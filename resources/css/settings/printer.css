@@ -1,0 +1,26 @@
+/* Printer Widget
+   ======================= */
+
+:root {
+    --printer-header_name-color: var(--orange-light);
+
+    --printer-main-printjob_text-color: var(--yellow-lighter);
+    --printer-main-printjob_text-fontsize: 2.5vh;
+
+    --printer-main-progress_progress-circle-trackcolor: var(--yellow-lightest);
+    --printer-main-progress_progress-circle-pathcolor: var(--orange-light);
+    --printer-main-progress_progress-circle-fontweight: var(--font-weight-black);
+    --printer-main-progress_progress-circle-textcolor: var(--color);
+    --printer-main-progress_progress-circle-successcolor: var(--yellow-light);
+
+    --printer-main-progress_job-title-textcolor: var(--color);
+    --printer-main-progress_job-title-opacity: 50%;
+    --printer-main-progress_job-time-fontweight: var(--font-weight-black);
+    --printer-main-progress_job-time-textcolor: var(--yellow-light);
+
+    --printer-footer_textcolor: var(--color);
+    --printer-footer_fontweight: normal;
+    --printer-footer_uom-icon-color: var(--color);
+    --printer-footer_uom-icon-opacity: 50%;
+    --printer-footer_icon-color: var(--orange-light);
+}

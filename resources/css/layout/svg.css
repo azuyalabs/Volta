@@ -1,0 +1,17 @@
+/* Stylesheet for SVG Icons
+   ======================== */
+
+.svg-icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    color: var(--color);
+    vertical-align: middle;
+    fill: none;
+    stroke: currentColor;
+}
+
+.svg-fill {
+    fill: currentColor;
+    stroke: none;
+}

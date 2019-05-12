@@ -1,0 +1,29 @@
+/* Clock Widget
+   ======================= */
+
+:root {
+    --clock-main_backgroundcolor: transparent;
+
+    --clock-main_timezone-color: var(--orange-light);
+    --clock-main_timezone-fontsize: 1.5vh;
+
+    --clock-main_digital-fontsize: 6vh;
+    --clock-main_digital-fontweight: var(--font-weight-black);
+    --clock-main_digital-color: var(--yellow-light);
+
+    --clock-face_fillcolor: var(--orange-lightest);
+    --clock-face_strokecolor: var(--orange-light);
+
+    --clock-face_ticks-color: var(--orange-lighter);
+
+    --clock-hand_hourcolor: var(--gray-darker);
+    --clock-hand_minutecolor: var(--clock-hand_hourcolor);
+    --clock-hand_secondcolor: var(--orange-light);
+    --clock-hand_secondcenter-strokecolor: var(--clock-hand_secondcolor);
+    --clock-hand_secondcenter-fillcolor: var(--color);
+
+    --clock-date_color: var(--color);
+    --clock-date_fontsize: 2vh;
+    --clock-date_fontweight: var(--font-weight);
+    --clock-date_texttransform: uppercase;
+}

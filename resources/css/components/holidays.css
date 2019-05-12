@@ -1,0 +1,37 @@
+/* Stylesheet for the Holidays Widget
+   ================================== */
+
+.holidays__header {
+    height: 4.5vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.holidays__header-country {
+    color: var(--tile-title-color, white);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xs);
+}
+
+.holidays {
+    padding-bottom: 1.5vh;
+    border-bottom: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.holidays__holiday-name {
+    color: var(--yellow-light);
+    font-size: 2vh;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+.holidays__holiday-date {
+    color: var(--color);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.8vh;
+    text-align: right;
+    text-align: -webkit-right;
+}

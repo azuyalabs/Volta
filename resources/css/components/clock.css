@@ -1,0 +1,87 @@
+/* Stylesheet for the Clock Widget
+   =============================== */
+
+/* Main Section
+   --------------------------------- */
+.clock-main {
+    height: 80%;
+    background-color: var(--clock-main_backgroundcolor, white);
+}
+
+.clock-main__timezone {
+    color: var(--clock-main_timezone-color, white);
+    display: flex;
+    height: 5%;
+    width: 100%;
+    justify-content: flex-end;
+    padding-right: 1vw;
+    padding-top: 0.5vw;
+    font-size: var(--clock-main_timezone-fontsize, medium);
+    text-transform: uppercase;
+    font-weight: var(--font-weight-bold, normal);
+}
+
+.clock-main__clock {
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    contain: content;
+}
+
+.clock-main__clock--digital {
+    text-align: center;
+    font-size: var(--clock-main_digital-fontsize, xx-large);
+    font-weight: var(--clock-main_digital-fontweight, normal);
+    color: var(--clock-main_digital-color, var(--color));
+}
+
+/* Clock
+   --------------------------------- */
+.clock__face {
+    stroke-width: 0.7vw;
+    fill: var(--clock-face_fillcolor, white);
+    stroke: var(--clock-face_strokecolor, grey);
+}
+
+.clock__face-ticks {
+    stroke-width: 0.2vw;
+    stroke-linecap: round;
+    stroke: var(--clock-face_ticks-color, black);
+}
+
+.clock__hand-hour {
+    stroke-width: 0.8vw;
+    stroke-linecap: round;
+    stroke: var(--clock-hand_hourcolor, black);
+}
+
+.clock__hand-minute {
+    stroke-width: 0.5vw;
+    stroke-linecap: round;
+    stroke: var(--clock-hand_minutecolor, black);
+}
+
+.clock__hand-second {
+    stroke-width: 0.1vw;
+    stroke: var(--clock-hand_secondcolor, black);
+}
+
+.clock__hand-second-center {
+    stroke-width: 0.3vw;
+    stroke: var(--clock-hand_secondcenter-strokecolor, black);
+    fill: var(--clock-hand_secondcenter-fillcolor, black);
+}
+
+/* Date Section
+   --------------------------------- */
+.clock-date {
+    height: 20%;
+    color: var(--clock-date_color, black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--clock-date_fontsize, medium);
+    font-weight: var(--clock-date_fontweight, normal);
+    text-transform: var(--clock-date_texttransform, uppercase);
+}

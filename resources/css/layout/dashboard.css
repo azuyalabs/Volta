@@ -1,0 +1,34 @@
+/* Stylesheet for the main Dashboard element
+   ========================================= */
+
+.dashboard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: grid;
+    padding: var(--grid-gap);
+    width: 100%;
+    height: 100%;
+    background-color: var(--dashboard-background-color);
+    color: var(--color);
+    grid-gap: var(--grid-gap);
+}
+
+.pill-new {
+    --badge-pill-padding-x: 0.6em;
+
+    color: var(--color);
+    background-color: var(--green-dark);
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    padding-right: var(--badge-pill-padding-x);
+    padding-left: var(--badge-pill-padding-x);
+    font-size: 60%;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 10rem;
+}

@@ -1,0 +1,56 @@
+/*!
+ * This file is part of the Volta Project.
+ *
+ * Copyright (c) 2018 - 2019. AzuyaLabs
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author Sacha Telgenhof <me@sachatelgenhof.com>
+ */
+
+/* Documentation */
+
+#docs-navigation {
+    ul {
+        list-style: none;
+    }
+}
+
+#docs-body {
+    h1,
+    h2,
+    h3,
+    h4 {
+        color: $dark-color;
+    }
+
+    h2,
+    h3,
+    h4 {
+        text-transform: uppercase;
+        padding-top: 3vh;
+    }
+
+    img {
+        border: 3px solid lighten($primary, 20);
+        border-radius: 8px;
+    }
+}
+
+#docs-not-found {
+    margin-top: 4vh;
+
+    .title {
+        font-size: 3vh;
+        padding: 3vh;
+        color: $dark;
+    }
+
+    .icon-error {
+        height: 20vh;
+        width: 100%;
+        fill: lighten($primary, 20);
+        margin-bottom: 2vh;
+    }
+}

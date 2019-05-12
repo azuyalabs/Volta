@@ -1,0 +1,79 @@
+/*!
+ * This file is part of the Volta Project.
+ *
+ * Copyright (c) 2018 - 2019. AzuyaLabs
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author Sacha Telgenhof <me@sachatelgenhof.com>
+ */
+
+// Standard Volta Data Table Component
+.table.volta {
+    th {
+        border-top: none !important;
+
+        &:focus {
+            outline-style: none !important;
+        }
+    }
+}
+
+// No data for table
+#no-data {
+    text-align: center;
+    margin-top: 4vh;
+
+    svg {
+        width: 13vw;
+        height: 13vh;
+        fill: lighten($primary, 20);
+    }
+
+    svg ~ div {
+        font-size: 3vh;
+        padding: 3vh;
+        color: $gray-600;
+    }
+}
+
+/* Machine Jobs Table */
+.machine_jobs_column_name {
+    width: 36%;
+
+    .status-indicator {
+        vertical-align: top;
+        margin-right: 1vw;
+        margin-top: 1.2vh;
+    }
+}
+
+.machine_jobs_column_machine {
+    width: 20%;
+}
+
+.machine_jobs_column_start {
+    width: 20%;
+}
+
+.machine_jobs_column_duration {
+    width: 16%;
+}
+
+.machine_jobs_column_actions {
+    width: 8%;
+}
+
+/* Vuetable Navigation */
+.vuetable-pagination {
+    .btn {
+        $pagination-button-margin: 0.25rem;
+        margin-left: $pagination-button-margin;
+        margin-right: $pagination-button-margin;
+
+        &:hover {
+            border-color: $primary;
+        }
+    }
+}

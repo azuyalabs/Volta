@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     viewBox="0 0 30 30"
+     focusable="false"
+     aria-hidden="true">
+    <g
+            transform="translate(2.9999998,2.9989994)"
+            id="dots">
+        <circle
+                cx="12"
+                cy="12.001"
+                r="2.9990001"
+                id="circle_middle"/>
+        <circle
+                cx="3"
+                cy="12.001"
+                r="2.9990001"
+                id="circle_left"/>
+        <circle
+                cx="21"
+                cy="12.001"
+                r="2.9990001"
+                id="circle_right"/>
+    </g>
+</svg>

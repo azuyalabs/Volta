@@ -1,0 +1,40 @@
+/* Stylesheet for the Tile Component
+   ================================= */
+
+.tile {
+    overflow: hidden;
+    padding: var(--grid-padding);
+    border-radius: var(--tile-border-radius, 0.25vw);
+    background-color: var(--tile-background-color);
+    color: var(--tile-color, white);
+    text-shadow: none;
+}
+
+.tile h1 {
+    color: var(--tile-title-color, white);
+    font-size: 2.2vh;
+    font-weight: var(--font-weight-bold);
+}
+
+.tile--overflow:after {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 1px;
+    box-shadow: 0 0 0.5em 0.5em var(--tile-background-color);
+    content: '';
+}
+
+.tile > * {
+    height: 100%;
+}
+
+.tile .content-center {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    text-transform: uppercase;
+}

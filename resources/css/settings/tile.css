@@ -1,0 +1,10 @@
+/* Tile settings
+   ============= */
+
+:root {
+    --tile-padding: inherit;
+    --tile-background-color: var(--gray-darker);
+    --tile-border-radius: 0.25vw;
+    --tile-color: var(--color);
+    --tile-title-color: var(--orange-light);
+}

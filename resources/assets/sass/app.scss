@@ -1,0 +1,301 @@
+@import 'utilities/mixins';
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/dist/bootstrap-vue';
+@import 'svg-icons';
+@import 'vue-status-indicator/styles.css';
+@import 'forms';
+@import 'data_table';
+@import 'docs';
+@import 'metrics';
+
+html {
+    overflow-y: scroll;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+/* See: https://github.com/twbs/bootstrap/issues/23454 */
+.invalid-feedback {
+    display: block;
+}
+
+#volta {
+    flex: 1;
+}
+
+.navbar-volta {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+ul#navbarMenu {
+    li {
+        :hover {
+            border-bottom: 2px solid $primary;
+            color: $primary;
+        }
+    }
+    li.active {
+        border-bottom: 2px solid $primary;
+        color: $primary;
+
+        &:hover {
+            border-bottom: none;
+        }
+    }
+}
+
+.card-header {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: $dark-color;
+}
+
+.card-header-custom {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    color: $primary;
+    background-color: #f5f8fa;
+    border-bottom: 1px solid $dark-color;
+    padding: 0.25rem 1.25rem;
+}
+
+.card-collection {
+    border: none;
+    min-height: 60vh;
+
+    .card-title {
+        text-transform: uppercase;
+        color: slategray;
+        font-size: 1.7vh;
+        font-weight: bolder;
+    }
+}
+
+// Default Card used by Volta
+.card-volta {
+    border: none;
+    border-radius: calc(0.5rem - 1px);
+    background-color: #ffffff;
+
+    .card-header {
+        text-transform: uppercase;
+        text-align: left;
+        font-weight: 600;
+        color: $primary;
+        background-color: inherit;
+        border-bottom: none;
+        padding-top: 1rem;
+
+        &:first-child {
+            border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px) 0 0;
+        }
+    }
+
+    .card-body {
+        padding-top: 0;
+        padding-bottom: 0;
+
+        .table {
+            margin-bottom: 0.25rem;
+
+            th {
+                color: $dark-color;
+            }
+
+            th,
+            td {
+                padding: 0.75rem;
+                border: none;
+            }
+        }
+    }
+}
+
+.card-custom {
+    border: none;
+
+    tbody {
+        tr:first-child {
+            th,
+            td {
+                border: none;
+            }
+        }
+    }
+}
+
+$btn-padding-y-mini: 0.2rem !default;
+$btn-padding-x-mini: 0.25rem !default;
+$btn-line-height-mini: 0.9 !default;
+$font-size-mini: ($font-size-base * 0.8) !default;
+$btn-border-radius-mini: 0.2rem !default;
+
+.btn-mini {
+    @include button-size(
+        $btn-padding-y-mini,
+        $btn-padding-x-mini,
+        $font-size-mini,
+        $btn-line-height-mini,
+        $btn-border-radius-mini
+    );
+}
+
+.icon-inline {
+    display: inline-block;
+    vertical-align: middle;
+
+    svg {
+        height: 1.5rem;
+        color: $dark-color;
+    }
+}
+
+// Collection Row Detail
+.card .collection-row-detail {
+    background-color: lighten($secondary-color, 40);
+    border: none;
+}
+
+// Used in table component -> row detail
+.table .detail-table {
+    background-color: transparent;
+
+    td,
+    th {
+        border-top: 1px solid $primary;
+    }
+    tr:first-child {
+        td,
+        th {
+            border-top: none;
+        }
+    }
+
+    th:first-child {
+        text-align: right;
+    }
+
+    .money {
+        th:nth-child(2),
+        td:nth-child(2) {
+            text-align: right;
+        }
+    }
+
+    .footer {
+        border-top: 2px solid $dark-color;
+    }
+}
+
+footer {
+    height: 10vh;
+}
+
+// Icon used for screen when empty collection
+.icon-empty {
+    height: 15vh;
+    width: 20vw;
+    fill: lighten($primary, 40);
+    margin-bottom: 2vh;
+}
+
+/* Preferences */
+#preferences-navigation {
+    > ul {
+        list-style: none;
+        padding-left: 0;
+        text-transform: uppercase;
+
+        > li {
+            margin-top: 2vh;
+        }
+
+        a {
+            color: darkslategrey;
+            font-size: 2vh;
+
+            &:hover {
+                text-decoration: none;
+                color: $primary;
+            }
+
+            &[aria-expanded='true'] {
+                border-bottom: 2px solid lighten($primary, 35) d;
+            }
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 1vw;
+
+            > li {
+                margin-top: 1vh;
+            }
+
+            a {
+                color: $primary;
+                font-size: 1.5vh;
+
+                &:hover {
+                    color: darken($primary, 25);
+                }
+
+                &:before {
+                    content: '-';
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
+}
+
+/* New Sidebar */
+#sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 140px 0 0;
+
+    .nav-item {
+        a {
+            color: gray;
+
+            svg.feather {
+                margin-right: 0.7vw;
+
+                @include svg_icon-size(1.5vw);
+            }
+
+            &:hover {
+                color: $dark-color;
+            }
+        }
+
+        .active {
+            color: $primary;
+        }
+    }
+}
+
+.filament_spool {
+    width: 10vw;
+    margin-top: 0.7vh;
+    .vm-progress-bar__inner {
+        background-color: $dark-color;
+    }
+}
+
+/* Overriding z-index of buttons to make loading overlay appear properly */
+.btn {
+    z-index: 0 !important;
+}

@@ -1,0 +1,72 @@
+/* Stylesheet for the Weather Widget
+   ================================= */
+@import '../vendor/weather-icons.css';
+
+.weather-main {
+    height: 40%;
+    color: var(--weather-main_color, var(--color));
+}
+
+.weather-main__icon {
+    color: var(--weather-main_icon-color, var(--weather-main_color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40%;
+    font-size: var(--weather-main_icon-fontsize, xx-large);
+    margin-bottom: 3vh;
+    margin-top: 3vh;
+}
+
+.weather-main__temperature {
+    text-align: center;
+    font-size: var(--weather-main_temperature-fontsize, xx-large);
+    font-weight: var(--weather-main_temperature-fontweight, normal);
+    margin-bottom: 2vh;
+    color: var(--weather-main_temperature-color, var(--color));
+}
+
+.weather-main__uom {
+    filter: opacity(var(--weather-main_uom-opacity), 100%);
+    font-size: var(--weather-main_uom-fontsize, medium);
+    font-weight: var(--weather-main_uom-fontweight, normal);
+    color: var(--weather-main_uom-color, var(--color));
+}
+
+.uom-icon {
+    height: 10vh;
+    width: 10vh;
+    vertical-align: text-top;
+    margin-left: -1vw;
+    color: var(--weather-main_uom-color);
+    filter: opacity(var(--weather-main_uom-opacity, 100%));
+}
+
+.weather-details {
+    background-color: var(--weather-details_backgroundcolor, transparent);
+}
+
+.weather-details__state {
+    color: var(--weather-details_state-color, var(--color));
+    display: flex;
+    height: 40%;
+    justify-content: center;
+    align-items: center;
+    text-transform: var(--weather-details_state-texttransform, none);
+    font-size: var(--weather-details_state-fontsize, medium);
+}
+
+.weather-details__other {
+    color: var(--weather-details_other-color, var(--color));
+    font-weight: var(--weather-details_other-fontweight, normal);
+    display: flex;
+    height: 20%;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 2vh;
+}
+
+.weather-details__other i.wi {
+    color: var(--weather-details_other-icon-color, var(--color));
+    padding-right: 0.5vw;
+}

@@ -1,0 +1,197 @@
+/* Stylesheet for the Printer Widget
+   ================================= */
+
+/* Header Section
+   --------------------------------- */
+.printer-header {
+    height: 15%;
+}
+
+.printer-header_name {
+    color: var(--printer-header_name-color, var(--color));
+    text-transform: uppercase;
+    font-size: 2vh;
+    font-weight: var(--font-weight-bold, normal);
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1vw;
+    padding-top: 1.2vh;
+}
+
+/* Main Section
+   --------------------------------- */
+.printer-main {
+    height: 65%;
+}
+
+.printer-main-printjob {
+    --printer-main-printjob_padding: 2vh;
+
+    margin-bottom: 2vh;
+    padding-left: var(--printer-main-printjob_padding);
+    padding-right: var(--printer-main-printjob_padding);
+}
+
+@-webkit-keyframes printer-main-printjob {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+    }
+
+    100% {
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+}
+
+@keyframes printer-main-printjob {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+    }
+
+    100% {
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+}
+
+.printer-main-printjob-wrap {
+    width: 100%;
+    padding-left: 100%;
+    box-sizing: content-box;
+    contain: content;
+    margin-left: 1vw;
+}
+
+.printer-main-printjob-wrap .printer-main-printjob {
+    --printer-main-printjob_iteration-count: infinite;
+    --printer-main-printjob_timing-function: linear;
+    --printer-main-printjob_name: printer-main-printjob;
+    --printer-main-printjob_duration: 25s;
+
+    display: inline-block;
+    white-space: nowrap;
+    padding-right: 100%;
+
+    -webkit-animation-iteration-count: var(--printer-main-printjob_iteration-count);
+    animation-iteration-count: var(--printer-main-printjob_iteration-count);
+    -webkit-animation-timing-function: var(--printer-main-printjob_timing-function);
+    animation-timing-function: var(--printer-main-printjob_timing-function);
+    -webkit-animation-name: var(--printer-main-printjob_name);
+    animation-name: var(--printer-main-printjob_name);
+    -webkit-animation-duration: var(--printer-main-printjob_duration);
+    animation-duration: var(--printer-main-printjob_duration);
+}
+
+.printer-main-printjob-wrap .printer-main-printjob_text {
+    display: inline-block;
+    padding: 0 2rem;
+    font-size: var(--printer-main-printjob_text-fontsize, medium);
+    color: var(--printer-main-printjob_text-color, var(--color));
+}
+
+.printer-main-progress {
+    --printer-main-progress_padding: 2vh;
+
+    display: flex;
+    align-items: center;
+    padding-left: var(--printer-main-progress_padding);
+    padding-right: var(--printer-main-progress_padding);
+}
+
+.printer-main-progress .vm-progress-circle {
+    --printer-main-progress_progress-circle-size: 11vh;
+
+    width: var(--printer-main-progress_progress-circle-size) !important;
+    height: var(--printer-main-progress_progress-circle-size) !important;
+}
+
+.printer-main-progress .vm-progress-circle__track {
+    stroke: var(--printer-main-progress_progress-circle-trackcolor, var(--gray-light)) !important;
+}
+
+.printer-main-progress .vm-progress-circle__path {
+    stroke: var(--printer-main-progress_progress-circle-pathcolor, var(--blue)) !important;
+}
+
+.printer-main-progress .vm-progress__text {
+    font-size: 2.5vh !important;
+    font-weight: var(--printer-main-progress_progress-circle-fontweight, normal);
+    color: var(--printer-main-progress_progress-circle-textcolor, var(--color));
+}
+
+.printer-main-progress-job {
+    display: inline-grid;
+    justify-items: self-end;
+    width: 100%;
+    font-size: 2vh;
+}
+
+.printer-main-progress-job_title {
+    color: var(--printer-main-progress_job-title-textcolor, var(--color));
+    filter: opacity(var(--printer-main-progress_job-title-opacity, 100%));
+    text-transform: uppercase;
+}
+
+.printer-main-progress-job_time {
+    font-size: 2.5vh;
+    font-weight: var(--printer-main-progress_job-time-fontweight, normal);
+    color: var(--printer-main-progress_job-time-textcolor, var(--color));
+}
+
+.printer-main-progress-job_remaining {
+}
+
+.printer-main-progress-status {
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.printer-main-progress-usage {
+    font-style: italic;
+    font-size: 1.6vh;
+    text-transform: uppercase;
+}
+
+/* Customizations */
+i.vm-progress-icon--success {
+    color: var(--printer-main-progress_progress-circle-successcolor, var(--color)) !important;
+    font-size: 4vh !important;
+}
+
+/* Footer Section
+   --------------------------------- */
+.printer-footer {
+    height: 20%;
+    color: var(--printer-footer_textcolor, var(--color));
+    font-weight: var(--printer-footer_fontweight, normal);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 2vh;
+}
+
+.printer-footer .printer-footer__uom-icon {
+    --printer-footer-icon_size: 4vh;
+
+    width: var(--printer-footer-icon_size);
+    height: var(--printer-footer-icon_size);
+
+    margin-left: -1vh;
+    color: var(--printer-footer_uom-icon-color, var(--color));
+    filter: opacity(var(--printer-footer_uom-icon-opacity, 100%));
+}
+
+.printer-footer .printer-footer-icon {
+    --printer-footer-icon_size: 6vh;
+
+    stroke: var(--printer-footer_icon-color, var(--color));
+    width: var(--printer-footer-icon_size);
+    height: var(--printer-footer-icon_size);
+    fill: none;
+}

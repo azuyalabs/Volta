@@ -1,0 +1,79 @@
+/* Color scheme/variations
+   ======================= */
+
+:root {
+    --red-lightest: #fcebec;
+    --red-lighter: #e69a9c;
+    --red-light: #ff5439;
+    --red: #e83134;
+    --red-dark: #a32324;
+    --red-darker: #63010e;
+    --red-darkest: #3d0109;
+
+    --orange-lightest: #ffe5ca;
+    --orange-lighter: #f5b180;
+    --orange-light: #e77636;
+    --orange: #e14a0c;
+    --orange-dark: #711f03;
+    --orange-darker: #581902;
+    --orange-darkest: #391102;
+
+    --yellow-lightest: #f7e8d4;
+    --yellow-lighter: #f7d1a1;
+    --yellow-light: #f6d169;
+    --yellow: #fbbd1a;
+    --yellow-dark: #b06f1c;
+    --yellow-darker: #734d00;
+    --yellow-darkest: #422c00;
+
+    --blue-lightest: #e5f4f8;
+    --blue-lighter: #a7dceb;
+    --blue-light: #0faace;
+    --blue: #13869e;
+    --blue-dark: #11727f;
+    --blue-darker: #202f53;
+    --blue-darkest: #262835;
+
+    --green-lightest: #cce9e5;
+    --green-lighter: #bfe3de;
+    --green-light: #a9d6d0;
+    --green: #5ebbae;
+    --green-dark: #40988c;
+    --green-darker: #287368;
+    --green-darkest: #13463f;
+
+    --gray-lightest: #ededf5;
+    --gray-lighter: #cdcdda;
+    --gray-light: #afb3bd;
+    --gray: #ababbb;
+    --gray-dark: #53575e;
+    --gray-darker: #23272f;
+    --gray-darkest: #1a1e25;
+
+    --indigo-lightest: hsl(231, 100%, 95%);
+    --indigo-lighter: hsl(231, 100%, 85%);
+    --indigo-light: hsl(231, 54%, 66%);
+    --indigo: hsl(231, 51%, 60%);
+    --indigo-dark: hsl(231, 38%, 52%);
+    --indigo-darker: hsl(231, 34%, 28%);
+    --indigo-darkest: hsl(231, 38%, 16%);
+
+    --purple-lightest: #f3ebff;
+    --purple-lighter: #d6bbfc;
+    --purple-light: #a779e9;
+    --purple: #9561e2;
+    --purple-dark: #794acf;
+    --purple-darker: #382b5f;
+    --purple-darkest: #21183c;
+
+    --pink-lightest: #ffebef;
+    --pink-lighter: #ffbbca;
+    --pink-light: #fa7ea8;
+    --pink: #f66d9b;
+    --pink-dark: #eb5286;
+    --pink-darker: #6f213f;
+    --pink-darkest: #451225;
+
+    --color: #fff;
+    --dashboard-background-color: var(--gray-darkest);
+}

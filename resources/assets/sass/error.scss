@@ -1,0 +1,53 @@
+@import 'utilities/mixins';
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+
+html {
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: lighten($body-bg, 40);
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 4vh;
+    padding: 3vh;
+    color: $dark-color;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.icon-error {
+    height: 20vh;
+    width: 40vw;
+    fill: lighten($primary, 20);
+    margin-bottom: 2vh;
+}
+
+.logo {
+    height: 100px;
+    width: 205px;
+    position: absolute;
+    top: 3vh;
+    left: 2vw;
+    background: url('/img/volta-logo.png') no-repeat;
+}

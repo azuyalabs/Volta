@@ -1,0 +1,114 @@
+.icon {
+    fill: currentColor;
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -0.125em;
+}
+
+.svg-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    color: inherit;
+    vertical-align: middle;
+    fill: none;
+    stroke: currentColor;
+}
+
+.svg-fill {
+    fill: currentColor;
+    stroke: none;
+}
+
+.svg-up {
+    transform: rotate(0deg);
+}
+
+.svg-right {
+    transform: rotate(90deg);
+}
+
+.svg-down {
+    transform: rotate(180deg);
+}
+
+.svg-left {
+    transform: rotate(-90deg);
+}
+
+.action-icon-md {
+    @include svg_icon-size(20px);
+    color: $dark-color;
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+.action-icon-sm {
+    @include svg_icon-size(14px);
+
+    color: $dark-color;
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+.action-icon-lg {
+    @include svg_icon-size(24px);
+    color: $dark-color;
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+.button-icon {
+    @include svg_icon-size(14px);
+
+    color: white;
+    fill: currentColor;
+    display: inline-block;
+    font-size: inherit;
+}
+
+.button-icon-sm {
+    @include svg_icon-size(14px);
+
+    fill: currentColor;
+    display: inline-block;
+    font-size: inherit;
+    vertical-align: -0.2em;
+}
+
+/* Wishlist */
+.icon_req_status {
+    @include svg_icon-size(1.5rem);
+    vertical-align: -0.5rem;
+}
+
+.color-swatch {
+    vertical-align: baseline;
+    margin-right: 1vw;
+}
+
+.usage-alert {
+    @include svg_icon-size(1.6rem);
+    vertical-align: baseline;
+    margin-left: 1vw;
+    color: $primary;
+}
+
+/* Card Collection */
+.mini_refresh_data {
+    @include svg_icon-size(1.5vh);
+    stroke-width: 4px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: currentColor;
+    fill: none;
+    color: silver;
+}

@@ -1,0 +1,7 @@
+/* Stylesheet for the Volta Widget
+   =============================== */
+
+.tile--volta {
+    background: transparent url('../images/volta-logo-white.png') no-repeat center center;
+    background-size: contain;
+}

@@ -1,0 +1,24 @@
+/* Stylesheet for the Firmware Releases Widget
+   =========================================== */
+.firmware__release {
+    padding-bottom: 1.2vh;
+    border-bottom: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.firmware__release-version {
+    color: var(--yellow-light);
+    font-size: 1.7vh;
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+}
+
+.firmware__release-date {
+    color: var(--color);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.5vh;
+    text-align: right;
+    text-align: -webkit-right;
+}
