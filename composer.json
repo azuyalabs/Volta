@@ -69,9 +69,6 @@
     }
   },
   "scripts": {
-    "post-root-package-install": [
-      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-    ],
     "post-create-project-cmd": [
       "@php artisan key:generate"
     ],
@@ -85,9 +82,6 @@
     ],
     "analyse": [
       "@php artisan code:analyse --level=5"
-    ],
-    "deploy": [
-      "@php artisan deploy alpha -s volta"
     ]
   },
   "config": {
