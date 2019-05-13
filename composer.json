@@ -24,7 +24,6 @@
     "laravel/passport": "^7.0",
     "laravel/tinker": "~1.0",
     "laravelcollective/html": "^5.7",
-    "lorisleiva/laravel-deployer": "^0.2",
     "nothingworks/blade-svg": "^0.3",
     "php-http/guzzle6-adapter": "^1.1",
     "predis/predis": "^1.1",
