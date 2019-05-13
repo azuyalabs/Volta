@@ -13,22 +13,6 @@
             </div>
         @endif
 
-        @if (!Auth::user()->last_login)
-            <b-modal id="modal-center" centered ok-only :visible="true">
-                <template slot="modal-header">
-                    <div class="container-fluid text-center">
-                        <img src="{{ url('/img/volta-logo.png') }}" width="205" alt="{{ config('app.name') }}">
-                    </div>
-                </template>
-                <h1 class="display-6 text-center">Hello, {{ Auth::user()->name }}!</h1>
-                <p class="lead">and welcome to {{ config('app.name', 'Laravel') }}! Thank you so much for your help in
-                    testing the first prototype of {{ config('app.name', 'Laravel') }}.</p>
-                <p>With the first step - creating your Volta account - done, please navigate to
-                    the {{ link_to_route('docs', __('docs.documentation')) }} section to get everything setup for the
-                    test.</p>
-            </b-modal>
-        @endif
-
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
