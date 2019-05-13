@@ -39,8 +39,8 @@ return [
             'prefix' => '',
         ],
 
-        // In Memory Database used for testing
-        'testing' => [
+        // In Memory Database used for unit testing
+        'unit_test' => [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
