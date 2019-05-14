@@ -22,19 +22,29 @@ new Vue({
 
     components: {
         Dashboard: () =>
-            import('./components/Dashboard/Dashboard' /* webpackChunkName: "js/dashboard/Dashboard" */),
+            import(
+                './components/Dashboard/Dashboard' /* webpackChunkName: "js/dashboard/Dashboard" */
+            ),
         Placeholder: () =>
-            import('./components/Dashboard/Placeholder' /* webpackChunkName: "js/dashboard/Placeholder" */),
+            import(
+                './components/Dashboard/Placeholder' /* webpackChunkName: "js/dashboard/Placeholder" */
+            ),
         Volta: () =>
             import('./components/Dashboard/Volta' /* webpackChunkName: "js/dashboard/Volta" */),
         Clock: () =>
             import('./components/Dashboard/Clock' /* webpackChunkName: "js/dashboard/Clock" */),
         SlicerReleases: () =>
-            import('./components/Dashboard/SlicerReleases' /* webpackChunkName: "js/dashboard/SlicerReleases" */),
+            import(
+                './components/Dashboard/SlicerReleases' /* webpackChunkName: "js/dashboard/SlicerReleases" */
+            ),
         FirmwareReleases: () =>
-            import('./components/Dashboard/FirmwareReleases' /* webpackChunkName: "js/dashboard/FirmwareReleases" */),
+            import(
+                './components/Dashboard/FirmwareReleases' /* webpackChunkName: "js/dashboard/FirmwareReleases" */
+            ),
         Holidays: () =>
-            import('./components/Dashboard/Holidays' /* webpackChunkName: "js/dashboard/Holidays" */),
+            import(
+                './components/Dashboard/Holidays' /* webpackChunkName: "js/dashboard/Holidays" */
+            ),
         Printer: () =>
             import('./components/Dashboard/Printer' /* webpackChunkName: "js/dashboard/Printer" */),
         Weather: () =>

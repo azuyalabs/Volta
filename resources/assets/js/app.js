@@ -111,24 +111,42 @@ new Vue({
         SlicerReleases: () =>
             import('./components/SlicerReleases' /* webpackChunkName: "js/app/SlicerReleases" */),
         CalibrationStatusCard: () =>
-            import('./components/CalibrationStatusCard' /* webpackChunkName: "js/app/CalibrationStatusCard" */),
+            import(
+                './components/CalibrationStatusCard' /* webpackChunkName: "js/app/CalibrationStatusCard" */
+            ),
         CollectionTableFilamentspools: () =>
-            import('./components/CollectionTableFilamentspools' /* webpackChunkName: "js/app/CollectionTableFilamentspools" */),
+            import(
+                './components/CollectionTableFilamentspools' /* webpackChunkName: "js/app/CollectionTableFilamentspools" */
+            ),
         CollectionTableMachines: () =>
-            import('./components/CollectionTableMachines' /* webpackChunkName: "js/app/CollectionTableMachines" */),
+            import(
+                './components/CollectionTableMachines' /* webpackChunkName: "js/app/CollectionTableMachines" */
+            ),
         GCode: () => import('./components/GCode' /* webpackChunkName: "js/app/GCode" */),
         ThreeDPrinterJobs: () =>
-            import('./components/ThreeDPrinterJobs/ThreeDPrinterJobs' /* webpackChunkName: "js/app/ThreeDPrinterJobs/ThreeDPrinterJobs" */),
+            import(
+                './components/ThreeDPrinterJobs/ThreeDPrinterJobs' /* webpackChunkName: "js/app/ThreeDPrinterJobs/ThreeDPrinterJobs" */
+            ),
         SuccessratePieChart: () =>
-            import('./components/ThreeDPrinterJobs/SuccessratePieChart' /* webpackChunkName: "js/app/ThreeDPrinterJobs/SuccessratePieChart" */),
+            import(
+                './components/ThreeDPrinterJobs/SuccessratePieChart' /* webpackChunkName: "js/app/ThreeDPrinterJobs/SuccessratePieChart" */
+            ),
         ActivityHistogram: () =>
-            import('./components/ThreeDPrinterJobs/ActivityHistogram' /* webpackChunkName: "js/app/ThreeDPrinterJobs/ActivityHistogram" */),
+            import(
+                './components/ThreeDPrinterJobs/ActivityHistogram' /* webpackChunkName: "js/app/ThreeDPrinterJobs/ActivityHistogram" */
+            ),
         ThreeDPrinterJobsHeatmap: () =>
-            import('./components/ThreeDPrinterJobs/Heatmap' /* webpackChunkName: "js/app/ThreeDPrinterJobs/Heatmap" */),
+            import(
+                './components/ThreeDPrinterJobs/Heatmap' /* webpackChunkName: "js/app/ThreeDPrinterJobs/Heatmap" */
+            ),
         ManufacturersTable: () =>
-            import('./components/Manufacturers/ManufacturersTable' /* webpackChunkName: "js/app/Manufacturers/ManufacturersTable" */),
+            import(
+                './components/Manufacturers/ManufacturersTable' /* webpackChunkName: "js/app/Manufacturers/ManufacturersTable" */
+            ),
         News: () => import('./components/News/News' /* webpackChunkName: "js/app/News/News" */),
         ThingiverseFeatured: () =>
-            import('./components/ThingiverseFeatured/ThingiverseFeatured' /* webpackChunkName: "js/app/ThingiverseFeatured/ThingiverseFeatured" */),
+            import(
+                './components/ThingiverseFeatured/ThingiverseFeatured' /* webpackChunkName: "js/app/ThingiverseFeatured/ThingiverseFeatured" */
+            ),
     },
 });
