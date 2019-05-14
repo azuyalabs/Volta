@@ -28,6 +28,7 @@
     </filter>
 
     <php>
+        <env name="APP_URL" value="http://volta.test"/>
         <env name="APP_ENV" value="testing"/>
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
