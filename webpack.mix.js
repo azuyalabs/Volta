@@ -24,3 +24,20 @@ mix.js('resources/assets/js/app.js', 'public/js')
         processCssUrls: false,
         postCss: [require('postcss-easy-import')],
     });
+
+mix.extract([
+    'vue',
+    'axios',
+    'moment',
+    'moment-duration-format',
+    'moment-timezone',
+    'laravel-echo',
+    'epic-spinners',
+    'dinero.js',
+    'mathjs',
+    'socket.io-client',
+    'vue-calendar-heatmap',
+    'vue-i18n',
+    'vue-router',
+    'vuetable-2',
+]);
