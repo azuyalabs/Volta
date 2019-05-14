@@ -75,9 +75,7 @@
                             </th>
                             <td style="text-align:right">
                                 40
-                                <b-link id="exPopoverReactive1" :disabled="popoverShow">
-                                    <icon name="plus-circle"></icon>
-                                </b-link>
+                                <b-link id="exPopoverReactive1" :disabled="popoverShow"> </b-link>
                             </td>
                         </tr>
                         <tr>
@@ -106,12 +104,8 @@
 </template>
 
 <script>
-import Icon from 'vue-awesome/components/Icon';
-
 export default {
-    components: {
-        Icon,
-    },
+    components: {},
     data() {
         return {
             input1: '',

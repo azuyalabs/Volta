@@ -48,5 +48,15 @@
     "description": "The ability to select which printer(s) show up on the dashboard. With the Current restrictions, I have to remove machines to get control which ones are listed.",
     "status": "requested",
     "category": "dashboard-layout"
+  },
+  "10": {
+    "description": "On the print jobs page, have a total for all jobs shown/all jobs known for the time and filament.",
+    "status": "requested",
+    "category": "print-jobs"
+  },
+  "11": {
+    "description": "A bar graph that shows hours/month (filament/month) printed, total and for each printer",
+    "status": "requested",
+    "category": "print-jobs"
   }
 }

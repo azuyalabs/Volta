@@ -1,16 +1,42 @@
+<!--
+  - This file is part of the Volta Project.
+  -
+  - Copyright (c) 2018 - 2019. AzuyaLabs
+  -
+  - For the full copyright and license information, please view the LICENSE
+  - file that was distributed with this source code.
+  -
+  - @author Sacha Telgenhof <me@sachatelgenhof.com>
+  -->
+
 <template>
-    <div class="list-group list-group-flush" v-if="releases.length">
-        <div
-            class="list-group-item list-group-item-action flex-column align-items-start"
-            v-for="release in releases"
-        >
-            <div class="d-flex w-100 justify-content-between">
-                <h6 class="mb-1">{{ release.name }}</h6>
-                <small>
-                    <relative-date :moment="release.date"></relative-date>
-                </small>
+    <div class="card card-default">
+        <!-- Card Header -->
+        <div class="container-fluid row pr-0">
+            <div class="card-title pl-2">
+                The latest releases of your favourite slicers
             </div>
         </div>
+
+        <!-- Card Body -->
+        <div class="card-body pt-0">
+            <div class="list-group list-group-flush" v-if="releases.length">
+                <div
+                    class="list-group-item list-group-item-action flex-column align-items-start"
+                    v-for="release in releases"
+                >
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">{{ release.name }}</h6>
+                        <small>
+                            <relative-date :moment="release.date"></relative-date>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="footer-text"></div>
     </div>
 </template>
 

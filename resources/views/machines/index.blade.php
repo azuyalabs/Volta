@@ -18,9 +18,9 @@
     <div class="d-flex flex-column align-items-center">
         @svg('machine', 'icon-empty')
         <span>There is nothing but an empty workspace here.
-            @if (Auth::user()->isAdministrator())
+            @role('experimental')
                 Add a <a href="{{ URL::route('machines.create') }}">new machine</a> to your arsenal.
-            @endif
+            @endrole
         </span>
     </div>
 @endsection

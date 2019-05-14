@@ -15,9 +15,6 @@
                 @yield('subtitle')
             </p>
         </div>
-        <div class="mb-4">
-            @yield('metrics')
-        </div>
         <div class="card-collection card">
             <div class="card-body">
                 @yield('page-content')

@@ -15,29 +15,27 @@
             <div class="ml-auto p-2 d-inline-flex">
                 <b-form-group
                     label="Material"
-                    label-for="filterMaterial"
+                    label-for="filter_material"
                     label-size="sm"
                     class="mr-3"
                 >
                     <b-form-select
-                        id="filterMaterial"
-                        v-model="filterMaterial"
+                        id="filter_material"
+                        v-model="filter.material"
                         :options="materialFilterOptions"
-                        @change="filterManufacturer = null"
                         size="sm"
                     >
-                        <option slot="first" :value="null">-- All --</option>
+                        <option slot="first" value="all">-- All --</option>
                     </b-form-select>
                 </b-form-group>
-                <b-form-group label="Manufacturer" label-for="filterManufacturer" label-size="sm">
+                <b-form-group label="Manufacturer" label-for="filter_manufacturer" label-size="sm">
                     <b-form-select
-                        id="filterManufacturer"
-                        v-model="filterManufacturer"
+                        id="filter_manufacturer"
+                        v-model="filter.manufacturer"
                         :options="manufacturerFilterOptions"
-                        @change="filterMaterial = null"
                         size="sm"
                     >
-                        <option slot="first" :value="null">-- All --</option>
+                        <option slot="first" value="all">-- All --</option>
                     </b-form-select>
                 </b-form-group>
             </div>
@@ -47,7 +45,8 @@
         <b-table
             :sort-by.sync="sortBy"
             :sort-desc.sync="sortDesc"
-            :filter="filterFunction"
+            :filter-function="filterFunction"
+            :filter="filter"
             :items="collection"
             :fields="fields"
             :current-page="currentPage"
@@ -210,8 +209,10 @@ export default {
             currentPage: 1,
             perPage: 10,
             collection: [],
-            filterMaterial: null,
-            filterManufacturer: null,
+            filter: {
+                material: 'all',
+                manufacturer: 'all',
+            },
         };
     },
 
@@ -235,12 +236,11 @@ export default {
 
     methods: {
         filterFunction(record) {
-            if (this.filterMaterial) {
-                return record.material === this.filterMaterial;
-            } else if (this.filterManufacturer) {
-                return record.manufacturer === this.filterManufacturer;
-            }
-            return true;
+            return (
+                (this.filter.material === 'all' || this.filter.material === record.material) &&
+                (this.filter.manufacturer === 'all' ||
+                    record.manufacturer === this.filter.manufacturer)
+            );
         },
 
         spoolUsage(spool) {

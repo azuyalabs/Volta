@@ -10,17 +10,6 @@ Vue.use(VueI18n);
 Vue.use(VueSVGIcon);
 Vue.use(Progress);
 
-// Import Vue Components
-Vue.component('Dashboard', require('./components/Dashboard/Dashboard.vue'));
-Vue.component('Placeholder', require('./components/Dashboard/Placeholder.vue'));
-Vue.component('Volta', require('./components/Dashboard/Volta.vue'));
-Vue.component('SlicerReleases', require('./components/Dashboard/SlicerReleases.vue'));
-Vue.component('FirmwareReleases', require('./components/Dashboard/FirmwareReleases.vue'));
-Vue.component('Holidays', require('./components/Dashboard/Holidays.vue'));
-Vue.component('Printer', require('./components/Dashboard/Printer.vue'));
-Vue.component('Weather', require('./components/Dashboard/Weather.vue'));
-Vue.component('Clock', require('./components/Dashboard/Clock'));
-
 const i18n = new VueI18n({
     locale: window.Volta.locale,
     fallbackLocale: 'en-US',
@@ -31,7 +20,26 @@ new Vue({
 
     el: '#dashboard',
 
-    components: {},
+    components: {
+        Dashboard: () =>
+            import('./components/Dashboard/Dashboard' /* webpackChunkName: "js/dashboard/Dashboard" */),
+        Placeholder: () =>
+            import('./components/Dashboard/Placeholder' /* webpackChunkName: "js/dashboard/Placeholder" */),
+        Volta: () =>
+            import('./components/Dashboard/Volta' /* webpackChunkName: "js/dashboard/Volta" */),
+        Clock: () =>
+            import('./components/Dashboard/Clock' /* webpackChunkName: "js/dashboard/Clock" */),
+        SlicerReleases: () =>
+            import('./components/Dashboard/SlicerReleases' /* webpackChunkName: "js/dashboard/SlicerReleases" */),
+        FirmwareReleases: () =>
+            import('./components/Dashboard/FirmwareReleases' /* webpackChunkName: "js/dashboard/FirmwareReleases" */),
+        Holidays: () =>
+            import('./components/Dashboard/Holidays' /* webpackChunkName: "js/dashboard/Holidays" */),
+        Printer: () =>
+            import('./components/Dashboard/Printer' /* webpackChunkName: "js/dashboard/Printer" */),
+        Weather: () =>
+            import('./components/Dashboard/Weather' /* webpackChunkName: "js/dashboard/Weather" */),
+    },
 
     created() {
         let options = {

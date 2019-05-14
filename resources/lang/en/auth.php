@@ -23,6 +23,13 @@ return [
         'send_link' => 'Send Password Reset Link'
     ],
 
+    'verify' => [
+        'title' => 'Verify Your Email Address',
+        'link_sent' => 'A fresh verification link has been sent to your email address.',
+        'before_proceeding' => 'Before proceeding, please check your email for a verification link.',
+        'request_another' => 'If you did not receive the email, <a href=":link">click here to request another</a>.'
+    ],
+
     'placeholder_email' => 'alessandro@volta.prof',
     'placeholder_password' => 'A super secret password',
 

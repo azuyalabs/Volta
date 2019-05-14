@@ -2,10 +2,44 @@
 
 An overview of all noteworthy changes in chronological order (newest on top)
 
+####2019/04/??
+- A minor makeover of the general styling (a new font) and revisit of the home page. The print job success rate pie chart and heatmap
+  are now relocated to the home page. The Equipment and Filament Statistics card have been removed to allow for more space for newer content.
+- Introducing two new info cards on the home page. 
+  First, a card that shows the latest 3D Printing news coming from 3DPrint.com. 
+  Secondly, to inspire you for a next project, a card showing Thingiverse's 5 most popular thingies in a visual carousel.
+
+  ![3D Printing News](../images/docs/volta_home_news.png "3D Printing News")
+  
+  ![Thingiverse](../images/docs/volta_home_thingiverse.png "Thingiverse")
+
+- The Print Jobs table now shows totals for the used filament and print time. The totals are calculated automatically depending on your filter settings.
+
+  ![Print Job Totals](../images/docs/volta_printjobs_subtotal.png "Print Job Totals")
+
+- Changed the table caption of the Print Jobs table to indicate the number of print jobs found/filtered.
+
+  ![Print Job Caption](../images/docs/volta_printjobs_caption.png "Print Job Caption")
+
+- Added the Prusa MK2.5, MK2.5S and MK3S to the list of machines. 
+
+####2019/02/18
+- Added the ANYCUBIC product range to the list of machines. 
+- Changed structure and loading of the UI (JavaScript), so that it will automatically load parts of the code only when they are actually needed. This will reduce the loading times (i.e. enhance performance).
+- Internal work performed to improve deployment to production.
+
+####2019/02/06
+- Added requirement that newly registered users need to perform an e-mail verification.
+  An e-mail will be sent to the user's registered email address to confirm his/hers address.
+
+####2019/02/02
+- A new feature has been added: Print Jobs (Tracking and managing print jobs from all registered printers).
+  Check out the [Print Jobs](/docs/printjobs) documentation for more details.
+
 ####2019/01/22
 - The Printer Widget will now show the print job details once a print has been completed. Before it would immediately show "Ready" after print completion.
 
-   ![Print Job Finished](../images/docs/volta_octoprint_finished_job.png "Print Job Finished")
+  ![Print Job Finished](../images/docs/volta_octoprint_finished_job.png "Print Job Finished")
 
 - The extruder and heat bed temperatures will only be displayed during the printing phase. During other phases (e.g. "Ready", "Paused", etc.) temperature readings are not yet being retrieved and would otherwise show inaccurate numbers on the widgets. 
 - Styling corrections made in various pages (Login, Registration, Equipment, etc.) to be in line with the latest Bootstrap CSS framework version.

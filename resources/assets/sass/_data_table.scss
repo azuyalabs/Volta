@@ -18,6 +18,14 @@
             outline-style: none !important;
         }
     }
+
+    tfoot {
+        tr {
+            th:not(:last-child) {
+                border-top: 2px solid $gray-400 !important;
+            }
+        }
+    }
 }
 
 // No data for table
@@ -63,6 +71,23 @@
 
 .machine_jobs_column_actions {
     width: 8%;
+}
+
+/* Manufacturers Table */
+.manufacturers_column_name {
+    width: 35%;
+}
+
+.manufacturers_column_country {
+    width: 25%;
+}
+
+.manufacturers_column_actions {
+    width: 8%;
+}
+
+.manufacturers_column_product_count {
+    width: 15%;
 }
 
 /* Vuetable Navigation */

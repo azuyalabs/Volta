@@ -2,36 +2,25 @@ import Vue from 'vue';
 import axios from 'axios';
 import Routes from './routes';
 import VueRouter from 'vue-router';
-
 import BootstrapVue from 'bootstrap-vue';
-import 'vue-awesome/icons';
-import FilamentStatistics from './components/FilamentStatistics';
-import EquipmentStatistics from './components/EquipmentStatistics';
-import SlicerReleases from './components/SlicerReleases';
-import CalibrationStatusCard from './components/CalibrationStatusCard';
-
-import CollectionTableFilamentspools from './components/CollectionTableFilamentspools';
-import CollectionTableMachines from './components/CollectionTableMachines';
-
-import ThreeDPrinterJobs from './components/ThreeDPrinterJobs/ThreeDPrinterJobs';
-
-import GCode from './components/GCode';
 import VueI18n from 'vue-i18n';
 import VueSVGIcon from 'vue-svgicon';
 import Progress from 'vue-multiple-progress';
-
 import Donut from 'vue-css-donut-chart';
 import 'vue-css-donut-chart/dist/vcdonut.css';
+import VueApexCharts from 'vue-apexcharts';
 
 Vue.use(Donut);
+Vue.use(VueRouter);
+Vue.use(BootstrapVue);
+Vue.use(VueI18n);
+Vue.use(VueSVGIcon);
+Vue.use(Progress);
 
 Vue.component('CollectionTable', require('./components/CollectionTable'));
-
 Vue.component('IndexScreen', require('./components/IndexScreen'));
 Vue.component('CreateScreen', require('./components/CreateScreen'));
-
-Vue.component('HeatMap', require('./components/parts/HeatMap'));
-Vue.component('PieChart', require('./components/parts/PieChart'));
+Vue.component('apexchart', VueApexCharts);
 
 require('bootstrap');
 
@@ -44,14 +33,6 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
-
-Vue.use(VueRouter);
-Vue.use(BootstrapVue);
-Vue.use(VueI18n);
-Vue.use(VueSVGIcon);
-Vue.use(Progress);
-
-//window.Popper = require('popper.js').default;
 
 const router = new VueRouter({
     routes: Routes,
@@ -127,13 +108,27 @@ new Vue({
     },
 
     components: {
-        FilamentStatistics,
-        EquipmentStatistics,
-        SlicerReleases,
-        CalibrationStatusCard,
-        CollectionTableFilamentspools,
-        CollectionTableMachines,
-        GCode,
-        ThreeDPrinterJobs,
+        SlicerReleases: () =>
+            import('./components/SlicerReleases' /* webpackChunkName: "js/app/SlicerReleases" */),
+        CalibrationStatusCard: () =>
+            import('./components/CalibrationStatusCard' /* webpackChunkName: "js/app/CalibrationStatusCard" */),
+        CollectionTableFilamentspools: () =>
+            import('./components/CollectionTableFilamentspools' /* webpackChunkName: "js/app/CollectionTableFilamentspools" */),
+        CollectionTableMachines: () =>
+            import('./components/CollectionTableMachines' /* webpackChunkName: "js/app/CollectionTableMachines" */),
+        GCode: () => import('./components/GCode' /* webpackChunkName: "js/app/GCode" */),
+        ThreeDPrinterJobs: () =>
+            import('./components/ThreeDPrinterJobs/ThreeDPrinterJobs' /* webpackChunkName: "js/app/ThreeDPrinterJobs/ThreeDPrinterJobs" */),
+        SuccessratePieChart: () =>
+            import('./components/ThreeDPrinterJobs/SuccessratePieChart' /* webpackChunkName: "js/app/ThreeDPrinterJobs/SuccessratePieChart" */),
+        ActivityHistogram: () =>
+            import('./components/ThreeDPrinterJobs/ActivityHistogram' /* webpackChunkName: "js/app/ThreeDPrinterJobs/ActivityHistogram" */),
+        ThreeDPrinterJobsHeatmap: () =>
+            import('./components/ThreeDPrinterJobs/Heatmap' /* webpackChunkName: "js/app/ThreeDPrinterJobs/Heatmap" */),
+        ManufacturersTable: () =>
+            import('./components/Manufacturers/ManufacturersTable' /* webpackChunkName: "js/app/Manufacturers/ManufacturersTable" */),
+        News: () => import('./components/News/News' /* webpackChunkName: "js/app/News/News" */),
+        ThingiverseFeatured: () =>
+            import('./components/ThingiverseFeatured/ThingiverseFeatured' /* webpackChunkName: "js/app/ThingiverseFeatured/ThingiverseFeatured" */),
     },
 });

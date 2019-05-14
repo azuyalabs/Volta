@@ -8,6 +8,7 @@
 @import 'data_table';
 @import 'docs';
 @import 'metrics';
+@import 'cards';
 
 html {
     overflow-y: scroll;
@@ -15,6 +16,7 @@ html {
 }
 
 body {
+    font-family: $font-family;
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -74,7 +76,7 @@ ul#navbarMenu {
     .card-title {
         text-transform: uppercase;
         color: slategray;
-        font-size: 1.7vh;
+        font-size: 1.9vh;
         font-weight: bolder;
     }
 }

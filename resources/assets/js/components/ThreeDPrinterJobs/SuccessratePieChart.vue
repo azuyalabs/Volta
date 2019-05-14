@@ -64,7 +64,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import '../../../../svg-icons/compiled/mini_refresh_circle.js';
 
 export default {
-    i18n: require('./piechart_i18n.js'),
+    i18n: require('./successrate_piechart_i18n.js'),
 
     components: {
         HalfCircleSpinner,

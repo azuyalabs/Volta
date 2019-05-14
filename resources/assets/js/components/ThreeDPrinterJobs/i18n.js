@@ -11,10 +11,11 @@
 
 export const messages = {
     'en-US': {
-        main_title: 'Print Job History',
+        main_title: 'Showing {filteredRows} of {totalRows} print jobs',
         job_id: 'Job ID: {id}',
         usage: 'Filament: {usage}m',
         no_data: "Uhm... you haven't printed anything yet. Guess it's about time, isn't it?",
+        total: 'Total',
 
         title: {
             refresh: 'Refresh',

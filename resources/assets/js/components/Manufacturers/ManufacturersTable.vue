@@ -23,12 +23,7 @@
         <!-- Card Header -->
         <div class="container-fluid row pr-0">
             <div class="p-2 card-title">
-                {{
-                    $t('main_title', {
-                        filteredRows: this.totalRows,
-                        totalRows: this.collection.length,
-                    })
-                }}
+                {{ $tc('index.title', this.totalRows, { count: this.totalRows }) }}
             </div>
             <div class="ml-auto p-2">
                 <b-link href="#" @click.prevent="getData" :title="$t('title.refresh')">
@@ -44,7 +39,16 @@
         <div v-if="collection.length">
             <!-- User Controls -->
             <div class="d-flex">
-                <div class="p-2"></div>
+                <div class="p-2">
+                    <b-link
+                        href="/manufacturers/create"
+                        class="btn btn-primary btn-sm text-uppercase"
+                        :title="$t('create.title')"
+                    >
+                        <svgicon icon="plus" class="button-icon-sm" color="#fff"></svgicon>
+                        add
+                    </b-link>
+                </div>
                 <div class="ml-auto p-2 d-inline-flex">
                     <b-form-group
                         :label="$t('filter.search.label')"
@@ -70,34 +74,34 @@
                         </b-input-group>
                     </b-form-group>
                     <b-form-group
-                        :label="$t('filter.result.label')"
-                        label-for="filter_result"
+                        :label="$t('filter.supplies.label')"
+                        label-for="filter_supplies"
                         label-size="sm"
                         class="mr-3"
                     >
                         <b-form-radio-group
-                            id="filter_result"
+                            id="filter_supplies"
                             buttons
-                            v-model="filter.result"
-                            :options="resultFilterOptions"
+                            v-model="filter.supplies"
+                            :options="suppliesFilterOptions"
                             size="sm"
                             button-variant="outline-primary"
                         />
                     </b-form-group>
                     <b-form-group
-                        :label="$t('filter.printer.label')"
-                        label-for="filter_machine"
+                        :label="$t('filter.country.label')"
+                        label-for="filter_country"
                         label-size="sm"
                         class="mr-3"
                     >
                         <b-form-select
-                            id="filter_machine"
-                            v-model="filter.machine"
-                            :options="resultMachineOptions"
+                            id="filter_country"
+                            v-model="filter.country"
+                            :options="countryFilterOptions"
                             size="sm"
                         >
                             <option slot="first" value="all"
-                                >-- {{ $t('filter.printer.all') }} --
+                                >-- {{ $t('filter.country.all') }} --
                             </option>
                         </b-form-select>
                     </b-form-group>
@@ -116,55 +120,25 @@
                 :per-page="perPage"
                 @filtered="onFiltered"
                 class="volta"
-                foot-clone
-                no-footer-sorting
             >
-                <template slot="name" slot-scope="row">
-                    <status-indicator
-                        v-if="row.item.status === 'success'"
-                        positive
+                <template slot="supplies" slot-scope="row">
+                    <b-badge
+                        class="text-uppercase"
+                        variant="primary"
                         v-b-tooltip.hover
-                        :title="$t('title.status_indicator.success')"
-                    ></status-indicator>
-                    <status-indicator
-                        v-if="row.item.status === 'failed'"
-                        negative
+                        :title="$t('fields.is_filament_supplier.tooltip')"
+                        v-if="row.item.filament_supplier == 1"
+                        >{{ $t('filament') }}
+                    </b-badge>
+                    <b-badge
+                        class="text-uppercase"
+                        variant="info"
                         v-b-tooltip.hover
-                        :title="$t('title.status_indicator.failed')"
-                    ></status-indicator>
-                    <status-indicator
-                        v-if="row.item.status === 'in_progress'"
-                        active
-                        pulse
-                        v-b-tooltip.hover
-                        :title="$t('title.status_indicator.in_progress')"
-                    ></status-indicator>
-                    <div class="d-inline-block">
-                        <div v-b-tooltip.hover :title="row.value" v-if="row.value.length > 30">
-                            {{ row.value.replace(/(.{30})..+/, '$1&hellip;') }}
-                        </div>
-                        <div v-else>{{ row.value }}</div>
-                        <div class="text-muted small">
-                            {{ $t('job_id', { id: row.item.job_id }) }}
-                        </div>
-                    </div>
+                        :title="$t('fields.is_equipment_supplier.tooltip')"
+                        v-if="row.item.equipment_supplier == 1"
+                        >{{ $t('equipment') }}
+                    </b-badge>
                 </template>
-
-                <template slot="started_at" slot-scope="row">
-                    {{ dateFormat(row.item.started_at, 'L LTS') }}
-                </template>
-
-                <template slot="duration" slot-scope="row">
-                    {{ formatPrintJobDuration(row.item.duration) }}
-                    <div class="text-muted small">
-                        {{ $t('usage', { usage: formatFilamentUsage(row.item.details) }) }}
-                    </div>
-                </template>
-
-                <template slot="machine" slot-scope="row">
-                    <b-link :href="'/machines'">{{ row.item.machine.name }}</b-link>
-                </template>
-
                 <template slot="actions" slot-scope="row">
                     <div v-if="row.item.status !== 'in_progress'">
                         <b-dropdown variant="link" size="sm" right no-caret>
@@ -177,42 +151,17 @@
                                 ></svgicon>
                             </template>
                             <b-dropdown-item
+                                :href="'/manufacturers/' + row.item.id + '/edit'"
+                                :title="$t('edit.title', { name: row.item.name })"
+                                >Edit
+                            </b-dropdown-item>
+                            <b-dropdown-item
                                 @click.prevent="deleteItem(row.item.id)"
                                 href="#"
-                                :title="$t('title.delete', { name: row.item.name })"
+                                :title="$t('delete.title', { name: row.item.name })"
                                 >Delete
                             </b-dropdown-item>
-                            <b-dropdown-divider />
-                            <b-dropdown-item
-                                v-if="row.item.status === 'failed'"
-                                :title="$t('title.mark_as_successful')"
-                                @click.prevent="toggleResult(row.item.id, 'success')"
-                                >Mark as Successful
-                            </b-dropdown-item>
-                            <b-dropdown-item
-                                v-if="row.item.status === 'success'"
-                                :title="$t('title.mark_as_failed')"
-                                @click.prevent="toggleResult(row.item.id, 'failed')"
-                                >Mark as Failed
-                            </b-dropdown-item>
                         </b-dropdown>
-                    </div>
-                </template>
-
-                <!-- Footer Templates -->
-                <template slot="FOOT_machine" slot-scope="data">
-                    &nbsp;
-                </template>
-                <template slot="FOOT_started_at" slot-scope="data">
-                    &nbsp;
-                </template>
-                <template slot="FOOT_name" slot-scope="data">
-                    {{ $t('total') }}
-                </template>
-                <template slot="FOOT_duration" slot-scope="data">
-                    {{ formatPrintJobDuration(total.duration) }}
-                    <div class="text-muted small">
-                        {{ $t('usage', { usage: numberFormat(total.filament / 1000) }) }}
                     </div>
                 </template>
             </b-table>
@@ -236,6 +185,11 @@
                 <div>{{ $t('no_data') }}</div>
             </div>
         </div>
+
+        <!-- Modal Component -->
+        <b-modal id="modal-center" centered :title="$t('create.title')">
+            <p class="my-4">Vertically centered modal!</p>
+        </b-modal>
     </div>
 </template>
 
@@ -248,7 +202,6 @@ import '../../../../svg-icons/compiled/actions.js';
 import '../../../../svg-icons/compiled/404.js';
 import '../../../../svg-icons/compiled/mini_refresh_circle.js';
 
-import { dateFormat, formatPrintJobDuration, numberFormat } from '../../../../js/helpers';
 import { StatusIndicator } from 'vue-status-indicator';
 import { HalfCircleSpinner } from 'epic-spinners';
 import Loading from 'vue-loading-overlay';
@@ -278,12 +231,8 @@ export default {
             collection: [],
             filter: {
                 search: '',
-                machine: 'all',
-                result: 'all',
-            },
-            total: {
-                filament: 0,
-                duration: 0,
+                country: 'all',
+                supplies: 'all',
             },
         };
     },
@@ -293,40 +242,30 @@ export default {
     },
 
     computed: {
-        resultFilterOptions() {
+        suppliesFilterOptions() {
             return [
-                { text: this.$t('filter.result.option_all'), value: 'all' },
-                { text: this.$t('filter.result.option_in_progress'), value: 'in_progress' },
-                { text: this.$t('filter.result.option_success'), value: 'success' },
-                { text: this.$t('filter.result.option_failed'), value: 'failed' },
+                { text: this.$t('filter.supplies.option_all'), value: 'all' },
+                { text: this.$t('filter.supplies.option_filament'), value: 'filament' },
+                { text: this.$t('filter.supplies.option_equipment'), value: 'equipment' },
             ];
         },
 
-        resultMachineOptions() {
-            return [...new Set(this.collection.map(item => item.machine.name))].sort().map(f => {
+        countryFilterOptions() {
+            return [...new Set(this.collection.map(item => item.country))].sort().map(f => {
                 return { text: f, value: f };
             });
         },
     },
 
     methods: {
-        formatFilamentUsage(record) {
-            let details = JSON.parse(record);
-
-            if (details && details.filament_length > 0) {
-                return numberFormat(details.filament_length / 1000);
-            }
-
-            return 0;
-        },
-
         filterFunction(record) {
             return (
-                (this.filter.result === 'all' || this.filter.result === record.status) &&
-                (this.filter.machine === 'all' || record.machine.name === this.filter.machine) &&
+                (this.filter.supplies === 'all' ||
+                    (this.filter.supplies === 'equipment' && record.equipment_supplier === 1) ||
+                    (this.filter.supplies === 'filament' && record.filament_supplier === 1)) &&
+                (this.filter.country === 'all' || record.country === this.filter.country) &&
                 (this.filter.search === '' ||
-                    record.name.toLowerCase().indexOf(this.filter.search.toLowerCase()) > -1 ||
-                    record.job_id.toLowerCase().indexOf(this.filter.search.toLowerCase()) > -1)
+                    record.name.toLowerCase().indexOf(this.filter.search.toLowerCase()) > -1)
             );
         },
 
@@ -334,12 +273,6 @@ export default {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length;
             this.currentPage = 1;
-
-            // Recalculate total used filament and total print time (based on filtered set)
-            this.total.filament = filteredItems
-                .map(item => JSON.parse(item.details).filament_length)
-                .reduce((a, b) => a + b);
-            this.total.duration = filteredItems.map(item => item.duration).reduce((a, b) => a + b);
         },
 
         deleteItem(id) {
@@ -348,7 +281,7 @@ export default {
 
             if (conf === true) {
                 axios
-                    .delete('/api/threedprinterjobs/' + id)
+                    .delete('/api/manufacturers/' + id)
                     .then(response => {
                         this.collection.splice(index, 1);
                     })
@@ -358,24 +291,10 @@ export default {
             }
         },
 
-        toggleResult(id, value) {
-            this.isLoading = true;
-            axios
-                .patch('/api/threedprinterjobs/' + id, {
-                    status: value,
-                })
-                .then(response => {
-                    this.getData();
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
-
         getData: async function() {
             this.isLoading = true;
             try {
-                const response = await axios.get('/api/threedprinterjobs');
+                const response = await axios.get('/api/manufacturers');
 
                 // Remap JSON:API data to simple array with objects as its elements
                 let collectionData = response.data.data;
@@ -389,31 +308,26 @@ export default {
                     let attr = collectionData[i].attributes;
                     for (let key in attr) {
                         if (attr.hasOwnProperty(key)) o[key] = attr[key];
+
+                        // Apply name code -> name mapping based on meta element
+                        if (collectionData[i].hasOwnProperty('meta')) {
+                            let meta = collectionData[i]['meta'];
+                            if (meta.hasOwnProperty(key + '.name') && meta[key + '.name']) {
+                                o[key] = meta[key + '.name'];
+                            }
+                        }
                     }
 
                     this.collection.push(o);
                 }
 
-                // Calculate totals
-                this.total.duration = this.collection
-                    .map(item => item.duration)
-                    .reduce((a, b) => a + b);
-                this.total.filament = this.collection
-                    .map(item => JSON.parse(item.details).filament_length)
-                    .reduce((a, b) => a + b);
-
                 this.totalRows = collectionData.length;
-
                 this.isLoading = false;
             } catch (error) {
                 console.log(error);
                 return [];
             }
         },
-
-        formatPrintJobDuration,
-        dateFormat,
-        numberFormat,
     },
 };
 </script>

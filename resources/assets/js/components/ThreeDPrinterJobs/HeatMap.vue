@@ -107,9 +107,7 @@ export default {
 </script>
 <style>
 svg.vch__wrapper {
-    /*width: 70%;
-        //height: 60%;*/
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
         'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol' !important;
     line-height: 10px;

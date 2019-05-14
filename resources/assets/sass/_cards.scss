@@ -9,7 +9,7 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-.card-metric {
+.card-default {
     border: none;
     padding: 2vh;
     height: 100%;
@@ -21,25 +21,9 @@
         font-weight: bolder;
     }
 
-    .chart-donut-center-text {
-        font-size: 2.5vh;
-        font-weight: 900;
-    }
-
     .footer-text {
         text-transform: uppercase;
         font-size: 1.3vh;
         color: #6c757d;
-    }
-
-    /* Overrides for the donut chart */
-    .cdc-legend {
-        font-size: 1.6vh;
-        text-transform: uppercase;
-    }
-
-    .cdc-legend-item-color {
-        width: 1em;
-        height: 1em;
     }
 }
