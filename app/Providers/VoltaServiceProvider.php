@@ -12,8 +12,18 @@
 
 namespace App\Providers;
 
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidFactory;
+use Illuminate\Database\Connection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Ramsey\Uuid\Codec\OrderedTimeCodec;
+use App\Storage\BinaryUuid\MySqlGrammar;
+use App\Storage\BinaryUuid\SQLiteGrammar;
+use Illuminate\Database\Schema\Grammars\Grammar;
+use Illuminate\Database\Query\Grammars\MySqlGrammar as IlluminateMySqlGrammar;
+use Illuminate\Database\Query\Grammars\SQLiteGrammar as IlluminateSQLiteGrammar;
 
 class VoltaServiceProvider extends ServiceProvider
 {
@@ -23,6 +33,35 @@ class VoltaServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
+    {
+        $this->registerServices();
+    }
+
+    /**
+     * Register the Volta services.
+     *
+     * @return void
+     */
+    protected function registerServices(): void
+    {
+        $services = [
+            'Contracts\Repositories\WeatherRepository' => 'Repositories\OpenWeatherMapRepository',
+            'Contracts\Repositories\FilamentSpoolRepository' => 'Repositories\FilamentSpoolRepository',
+            'Contracts\Repositories\MachineJobRepository' => 'Repositories\MachineJobRepository',
+            'Contracts\Repositories\ManufacturerRepository' => 'Repositories\ManufacturerRepository'
+        ];
+
+        foreach ($services as $key => $value) {
+            $this->app->singleton('App\\' . $key, 'App\\' . $value);
+        }
+    }
+
+    /**
+     * Register custom Blade directives
+     *
+     * @return void
+     */
+    protected function registerBladeDirectives(): void
     {
         Blade::directive('moneyFormat', function ($value) {
             return "<?php echo money($value, auth()->user()->profile->currency ?? 'USD'); ?>";
@@ -35,30 +74,13 @@ class VoltaServiceProvider extends ServiceProvider
         Blade::directive('CurrencySymbol', function ($code) {
             return "<?php echo Punic\Currency::getSymbol({$code}); ?>";
         });
-
-        $this->registerServices();
-    }
-
-    /**
-     * Register the Volta services.
-     *
-     * @return void
-     */
-    protected function registerServices()
-    {
-        $services = [
-            'Contracts\Repositories\WeatherRepository' => 'Repositories\OpenWeatherMapRepository',
-            'Contracts\Repositories\FilamentSpoolRepository' => 'Repositories\FilamentSpoolRepository',
-            'Contracts\Repositories\MachineJobRepository' => 'Repositories\MachineJobRepository'
-        ];
-
-        foreach ($services as $key => $value) {
-            $this->app->singleton('App\\' . $key, 'App\\' . $value);
-        }
     }
 
     public function boot()
     {
+        $this->registerBladeDirectives();
+
+        // Inject all views with custom variables
         view()->composer('*', function ($view) {
             $variables = [
                 'locale' => auth()->user()->profile->language ?? 'en-US',
@@ -76,5 +98,54 @@ class VoltaServiceProvider extends ServiceProvider
 
             app()->isLocal();
         });
+
+        // Allow database/models for Binary UUID
+        /** @var \Illuminate\Database\Connection $connection */
+        try {
+            $connection = app('db')->connection();
+            $connection->setSchemaGrammar($this->createGrammarFromConnection($connection));
+            $this->optimizeUuids();
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
+    }
+
+    /**
+     * Set the UUID factory to use optimize UUID's
+     */
+    protected function optimizeUuids(): void
+    {
+        $factory = new UuidFactory();
+        $codec = new OrderedTimeCodec($factory->getUuidBuilder());
+        $factory->setCodec($codec);
+        Uuid::setFactory($factory);
+    }
+
+    /**
+     * Determines the proper SQL Grammar from the provided connection instance.
+     *
+     * @param Connection $connection Database connection instance
+     *
+     * @return SQLiteGrammar|MySqlGrammar
+     * @throws \Exception
+     */
+    protected function createGrammarFromConnection(Connection $connection): Grammar
+    {
+        $queryGrammar = $connection->getQueryGrammar();
+        $queryGrammarClass = \get_class($queryGrammar);
+        if (! \in_array($queryGrammarClass, [
+            IlluminateMySqlGrammar::class,
+            IlluminateSQLiteGrammar::class,
+        ])) {
+            throw new \Exception("There current grammar `$queryGrammarClass` doesn't support binary uuids. Only  MySql and SQLite connections are supported.");
+        }
+        if ($queryGrammar instanceof IlluminateSQLiteGrammar) {
+            $grammar = new SQLiteGrammar();
+        } else {
+            $grammar = new MySqlGrammar();
+        }
+        $grammar->setTablePrefix($queryGrammar->getTablePrefix());
+
+        return $grammar;
     }
 }

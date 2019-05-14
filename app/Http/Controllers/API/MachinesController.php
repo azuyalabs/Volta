@@ -14,23 +14,12 @@ namespace App\Http\Controllers\API;
 
 use App\Machine;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\MachineResource;
 use App\Http\Resources\MachineCollectionResource;
 
 class MachinesController extends Controller
 {
-
-    /**
-     * MachinesController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-        //$this->authorizeResource(Machine::class);
-    }
-
     /**
      * Display the specified machine.
      *

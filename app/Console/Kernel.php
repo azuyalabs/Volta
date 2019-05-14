@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
         FetchFirmwareReleases::class,
         FetchSlicerReleases::class,
         FetchWeather::class,
-        OptimizeCommand::class,
+        SlicerProfilesCommand::class
     ];
 
     /**
@@ -53,6 +53,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('dashboard:firmwares')->twiceDaily();
         $schedule->command('dashboard:slicers')->twiceDaily();
         $schedule->command('dashboard:weather')->everyFifteenMinutes();
-        $schedule->command('volta:prune-status')->daily();
+        $schedule->command('volta:vacuum')->weeklyOn(0);
     }
 }

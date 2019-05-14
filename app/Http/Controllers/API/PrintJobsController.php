@@ -13,20 +13,11 @@
 namespace App\Http\Controllers\API;
 
 use App\GCode;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\PrintJobResource;
 
 class PrintJobsController extends Controller
 {
-
-    /**
-     * PrintJobsController constructor.
-     */
-    public function __construct()
-    {
-        //$this->middleware('auth:api');
-    }
 
     /**
      * Display the specified print job.

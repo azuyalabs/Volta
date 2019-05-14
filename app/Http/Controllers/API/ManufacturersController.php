@@ -15,43 +15,24 @@ namespace App\Http\Controllers\API;
 use App\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\ManufacturerResource;
+use App\QueryOptions\ManufacturerQueryOptions;
+use App\Contracts\Repositories\ManufacturerRepository;
 use App\Http\Resources\ManufacturerCollectionResource;
 use App\Http\Requests\Manufacturer as ManufacturerRequest;
 
 class ManufacturersController extends Controller
 {
     /**
-     * MachinesController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-        //$this->authorizeResource(Manufacturer::class);
-    }
-
-    /**
-     * Get a list of all manufacturers.
+     *List all manufacturers.
      *
-     * @param Request $request
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Contracts\Repositories\ManufacturerRepository $storage
      * @return \App\Http\Resources\ManufacturerCollectionResource
      */
-    public function index(Request $request): ManufacturerCollectionResource
+    public function index(Request $request, ManufacturerRepository $storage): ManufacturerCollectionResource
     {
-        $collection = Manufacturer::query();
-
-        if ($request->has('filter') && null !== $request->query('filter')) {
-            $collection->where('name', 'LIKE', '%' . $request->query('filter') . '%');
-        }
-
-        if ($request->has('sort') && null !== $request->query('sort')) {
-            [$sort_field, $sort_direction] = \explode('|', $request->query('sort'));
-
-            $collection->orderBy($sort_field, $sort_direction);
-        }
-
-        return new ManufacturerCollectionResource($collection->paginate(10));
+        return new ManufacturerCollectionResource($storage->all((new ManufacturerQueryOptions())));
     }
 
     /**
@@ -68,18 +49,19 @@ class ManufacturersController extends Controller
     }
 
     /**
-     * Remove the specified manufacturer
+     * Remove the specified manufacturer from storage
      *
-     * @param  Manufacturer $manufacturer
+     * @param string $id the id of the manufacturer
      *
+     * @param ManufacturerRepository $storage
      * @return \Illuminate\Http\Response
-     * @throws \Exception
      */
-    public function destroy(Manufacturer $manufacturer): Response
+    public function destroy($id, ManufacturerRepository $storage): Response
     {
-        $manufacturer->delete();
-
-        return response(null, Response::HTTP_OK);
+        if ($storage->delete($id)) {
+            return response(null, Response::HTTP_NO_CONTENT);
+        }
+        return response(null, Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**

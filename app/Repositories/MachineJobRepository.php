@@ -13,8 +13,8 @@
 namespace App\Repositories;
 
 use App\MachineJob;
-use App\MachineJobStatus;
 use Illuminate\Support\Facades\DB;
+use App\QueryOptions\MachineJobQueryOptions;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests\MachineJob as MachineJobRequest;
 use App\Contracts\Repositories\MachineJobRepository as Contract;
@@ -29,12 +29,11 @@ class MachineJobRepository implements Contract
     /**
      * {@inheritdoc}
      */
-    public function all($type, $user_id): Collection
+    public function all($user_id, MachineJobQueryOptions $options): Collection
     {
         return MachineJob::whereUserId($user_id)
-            ->when($type, function ($query, $type) {
-                return $query->where('type', $type);
-            })->with('machine')->get();
+            ->withQueryOptions($options)
+            ->with('machine')->get();
     }
 
     /**
@@ -75,14 +74,11 @@ class MachineJobRepository implements Contract
     /**
      * {@inheritdoc}
      */
-    public function activity($type, $user_id): Collection
+    public function activity($user_id, MachineJobQueryOptions $options): Collection
     {
         return MachineJob::select(DB::raw('date(started_at) as date, count(job_id) as count'))
             ->whereUserId($user_id)
-            ->when($type, function ($query, $type) {
-                return $query->where('type', $type);
-            })
-            ->whereIn('status', [MachineJobStatus::FAILED, MachineJobStatus::SUCCESS])
+            ->withQueryOptions($options)
             ->groupBy('date')
             ->get();
     }
@@ -90,14 +86,11 @@ class MachineJobRepository implements Contract
     /**
      * {@inheritdoc}
      */
-    public function success_rate($type, $user_id): Collection
+    public function success_rate($user_id, MachineJobQueryOptions $options): Collection
     {
         return MachineJob::select(DB::raw('status, count(job_id) as value'))
             ->whereUserId($user_id)
-            ->when($type, function ($query, $type) {
-                return $query->where('type', $type);
-            })
-            ->whereIn('status', [MachineJobStatus::FAILED, MachineJobStatus::SUCCESS])
+            ->withQueryOptions($options)
             ->groupBy('status')
             ->get();
     }

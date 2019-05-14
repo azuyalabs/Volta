@@ -13,8 +13,8 @@
 namespace App;
 
 use Cknow\Money\Money;
-use Spatie\BinaryUuid\HasBinaryUuid;
 use Illuminate\Database\Eloquent\Model;
+use App\Storage\BinaryUuid\HasBinaryUuid;
 
 /**
  * Class representing the model for a Filament Spool.

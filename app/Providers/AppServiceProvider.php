@@ -13,7 +13,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Laravel\Telescope\TelescopeServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,8 +33,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if ($this->app->isLocal() || $this->app->environment('production')) {
-            $this->app->register(TelescopeServiceProvider::class);
-        }
+        Schema::defaultStringLength(191);
     }
 }

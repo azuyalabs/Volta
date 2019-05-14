@@ -37,9 +37,8 @@ class FilamentSpoolsController extends Controller
      */
     public function __construct(FilamentSpoolRepository $spools)
     {
+        parent::__construct();
         $this->spools = $spools;
-
-        $this->middleware('auth');
     }
 
     /**

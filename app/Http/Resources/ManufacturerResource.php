@@ -36,9 +36,10 @@ class ManufacturerResource extends JsonResource
                 'website' => $this->website,
                 'filament_supplier' => $this->filament_supplier,
                 'equipment_supplier' => $this->equipment_supplier,
+                'product_count' => $this->models->count()
             ],
             'links' => [
-                'self' => route('manufacturers.show', ['manufacturer' => $this->slug]),
+                'self' => \getenv('APP_URL') . '/api/manufacturers/' . $this->slug,
             ],
             'meta' => [
                 'country.name' => app(CountryRepository::class)->getName($this->country),

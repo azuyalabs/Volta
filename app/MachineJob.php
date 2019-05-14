@@ -12,8 +12,9 @@
 
 namespace App;
 
-use Spatie\BinaryUuid\HasBinaryUuid;
 use Illuminate\Database\Eloquent\Model;
+use App\Storage\BinaryUuid\HasBinaryUuid;
+use App\QueryOptions\MachineJobQueryOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -66,5 +67,102 @@ class MachineJob extends Model
     public function machine()
     {
         return $this->belongsTo(Machine::class);
+    }
+
+    /**
+     * Scope the query for the given query options.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  \App\QueryOptions\MachineJobQueryOptions $options
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithQueryOptions($query, MachineJobQueryOptions $options)
+    {
+        $this->whereType($query, $options)
+            ->whereStatuses($query, $options)
+            ->whereMachines($query, $options)
+            ->whereStartDatePeriod($query, $options);
+        return $query;
+    }
+
+    /**
+     * Scope the query for the given start date period.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  MachineJobQueryOptions $options
+     *
+     * @return $this
+     */
+    protected function whereStartDatePeriod($query, MachineJobQueryOptions $options)
+    {
+        $query->when($options->start_date_period, function ($query, \DatePeriod $period) {
+            return $query->whereBetween('started_at', [$period->getStartDate(), $period->getEndDate()]);
+        });
+
+        return $this;
+    }
+
+    /**
+     * Scope the query for the given machine(s) (id's).
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  MachineJobQueryOptions $options
+     *
+     * @return $this
+     */
+    protected function whereMachines($query, MachineJobQueryOptions $options)
+    {
+        $query->when($options->machines, function ($query, $machines) {
+            $column_name = 'machine_id';
+
+            if (1 < \count($machines)) {
+                return $query->whereIn($column_name, $machines);
+            }
+
+            return $query->where($column_name, $machines);
+        });
+
+        return $this;
+    }
+
+    /**
+     * Scope the query for the given type.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  MachineJobQueryOptions $options
+     *
+     * @return $this
+     */
+    protected function whereStatuses($query, MachineJobQueryOptions $options)
+    {
+        $query->when($options->statuses, function ($query, $status) {
+            $column_name = 'status';
+
+            if (1 < \count($status)) {
+                return $query->whereIn($column_name, $status);
+            }
+
+            return $query->where($column_name, $status);
+        });
+
+        return $this;
+    }
+
+    /**
+     * Scope the query for the given type.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  MachineJobQueryOptions $options
+     *
+     * @return $this
+     */
+    protected function whereType($query, MachineJobQueryOptions $options)
+    {
+        $query->when($options->type, function ($query, $type) {
+            return $query->where('type', $type);
+        });
+
+        return $this;
     }
 }

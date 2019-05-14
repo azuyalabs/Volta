@@ -14,7 +14,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Rules\ValidPrinterId;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use App\Http\Resources\VerificationResource;
 use App\Events\PrinterMonitor\PrinterStatusFetched;
 

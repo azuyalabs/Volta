@@ -19,14 +19,6 @@ class ProjectsController extends Controller
 {
 
     /**
-     * ProjectsController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display a listing of projects.
      *
      * @param \Illuminate\Http\Request $request

@@ -13,7 +13,6 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\FilamentSpoolResource;
 use App\Contracts\Repositories\FilamentSpoolRepository;
 use App\Http\Resources\FilamentSpoolCollectionResource;
@@ -33,9 +32,8 @@ class FilamentSpoolsController extends Controller
      */
     public function __construct(FilamentSpoolRepository $spools)
     {
+        parent::__construct();
         $this->spools = $spools;
-
-        $this->middleware('auth:api');
     }
 
     /**

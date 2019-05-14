@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\QueryOptions\ManufacturerQueryOptions;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
@@ -123,5 +124,22 @@ class Manufacturer extends Model
     public function scopeIsEquipmentSupplier($query): Builder
     {
         return $query->where('equipment_supplier', true);
+    }
+
+    /**
+     * Scope the query for the given query options.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  \App\QueryOptions\ManufacturerQueryOptions $options
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithQueryOptions($query, ManufacturerQueryOptions $options)
+    {
+        /*$this->whereType($query, $options)
+            ->whereStatuses($query, $options)
+            ->whereMachines($query, $options)
+            ->whereStartDatePeriod($query, $options);*/
+        return $query;
     }
 }

@@ -30,7 +30,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product)
     {
-        return $user->isAdministrator();
+        return $user->hasRole('admin');
     }
 
     /**
@@ -42,7 +42,7 @@ class ProductPolicy
      */
     public function create(User $user)
     {
-        return $user->isAdministrator();
+        return $user->hasRole('admin');
     }
 
     /**
@@ -54,7 +54,7 @@ class ProductPolicy
      */
     public function update(User $user)
     {
-        return $user->isAdministrator();
+        return $user->hasRole('admin');
     }
 
     /**
@@ -66,6 +66,6 @@ class ProductPolicy
      */
     public function delete(User $user)
     {
-        return $user->isAdministrator();
+        return $user->hasRole('admin');
     }
 }

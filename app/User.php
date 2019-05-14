@@ -13,7 +13,9 @@
 namespace App;
 
 use Illuminate\Support\Str;
+use App\Notifications\VerifyEmail;
 use Laravel\Passport\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,7 +27,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, HasRoles;
 
     /**
      * @inheritdoc
@@ -65,12 +67,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Has this user Administrator privileges or not?
-     *
-     * @return bool
+     * @inheritdoc
      */
-    public function isAdministrator(): bool
+    public function sendEmailVerificationNotification()
     {
-        return $this->id === 1;
+        $this->notify(new VerifyEmail());
     }
 }

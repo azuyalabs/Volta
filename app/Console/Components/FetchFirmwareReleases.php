@@ -14,8 +14,8 @@ namespace App\Console\Components;
 
 use Carbon\Carbon;
 use App\Services\GitHubApi;
-use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use App\Events\FirmwareReleases\FirmwareReleasesFetched;
 

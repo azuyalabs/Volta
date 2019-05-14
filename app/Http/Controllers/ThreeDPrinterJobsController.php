@@ -22,15 +22,6 @@ use Illuminate\Http\Request;
 class ThreeDPrinterJobsController extends Controller
 {
     /**
-     * ThreeDPrinterJobsController constructor.
-     *
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display a listing of the authenticated user's 3D Printer Jobs.
      *
      * @param \Illuminate\Http\Request $request

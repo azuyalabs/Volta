@@ -25,6 +25,11 @@ class Controller extends BaseController
         resourceAbilityMap as protected resourceAbilityMapTrait;
     }
 
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
     /**
      * Get the map of resource methods to ability names.
      *

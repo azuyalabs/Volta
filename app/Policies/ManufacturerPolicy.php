@@ -30,7 +30,7 @@ class ManufacturerPolicy
      */
     public function view(User $user, Manufacturer $manufacturer)
     {
-        return $user->isAdministrator();
+        return $user->hasRole('admin');
     }
 
     /**
@@ -42,7 +42,7 @@ class ManufacturerPolicy
      */
     public function create(User $user)
     {
-        return $user->isAdministrator();
+        return $user->hasRole('admin');
     }
 
     /**
@@ -55,7 +55,7 @@ class ManufacturerPolicy
      */
     public function update(User $user, Manufacturer $manufacturer)
     {
-        return $user->isAdministrator();
+        return $user->hasRole('admin');
     }
 
     /**
@@ -68,11 +68,11 @@ class ManufacturerPolicy
      */
     public function delete(User $user, Manufacturer $manufacturer)
     {
-        return $user->isAdministrator();
+        return $user->hasRole('admin');
     }
 
     public function list(User $user)
     {
-        return true;
+        return $user->hasRole('admin');
     }
 }

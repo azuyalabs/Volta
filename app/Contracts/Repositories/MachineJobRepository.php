@@ -13,6 +13,7 @@
 namespace App\Contracts\Repositories;
 
 use App\MachineJob;
+use App\QueryOptions\MachineJobQueryOptions;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests\MachineJob as MachineJobRequest;
 
@@ -26,12 +27,12 @@ interface MachineJobRepository
     /**
      * Get all of the authenticated user's machine jobs.
      *
-     * @param  string|null $type the type of machine
+     * @param  MachineJobQueryOptions $options query options
      * @param int $user_id the identifier of the user owning the machine jobs
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function all($type, $user_id): Collection;
+    public function all($user_id, MachineJobQueryOptions $options): Collection;
 
     /**
      * Retrieves a machine job from storage with the given ID.
@@ -77,20 +78,20 @@ interface MachineJobRepository
     /**
      * Gets all of machine jobs activity (summary) of the given user
      *
-     * @param  string|null $type the type of machine
+     * @param  MachineJobQueryOptions $options query options
      * @param int $user_id the identifier of the user owning the machine jobs
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function activity($type, $user_id): Collection;
+    public function activity($user_id, MachineJobQueryOptions $options): Collection;
 
     /**
      * Get the success rate (success vs failure ration) of all machine jobs of the given user
      *
-     * @param  string|null $type the type of machine
+     * @param  MachineJobQueryOptions $options query options
      * @param int $user_id the identifier of the user owning the machine jobs
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function success_rate($type, $user_id): Collection;
+    public function success_rate($user_id, MachineJobQueryOptions $options): Collection;
 }

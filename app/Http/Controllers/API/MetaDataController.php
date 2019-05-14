@@ -13,20 +13,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Manufacturer;
-use App\Http\Controllers\Controller;
 use App\Repositories\CountryRepository;
 
 class MetaDataController extends Controller
 {
-
-
-    /**
-     * MetaDataController constructor.
-     */
-    public function __construct()
-    {
-    }
-
     public function countries()
     {
         $list = app(CountryRepository::class)->all();

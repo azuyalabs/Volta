@@ -23,7 +23,7 @@ class Product extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->isAdministrator();
+        return auth()->user()->hasRole('admin');
     }
 
     /**

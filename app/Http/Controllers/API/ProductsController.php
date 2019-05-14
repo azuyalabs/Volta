@@ -16,21 +16,12 @@ use App\Product;
 use App\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Http\Requests\Product as ProductRequest;
 use App\Http\Resources\ProductCollectionResource;
 
 class ProductsController extends Controller
 {
-    /**
-     * ProductsController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-        //$this->authorizeResource(Product::class);
-    }
 
     /**
      * Get a list of all products.

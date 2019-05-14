@@ -12,24 +12,16 @@
 
 namespace App\Http\Controllers\API;
 
+use App\MachineJobStatus;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use App\QueryOptions\MachineJobQueryOptions;
 use App\Contracts\Repositories\MachineJobRepository;
 use App\Http\Requests\MachineJob as MachineJobRequest;
 use App\Http\Resources\ThreeDPrinterJobCollectionResource;
 
 abstract class MachineJobController extends Controller
 {
-    /**
-     * API MachineJobController constructor.
-     *
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
     /**
      * List the machine jobs of the given type.
      *
@@ -39,7 +31,10 @@ abstract class MachineJobController extends Controller
      */
     public function index(Request $request, MachineJobRepository $storage): ThreeDPrinterJobCollectionResource
     {
-        return new ThreeDPrinterJobCollectionResource($storage->all($this->machineType(), auth()->user()->id));
+        $options = new MachineJobQueryOptions();
+        $options->type($this->machineType());
+
+        return new ThreeDPrinterJobCollectionResource($storage->all(auth()->user()->id, $options));
     }
 
     /**
@@ -98,14 +93,28 @@ abstract class MachineJobController extends Controller
     }
 
     /**
-     * Retrieves all the print job activity of the given user.
+     * Retrieves all the print job activity of the given user for the last year.
      *
      * @param MachineJobRepository $storage
+     *
      * @return \Illuminate\Http\JsonResponse
+     *
+     * @throws \Exception
      */
     public function activity(MachineJobRepository $storage)
     {
-        $activity = $storage->activity($this->machineType(), auth()->user()->id);
+        $options = new MachineJobQueryOptions();
+        $options->statuses([MachineJobStatus::FAILED, MachineJobStatus::SUCCESS]);
+        $options->type($this->machineType());
+
+        $endDate = new \DateTimeImmutable();
+        $options->start_date_period(new \DatePeriod(
+            $endDate->sub(new \DateInterval('P1Y')),
+            new \DateInterval('P1D'),
+            $endDate
+        ));
+
+        $activity = $storage->activity(auth()->user()->id, $options);
 
         return response()->json($activity);
     }
@@ -115,10 +124,23 @@ abstract class MachineJobController extends Controller
      *
      * @param MachineJobRepository $storage
      * @return \Illuminate\Http\JsonResponse
+     *
+     * @throws \Exception
      */
     public function success_rate(MachineJobRepository $storage)
     {
-        $activity = $storage->success_rate($this->machineType(), auth()->user()->id);
+        $options = new MachineJobQueryOptions();
+        $options->statuses([MachineJobStatus::FAILED, MachineJobStatus::SUCCESS]);
+        $options->type($this->machineType());
+
+        $endDate = new \DateTimeImmutable();
+        $options->start_date_period(new \DatePeriod(
+            $endDate->sub(new \DateInterval('P1Y')),
+            new \DateInterval('P1D'),
+            $endDate
+        ));
+
+        $activity = $storage->success_rate(auth()->user()->id, $options);
 
         return response()->json($activity);
     }

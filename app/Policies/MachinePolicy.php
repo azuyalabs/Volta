@@ -26,20 +26,6 @@ class MachinePolicy
     use HandlesAuthorization;
 
     /**
-     * Determine to authorize an action before the intended policy method is called.
-     *
-     * @param \App\User $user
-     *
-     * @return mixed
-     */
-    public function before($user)
-    {
-        if ($user->isAdministrator()) {
-            return true;
-        }
-    }
-
-    /**
      * Determine whether the user can view the list of machines.
      *
      * @param  \App\User $user
@@ -73,7 +59,7 @@ class MachinePolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->hasRole('experimental');
     }
 
     /**

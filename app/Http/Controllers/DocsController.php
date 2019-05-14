@@ -32,7 +32,7 @@ class DocsController extends Controller
      */
     public function __construct(Documentation $docs)
     {
-        $this->middleware('auth'); // Only registered users can read the docs (for now)
+        parent::__construct();
         $this->docs = $docs;
     }
 
