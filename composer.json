@@ -31,14 +31,14 @@
     "pusher/pusher-php-server": "3.3",
     "spatie/laravel-model-status": "^1.6",
     "spatie/laravel-permission": "^2.30",
-    "symfony/dom-crawler": "^4.2"
+    "symfony/dom-crawler": "^4.2",
+    "league/plates": "^3.3"
   },
   "require-dev": {
     "doctrine/dbal": "^2.9",
     "filp/whoops": "~2.3",
     "friendsofphp/php-cs-fixer": "^2.14",
     "fzaninotto/faker": "~1.8",
-    "league/plates": "^3.3",
     "mockery/mockery": "~1.2",
     "nunomaduro/collision": "~3.0",
     "nunomaduro/larastan": "^0.3",
