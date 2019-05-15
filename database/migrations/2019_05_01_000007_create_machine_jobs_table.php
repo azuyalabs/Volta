@@ -34,41 +34,33 @@ class CreateMachineJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create(self::TABLE_NAME, function (Blueprint $table) {
-            $table->uuid('uuid')->primary()->nullable();
-            $table->char('job_id', 16);
+        if (!Schema::hasTable(self::TABLE_NAME)) {
+            Schema::create(self::TABLE_NAME, function (Blueprint $table) {
+                $table->uuid('uuid')->primary()->nullable();
+                $table->char('job_id', 16);
 
-            $table->integer('user_id')->unsigned();
-            $table->integer('machine_id')->unsigned();
-            $table->string('name');
-            $table->enum('status', [MachineJobStatus::SUCCESS, MachineJobStatus::FAILED, MachineJobStatus::IN_PROGRESS]);
-            $table->unsignedMediumInteger('duration')->default(0);
-            $table->enum('type', [MachineJobType::THREE_D_PRINTER, MachineJobType::LASER, MachineJobType::ROUTER]);
-            $table->longText('details')->nullable();
+                $table->integer('user_id')->unsigned();
+                $table->integer('machine_id')->unsigned();
+                $table->string('name');
+                $table->enum('status', [MachineJobStatus::SUCCESS, MachineJobStatus::FAILED, MachineJobStatus::IN_PROGRESS]);
+                $table->unsignedMediumInteger('duration')->default(0);
+                $table->enum('type', [MachineJobType::THREE_D_PRINTER, MachineJobType::LASER, MachineJobType::ROUTER]);
+                $table->longText('details')->nullable();
 
-            // Relationships
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('machine_id')->references('id')->on('machines')->onDelete('cascade')->onUpdate('cascade');
+                // Relationships
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('machine_id')->references('id')->on('machines')->onDelete('cascade')->onUpdate('cascade');
 
-            // Indexes
-            $table->index('type');
+                // Indexes
+                $table->index('type');
 
-            // Timestamps
-            $table->timestamps();
-            $table->softDeletes();
-        });
+                // Timestamps
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
 
         $this->addStartedAtColumn();
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists(self::TABLE_NAME);
     }
 
     /**
@@ -84,5 +76,15 @@ class CreateMachineJobsTable extends Migration
 
         DB::statement(\sprintf('ALTER TABLE %s ADD COLUMN %s timestamp NULL DEFAULT NULL;', self::TABLE_NAME, $startedAtColumnName));
         DB::statement(\sprintf('CREATE UNIQUE INDEX %s on %s(%s, %s, %s);', $startedAtIndexName, self::TABLE_NAME, 'job_id', 'name', $startedAtColumnName));
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists(self::TABLE_NAME);
     }
 }

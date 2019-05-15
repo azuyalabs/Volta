@@ -44,7 +44,7 @@ class CreateMachinesTable extends Migration
                 $table->smallInteger('energy_consumption')->default(0);
 
                 // Foreign keys / reference fields
-                $table->string('reference_id', 60)->nullable();
+                $table->string('reference_id', 100)->nullable();
 
                 $table->integer('user_id')->unsigned();
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

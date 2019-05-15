@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Migration class for creating the permissions tables.
+ */
 class CreatePermissionTables extends Migration
 {
     /**
@@ -35,7 +38,7 @@ class CreatePermissionTables extends Migration
 
             $table->string('model_type');
             $table->unsignedBigInteger($columnNames['model_morph_key']);
-            $table->index([$columnNames['model_morph_key'], 'model_type', ]);
+            $table->index([$columnNames['model_morph_key'], 'model_type',]);
 
             $table->foreign('permission_id')
                 ->references('id')
@@ -53,7 +56,7 @@ class CreatePermissionTables extends Migration
 
             $table->string('model_type');
             $table->unsignedBigInteger($columnNames['model_morph_key']);
-            $table->index([$columnNames['model_morph_key'], 'model_type', ]);
+            $table->index([$columnNames['model_morph_key'], 'model_type',]);
 
             $table->foreign('role_id')
                 ->references('id')
@@ -81,7 +84,7 @@ class CreatePermissionTables extends Migration
                 ->onDelete('cascade');
 
             $table->primary(['permission_id', 'role_id']);
-            
+
             app('cache')
                 ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
                 ->forget(config('permission.cache.key'));
@@ -97,10 +100,10 @@ class CreatePermissionTables extends Migration
     {
         $tableNames = config('permission.table_names');
 
-        Schema::drop($tableNames['role_has_permissions']);
-        Schema::drop($tableNames['model_has_roles']);
-        Schema::drop($tableNames['model_has_permissions']);
-        Schema::drop($tableNames['roles']);
-        Schema::drop($tableNames['permissions']);
+        Schema::dropIfExists($tableNames['role_has_permissions']);
+        Schema::dropIfExists($tableNames['model_has_roles']);
+        Schema::dropIfExists($tableNames['model_has_permissions']);
+        Schema::dropIfExists($tableNames['roles']);
+        Schema::dropIfExists($tableNames['permissions']);
     }
 }

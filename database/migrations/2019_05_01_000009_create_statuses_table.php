@@ -14,17 +14,15 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserPreferences extends Migration
+/**
+ * Migration class for creating the statuses table.
+ */
+class CreateStatusesTable extends Migration
 {
     /**
      * Name of the database table
      */
-    private const TABLE_NAME = 'user_profile';
-
-    /**
-     * Name of the table column
-     */
-    private const COLUMN_NAME = 'preferences';
+    private const TABLE_NAME = 'statuses';
 
     /**
      * Run the migrations.
@@ -33,9 +31,15 @@ class AddUserPreferences extends Migration
      */
     public function up()
     {
-        Schema::table(self::TABLE_NAME, function (Blueprint $table) {
-            $table->json(self::COLUMN_NAME)->nullable();
-        });
+        if (!Schema::hasTable(self::TABLE_NAME)) {
+            Schema::create(self::TABLE_NAME, function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->text('reason')->nullable();
+                $table->morphs('model');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -45,8 +49,6 @@ class AddUserPreferences extends Migration
      */
     public function down()
     {
-        Schema::table(self::TABLE_NAME, function (Blueprint $table) {
-            $table->dropColumn([self::COLUMN_NAME]);
-        });
+        Schema::dropIfExists('statuses');
     }
 }

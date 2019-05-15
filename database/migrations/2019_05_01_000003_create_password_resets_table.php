@@ -15,30 +15,29 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Schema change representing the email verification column (upon user registration).
+ * Migration class for creating the password resets table.
  */
-class AddVerifyEmailUser extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Name of the database table
      */
-    private const TABLE_NAME = 'users';
-
-    /**
-     * Name of the table column
-     */
-    private const COLUMN_NAME = 'email_verified_at';
+    private const TABLE_NAME = 'password_resets';
 
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table(self::TABLE_NAME, function (Blueprint $table) {
-            $table->timestamp(self::COLUMN_NAME)->nullable();
-        });
+        if (!Schema::hasTable(self::TABLE_NAME)) {
+            Schema::create(self::TABLE_NAME, function (Blueprint $table) {
+                $table->string('email')->index();
+                $table->string('token');
+                $table->timestamp('created_at')->nullable();
+            });
+        }
     }
 
     /**
@@ -46,10 +45,8 @@ class AddVerifyEmailUser extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::table(self::TABLE_NAME, function (Blueprint $table) {
-            $table->dropColumn([self::COLUMN_NAME]);
-        });
+        Schema::dropIfExists(self::TABLE_NAME);
     }
 }

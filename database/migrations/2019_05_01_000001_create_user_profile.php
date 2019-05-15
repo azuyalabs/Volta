@@ -14,8 +14,14 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Migration class for creating the user profile table.
+ */
 class CreateUserProfile extends Migration
 {
+    /**
+     * Name of the database table
+     */
     private const TABLE_NAME = 'user_profile';
 
     /**
@@ -25,18 +31,21 @@ class CreateUserProfile extends Migration
      */
     public function up(): void
     {
-        Schema::create(self::TABLE_NAME, function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->nullable();
+        if (!Schema::hasTable(self::TABLE_NAME)) {
+            Schema::create(self::TABLE_NAME, function (Blueprint $table) {
+                $table->integer('user_id')->unsigned()->nullable();
 
-            $table->char('currency', 3)->default('USD');
-            $table->char('language', 5)->default('en-US');
-            $table->char('country', 2)->default('US');
-            $table->string('city')->nullable();
+                $table->char('currency', 3)->default('USD');
+                $table->char('language', 5)->default('en-US');
+                $table->char('country', 2)->default('US');
+                $table->string('city')->nullable();
+                $table->json('preferences')->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
 
     /**
