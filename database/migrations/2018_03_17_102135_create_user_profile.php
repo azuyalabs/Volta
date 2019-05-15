@@ -29,7 +29,7 @@ class CreateUserProfile extends Migration
             $table->integer('user_id')->unsigned()->nullable();
 
             $table->char('currency', 3)->default('USD');
-            $table->char('language', 2)->default('en-US');
+            $table->char('language', 5)->default('en-US');
             $table->char('country', 2)->default('US');
             $table->string('city')->nullable();
 

@@ -35,7 +35,7 @@ class CreateManufacturersTable extends Migration
             Schema::create(self::TABLE_NAME, function (Blueprint $table) {
                 $table->increments('id');
 
-                $table->string('name')->unique();
+                $table->string('name')->unique()->collation('utf8_bin');
                 $table->string('slug')->nullable();
                 $table->char('country', 2)->nullable();
                 $table->string('website')->nullable();

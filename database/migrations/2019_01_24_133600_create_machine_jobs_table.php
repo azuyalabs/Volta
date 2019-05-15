@@ -82,7 +82,7 @@ class CreateMachineJobsTable extends Migration
         $startedAtColumnName = 'started_at';
         $startedAtIndexName = self::TABLE_NAME . '_job_unique';
 
-        DB::statement(\sprintf('ALTER TABLE %s ADD COLUMN %s timestamp;', self::TABLE_NAME, $startedAtColumnName));
+        DB::statement(\sprintf('ALTER TABLE %s ADD COLUMN %s timestamp NULL DEFAULT NULL;', self::TABLE_NAME, $startedAtColumnName));
         DB::statement(\sprintf('CREATE UNIQUE INDEX %s on %s(%s, %s, %s);', $startedAtIndexName, self::TABLE_NAME, 'job_id', 'name', $startedAtColumnName));
     }
 }

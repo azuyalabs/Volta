@@ -40,7 +40,7 @@ class CreateMachinesTable extends Migration
                 $table->mediumInteger('residual_value')->nullable()->default(0);
                 $table->mediumInteger('maintenance_cost')->nullable()->default(0);
                 $table->tinyInteger('lifespan')->default(1);
-                $table->tinyInteger('operating_hours')->default(1);
+                $table->smallInteger('operating_hours')->default(1);
                 $table->smallInteger('energy_consumption')->default(0);
 
                 // Foreign keys / reference fields

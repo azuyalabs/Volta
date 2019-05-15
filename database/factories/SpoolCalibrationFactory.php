@@ -21,8 +21,8 @@ $factory->define(\App\SpoolCalibration::class, function (Faker $faker) {
     $measurements = '{}';
     if ($mType === 'linear_advance') {
         $measurements = '{"date": "' . $faker->dateTimeThisMonth()->format(DATE_ATOM) . '", "value": ' . $faker->numberBetween(
-                10,
-                80
+            10,
+            80
             ) . '}';
     }
 
