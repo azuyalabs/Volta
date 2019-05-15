@@ -141,7 +141,7 @@ class SlicerProfilesCommand extends Command
             // Update original filament definition
             if (!isset($f['id'])) {
                 $f = ['id' => Uuid::uuid4()] + $f;
-                file_put_contents($filamentDefinition, json_encode($f, JSON_PRETTY_PRINT));
+                \file_put_contents($filamentDefinition, \json_encode($f, JSON_PRETTY_PRINT));
             }
 
             // Set defaults
