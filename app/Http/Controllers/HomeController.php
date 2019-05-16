@@ -23,14 +23,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
-
-    /**
-     * Temporary endpoint to test the vue-router
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function v()
-    {
-        return view('layouts.appv');
-    }
 }
