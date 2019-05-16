@@ -17,7 +17,7 @@
             <b-modal id="modal-center" centered ok-only :visible="true">
                 <template slot="modal-header">
                     <div class="container-fluid text-center">
-                        <img src="{{ url('/img/volta-logo.png') }}" width="205" alt="{{ config('app.name') }}">
+                        <img src="{{ url('/images/volta-logo.png') }}" width="205" alt="{{ config('app.name') }}">
                     </div>
                 </template>
                 <h1 class="display-6 text-center">Hello, {{ Auth::user()->name }}!</h1>
