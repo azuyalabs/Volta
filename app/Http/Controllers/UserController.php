@@ -30,6 +30,16 @@ class UserController extends Controller
     }
 
     /**
+     * Show the users' dashboard (i.e. Home).
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
+    }
+
+    /**
      * Show the user profile
      *
      * @return \Illuminate\View\View

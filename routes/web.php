@@ -11,17 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect()->route('home');
-    }
-
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('home', 'HomeController@index')->name('home');
+Route::get('/', 'UserController@home')->name('home');
 
 // User Profile
 Route::get('profile', 'UserController@profile')->name('profile');
@@ -52,7 +44,3 @@ Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 // Documentation
 Route::get('docs/wishlist', 'DocsController@wishlist')->name('wishlist');
 Route::get('docs/{page?}', 'DocsController@show')->name('docs');
-
-// Others/WIP
-Route::resource('projects', 'ProjectsController');
-Route::get('/new/{view?}', 'HomeController@v')->where('view', '(.*)')->name('new');
