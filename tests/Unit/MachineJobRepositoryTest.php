@@ -18,6 +18,7 @@ use Tests\TestCase;
 use App\MachineJobType;
 use App\MachineJobStatus;
 use App\Repositories\MachineJobRepository;
+use App\QueryOptions\MachineJobQueryOptions;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests\MachineJob as MachineJobRequest;
 
@@ -59,7 +60,7 @@ class MachineJobRepositoryTest extends TestCase
 
         $collection = factory(MachineJob::class, $samples)->create(['user_id' => $user_id]);
 
-        $result = (new MachineJobRepository())->all(null, $user_id);
+        $result = (new MachineJobRepository())->all($user_id, (new MachineJobQueryOptions()));
 
         $this->assertInstanceOf(Collection::class, $result);
         $this->assertSame($collection->count(), $result->count());
@@ -85,8 +86,8 @@ class MachineJobRepositoryTest extends TestCase
         $result = $repository->delete($job_id, $user_id);
 
         $this->assertTrue($result);
-        $this->assertSame($samples - 1, $repository->all(null, $user_id)->count());
-        $this->assertNotContains($job_id, $repository->all(null, $user_id)->pluck('uuid'));
+        $this->assertSame($samples - 1, $repository->all($user_id, (new MachineJobQueryOptions()))->count());
+        $this->assertNotContains($job_id, $repository->all($user_id, (new MachineJobQueryOptions()))->pluck('uuid'));
     }
 
     /**
@@ -126,7 +127,7 @@ class MachineJobRepositoryTest extends TestCase
         $job = factory(MachineJob::class)->create(); // Create a Machine Job record
 
         $repository = new MachineJobRepository();
-        $jobs_count = $repository->all(null, $job->user_id)->count(); // Get the number of records before creation
+        $jobs_count = $repository->all($job->user_id, (new MachineJobQueryOptions()))->count(); // Get the number of records before creation
 
         $request['status'] = $this->faker->randomElement([MachineJobStatus::SUCCESS, MachineJobStatus::FAILED, MachineJobStatus::IN_PROGRESS]);
         $request['job_id'] = $this->faker->ean13 . 'abc';
@@ -139,7 +140,7 @@ class MachineJobRepositoryTest extends TestCase
 
         $result = $repository->store($job->user_id, (new MachineJobRequest($request)));
 
-        $this->assertSame($jobs_count + 1, $repository->all(null, $job->user_id)->count());
+        $this->assertSame($jobs_count + 1, $repository->all($job->user_id, (new MachineJobQueryOptions()))->count());
         $this->assertInstanceOf(MachineJob::class, $result);
         $this->assertSame($request['name'], $result->name);
         $this->assertSame($request['status'], $result->status);
@@ -162,7 +163,10 @@ class MachineJobRepositoryTest extends TestCase
 
         factory(MachineJob::class, $samples)->create(['user_id' => $user_id]);
 
-        $result = (new MachineJobRepository())->activity(MachineJobType::THREE_D_PRINTER, $user_id);
+        $filter = new MachineJobQueryOptions();
+        $filter->type = MachineJobType::THREE_D_PRINTER;
+
+        $result = (new MachineJobRepository())->activity($user_id, $filter);
 
         $this->assertInstanceOf(Collection::class, $result);
         $this->assertArrayHasKey('date', $result->toArray()[0]); // Just check first item
@@ -181,7 +185,10 @@ class MachineJobRepositoryTest extends TestCase
 
         factory(MachineJob::class, $samples)->create(['user_id' => $user_id, 'type' => MachineJobType::THREE_D_PRINTER]);
 
-        $result = (new MachineJobRepository())->success_rate(MachineJobType::THREE_D_PRINTER, $user_id);
+        $filter = new MachineJobQueryOptions();
+        $filter->type = MachineJobType::THREE_D_PRINTER;
+
+        $result = (new MachineJobRepository())->success_rate($user_id, $filter);
 
         $this->assertInstanceOf(Collection::class, $result);
         $this->assertArrayHasKey('status', $result->toArray()[0]); // Just check first item

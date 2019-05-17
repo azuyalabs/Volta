@@ -23,22 +23,6 @@ use Tests\TestCase;
 class UserTest extends TestCase
 {
     /** @test */
-    public function it_can_determine_if_a_user_has_admin_privileges()
-    {
-        $user = User::find(1); // User #1 Is an Administrator
-
-        $this->assertTrue($user->isAdministrator());
-    }
-
-    /** @test */
-    public function it_can_determine_if_a_user_has_no_admin_privileges()
-    {
-        $user = User::find(2); // User #2 Is not an Administrator
-
-        $this->assertFalse($user->isAdministrator());
-    }
-
-    /** @test */
     public function it_can_generate_an_api_token()
     {
         $user = factory(User::class)->create(['api_token' => null]);
