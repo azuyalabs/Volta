@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.3",
+    "@babel/preset-env": "^7.5",
     "cross-env": "^5.1",
     "jquery": "^3.2",
     "laravel-mix": "^3.0",
@@ -18,14 +18,14 @@
     "prettier": "^1.15"
   },
   "dependencies": {
-    "apexcharts": "^3.6.3",
-    "axios": "^0.18",
+    "apexcharts": "^3.8",
+    "axios": "^0.19",
     "bootstrap": "^4.3",
     "bootstrap-vue": "2.0.0-rc.16",
     "dinero.js": "^1.6",
     "epic-spinners": "^1.0.4",
     "github-api": "^3.0",
-    "laravel-echo": "^1.4",
+    "laravel-echo": "^1.5",
     "mathjs": "^5.7",
     "moment": "^2.23",
     "moment-duration-format": "^2.2",
