@@ -12,6 +12,8 @@
 
 namespace App\Contracts\Repositories;
 
+use Illuminate\Database\Eloquent\Collection;
+
 /**
  * ProductRepository interface
  *
@@ -22,7 +24,7 @@ interface ProductRepository
     /**
      * Get all of the products for the application.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function all();
 }

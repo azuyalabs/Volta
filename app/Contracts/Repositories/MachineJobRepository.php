@@ -30,7 +30,7 @@ interface MachineJobRepository
      * @param  MachineJobQueryOptions $options query options
      * @param int $user_id the identifier of the user owning the machine jobs
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function all($user_id, MachineJobQueryOptions $options): Collection;
 
@@ -81,7 +81,7 @@ interface MachineJobRepository
      * @param  MachineJobQueryOptions $options query options
      * @param int $user_id the identifier of the user owning the machine jobs
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function activity($user_id, MachineJobQueryOptions $options): Collection;
 
@@ -91,7 +91,7 @@ interface MachineJobRepository
      * @param  MachineJobQueryOptions $options query options
      * @param int $user_id the identifier of the user owning the machine jobs
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function success_rate($user_id, MachineJobQueryOptions $options): Collection;
 }

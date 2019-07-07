@@ -26,7 +26,7 @@ interface FilamentSpoolRepository
     /**
      * Get all of the authenticated user's filament spools.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function all(): Collection;
 

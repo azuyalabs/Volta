@@ -29,7 +29,7 @@ interface ManufacturerRepository
      *
      * @param  ManufacturerQueryOptions $options query options
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function all(ManufacturerQueryOptions $options): Collection;
 
