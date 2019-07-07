@@ -51,10 +51,4 @@ class OptimizeVoltaCommandTest extends TestCase
     {
         $this->artisan(self::OPTIMIZE_COMMAND)->expectsOutput('Database vacuumed.');
     }
-
-    /** @test */
-    public function it_can_prune_telescope_entries()
-    {
-        $this->artisan(self::OPTIMIZE_COMMAND)->assertExitCode(0);
-    }
 }
