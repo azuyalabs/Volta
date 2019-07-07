@@ -41,7 +41,7 @@ class FirmwareReleasesFetched implements ShouldBroadcast
     /**
      * Get the channel(s) the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return Channel|array
      */
     public function broadcastOn()
     {
