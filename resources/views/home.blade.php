@@ -41,30 +41,15 @@
         <br>
 
         <div class="row">
-            <div class="col-md-5">
-
-            </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <news></news>
+            </div>
+            <div class="col-md-6">
+                <thingiverse-featured></thingiverse-featured>
             </div>
         </div>
 
         <br>
-
-        <div class="row">
-            <div class="col-6">
-                <thingiverse-featured></thingiverse-featured>
-            </div>
-            <div class="col-md-6">
-
-            </div>
-        </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <activity-histogram></activity-histogram>
-                </div>
-            </div>
 
     </div>
 @endsection
