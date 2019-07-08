@@ -35,7 +35,7 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => database_path('volta.sqlite'),
+            'database' => database_path(env('DB_DATABASE', 'volta.sqlite')),
             'prefix' => '',
         ],
 
