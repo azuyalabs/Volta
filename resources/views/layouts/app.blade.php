@@ -132,7 +132,6 @@
                                         Print Jobs
                                     </a>
                                 </li>
-                            @role('experimental')
                                 <li class="nav-item">
                                     <a class="nav-link {{ Request::is('spools*') ? 'active' : '' }}"
                                        href="{{ route('spools.index') }}">
@@ -150,7 +149,6 @@
                                         Filament Spools
                                     </a>
                                 </li>
-                            @endrole
 
                         </ul>
                         @role('admin')
