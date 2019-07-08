@@ -76,7 +76,7 @@ class FilamentSpoolRepository implements Contract
         $summary = FilamentSpool::whereUserId(auth()->user()->id)
             ->select(
                 [
-                    DB::raw('COUNT(uuid) as count'),
+                    DB::raw('COUNT(id) as count'),
                     DB::raw('SUM(weight) as weight_total'),
                     DB::raw('SUM(purchase_price) as price_total')
                 ]
