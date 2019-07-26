@@ -24,8 +24,7 @@
                 <p class="lead">and welcome to {{ config('app.name', 'Laravel') }}! Thank you so much for your help in
                     testing the first prototype of {{ config('app.name', 'Laravel') }}.</p>
                 <p>With the first step - creating your Volta account - done, please navigate to
-                    the {{ link_to_route('docs', __('docs.documentation')) }} section to get everything setup for the
-                    test.</p>
+                    the {{ link_to('https://github.com/azuyalabs/Volta/wiki', __('docs.documentation')) }} Wiki to get everything set up.</p>
             </b-modal>
         @endif
 

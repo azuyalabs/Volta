@@ -39,7 +39,7 @@
                             <svgicon icon="details" class="button-icon-sm" color="#fff"></svgicon>
                             Live!
                         </b-link>
-                        <b-link href="/docs" title="Documentation" class="pl-3">
+                        <b-link href="https://github.com/azuyalabs/Volta/wiki" target="_blank" title="Documentation" class="pl-3">
                             Documentation
                         </b-link>
                     </div>

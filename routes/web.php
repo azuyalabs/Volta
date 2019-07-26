@@ -40,7 +40,3 @@ Route::resource('threedprinterjobs', 'ThreeDPrinterJobsController');
 
 // Dashboard
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-
-// Documentation
-Route::get('docs/wishlist', 'DocsController@wishlist')->name('wishlist');
-Route::get('docs/{page?}', 'DocsController@show')->name('docs');
