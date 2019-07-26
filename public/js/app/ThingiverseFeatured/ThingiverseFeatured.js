@@ -67,6 +67,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   i18n: __webpack_require__("./resources/assets/js/components/ThingiverseFeatured/thingiverse_featured_i18n.js"),
@@ -8497,7 +8498,8 @@ var render = function() {
                 attrs: {
                   place: "feed",
                   href: "https://thingiverse.com/",
-                  target: "_blank"
+                  target: "_blank",
+                  rel: "noreferrer"
                 }
               },
               [_vm._v("Thingiverse")]
@@ -8530,7 +8532,11 @@ var render = function() {
                   "b-link",
                   {
                     key: thing.guid,
-                    attrs: { href: thing.link, target: "_blank" }
+                    attrs: {
+                      href: thing.link,
+                      target: "_blank",
+                      rel: "noreferrer"
+                    }
                   },
                   [
                     _c("b-carousel-slide", {

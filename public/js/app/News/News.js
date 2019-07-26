@@ -56,6 +56,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   i18n: __webpack_require__("./resources/assets/js/components/News/news_i18n.js"),
@@ -8480,7 +8481,8 @@ var render = function() {
                 attrs: {
                   place: "feed",
                   href: "https://3dprint.com/",
-                  target: "_blank"
+                  target: "_blank",
+                  rel: "noreferrer"
                 }
               },
               [_vm._v("3DPrint.com")]
@@ -8504,7 +8506,11 @@ var render = function() {
                   "b-list-group-item",
                   {
                     key: article.guid,
-                    attrs: { href: article.link, target: "_blank" }
+                    attrs: {
+                      href: article.link,
+                      target: "_blank",
+                      rel: "noreferrer"
+                    }
                   },
                   [
                     _vm._v(

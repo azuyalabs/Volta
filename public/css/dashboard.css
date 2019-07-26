@@ -843,6 +843,7 @@ i.vm-progress-icon--success {
     font-weight: normal;
     font-style: normal;
     font-family: 'weathericons';
+    font-display: auto;
     src: url('../fonts/weathericons-regular-webfont.eot');
     src: url('../fonts/weathericons-regular-webfont.eot?#iefix') format('embedded-opentype'),
     url('../fonts/weathericons-regular-webfont.woff2') format('woff2'),
