@@ -10,11 +10,11 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-use App\User;
 use App\Product;
-use Money\Currency;
+use App\User;
 use Cknow\Money\Money;
 use Faker\Generator as Faker;
+use Money\Currency;
 
 $factory->define(\App\Machine::class, function (Faker $faker) {
     $products = Product::where('class', 'machine')->get();
@@ -25,9 +25,16 @@ $factory->define(\App\Machine::class, function (Faker $faker) {
     // Retrieve the subunit Number of the Currency assigned to the User account
     $user = User::find($user_id);
     $currencies = Money::getCurrencies();
-    $subUnit = $currencies->subunitFor(new Currency($user->profile->currency));
 
-    $ratio = \pow(10, $subUnit);
+    // Stored currencies aren't always registered with the Money library. In such case
+    // default the subUnits to 2.
+    try {
+        $subUnit = $currencies->subunitFor(new Currency($user->profile->currency));
+    } catch (Exception $e) {
+        $subUnit = 2;
+    }
+
+    $ratio = 10 ** $subUnit;
 
     return [
         'user_id' => $user_id,

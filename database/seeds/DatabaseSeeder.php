@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ManufacturerTableSeeder::class,
             ProductsTableSeeder::class,
-            MachinesTableSeeder::class,
         ]);
     }
 }
