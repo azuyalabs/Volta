@@ -14,7 +14,7 @@
     "ext-openssl": "*",
     "azuyalabs/yasumi": "^2.1",
     "cache/predis-adapter": "^1.0",
-    "cknow/laravel-money": "^3.4",
+    "cknow/laravel-money": "^3.7",
     "cviebrock/eloquent-sluggable": "^4.8",
     "erusev/parsedown-extra": "^0.7",
     "fideloper/proxy": "~4.1",
@@ -23,14 +23,14 @@
     "laravel/framework": "5.8.*",
     "laravel/passport": "^7.3",
     "laravel/tinker": "~1.0",
-    "laravelcollective/html": "^5.7",
+    "laravelcollective/html": "^5.8",
     "nothingworks/blade-svg": "^0.3",
     "php-http/guzzle6-adapter": "^1.1",
     "predis/predis": "^1.1",
     "punic/punic": "^3.4",
     "pusher/pusher-php-server": "3.3",
     "spatie/laravel-model-status": "^1.6",
-    "spatie/laravel-permission": "^2.30",
+    "spatie/laravel-permission": "^2.37",
     "symfony/dom-crawler": "^4.3",
     "league/plates": "^3.3"
   },
@@ -42,7 +42,7 @@
     "mockery/mockery": "~1.2",
     "nunomaduro/collision": "~3.0",
     "nunomaduro/larastan": "^0.3",
-    "phpunit/phpunit": "~7.0"
+    "phpunit/phpunit": "~7.5"
   },
   "autoload": {
     "classmap": [
