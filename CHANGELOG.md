@@ -26,6 +26,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   ![Print Job Caption](../images/docs/volta_printjobs_caption.png "Print Job Caption")
 
 ### Fixed
+- After registering a new account, Volta redirects to an unknown page (/home). [\#12](https://github.com/azuyalabs/yasumi/issue/12)
+- The UsersTableSeeder would fail when running a migration command with seed option. Removed the UsersTableSeeder and MachinesTableSeeder as these are only need to be used for development. [\#11](https://github.com/azuyalabs/yasumi/issue/11)
 
 ### Removed
 
