@@ -26,11 +26,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ManufacturerTableSeeder::class,
-            UsersTableSeeder::class,
             ProductsTableSeeder::class,
             MachinesTableSeeder::class,
-            //FilamentSpoolsTableSeeder::class,
-            //SpoolCalibrationsTableSeeder::class,
         ]);
     }
 }

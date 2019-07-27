@@ -13,12 +13,12 @@
 use Cknow\Money\Money;
 use Faker\Generator as Faker;
 
-$factory->define(\App\UserProfile::class, function (Faker $faker) {
+$factory->define(\App\UserProfile::class, static function (Faker $faker) {
     $preferences['dashboard']['clock']['type'] = $faker->randomElement(['analog', 'digital']);
     $preferences['dashboard']['weather']['system_of_measure'] = $faker->randomElement(['metric', 'imperial']);
 
     return [
-        'currency' => $faker->randomElement(Money::getCurrencies()),
+        'currency' => $faker->randomElement(Money::getCurrencies()->getIterator()),
         'language' => $faker->randomElement(['en-US', 'ja-JP']),
         'country' => $faker->countryCode,
         'city' => $faker->city,
