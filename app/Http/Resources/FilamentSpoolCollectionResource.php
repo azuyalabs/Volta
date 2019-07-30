@@ -46,7 +46,7 @@ class FilamentSpoolCollectionResource extends ResourceCollection
             'meta' => [
                 'currency' => 'JPY',
                 'count' => $this->collection->count(),
-                'purchase_value' => $this->collection->sum(function ($spool) {
+                'purchase_value' => $this->collection->sum(static function ($spool) {
                     return $spool->purchase_price;
                 })
             ],

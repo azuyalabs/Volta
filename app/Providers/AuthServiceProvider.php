@@ -48,7 +48,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
 
         // Implicitly grant "Admin" role all permissions
-        Gate::before(function ($user, $ability) {
+        Gate::before(static function ($user, $ability) {
             if ($user->hasRole('admin')) {
                 return true;
             }

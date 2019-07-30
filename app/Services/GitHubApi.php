@@ -78,7 +78,7 @@ class GitHubApi
                 $tags = $this->client->repo()->tags($userName, $repoName);
 
                 // Get the tag with the highest numerical value (assuming most maintainers apply a semver pattern)
-                $lastTag = collect($tags)->sortBy(function ($item) {
+                $lastTag = collect($tags)->sortBy(static function ($item) {
                     \preg_match_all('/(\d{1,6})/m', $item['name'], $matches);
                     return \implode('.', $matches[0]);
                 })->last();

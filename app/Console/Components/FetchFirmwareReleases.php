@@ -44,17 +44,17 @@ class FetchFirmwareReleases extends Command
         $client = new GitHubApi();
 
         $releasesList[] = $client->fetchLatestRelease('MarlinFirmware', 'Marlin');
-        $releasesList[] = $client->fetchLatestRelease('gnea', 'grbl', null, function ($version) {
+        $releasesList[] = $client->fetchLatestRelease('gnea', 'grbl', null, static function ($version) {
             \preg_match_all('/^[v](\d{1,2})[.](.{1,3})[.]\w+$/', $version, $matches);
             return $matches[1][0] . '.' . $matches[2][0];
         });
         $releasesList[] = $client->fetchLatestRelease('repetier', 'Repetier-Firmware', 'Repetier');
-        $releasesList[] = $client->fetchLatestRelease('prusa3d', 'Prusa-Firmware', 'Prusa MK3', function ($version) {
+        $releasesList[] = $client->fetchLatestRelease('prusa3d', 'Prusa-Firmware', 'Prusa MK3', static function ($version) {
             return \substr($version, 1);
         });
 
         // Sort the releases with the newest one first
-        $releasesList = \array_reverse(\array_values(Arr::sort($releasesList, function ($value) {
+        $releasesList = \array_reverse(\array_values(Arr::sort($releasesList, static function ($value) {
             return new Carbon($value['release_date']);
         })));
 

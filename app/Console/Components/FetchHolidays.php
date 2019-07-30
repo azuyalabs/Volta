@@ -50,9 +50,9 @@ class FetchHolidays extends Command
                 $holidays = Yasumi::createByISO3166_2($provider, (int)\date('Y'), 'en_US');
                 $official = new OfficialHolidaysFilter($holidays->getIterator());
 
-                $holidaysList = collect($official)->filter(function (Holiday $holiday) {
+                $holidaysList = collect($official)->filter(static function (Holiday $holiday) {
                     return $holiday >= new \DateTime();
-                })->map(function (Holiday $holiday) {
+                })->map(static function (Holiday $holiday) {
                     return [
                         'name' => $holiday->getName(),
                         'date' => $holiday->format(\DateTime::ATOM)

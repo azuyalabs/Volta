@@ -71,14 +71,14 @@ class UserController extends Controller
         $requestData = $request->all();
 
         $collection = collect($requestData);
-        $userRequestData = $collection->filter(function ($value, $key) {
+        $userRequestData = $collection->filter(static function ($value, $key) {
             return \in_array($key, (new User())->getFillable(), true);
         });
 
         $user->update($userRequestData->all());
 
         $collectionP = collect($requestData);
-        $profileRequestData = $collectionP->filter(function ($value, $key) {
+        $profileRequestData = $collectionP->filter(static function ($value, $key) {
             return \in_array($key, (new UserProfile())->getFillable(), true);
         });
 

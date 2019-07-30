@@ -213,7 +213,7 @@ class SlicerProfilesCommand extends Command
             if (isset($f['extrusion_calibrations'])) {
                 $em = collect($f['extrusion_calibrations']);
 
-                $newMultiplier = $em->map(function ($item) {
+                $newMultiplier = $em->map(static function ($item) {
                     return ($item['extrusion_width'] / collect($item['measurements'])->average()) * $item['multiplier'];
                 })->average();
 

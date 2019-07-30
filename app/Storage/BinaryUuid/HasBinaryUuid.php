@@ -27,7 +27,7 @@ trait HasBinaryUuid
 {
     protected static function bootHasBinaryUuid()
     {
-        static::creating(function (Model $model) {
+        static::creating(static function (Model $model) {
             if ($model->{$model->getKeyName()}) {
                 return;
             }
@@ -48,7 +48,7 @@ trait HasBinaryUuid
 
         $uuid = (array) $uuid;
 
-        return $builder->whereKey(\array_map(function (string $modelUuid) {
+        return $builder->whereKey(\array_map(static function (string $modelUuid) {
             return static::encodeUuid($modelUuid);
         }, $uuid));
     }
@@ -61,7 +61,7 @@ trait HasBinaryUuid
 
         $uuid = (array) $uuid;
 
-        return $builder->whereIn($field, \array_map(function (string $modelUuid) {
+        return $builder->whereIn($field, \array_map(static function (string $modelUuid) {
             return static::encodeUuid($modelUuid);
         }, $uuid));
     }

@@ -96,7 +96,7 @@ class MachineJob extends Model
      */
     protected function whereStartDatePeriod($query, MachineJobQueryOptions $options)
     {
-        $query->when($options->start_date_period, function ($query, \DatePeriod $period) {
+        $query->when($options->start_date_period, static function ($query, \DatePeriod $period) {
             return $query->whereBetween('started_at', [$period->getStartDate(), $period->getEndDate()]);
         });
 
@@ -113,7 +113,7 @@ class MachineJob extends Model
      */
     protected function whereMachines($query, MachineJobQueryOptions $options)
     {
-        $query->when($options->machines, function ($query, $machines) {
+        $query->when($options->machines, static function ($query, $machines) {
             $column_name = 'machine_id';
 
             if (1 < \count($machines)) {
@@ -136,7 +136,7 @@ class MachineJob extends Model
      */
     protected function whereStatuses($query, MachineJobQueryOptions $options)
     {
-        $query->when($options->statuses, function ($query, $status) {
+        $query->when($options->statuses, static function ($query, $status) {
             $column_name = 'status';
 
             if (1 < \count($status)) {
@@ -159,7 +159,7 @@ class MachineJob extends Model
      */
     protected function whereType($query, MachineJobQueryOptions $options)
     {
-        $query->when($options->type, function ($query, $type) {
+        $query->when($options->type, static function ($query, $type) {
             return $query->where('type', $type);
         });
 

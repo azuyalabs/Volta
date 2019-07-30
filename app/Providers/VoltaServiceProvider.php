@@ -63,15 +63,15 @@ class VoltaServiceProvider extends ServiceProvider
      */
     protected function registerBladeDirectives(): void
     {
-        Blade::directive('moneyFormat', function ($value) {
+        Blade::directive('moneyFormat', static function ($value) {
             return "<?php echo money($value, auth()->user()->profile->currency ?? 'USD'); ?>";
         });
 
-        Blade::directive('CurrencySymbol', function ($code) {
+        Blade::directive('CurrencySymbol', static function ($code) {
             return "<?php echo Punic\Currency::getSymbol({$code}); ?>";
         });
 
-        Blade::directive('CurrencySymbol', function ($code) {
+        Blade::directive('CurrencySymbol', static function ($code) {
             return "<?php echo Punic\Currency::getSymbol({$code}); ?>";
         });
     }
@@ -81,7 +81,7 @@ class VoltaServiceProvider extends ServiceProvider
         $this->registerBladeDirectives();
 
         // Inject all views with custom variables
-        view()->composer('*', function ($view) {
+        view()->composer('*', static function ($view) {
             $variables = [
                 'locale' => auth()->user()->profile->language ?? 'en-US',
                 'currency' => auth()->user()->profile->currency ?? 'USD',

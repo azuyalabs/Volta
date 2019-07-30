@@ -46,14 +46,14 @@ class FetchSlicerReleases extends Command
         $releasesList[] = $client->fetchLatestRelease('alexrj', 'Slic3r');
         $releasesList[] = $client->fetchLatestRelease('Ultimaker', 'Cura');
 
-        $releasesList[] = $client->fetchLatestRelease('prusa3d', 'Slic3r', 'Slic3rPE', function ($version) {
+        $releasesList[] = $client->fetchLatestRelease('prusa3d', 'Slic3r', 'Slic3rPE', static function ($version) {
             $prefix = 'version_';
             return (\strpos($version, $prefix) === 0) ? \substr($version, \strlen($prefix)) : $version;
         });
         $releasesList[] = $this->getSimplify3DRelease();
 
         // Sort the releases with the newest one first
-        $releasesList = \array_reverse(\array_values(Arr::sort($releasesList, function ($value) {
+        $releasesList = \array_reverse(\array_values(Arr::sort($releasesList, static function ($value) {
             return new Carbon($value['release_date']);
         })));
 

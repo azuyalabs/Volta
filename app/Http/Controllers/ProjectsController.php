@@ -27,10 +27,10 @@ class ProjectsController extends Controller
      */
     public function index(Request $request)
     {
-        $projects = collect(Storage::disk('gcode')->files())->filter(function ($value, $key) {
+        $projects = collect(Storage::disk('gcode')->files())->filter(static function ($value, $key) {
             $pathParts = \pathinfo($value);
             return $pathParts['extension'] === 'gcode';
-        })->reject(function ($value, $key) {
+        })->reject(static function ($value, $key) {
             return \substr($value, 0, 2) === "._";
         });
 
