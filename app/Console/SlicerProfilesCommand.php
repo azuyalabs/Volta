@@ -27,17 +27,17 @@ class SlicerProfilesCommand extends Command
     /**
      * Directory name where filaments are stored
      */
-    const FILAMENTS_DIR = 'filaments';
+    private const FILAMENTS_DIR = 'filaments';
 
     /**
      * Directory name where template files are stored
      */
-    const TEMPLATES_DIR = 'filaments/_templates';
+    private const TEMPLATES_DIR = 'filaments/_templates';
 
     /**
      * Directory name where profiles will be stored
      */
-    const PROFILES_DIR = 'filaments/profiles';
+    private const PROFILES_DIR = 'filaments/profiles';
 
     /**
      * List of supported slicers

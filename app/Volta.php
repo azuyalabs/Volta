@@ -22,5 +22,5 @@ final class Volta
     /**
      * Volta's version number
      */
-    const VERSION = '0.1.0-dev';
+    public const VERSION = '0.1.0-dev';
 }
