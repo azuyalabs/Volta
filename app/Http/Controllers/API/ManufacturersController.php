@@ -32,7 +32,7 @@ class ManufacturersController extends Controller
      */
     public function index(Request $request, ManufacturerRepository $storage): ManufacturerCollectionResource
     {
-        return new ManufacturerCollectionResource($storage->all((new ManufacturerQueryOptions())));
+        return new ManufacturerCollectionResource($storage->all(new ManufacturerQueryOptions()));
     }
 
     /**

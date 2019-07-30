@@ -46,7 +46,7 @@ class FetchWeather extends Command
         })->pluck('city')->toArray();
 
         foreach ($cityList as $city) {
-            $weather = (app(WeatherRepository::class)->currentWeather($city));
+            $weather = app(WeatherRepository::class)->currentWeather($city);
 
             event(new WeatherFetched($city, $weather));
             Log::channel('dashboard')->info(formatLogMessage(\sprintf('Weather for %s retrieved.', $city), $this->signature), $weather);

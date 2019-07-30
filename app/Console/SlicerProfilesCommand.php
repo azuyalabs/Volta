@@ -201,7 +201,7 @@ class SlicerProfilesCommand extends Command
                 $margin = $avg - $f['diameter'];
 
                 if (isset($avg)) {
-                    $this->info(\sprintf('Filament Diameter    : %.3fmm [%.3fmm (%.2f%%)]', $avg, $margin, ($margin/$f['diameter'] * 100)));
+                    $this->info(\sprintf('Filament Diameter    : %.3fmm [%.3fmm (%.2f%%)]', $avg, $margin, $margin/$f['diameter'] * 100));
                     $f['diameter'] = \sprintf('%.3f', $avg);
                     $f['filament_notes'] .= \sprintf('Filament diameter last calibrated on %s\\n', $dm->pluck('date')->max());
                 }
@@ -223,7 +223,7 @@ class SlicerProfilesCommand extends Command
                 $margin = $average - $avg_extrusion_width;
 
                 if (isset($newMultiplier)) {
-                    $this->info(\sprintf('Extrusion Width      : %.3fmm [%.3fmm (%.2f%%)]', $average, $margin, ($margin/$avg_extrusion_width * 100)));
+                    $this->info(\sprintf('Extrusion Width      : %.3fmm [%.3fmm (%.2f%%)]', $average, $margin, $margin/$avg_extrusion_width * 100));
                     $this->info(\sprintf('Extrusion Multiplier : %.3f', $newMultiplier));
 
                     $f['extrusion_multiplier'] = \sprintf('%.3f', $newMultiplier);

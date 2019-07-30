@@ -147,16 +147,16 @@ trait HasBinaryUuid
 
     protected function getUuidSuffix()
     {
-        return (\property_exists($this, 'uuidSuffix')) ? $this->uuidSuffix : '_text';
+        return \property_exists($this, 'uuidSuffix') ? $this->uuidSuffix : '_text';
     }
 
     protected function uuidTextAttribute($key)
     {
         $uuidAttributes = $this->getUuidAttributes();
         $suffix = $this->getUuidSuffix();
-        $offset = -(\strlen($suffix));
+        $offset = -\strlen($suffix);
 
-        if (\substr($key, $offset) == $suffix && \in_array(($uuidKey = \substr($key, 0, $offset)), $uuidAttributes)) {
+        if (\substr($key, $offset) == $suffix && \in_array($uuidKey = \substr($key, 0, $offset), $uuidAttributes)) {
             return $uuidKey;
         }
 
