@@ -156,7 +156,7 @@ trait HasBinaryUuid
         $suffix = $this->getUuidSuffix();
         $offset = -\strlen($suffix);
 
-        if (\substr($key, $offset) == $suffix && \in_array($uuidKey = \substr($key, 0, $offset), $uuidAttributes)) {
+        if (\substr($key, $offset) === $suffix && \in_array($uuidKey = \substr($key, 0, $offset), $uuidAttributes)) {
             return $uuidKey;
         }
 

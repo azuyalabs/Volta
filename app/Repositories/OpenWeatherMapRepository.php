@@ -41,7 +41,7 @@ class OpenWeatherMapRepository implements Contract
                 'state' => $this->getState(),
                 'temperature' => [
                     'value' => $this->weather->temperature->getValue(),
-                    'uom' => $this->weather->temperature->getUnit() == '&deg;C' ? 'celsius' : null,
+                    'uom' => $this->weather->temperature->getUnit() === '&deg;C' ? 'celsius' : null,
                 ],
                 'humidity' => [
                     'value' => $this->weather->humidity->getValue(),

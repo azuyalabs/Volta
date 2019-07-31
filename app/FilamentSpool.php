@@ -110,7 +110,7 @@ class FilamentSpool extends Model
      */
     public function getPricePerKilogramAttribute(): Money
     {
-        if ($this->weight == 0) {
+        if ($this->weight === 0) {
             throw new \UnexpectedValueException('Weight can not be zero.');
         }
 
