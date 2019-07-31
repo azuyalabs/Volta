@@ -52,17 +52,17 @@ class ValidPrinterId implements Rule
     public function passes($attribute, $value)
     {
         // To decrypt, split the encrypted data from IV - unique separator used was "::"
-        $encodedPrinterId = \explode('::', \base64_decode(\str_replace(['-', '_'], ['+', '/'], $value)));
+        $encodedPrinterId = explode('::', base64_decode(str_replace(['-', '_'], ['+', '/'], $value)));
 
         // Check if the Base64 decoded value is a valid 2 element array
-        if (!\is_array($encodedPrinterId) || \sizeof($encodedPrinterId) === 1) {
+        if (!is_array($encodedPrinterId) || sizeof($encodedPrinterId) === 1) {
             return false;
         }
 
         // Try to decrypt the encoded printer ID with the given API Token
         // Check if the decoded printer ID matches the string pattern ('<machine>@<host>:<port>')
-        $printerIdDecoded = \openssl_decrypt($encodedPrinterId[0], 'aes-256-cfb8', $this->apiToken, 1, $encodedPrinterId[1]);
-        if (\preg_match('/^\S+@\S+:\d{1,5}$/', $printerIdDecoded) !== 1) {
+        $printerIdDecoded = openssl_decrypt($encodedPrinterId[0], 'aes-256-cfb8', $this->apiToken, 1, $encodedPrinterId[1]);
+        if (preg_match('/^\S+@\S+:\d{1,5}$/', $printerIdDecoded) !== 1) {
             return false;
         }
 

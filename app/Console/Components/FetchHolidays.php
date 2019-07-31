@@ -49,7 +49,7 @@ class FetchHolidays extends Command
 
         try {
             foreach ($holidayProviders as $provider) {
-                $holidays = Yasumi::createByISO3166_2($provider, (int)\date('Y'), 'en_US');
+                $holidays = Yasumi::createByISO3166_2($provider, (int)date('Y'), 'en_US');
                 $official = new OfficialHolidaysFilter($holidays->getIterator());
 
                 $holidaysList = collect($official)->filter(static function (Holiday $holiday) {
@@ -61,9 +61,9 @@ class FetchHolidays extends Command
                     ];
                 })->slice(0, 5)->sortBy('date')->toArray();
 
-                event(new HolidaysFetched($provider, \array_values($holidaysList)));
+                event(new HolidaysFetched($provider, array_values($holidaysList)));
 
-                Log::channel('dashboard')->info(formatLogMessage(\sprintf('Holidays for %s retrieved.', $provider), $this->signature), $holidaysList);
+                Log::channel('dashboard')->info(formatLogMessage(sprintf('Holidays for %s retrieved.', $provider), $this->signature), $holidaysList);
             }
         } catch (Exception $e) {
             Log::channel('dashboard')->error(formatLogMessage($e->getMessage(), $this->signature));

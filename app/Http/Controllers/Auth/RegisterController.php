@@ -89,7 +89,7 @@ class RegisterController extends Controller
         $profile = new UserProfile();
         $preferences['dashboard']['clock']['type'] = 'analog';
         $preferences['dashboard']['weather']['system_of_measure'] = 'metric';
-        $profile->preferences = \json_encode($preferences);
+        $profile->preferences = json_encode($preferences);
 
         $user->profile()->save($profile);
 

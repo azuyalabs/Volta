@@ -64,7 +64,7 @@ class PrintStateReceived
                 try {
                     $job = MachineJob::firstOrCreate(
                         [
-                            'job_id' => \hash('fnv1a64', $event->status['id'] . $event->status['printjob']['filename'] . $event->status['printjob']['started_at'])
+                            'job_id' => hash('fnv1a64', $event->status['id'] . $event->status['printjob']['filename'] . $event->status['printjob']['started_at'])
                         ],
                         [
                             'user_id' => auth()->user()->id,
@@ -80,7 +80,7 @@ class PrintStateReceived
                     $job->duration = (int)$event->status['printjob']['time_elapsed'];
 
                     // Save details
-                    $details = \json_decode($job->details, true);
+                    $details = json_decode($job->details, true);
                     if (isset($event->status['printjob']['filament_length']) && $event->status['printjob']['filament_length'] > 0) {
                         $details['filament_length'] = $event->status['printjob']['filament_length'];
                     }
@@ -92,7 +92,7 @@ class PrintStateReceived
                     if (isset($event->status['extruder_temperature']['target']) && $event->status['extruder_temperature']['target'] > 0) {
                         $details['extruder_temperature'] = $event->status['extruder_temperature']['target'];
                     }
-                    $job->details = \json_encode($details);
+                    $job->details = json_encode($details);
 
                     $job->save();
                 } catch (Exception $e) {

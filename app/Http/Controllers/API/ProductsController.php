@@ -40,7 +40,7 @@ class ProductsController extends Controller
         }
 
         if ($request->has('sort') && null !== $request->query('sort')) {
-            [$sort_field, $sort_direction] = \explode('|', $request->query('sort'));
+            [$sort_field, $sort_direction] = explode('|', $request->query('sort'));
 
             $collection->orderBy($sort_field, $sort_direction);
         }

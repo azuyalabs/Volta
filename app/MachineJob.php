@@ -119,7 +119,7 @@ class MachineJob extends Model
         $query->when($options->machines, static function ($query, $machines) {
             $column_name = 'machine_id';
 
-            if (1 < \count($machines)) {
+            if (1 < count($machines)) {
                 return $query->whereIn($column_name, $machines);
             }
 
@@ -142,7 +142,7 @@ class MachineJob extends Model
         $query->when($options->statuses, static function ($query, $status) {
             $column_name = 'status';
 
-            if (1 < \count($status)) {
+            if (1 < count($status)) {
                 return $query->whereIn($column_name, $status);
             }
 

@@ -88,7 +88,7 @@ class PrinterController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'message' => \sprintf('Data for printer `%s` successfully received.', $validPrinterIdRule->printerId)
+            'message' => sprintf('Data for printer `%s` successfully received.', $validPrinterIdRule->printerId)
         ], 201);
     }
 }

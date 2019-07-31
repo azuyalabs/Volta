@@ -69,8 +69,8 @@ class GitHubApi
             // Execute callback function to allow for customized version string
             return [
                 'name' => $friendlyName ?? $repoName,
-                'version' => \is_callable($callback) ? $callback(\trim($release['tag_name'])) : \trim($release['tag_name']),
-                'release_date' => (new Carbon(\trim($release['published_at'])))->toIso8601String(),
+                'version' => is_callable($callback) ? $callback(trim($release['tag_name'])) : trim($release['tag_name']),
+                'release_date' => (new Carbon(trim($release['published_at'])))->toIso8601String(),
             ];
         } catch (RuntimeException $e) {
 
@@ -80,8 +80,8 @@ class GitHubApi
 
                 // Get the tag with the highest numerical value (assuming most maintainers apply a semver pattern)
                 $lastTag = collect($tags)->sortBy(static function ($item) {
-                    \preg_match_all('/(\d{1,6})/m', $item['name'], $matches);
-                    return \implode('.', $matches[0]);
+                    preg_match_all('/(\d{1,6})/m', $item['name'], $matches);
+                    return implode('.', $matches[0]);
                 })->last();
 
                 // Need to make a second API call to retrieve the date associated with this tag's commit
@@ -90,7 +90,7 @@ class GitHubApi
                 return [
                     'name' => $friendlyName ?? $repoName,
                     'version' => $lastTag['name'],
-                    'release_date' => (new Carbon(\trim($tagCommit['commit']['author']['date'])))->toIso8601String(),
+                    'release_date' => (new Carbon(trim($tagCommit['commit']['author']['date'])))->toIso8601String(),
                 ];
             }
             Log::error($e->getMessage());

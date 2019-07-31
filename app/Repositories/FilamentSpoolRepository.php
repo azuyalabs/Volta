@@ -63,7 +63,7 @@ class FilamentSpoolRepository implements Contract
     public function create(FilamentSpoolRequest $request): FilamentSpool
     {
         $requestData = $request->all();
-        $requestData = \array_merge($requestData, ['user_id' => auth()->user()->id]);
+        $requestData = array_merge($requestData, ['user_id' => auth()->user()->id]);
 
         return FilamentSpool::create($requestData);
     }

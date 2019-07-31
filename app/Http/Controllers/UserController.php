@@ -56,7 +56,7 @@ class UserController extends Controller
     {
         $user = User::with('profile')->findOrFail(auth()->user()->id);
 
-        return view('users.profile', \compact('user'));
+        return view('users.profile', compact('user'));
     }
 
     /**
@@ -79,14 +79,14 @@ class UserController extends Controller
 
         $collection = collect($requestData);
         $userRequestData = $collection->filter(static function ($value, $key) {
-            return \in_array($key, (new User())->getFillable(), true);
+            return in_array($key, (new User())->getFillable(), true);
         });
 
         $user->update($userRequestData->all());
 
         $collectionP = collect($requestData);
         $profileRequestData = $collectionP->filter(static function ($value, $key) {
-            return \in_array($key, (new UserProfile())->getFillable(), true);
+            return in_array($key, (new UserProfile())->getFillable(), true);
         });
 
         $user->profile()->update($profileRequestData->all());
@@ -108,10 +108,10 @@ class UserController extends Controller
             return abort(404);
         }
 
-        [$component, $part] = \explode('.', $setting);
+        [$component, $part] = explode('.', $setting);
 
         return view(
-            'users.preferences.' . \str_replace('.', '_', $setting),
+            'users.preferences.' . str_replace('.', '_', $setting),
             [
                 'component' => $component,
                 'part' => $part,
@@ -129,7 +129,7 @@ class UserController extends Controller
      */
     private function isValidSettingName(string $setting)
     {
-        if (!\strpos($setting, '.')) {
+        if (!strpos($setting, '.')) {
             return false;
         }
 
@@ -187,9 +187,9 @@ class UserController extends Controller
             return abort(404);
         }
 
-        [$component, $part] = \explode('.', $setting);
+        [$component, $part] = explode('.', $setting);
 
-        $className = '\App\Http\Requests\\' . \ucfirst($component) . \ucfirst($part) . 'Preferences';
+        $className = '\App\Http\Requests\\' . ucfirst($component) . ucfirst($part) . 'Preferences';
 
         $validatedData = $this->validate($request, (new $className())->rules());
 
@@ -199,7 +199,7 @@ class UserController extends Controller
             $preferences[$component][$part][$key] = $value;
         }
 
-        auth()->user()->profile()->update(['preferences' => \json_encode($preferences)]);
+        auth()->user()->profile()->update(['preferences' => json_encode($preferences)]);
 
         return redirect()->back()->with('success', 'Preferences successfully updated!');
     }

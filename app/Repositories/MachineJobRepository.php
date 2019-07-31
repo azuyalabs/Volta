@@ -66,7 +66,7 @@ class MachineJobRepository implements Contract
     public function store($user_id, MachineJobRequest $request): MachineJob
     {
         $requestData = $request->all();
-        $requestData = \array_merge($requestData, ['user_id' => $user_id]);
+        $requestData = array_merge($requestData, ['user_id' => $user_id]);
 
         return MachineJob::create($requestData);
     }

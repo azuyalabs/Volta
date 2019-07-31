@@ -38,7 +38,7 @@ class Manufacturer extends FormRequest
             'name' => 'required|min:4',
             'website' => 'sometimes|nullable|url',
             'country' => [static function ($attribute, $value, $fail) {
-                if (!\in_array($value, \array_keys(app(CountryRepository::class)->all()))) {
+                if (!in_array($value, array_keys(app(CountryRepository::class)->all()))) {
                     $fail($attribute);
                 }
             }],

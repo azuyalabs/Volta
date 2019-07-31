@@ -55,7 +55,7 @@ class FilamentSpoolsController extends Controller
      */
     public function index(Request $request)
     {
-        $statistics = \json_decode($this->statistics()->content());
+        $statistics = json_decode($this->statistics()->content());
 
         return view('spools.index', ['statistics' => $statistics]);
     }
@@ -191,8 +191,8 @@ class FilamentSpoolsController extends Controller
      */
     public function export(FilamentSpool $spool)
     {
-        $filename = \strtolower(
-            \str_replace(
+        $filename = strtolower(
+            str_replace(
                 ' ',
                 '',
                 $spool->manufacturer->name

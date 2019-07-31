@@ -41,7 +41,7 @@ class TrustOctoPrintClient
             return response()->json(['message' => 'Correct User-Agent header is missing'], 400);
         }
 
-        $agent = \explode('/', $request->header('User-Agent'));
+        $agent = explode('/', $request->header('User-Agent'));
         if ($agent[0] !== 'OctoPrint-Volta') {
             return response()->json(['message' => 'Unauthenticated.'], 401);
         }

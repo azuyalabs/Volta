@@ -49,7 +49,7 @@ trait HasBinaryUuid
 
         $uuid = (array) $uuid;
 
-        return $builder->whereKey(\array_map(static function (string $modelUuid) {
+        return $builder->whereKey(array_map(static function (string $modelUuid) {
             return static::encodeUuid($modelUuid);
         }, $uuid));
     }
@@ -62,7 +62,7 @@ trait HasBinaryUuid
 
         $uuid = (array) $uuid;
 
-        return $builder->whereIn($field, \array_map(static function (string $modelUuid) {
+        return $builder->whereIn($field, array_map(static function (string $modelUuid) {
             return static::encodeUuid($modelUuid);
         }, $uuid));
     }
@@ -104,12 +104,12 @@ trait HasBinaryUuid
 
         $array = parent::toArray();
 
-        if (! $this->exists || ! \is_array($uuidAttributes)) {
+        if (! $this->exists || ! is_array($uuidAttributes)) {
             return $array;
         }
 
         foreach ($uuidAttributes as $attributeKey) {
-            if (! \array_key_exists($attributeKey, $array)) {
+            if (! array_key_exists($attributeKey, $array)) {
                 continue;
             }
             $uuidKey = $this->getRelatedBinaryKeyName($attributeKey);
@@ -123,7 +123,7 @@ trait HasBinaryUuid
     {
         $suffix = $this->getUuidSuffix();
 
-        return \preg_match('/(?:uu)?id/i', $attribute) ? "{$attribute}{$suffix}" : $attribute;
+        return preg_match('/(?:uu)?id/i', $attribute) ? "{$attribute}{$suffix}" : $attribute;
     }
 
     public function getAttribute($key)
@@ -148,16 +148,16 @@ trait HasBinaryUuid
 
     protected function getUuidSuffix()
     {
-        return \property_exists($this, 'uuidSuffix') ? $this->uuidSuffix : '_text';
+        return property_exists($this, 'uuidSuffix') ? $this->uuidSuffix : '_text';
     }
 
     protected function uuidTextAttribute($key)
     {
         $uuidAttributes = $this->getUuidAttributes();
         $suffix = $this->getUuidSuffix();
-        $offset = -\strlen($suffix);
+        $offset = -strlen($suffix);
 
-        if (\substr($key, $offset) === $suffix && \in_array($uuidKey = \substr($key, 0, $offset), $uuidAttributes)) {
+        if (substr($key, $offset) === $suffix && in_array($uuidKey = substr($key, 0, $offset), $uuidAttributes)) {
             return $uuidKey;
         }
 
@@ -168,14 +168,14 @@ trait HasBinaryUuid
     {
         $uuidAttributes = [];
 
-        if (\property_exists($this, 'uuids') && \is_array($this->uuids)) {
-            $uuidAttributes = \array_merge($uuidAttributes, $this->uuids);
+        if (property_exists($this, 'uuids') && is_array($this->uuids)) {
+            $uuidAttributes = array_merge($uuidAttributes, $this->uuids);
         }
 
         // non composite primary keys will return a string so casting required
         $key = (array) $this->getKeyName();
 
-        $uuidAttributes = \array_unique(\array_merge($uuidAttributes, $key));
+        $uuidAttributes = array_unique(array_merge($uuidAttributes, $key));
 
         return $uuidAttributes;
     }
@@ -184,7 +184,7 @@ trait HasBinaryUuid
     {
         $key = $this->getKeyName();
 
-        if (! $this->exists || \is_array($key)) {
+        if (! $this->exists || is_array($key)) {
             return null;
         }
 
@@ -195,7 +195,7 @@ trait HasBinaryUuid
     {
         $key = $this->getKeyName();
 
-        if (\is_array($key)) {
+        if (is_array($key)) {
             return;
         }
 
@@ -204,12 +204,12 @@ trait HasBinaryUuid
 
     public function getQueueableId()
     {
-        return \base64_encode($this->{$this->getKeyName()});
+        return base64_encode($this->{$this->getKeyName()});
     }
 
     public function newQueryForRestoration($id)
     {
-        return $this->newQueryWithoutScopes()->whereKey(\base64_decode($id));
+        return $this->newQueryWithoutScopes()->whereKey(base64_decode($id));
     }
 
     public function newEloquentBuilder($query)

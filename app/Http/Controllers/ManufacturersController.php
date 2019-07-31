@@ -54,7 +54,7 @@ class ManufacturersController extends Controller
      */
     public function index(Request $request)
     {
-        $statistics = \json_decode($this->statistics()->content());
+        $statistics = json_decode($this->statistics()->content());
 
         return view('manufacturers.index', ['statistics' => $statistics]);
     }

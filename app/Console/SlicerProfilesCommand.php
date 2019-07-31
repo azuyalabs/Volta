@@ -136,15 +136,15 @@ class SlicerProfilesCommand extends Command
         $cura_material_settings = [];
 
         foreach ($filamentFiles as $filamentDefinition) {
-            $f = \json_decode(\file_get_contents($filamentDefinition), true);
+            $f = json_decode(file_get_contents($filamentDefinition), true);
 
             $color = isset($f['color']['name']) ? $f['color']['name'] : $this->color2Name($f['color']['code']);
-            $filamentName = \join(' ', [$f['brand'], $f['type'], $color, $f['diameter'] . 'mm']);
+            $filamentName = join(' ', [$f['brand'], $f['type'], $color, $f['diameter'] . 'mm']);
 
             // Update original filament definition
             if (!isset($f['id'])) {
                 $f = ['id' => Uuid::uuid4()] + $f;
-                \file_put_contents($filamentDefinition, \json_encode($f, JSON_PRETTY_PRINT));
+                file_put_contents($filamentDefinition, json_encode($f, JSON_PRETTY_PRINT));
             }
 
             // Set defaults
@@ -155,7 +155,7 @@ class SlicerProfilesCommand extends Command
             $f['cooling'] = $f['type'] === 'ABS' ? 0 : 1;
             $f['fan_always_on'] = $f['type'] === 'ABS' ? 0 : 1;
             $f['k_value'] = ($f['type'] === 'PET') ? 45: 30;
-            $f['filament_notes'] = \sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
+            $f['filament_notes'] = sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
             $f['filament_colour'] = $color;
             $f['min_fan_speed'] = $this->min_fan_speed[$f['type']];
             $f['max_fan_speed'] = $this->max_fan_speed[$f['type']];
@@ -183,7 +183,7 @@ class SlicerProfilesCommand extends Command
             // Store Cura Material Settings
             $cura_material_settings[(string) $f['id']] = ['spool_weight' => $f['weight'], 'spool_cost' => $f['price']];
 
-            $this->info($filamentName . ' (' . \basename($filamentDefinition) . ')');
+            $this->info($filamentName . ' (' . basename($filamentDefinition) . ')');
 
             # Retrieve Linear Advance Calibration data
             if (isset($f['k_value_calibrations'])) {
@@ -191,7 +191,7 @@ class SlicerProfilesCommand extends Command
                 $kvalue = $kValueCalibration['value'];
                 if (isset($kvalue)) {
                     $f['k_value'] = $kvalue;
-                    $f['filament_notes'] .= \sprintf('K Value last calibrated on %s\\n', $kValueCalibration['date']);
+                    $f['filament_notes'] .= sprintf('K Value last calibrated on %s\\n', $kValueCalibration['date']);
                 }
             } else {
                 $this->warn('>> Linear Advance Calibration not performed yet.');
@@ -204,9 +204,9 @@ class SlicerProfilesCommand extends Command
                 $margin = $avg - $f['diameter'];
 
                 if (isset($avg)) {
-                    $this->info(\sprintf('Filament Diameter    : %.3fmm [%.3fmm (%.2f%%)]', $avg, $margin, $margin/$f['diameter'] * 100));
-                    $f['diameter'] = \sprintf('%.3f', $avg);
-                    $f['filament_notes'] .= \sprintf('Filament diameter last calibrated on %s\\n', $dm->pluck('date')->max());
+                    $this->info(sprintf('Filament Diameter    : %.3fmm [%.3fmm (%.2f%%)]', $avg, $margin, $margin/$f['diameter'] * 100));
+                    $f['diameter'] = sprintf('%.3f', $avg);
+                    $f['filament_notes'] .= sprintf('Filament diameter last calibrated on %s\\n', $dm->pluck('date')->max());
                 }
             } else {
                 $this->warn('>> Filament Diameter Calibration not performed yet.');
@@ -226,11 +226,11 @@ class SlicerProfilesCommand extends Command
                 $margin = $average - $avg_extrusion_width;
 
                 if (isset($newMultiplier)) {
-                    $this->info(\sprintf('Extrusion Width      : %.3fmm [%.3fmm (%.2f%%)]', $average, $margin, $margin/$avg_extrusion_width * 100));
-                    $this->info(\sprintf('Extrusion Multiplier : %.3f', $newMultiplier));
+                    $this->info(sprintf('Extrusion Width      : %.3fmm [%.3fmm (%.2f%%)]', $average, $margin, $margin/$avg_extrusion_width * 100));
+                    $this->info(sprintf('Extrusion Multiplier : %.3f', $newMultiplier));
 
-                    $f['extrusion_multiplier'] = \sprintf('%.3f', $newMultiplier);
-                    $f['filament_notes'] .= \sprintf('Extrusion Multiplier last calibrated on %s\\n', $em->pluck('date')->max());
+                    $f['extrusion_multiplier'] = sprintf('%.3f', $newMultiplier);
+                    $f['filament_notes'] .= sprintf('Extrusion Multiplier last calibrated on %s\\n', $em->pluck('date')->max());
                 }
             } else {
                 $this->warn('>> Extrusion Multiplier Calibration not performed yet.');
@@ -242,19 +242,19 @@ class SlicerProfilesCommand extends Command
                 $profileFilename = $filamentName . '.ini';
 
                 if ('cura' === $slicer_id) {
-                    $profileFilename = \str_replace(' ', '_', $filamentName) . '.xml.fdm_material';
+                    $profileFilename = str_replace(' ', '_', $filamentName) . '.xml.fdm_material';
 
                     // Output Cura Material Settings (replace this in your cura.cfg file)
-                    \file_put_contents($outputDirectory.DIRECTORY_SEPARATOR.'cura_material_settings.txt', 'material_settings = '. \json_encode($cura_material_settings));
+                    file_put_contents($outputDirectory.DIRECTORY_SEPARATOR.'cura_material_settings.txt', 'material_settings = '. json_encode($cura_material_settings));
                 }
 
                 // Create slicer profile directory if not exists
-                if (!\file_exists($outputDirectory)) {
-                    \mkdir($outputDirectory);
+                if (!file_exists($outputDirectory)) {
+                    mkdir($outputDirectory);
                 }
 
                 // Save output
-                \file_put_contents(
+                file_put_contents(
                     $outputDirectory . DIRECTORY_SEPARATOR . $profileFilename,
                     $this->plates->render($slicer_id, [
                         'generated_on' => (new DateTime())->format(DATE_ISO8601),
@@ -265,7 +265,7 @@ class SlicerProfilesCommand extends Command
             $this->line('');
         }
 
-        $this->info('Profiles successfully generated for '. \join(', ', $this->slicers));
+        $this->info('Profiles successfully generated for '. join(', ', $this->slicers));
     }
 
     /**
@@ -278,12 +278,12 @@ class SlicerProfilesCommand extends Command
     {
         // Strip any preceding hash character
         $needle = '#';
-        if (\strpos($color, $needle) >= 0) {
-            $color = \substr($color, \strlen($needle));
+        if (strpos($color, $needle) >= 0) {
+            $color = substr($color, strlen($needle));
         }
 
-        $response = \file_get_contents('http://www.thecolorapi.com/id?hex=' . $color);
-        $color_api = \json_decode($response, true);
+        $response = file_get_contents('http://www.thecolorapi.com/id?hex=' . $color);
+        $color_api = json_decode($response, true);
 
         if (isset($color_api['name']['value'])) {
             return $color_api['name']['value'];

@@ -53,7 +53,7 @@ trait Monetary
      */
     private function isMoneyAttribute(string $key): bool
     {
-        return \in_array($key, $this->money_attributes);
+        return in_array($key, $this->money_attributes);
     }
 
     /**

@@ -40,7 +40,7 @@ class ManufacturerResource extends JsonResource
                 'product_count' => $this->models->count()
             ],
             'links' => [
-                'self' => \getenv('APP_URL') . '/api/manufacturers/' . $this->slug,
+                'self' => getenv('APP_URL') . '/api/manufacturers/' . $this->slug,
             ],
             'meta' => [
                 'country.name' => app(CountryRepository::class)->getName($this->country),

@@ -42,14 +42,14 @@ class FetchWeather extends Command
     {
         // Get all unique cities from the registered user base
         $cityList = UserProfile::all()->unique('city')->filter(static function ($value) {
-            return !\is_null($value->city);
+            return !is_null($value->city);
         })->pluck('city')->toArray();
 
         foreach ($cityList as $city) {
             $weather = app(WeatherRepository::class)->currentWeather($city);
 
             event(new WeatherFetched($city, $weather));
-            Log::channel('dashboard')->info(formatLogMessage(\sprintf('Weather for %s retrieved.', $city), $this->signature), $weather);
+            Log::channel('dashboard')->info(formatLogMessage(sprintf('Weather for %s retrieved.', $city), $this->signature), $weather);
         }
     }
 }

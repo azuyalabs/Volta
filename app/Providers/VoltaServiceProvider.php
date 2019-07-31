@@ -133,8 +133,8 @@ class VoltaServiceProvider extends ServiceProvider
     protected function createGrammarFromConnection(Connection $connection): Grammar
     {
         $queryGrammar = $connection->getQueryGrammar();
-        $queryGrammarClass = \get_class($queryGrammar);
-        if (! \in_array($queryGrammarClass, [
+        $queryGrammarClass = get_class($queryGrammar);
+        if (! in_array($queryGrammarClass, [
             IlluminateMySqlGrammar::class,
             IlluminateSQLiteGrammar::class,
         ])) {

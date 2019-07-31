@@ -40,7 +40,7 @@ class MachinesController extends Controller
      */
     public function index(Request $request)
     {
-        $statistics = \json_decode($this->statistics()->content());
+        $statistics = json_decode($this->statistics()->content());
 
         return view('machines.index', ['statistics' => $statistics]);
     }
@@ -72,7 +72,7 @@ class MachinesController extends Controller
         foreach ($pm as $model) {
             $groups[$model->manufacturer->name][$model->id] = $model->name;
         }
-        \ksort($groups);
+        ksort($groups);
 
         return $groups;
     }
@@ -92,7 +92,7 @@ class MachinesController extends Controller
         $requestData = $request->all();
 
         // Merge with the current user ID
-        $requestData = \array_merge($requestData, ['user_id' => auth()->user()->id]);
+        $requestData = array_merge($requestData, ['user_id' => auth()->user()->id]);
 
         Machine::create($requestData);
 

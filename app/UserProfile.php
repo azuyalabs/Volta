@@ -42,7 +42,7 @@ class UserProfile extends Model
      */
     public function getPreferencesAttribute($value): array
     {
-        return \json_decode($value, true);
+        return json_decode($value, true);
     }
 
     /**

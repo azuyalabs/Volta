@@ -28,7 +28,7 @@ class Builder extends EloquentBuilder
      */
     public function find($id, $columns = ['*'])
     {
-        if (\is_array($id) || $id instanceof Arrayable) {
+        if (is_array($id) || $id instanceof Arrayable) {
             return $this->findMany($id, $columns);
         }
 
