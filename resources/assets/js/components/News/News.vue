@@ -14,7 +14,9 @@
         <!-- Card Header -->
         <div class="container-fluid row pr-0">
             <i18n path="main_title" tag="div" class="card-title pl-2">
-                <a place="feed" href="https://3dprint.com/" target="_blank" rel="noreferrer">3DPrint.com</a>
+                <a place="feed" href="https://3dprint.com/" target="_blank" rel="noreferrer"
+                    >3DPrint.com</a
+                >
             </i18n>
         </div>
 
