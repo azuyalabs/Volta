@@ -35,13 +35,6 @@ class Project extends Model
     protected $table = 'projects';
 
     /**
-     * The database primary key value.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'id';
-
-    /**
      * Attributes that should be mass-assignable.
      *
      * @var array

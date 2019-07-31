@@ -39,10 +39,6 @@ class Machine extends Model
      * @inheritdoc
      */
     protected $table = 'machines';
-    /**
-     * @inheritdoc
-     */
-    protected $primaryKey = 'id';
 
     /**
      * @inheritdoc

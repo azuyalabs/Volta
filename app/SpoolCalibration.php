@@ -24,13 +24,6 @@ class SpoolCalibration extends Model
     protected $table = 'spool_calibrations';
 
     /**
-     * The database primary key value.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'id';
-
-    /**
      * Attributes that should be mass-assignable.
      *
      * @var array

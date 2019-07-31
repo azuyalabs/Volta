@@ -30,11 +30,6 @@ class UserProfile extends Model
     /**
      * @inheritdoc
      */
-    protected $primaryKey = 'id';
-
-    /**
-     * @inheritdoc
-     */
     protected $fillable = ['currency', 'language', 'country', 'city', 'preferences'];
 
     /**

@@ -38,13 +38,6 @@ class Manufacturer extends Model
     protected $table = 'manufacturers';
 
     /**
-     * The database primary key value.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'id';
-
-    /**
      * Attributes that should be mass-assignable.
      *
      * @var array
