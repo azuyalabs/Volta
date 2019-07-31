@@ -28,7 +28,7 @@ class MachinePolicy
     /**
      * Determine whether the user can view the list of machines.
      *
-     * @param  \App\User $user
+     * @param User $user
      *
      * @return mixed
      */
@@ -40,8 +40,8 @@ class MachinePolicy
     /**
      * Determine whether the user can view the machine.
      *
-     * @param  \App\User $user
-     * @param  \App\Machine $machine
+     * @param User $user
+     * @param Machine $machine
      *
      * @return mixed
      */
@@ -53,7 +53,7 @@ class MachinePolicy
     /**
      * Determine whether the user can create machines.
      *
-     * @param  \App\User $user
+     * @param User $user
      *
      * @return mixed
      */
@@ -65,8 +65,8 @@ class MachinePolicy
     /**
      * Determine whether the user can update the machine.
      *
-     * @param  \App\User $user
-     * @param  \App\Machine $machine
+     * @param User $user
+     * @param Machine $machine
      *
      * @return mixed
      */
@@ -78,8 +78,8 @@ class MachinePolicy
     /**
      * Determine whether the user can delete the machine.
      *
-     * @param  \App\User $user
-     * @param  \App\Machine $machine
+     * @param User $user
+     * @param Machine $machine
      *
      * @return mixed
      */

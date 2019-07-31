@@ -100,7 +100,7 @@ class VoltaServiceProvider extends ServiceProvider
         });
 
         // Allow database/models for Binary UUID
-        /** @var \Illuminate\Database\Connection $connection */
+        /** @var Connection $connection */
         try {
             $connection = app('db')->connection();
             $connection->setSchemaGrammar($this->createGrammarFromConnection($connection));

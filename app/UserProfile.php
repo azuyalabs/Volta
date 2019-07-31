@@ -48,7 +48,7 @@ class UserProfile extends Model
     /**
      * Get the user that the profile belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {

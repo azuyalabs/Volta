@@ -73,7 +73,7 @@ class MachineJob extends Model
      * Scope the query for the given query options.
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  \App\QueryOptions\MachineJobQueryOptions $options
+     * @param MachineJobQueryOptions $options
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */

@@ -23,8 +23,8 @@ class ManufacturerPolicy
     /**
      * Determine whether the user can view a manufacturer.
      *
-     * @param  \App\User $user
-     * @param  \App\Manufacturer $manufacturer
+     * @param User $user
+     * @param Manufacturer $manufacturer
      *
      * @return mixed
      */
@@ -36,7 +36,7 @@ class ManufacturerPolicy
     /**
      * Determine whether the user can create a manufacturer.
      *
-     * @param  \App\User $user
+     * @param User $user
      *
      * @return mixed
      */
@@ -48,8 +48,8 @@ class ManufacturerPolicy
     /**
      * Determine whether the user can update a manufacturer.
      *
-     * @param  \App\User $user
-     * @param  \App\Manufacturer $manufacturer
+     * @param User $user
+     * @param Manufacturer $manufacturer
      *
      * @return mixed
      */
@@ -61,8 +61,8 @@ class ManufacturerPolicy
     /**
      * Determine whether the user can delete a manufacturer.
      *
-     * @param  \App\User $user
-     * @param  \App\Manufacturer $manufacturer
+     * @param User $user
+     * @param Manufacturer $manufacturer
      *
      * @return mixed
      */

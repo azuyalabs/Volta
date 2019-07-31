@@ -45,7 +45,7 @@ class ManufacturersController extends Controller
     /**
      * Display a listing of manufacturers.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\View\View
      */

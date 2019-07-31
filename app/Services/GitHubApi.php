@@ -27,7 +27,7 @@ use Cache\Adapter\Predis\PredisCachePool;
 class GitHubApi
 {
     /**
-     * @var \Github\Client Github Client instance
+     * @var Client Github Client instance
      */
     private $client;
 

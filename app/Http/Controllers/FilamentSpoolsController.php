@@ -44,7 +44,7 @@ class FilamentSpoolsController extends Controller
     /**
      * Display a listing of filament spools.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\View\View
      */

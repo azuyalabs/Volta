@@ -49,7 +49,7 @@ class User extends Authenticatable
     /**
      * Get the profile record associated with the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function profile(): HasOne
     {

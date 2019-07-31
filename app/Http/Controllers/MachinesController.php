@@ -31,7 +31,7 @@ class MachinesController extends Controller
     /**
      * Display a listing of machines.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\View\View
      */
@@ -77,7 +77,7 @@ class MachinesController extends Controller
     /**
      * Store a newly created machine in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -118,7 +118,7 @@ class MachinesController extends Controller
     /**
      * Update the specified machine in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param  Machine $machine
      *
      * @return \Illuminate\Http\RedirectResponse

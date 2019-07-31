@@ -23,8 +23,8 @@ class ProductPolicy
     /**
      * Determine whether the user can view a Product (class).
      *
-     * @param  \App\User $user
-     * @param  \App\Product $product
+     * @param User $user
+     * @param Product $product
      *
      * @return mixed
      */
@@ -36,7 +36,7 @@ class ProductPolicy
     /**
      * Determine whether the user can create a product.
      *
-     * @param  \App\User $user
+     * @param User $user
      *
      * @return mixed
      */
@@ -48,7 +48,7 @@ class ProductPolicy
     /**
      * Determine whether the user can update a product.
      *
-     * @param  \App\User $user
+     * @param User $user
      *
      * @return mixed
      */
@@ -60,7 +60,7 @@ class ProductPolicy
     /**
      * Determine whether the user can delete a product.
      *
-     * @param  \App\User $user
+     * @param User $user
      *
      * @return mixed
      */

@@ -78,7 +78,7 @@ class Manufacturer extends Model
     /**
      * Get the products for the manufacturer
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function models(): HasMany
     {
@@ -88,7 +88,7 @@ class Manufacturer extends Model
     /**
      * Get the spools for the manufacturer
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function spools(): HasMany
     {
@@ -98,9 +98,9 @@ class Manufacturer extends Model
     /**
      * Scope a query to only include manufacturers that are a filament supplier.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeIsFilamentSupplier($query): Builder
     {
@@ -110,9 +110,9 @@ class Manufacturer extends Model
     /**
      * Scope a query to only include manufacturers that are an equipment supplier.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeIsEquipmentSupplier($query): Builder
     {
@@ -122,10 +122,10 @@ class Manufacturer extends Model
     /**
      * Scope the query for the given query options.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  \App\QueryOptions\ManufacturerQueryOptions $options
+     * @param Builder $query
+     * @param ManufacturerQueryOptions $options
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeWithQueryOptions($query, ManufacturerQueryOptions $options)
     {

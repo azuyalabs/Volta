@@ -23,9 +23,9 @@ class MachinesController extends Controller
     /**
      * Display the specified machine.
      *
-     * @param  \App\Machine $machine
+     * @param Machine $machine
      *
-     * @return \App\Http\Resources\MachineResource
+     * @return MachineResource
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -41,7 +41,7 @@ class MachinesController extends Controller
     /**
      * Display a listing of a user's machines.
      *
-     * @return \App\Http\Resources\MachineCollectionResource
+     * @return MachineCollectionResource
      */
     public function index(): MachineCollectionResource
     {
@@ -53,7 +53,7 @@ class MachinesController extends Controller
      *
      * @param  Machine $machine
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      * @throws \Exception
      */
     public function destroy(Machine $machine): Response

@@ -41,7 +41,7 @@ class FilamentSpoolsController extends Controller
      *
      * @param string $id the id of the filament spool
      *
-     * @return \App\Http\Resources\FilamentSpoolResource
+     * @return FilamentSpoolResource
      */
     public function show($id): FilamentSpoolResource
     {
@@ -53,7 +53,7 @@ class FilamentSpoolsController extends Controller
     /**
      * Return a listing of the authenticated users' filament spools.
      *
-     * @return \App\Http\Resources\FilamentSpoolCollectionResource
+     * @return FilamentSpoolCollectionResource
      */
     public function index(): FilamentSpoolCollectionResource
     {
@@ -65,7 +65,7 @@ class FilamentSpoolsController extends Controller
      *
      * @param string $id the id of the filament spool
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id): Response
     {

@@ -77,7 +77,7 @@ class Product extends Model
     /**
      * Get the manufacturer that the products belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function manufacturer(): BelongsTo
     {
@@ -87,7 +87,7 @@ class Product extends Model
     /**
      * Get the machines for the product.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function machines(): HasMany
     {

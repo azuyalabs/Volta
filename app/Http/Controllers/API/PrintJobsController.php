@@ -24,7 +24,7 @@ class PrintJobsController extends Controller
      *
      * @param  string $printJob
      *
-     * @return \App\Http\Resources\PrintJobResource
+     * @return PrintJobResource
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */

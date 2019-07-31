@@ -76,7 +76,7 @@ class Machine extends Model
     /**
      * Get the user that the machine belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -86,7 +86,7 @@ class Machine extends Model
     /**
      * Get the product model that the machine belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function model(): BelongsTo
     {
@@ -96,9 +96,9 @@ class Machine extends Model
     /**
      * Get my machines
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeMine($query): Builder
     {
@@ -108,9 +108,9 @@ class Machine extends Model
     /**
      * Get all my machines that are paired (i.e. having an external reference ID)
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeMyPaired($query): Builder
     {

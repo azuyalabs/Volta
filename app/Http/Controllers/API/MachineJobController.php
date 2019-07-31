@@ -25,9 +25,9 @@ abstract class MachineJobController extends Controller
     /**
      * List the machine jobs of the given type.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Contracts\Repositories\MachineJobRepository $storage
-     * @return \App\Http\Resources\ThreeDPrinterJobCollectionResource
+     * @param Request $request
+     * @param MachineJobRepository $storage
+     * @return ThreeDPrinterJobCollectionResource
      */
     public function index(Request $request, MachineJobRepository $storage): ThreeDPrinterJobCollectionResource
     {
@@ -50,7 +50,7 @@ abstract class MachineJobController extends Controller
      * @param string $id the id of the machine job
      *
      * @param MachineJobRepository $storage
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id, MachineJobRepository $storage): Response
     {
@@ -67,7 +67,7 @@ abstract class MachineJobController extends Controller
      * @param MachineJobRepository $storage
      * @param MachineJobRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update($id, MachineJobRepository $storage, MachineJobRequest $request): Response
     {

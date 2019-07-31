@@ -27,7 +27,7 @@ class ProductsController extends Controller
      * Get a list of all products.
      *
      * @param Request $request
-     * @return \App\Http\Resources\ProductCollectionResource
+     * @return ProductCollectionResource
      */
     public function index(Request $request): ProductCollectionResource
     {
@@ -66,7 +66,7 @@ class ProductsController extends Controller
      *
      * @param  Product $product
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      * @throws \Exception
      */
     public function destroy(Product $product): Response

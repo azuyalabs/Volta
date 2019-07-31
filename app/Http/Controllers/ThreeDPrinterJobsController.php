@@ -24,7 +24,7 @@ class ThreeDPrinterJobsController extends Controller
     /**
      * Display a listing of the authenticated user's 3D Printer Jobs.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\View\View
      */

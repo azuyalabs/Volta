@@ -21,7 +21,7 @@ class ProjectsController extends Controller
     /**
      * Display a listing of projects.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\View\View
      */

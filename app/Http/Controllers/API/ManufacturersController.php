@@ -26,9 +26,9 @@ class ManufacturersController extends Controller
     /**
      *List all manufacturers.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Contracts\Repositories\ManufacturerRepository $storage
-     * @return \App\Http\Resources\ManufacturerCollectionResource
+     * @param Request $request
+     * @param ManufacturerRepository $storage
+     * @return ManufacturerCollectionResource
      */
     public function index(Request $request, ManufacturerRepository $storage): ManufacturerCollectionResource
     {
@@ -54,7 +54,7 @@ class ManufacturersController extends Controller
      * @param string $id the id of the manufacturer
      *
      * @param ManufacturerRepository $storage
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id, ManufacturerRepository $storage): Response
     {
