@@ -12,10 +12,13 @@
 
 namespace App;
 
+use DatePeriod;
 use Illuminate\Database\Eloquent\Model;
 use App\Storage\BinaryUuid\HasBinaryUuid;
+use Illuminate\Database\Eloquent\Builder;
 use App\QueryOptions\MachineJobQueryOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class representing the model for a Machine Job.
@@ -52,7 +55,7 @@ class MachineJob extends Model
     /**
      * A machine job is owned by a user
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {
@@ -62,7 +65,7 @@ class MachineJob extends Model
     /**
      * A machine job is performed by a machine
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function machine()
     {
@@ -72,10 +75,10 @@ class MachineJob extends Model
     /**
      * Scope the query for the given query options.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  Builder $query
      * @param MachineJobQueryOptions $options
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeWithQueryOptions($query, MachineJobQueryOptions $options)
     {
@@ -89,14 +92,14 @@ class MachineJob extends Model
     /**
      * Scope the query for the given start date period.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  Builder $query
      * @param  MachineJobQueryOptions $options
      *
      * @return $this
      */
     protected function whereStartDatePeriod($query, MachineJobQueryOptions $options)
     {
-        $query->when($options->start_date_period, static function ($query, \DatePeriod $period) {
+        $query->when($options->start_date_period, static function ($query, DatePeriod $period) {
             return $query->whereBetween('started_at', [$period->getStartDate(), $period->getEndDate()]);
         });
 
@@ -106,7 +109,7 @@ class MachineJob extends Model
     /**
      * Scope the query for the given machine(s) (id's).
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  Builder $query
      * @param  MachineJobQueryOptions $options
      *
      * @return $this
@@ -129,7 +132,7 @@ class MachineJob extends Model
     /**
      * Scope the query for the given type.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  Builder $query
      * @param  MachineJobQueryOptions $options
      *
      * @return $this
@@ -152,7 +155,7 @@ class MachineJob extends Model
     /**
      * Scope the query for the given type.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  Builder $query
      * @param  MachineJobQueryOptions $options
      *
      * @return $this

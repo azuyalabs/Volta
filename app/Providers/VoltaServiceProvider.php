@@ -12,6 +12,7 @@
 
 namespace App\Providers;
 
+use Exception;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidFactory;
 use Illuminate\Database\Connection;
@@ -105,7 +106,7 @@ class VoltaServiceProvider extends ServiceProvider
             $connection = app('db')->connection();
             $connection->setSchemaGrammar($this->createGrammarFromConnection($connection));
             $this->optimizeUuids();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
         }
     }
@@ -127,7 +128,7 @@ class VoltaServiceProvider extends ServiceProvider
      * @param Connection $connection Database connection instance
      *
      * @return SQLiteGrammar|MySqlGrammar
-     * @throws \Exception
+     * @throws Exception
      */
     protected function createGrammarFromConnection(Connection $connection): Grammar
     {
@@ -137,7 +138,7 @@ class VoltaServiceProvider extends ServiceProvider
             IlluminateMySqlGrammar::class,
             IlluminateSQLiteGrammar::class,
         ])) {
-            throw new \Exception("There current grammar `$queryGrammarClass` doesn't support binary uuids. Only  MySql and SQLite connections are supported.");
+            throw new Exception("There current grammar `$queryGrammarClass` doesn't support binary uuids. Only  MySql and SQLite connections are supported.");
         }
         if ($queryGrammar instanceof IlluminateSQLiteGrammar) {
             $grammar = new SQLiteGrammar();

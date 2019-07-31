@@ -12,9 +12,14 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
+use DatePeriod;
+use DateInterval;
+use DateTimeImmutable;
 use App\MachineJobStatus;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use App\QueryOptions\MachineJobQueryOptions;
 use App\Contracts\Repositories\MachineJobRepository;
 use App\Http\Requests\MachineJob as MachineJobRequest;
@@ -83,7 +88,7 @@ abstract class MachineJobController extends Controller
      * @param MachineJobRequest $request
      * @param MachineJobRepository $storage
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(MachineJobRequest $request, MachineJobRepository $storage)
     {
@@ -97,9 +102,9 @@ abstract class MachineJobController extends Controller
      *
      * @param MachineJobRepository $storage
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function activity(MachineJobRepository $storage)
     {
@@ -107,10 +112,10 @@ abstract class MachineJobController extends Controller
         $options->statuses([MachineJobStatus::FAILED, MachineJobStatus::SUCCESS]);
         $options->type($this->machineType());
 
-        $endDate = new \DateTimeImmutable();
-        $options->start_date_period(new \DatePeriod(
-            $endDate->sub(new \DateInterval('P1Y')),
-            new \DateInterval('P1D'),
+        $endDate = new DateTimeImmutable();
+        $options->start_date_period(new DatePeriod(
+            $endDate->sub(new DateInterval('P1Y')),
+            new DateInterval('P1D'),
             $endDate
         ));
 
@@ -123,9 +128,9 @@ abstract class MachineJobController extends Controller
      * Retrieves the success rate of all print jobs over time of the given user.
      *
      * @param MachineJobRepository $storage
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function success_rate(MachineJobRepository $storage)
     {
@@ -133,10 +138,10 @@ abstract class MachineJobController extends Controller
         $options->statuses([MachineJobStatus::FAILED, MachineJobStatus::SUCCESS]);
         $options->type($this->machineType());
 
-        $endDate = new \DateTimeImmutable();
-        $options->start_date_period(new \DatePeriod(
-            $endDate->sub(new \DateInterval('P1Y')),
-            new \DateInterval('P1D'),
+        $endDate = new DateTimeImmutable();
+        $options->start_date_period(new DatePeriod(
+            $endDate->sub(new DateInterval('P1Y')),
+            new DateInterval('P1D'),
             $endDate
         ));
 

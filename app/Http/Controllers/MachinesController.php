@@ -12,9 +12,12 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Machine;
 use App\Product;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class MachinesController extends Controller
 {
@@ -33,7 +36,7 @@ class MachinesController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(Request $request)
     {
@@ -55,7 +58,7 @@ class MachinesController extends Controller
     /**
      * Show the form for creating a new machine.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -79,7 +82,7 @@ class MachinesController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -101,7 +104,7 @@ class MachinesController extends Controller
      *
      * @param  Machine $machine
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(Machine $machine)
     {
@@ -121,7 +124,7 @@ class MachinesController extends Controller
      * @param Request $request
      * @param  Machine $machine
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request, Machine $machine)
     {
@@ -141,8 +144,8 @@ class MachinesController extends Controller
      *
      * @param  Machine $machine
      *
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy(Machine $machine)
     {

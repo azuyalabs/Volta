@@ -12,7 +12,9 @@
 
 namespace App\Storage\BinaryUuid;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 class Builder extends EloquentBuilder
@@ -22,7 +24,7 @@ class Builder extends EloquentBuilder
      *
      * @param  mixed  $id
      * @param  array  $columns
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null
+     * @return Model|Collection|static[]|static|null
      */
     public function find($id, $columns = ['*'])
     {
@@ -38,7 +40,7 @@ class Builder extends EloquentBuilder
      *
      * @param Arrayable|array  $ids
      * @param  array  $columns
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function findMany($ids, $columns = ['*'])
     {

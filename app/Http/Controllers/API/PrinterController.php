@@ -14,6 +14,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Rules\ValidPrinterId;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use App\Http\Resources\VerificationResource;
 use App\Events\PrinterMonitor\PrinterStatusFetched;
@@ -50,7 +51,7 @@ class PrinterController extends Controller
      * Accepts updates to a registered printer via the OctoPrint plugin.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function monitor(Request $request)
     {

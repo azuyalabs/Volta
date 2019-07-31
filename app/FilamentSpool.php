@@ -13,8 +13,10 @@
 namespace App;
 
 use Cknow\Money\Money;
+use UnexpectedValueException;
 use Illuminate\Database\Eloquent\Model;
 use App\Storage\BinaryUuid\HasBinaryUuid;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class representing the model for a Filament Spool.
@@ -60,7 +62,7 @@ class FilamentSpool extends Model
     /**
      * A filament spool is owned by a user
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {
@@ -70,7 +72,7 @@ class FilamentSpool extends Model
     /**
      * A filament spool is made by a manufacturer (supplier)
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function manufacturer()
     {
@@ -85,7 +87,7 @@ class FilamentSpool extends Model
     public function getLengthAttribute(): float
     {
         if ($this->density === 0 || $this->diameter === 0) {
-            throw new \UnexpectedValueException('Density can not be zero.');
+            throw new UnexpectedValueException('Density can not be zero.');
         }
 
         return $this->attributes['length'] = ($this->weight / $this->density) / (M_PI * (($this->diameter / 2) ** 2));
@@ -111,7 +113,7 @@ class FilamentSpool extends Model
     public function getPricePerKilogramAttribute(): Money
     {
         if ($this->weight === 0) {
-            throw new \UnexpectedValueException('Weight can not be zero.');
+            throw new UnexpectedValueException('Weight can not be zero.');
         }
 
         return Money::JPY($this->purchase_price)->multiply(1000 / $this->weight);

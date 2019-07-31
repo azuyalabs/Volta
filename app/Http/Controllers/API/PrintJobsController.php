@@ -15,6 +15,8 @@ namespace App\Http\Controllers\API;
 use App\GCode;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\PrintJobResource;
+use App\Http\Resources\MachineCollectionResource;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class PrintJobsController extends Controller
 {
@@ -26,7 +28,7 @@ class PrintJobsController extends Controller
      *
      * @return PrintJobResource
      *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function show(string $printJob): PrintJobResource
     {
@@ -42,7 +44,7 @@ class PrintJobsController extends Controller
     /**
      * Display a listing of a user's machines.
      *
-     * @return \App\Http\Resources\MachineCollectionResource
+     * @return MachineCollectionResource
      */
     //public function index()
     //{

@@ -12,6 +12,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class FilamentSpoolCollectionResource extends ResourceCollection
@@ -19,7 +20,7 @@ class FilamentSpoolCollectionResource extends ResourceCollection
     /**
      * Transform the resource collection into an array.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  Request $request
      *
      * @return array
      */
@@ -33,7 +34,7 @@ class FilamentSpoolCollectionResource extends ResourceCollection
     /**
      * Get additional data that should be returned with the resource array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */

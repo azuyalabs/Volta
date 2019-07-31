@@ -12,6 +12,7 @@
 
 namespace App\Services;
 
+use Exception;
 use Carbon\Carbon;
 use Github\Client;
 use Predis\Client as PredisClient;
@@ -93,7 +94,7 @@ class GitHubApi
                 ];
             }
             Log::error($e->getMessage());
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
         }
 

@@ -13,6 +13,7 @@
 namespace App\Http\Controllers;
 
 use App\Machine;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
@@ -20,7 +21,7 @@ class DashboardController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {

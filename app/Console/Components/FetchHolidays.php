@@ -12,6 +12,8 @@
 
 namespace App\Console\Components;
 
+use DateTime;
+use Exception;
 use Yasumi\Yasumi;
 use Yasumi\Holiday;
 use App\UserProfile;
@@ -51,11 +53,11 @@ class FetchHolidays extends Command
                 $official = new OfficialHolidaysFilter($holidays->getIterator());
 
                 $holidaysList = collect($official)->filter(static function (Holiday $holiday) {
-                    return $holiday >= new \DateTime();
+                    return $holiday >= new DateTime();
                 })->map(static function (Holiday $holiday) {
                     return [
                         'name' => $holiday->getName(),
-                        'date' => $holiday->format(\DateTime::ATOM)
+                        'date' => $holiday->format(DateTime::ATOM)
                     ];
                 })->slice(0, 5)->sortBy('date')->toArray();
 
@@ -63,7 +65,7 @@ class FetchHolidays extends Command
 
                 Log::channel('dashboard')->info(formatLogMessage(\sprintf('Holidays for %s retrieved.', $provider), $this->signature), $holidaysList);
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::channel('dashboard')->error(formatLogMessage($e->getMessage(), $this->signature));
         }
     }

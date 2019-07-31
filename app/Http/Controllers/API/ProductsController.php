@@ -12,10 +12,12 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Product;
 use App\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use App\Http\Resources\ProductResource;
 use App\Http\Requests\Product as ProductRequest;
 use App\Http\Resources\ProductCollectionResource;
@@ -50,7 +52,7 @@ class ProductsController extends Controller
      * Store a new product
      *
      * @param ProductRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(ProductRequest $request)
     {
@@ -67,7 +69,7 @@ class ProductsController extends Controller
      * @param  Product $product
      *
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(Product $product): Response
     {
@@ -94,7 +96,7 @@ class ProductsController extends Controller
      * @param ProductRequest $request
      * @param Product $product
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(ProductRequest $request, Product $product)
     {

@@ -12,6 +12,8 @@
 
 namespace App\QueryOptions;
 
+use DatePeriod;
+
 /**
  * Class representing Query Options for the Manufacturer Repository
  *
@@ -43,7 +45,7 @@ class ManufacturerQueryOptions
     /**
      * The date period for the start date that must be associated to the retrieved machine jobs.
      *
-     * @var \DatePeriod
+     * @var DatePeriod
      */
     public $start_date_period;
 
@@ -89,11 +91,11 @@ class ManufacturerQueryOptions
     /**
      * Set the date range for the start date that must belong to the retrieved machine jobs.
      *
-     * @param  \DatePeriod $start_date_period
+     * @param  DatePeriod $start_date_period
      *
      * @return $this
      */
-    public function start_date_period(?\DatePeriod $start_date_period)
+    public function start_date_period(?DatePeriod $start_date_period)
     {
         $this->start_date_period = $start_date_period;
 

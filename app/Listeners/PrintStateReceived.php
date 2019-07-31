@@ -12,6 +12,7 @@
 
 namespace App\Listeners;
 
+use Exception;
 use App\Machine;
 use App\MachineJob;
 use App\MachineJobType;
@@ -94,7 +95,7 @@ class PrintStateReceived
                     $job->details = \json_encode($details);
 
                     $job->save();
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     DB::rollback();
                 }
                 DB::commit();

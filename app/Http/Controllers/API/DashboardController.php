@@ -36,7 +36,7 @@ class DashboardController extends Controller
             if ($exitCode === 0) {
                 return response()->json([
                     'status' => 'ok',
-                    'message' => \sprintf('Command `%s` executed successfully.', $command)], 200);
+                    'message' => sprintf('Command `%s` executed successfully.', $command)], 200);
             }
         } catch (CommandNotFoundException $e) {
             return response()->json([

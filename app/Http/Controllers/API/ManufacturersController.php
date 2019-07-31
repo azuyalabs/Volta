@@ -15,6 +15,7 @@ namespace App\Http\Controllers\API;
 use App\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use App\Http\Resources\ManufacturerResource;
 use App\QueryOptions\ManufacturerQueryOptions;
 use App\Contracts\Repositories\ManufacturerRepository;
@@ -39,7 +40,7 @@ class ManufacturersController extends Controller
      * Store a new manufacturer
      *
      * @param ManufacturerRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(ManufacturerRequest $request)
     {
@@ -82,7 +83,7 @@ class ManufacturersController extends Controller
      * @param ManufacturerRequest $request
      * @param Manufacturer $manufacturer
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(ManufacturerRequest $request, Manufacturer $manufacturer)
     {

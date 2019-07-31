@@ -12,6 +12,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,7 +24,7 @@ class ProjectsController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(Request $request)
     {
@@ -42,7 +43,7 @@ class ProjectsController extends Controller
      *
      * @param  string $project
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function show(string $project)
     {

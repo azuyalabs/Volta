@@ -12,7 +12,10 @@
 
 namespace App;
 
-class GCode extends \SplFileObject
+use SplFileObject;
+use RuntimeException;
+
+class GCode extends SplFileObject
 {
     const KISSSLICER = 'KISSlicer';
     const SLIC3RPE = 'Slic3rPE';
@@ -39,7 +42,7 @@ class GCode extends \SplFileObject
     public function __construct(string $filename)
     {
         if (!\is_readable($filename)) {
-            throw new \RuntimeException('File not readable.');
+            throw new RuntimeException('File not readable.');
         }
 
         try {
@@ -188,7 +191,7 @@ class GCode extends \SplFileObject
 
                 $this->printCost = $this->printUsedFilamentWeight / 1000 * $this->filamentCost;
             }
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             echo $e->getMessage();
         }
     }

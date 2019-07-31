@@ -14,7 +14,12 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\UserProfile;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
 {
@@ -34,7 +39,7 @@ class UserController extends Controller
     /**
      * Show the users' dashboard (i.e. Home).
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function home()
     {
@@ -44,8 +49,8 @@ class UserController extends Controller
     /**
      * Show the user profile
      *
-     * @return \Illuminate\View\View
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @return View
+     * @throws ModelNotFoundException
      */
     public function profile()
     {
@@ -60,8 +65,8 @@ class UserController extends Controller
      * @param Request $request
      * @param User $user
      *
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function update(Request $request, User $user)
     {
@@ -94,7 +99,7 @@ class UserController extends Controller
      *
      * @param string $setting
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function preferences(string $setting = 'dashboard.clock')
     {
@@ -172,8 +177,8 @@ class UserController extends Controller
      * @param Request $request
      * @param string $setting
      *
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function updatePreferences(Request $request, string $setting)
     {

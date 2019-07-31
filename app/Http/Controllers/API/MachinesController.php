@@ -12,11 +12,13 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Machine;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\MachineResource;
 use App\Http\Resources\MachineCollectionResource;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class MachinesController extends Controller
 {
@@ -27,7 +29,7 @@ class MachinesController extends Controller
      *
      * @return MachineResource
      *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function show(Machine $machine): MachineResource
     {
@@ -54,7 +56,7 @@ class MachinesController extends Controller
      * @param  Machine $machine
      *
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(Machine $machine): Response
     {

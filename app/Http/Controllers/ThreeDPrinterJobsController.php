@@ -12,6 +12,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 /**
@@ -26,7 +27,7 @@ class ThreeDPrinterJobsController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(Request $request)
     {

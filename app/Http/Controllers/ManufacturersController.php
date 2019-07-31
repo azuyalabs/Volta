@@ -13,7 +13,10 @@
 namespace App\Http\Controllers;
 
 use App\Manufacturer;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use App\Repositories\CountryRepository;
 use App\Repositories\ManufacturerRepository;
 use App\Http\Requests\Manufacturer as ManufacturerRequest;
@@ -47,7 +50,7 @@ class ManufacturersController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(Request $request)
     {
@@ -59,7 +62,7 @@ class ManufacturersController extends Controller
     /**
      * Show the form for creating a new manufacturer.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -71,7 +74,7 @@ class ManufacturersController extends Controller
      *
      * @param ManufacturerRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(ManufacturerRequest $request)
     {
@@ -85,7 +88,7 @@ class ManufacturersController extends Controller
      *
      * @param string $id the id of the manufacturer
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit($id)
     {
@@ -101,7 +104,7 @@ class ManufacturersController extends Controller
      * @param ManufacturerRequest $request
      * @param string $id the id of the manufacturer
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update($id, ManufacturerRequest $request)
     {
@@ -117,7 +120,7 @@ class ManufacturersController extends Controller
     /**
      * Get some basic statistics about the Manufacturers storage.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     private function statistics()
     {

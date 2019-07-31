@@ -10,11 +10,11 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-use App\Product;
 use App\User;
+use App\Product;
+use Money\Currency;
 use Cknow\Money\Money;
 use Faker\Generator as Faker;
-use Money\Currency;
 
 $factory->define(\App\Machine::class, function (Faker $faker) {
     $products = Product::where('class', 'machine')->get();

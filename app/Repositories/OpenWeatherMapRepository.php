@@ -12,8 +12,11 @@
 
 namespace App\Repositories;
 
+use DateTime;
+use Exception;
 use Gmopx\LaravelOWM\LaravelOWM;
 use Illuminate\Support\Facades\Log;
+use Cmfcmf\OpenWeatherMap\CurrentWeather;
 use App\Contracts\Repositories\WeatherRepository as Contract;
 
 /**
@@ -24,7 +27,7 @@ use App\Contracts\Repositories\WeatherRepository as Contract;
 class OpenWeatherMapRepository implements Contract
 {
     /**
-     * @var \Cmfcmf\OpenWeatherMap\CurrentWeather Container for the current weather information
+     * @var CurrentWeather Container for the current weather information
      */
     private $weather;
 
@@ -52,11 +55,11 @@ class OpenWeatherMapRepository implements Contract
                     'uom' => $this->weather->wind->speed->getUnit(),
                 ],
                 'sun' => [
-                    'rise' => $this->weather->sun->rise->format(\DateTime::ATOM),
-                    'set' => $this->weather->sun->set->format(\DateTime::ATOM),
+                    'rise' => $this->weather->sun->rise->format(DateTime::ATOM),
+                    'set' => $this->weather->sun->set->format(DateTime::ATOM),
                 ]
             ];
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
             return [];
         }

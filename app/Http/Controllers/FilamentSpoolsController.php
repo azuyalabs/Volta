@@ -14,8 +14,13 @@ namespace App\Http\Controllers;
 
 use App\Manufacturer;
 use App\FilamentSpool;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use App\Contracts\Repositories\FilamentSpoolRepository;
+use Illuminate\Database\Eloquent\JsonEncodingException;
 use App\Http\Requests\FilamentSpool as FilamentSpoolRequest;
 
 /**
@@ -46,7 +51,7 @@ class FilamentSpoolsController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(Request $request)
     {
@@ -58,7 +63,7 @@ class FilamentSpoolsController extends Controller
     /**
      * Gets a summary (statistics) of the authenticated user's filament spools.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function statistics()
     {
@@ -68,7 +73,7 @@ class FilamentSpoolsController extends Controller
     /**
      * Show the form for creating a new filament spool.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -82,7 +87,7 @@ class FilamentSpoolsController extends Controller
      *
      * @param string $id the id of the filament spool
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit($id)
     {
@@ -97,7 +102,7 @@ class FilamentSpoolsController extends Controller
      *
      * @param FilamentSpoolRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(FilamentSpoolRequest $request)
     {
@@ -111,7 +116,7 @@ class FilamentSpoolsController extends Controller
      *
      * @param string $id the id of the filament spool
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function show($id)
     {
@@ -124,7 +129,7 @@ class FilamentSpoolsController extends Controller
      * @param FilamentSpoolRequest $request
      * @param string $id the id of the filament spool
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update($id, FilamentSpoolRequest $request)
     {
@@ -138,7 +143,7 @@ class FilamentSpoolsController extends Controller
      *
      * @param string $id the id of the filament spool
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy($id)
     {
@@ -152,7 +157,7 @@ class FilamentSpoolsController extends Controller
      *
      * @param string $id the id of the filament spool
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function duplicate($id)
     {
@@ -166,7 +171,7 @@ class FilamentSpoolsController extends Controller
      *
      * @param string $id the id of the filament spool
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function empty($id)
     {
@@ -180,9 +185,9 @@ class FilamentSpoolsController extends Controller
      *
      * @param FilamentSpool $spool
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      *
-     * @throws \Illuminate\Database\Eloquent\JsonEncodingException
+     * @throws JsonEncodingException
      */
     public function export(FilamentSpool $spool)
     {

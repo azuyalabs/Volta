@@ -12,11 +12,11 @@
 
 namespace App\Repositories;
 
-use App\Contracts\Repositories\FilamentSpoolRepository as Contract;
 use App\FilamentSpool;
-use App\Http\Requests\FilamentSpool as FilamentSpoolRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\FilamentSpool as FilamentSpoolRequest;
+use App\Contracts\Repositories\FilamentSpoolRepository as Contract;
 
 /**
  * The Filament Spool Repository with Eloquent as the data backend.

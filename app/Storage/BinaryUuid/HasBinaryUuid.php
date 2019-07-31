@@ -12,6 +12,7 @@
 
 namespace App\Storage\BinaryUuid;
 
+use Exception;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
@@ -70,7 +71,7 @@ trait HasBinaryUuid
     {
         try {
             return Uuid::uuid1();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
         }
     }

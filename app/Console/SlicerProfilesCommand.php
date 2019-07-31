@@ -12,7 +12,10 @@
 
 namespace App\Console;
 
+use DateTime;
+use Exception;
 use Ramsey\Uuid\Uuid;
+use const DATE_ISO8601;
 use League\Plates\Engine;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -124,7 +127,7 @@ class SlicerProfilesCommand extends Command
     /**
      * Execute the console command
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function handle(): void
     {
@@ -242,7 +245,7 @@ class SlicerProfilesCommand extends Command
                     $profileFilename = \str_replace(' ', '_', $filamentName) . '.xml.fdm_material';
 
                     // Output Cura Material Settings (replace this in your cura.cfg file)
-                    \file_put_contents($outputDirectory.DIRECTORY_SEPARATOR.'cura_material_settings.txt', 'material_settings = '.\json_encode($cura_material_settings));
+                    \file_put_contents($outputDirectory.DIRECTORY_SEPARATOR.'cura_material_settings.txt', 'material_settings = '. \json_encode($cura_material_settings));
                 }
 
                 // Create slicer profile directory if not exists
@@ -254,7 +257,7 @@ class SlicerProfilesCommand extends Command
                 \file_put_contents(
                     $outputDirectory . DIRECTORY_SEPARATOR . $profileFilename,
                     $this->plates->render($slicer_id, [
-                        'generated_on' => (new \DateTime())->format(\DATE_ISO8601),
+                        'generated_on' => (new DateTime())->format(DATE_ISO8601),
                         'profile' => $f
                     ])
                 );
