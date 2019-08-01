@@ -60,6 +60,8 @@ class GitHubApi
      * @param callable|null $callback an optional callback function to process the version number (not all repositories adhere to the semver standard).
      *
      * @return array structure containing the latest release version number, the release date and the (friendly) repository name
+     * @throws Exception
+     *
      */
     public function fetchLatestRelease(string $userName, string $repoName, string $friendlyName = null, callable $callback = null): array
     {
