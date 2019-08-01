@@ -134,11 +134,11 @@ class VoltaServiceProvider extends ServiceProvider
     {
         $queryGrammar = $connection->getQueryGrammar();
         $queryGrammarClass = get_class($queryGrammar);
-        if (! in_array($queryGrammarClass, [
+        if (!in_array($queryGrammarClass, [
             IlluminateMySqlGrammar::class,
             IlluminateSQLiteGrammar::class,
-        ])) {
-            throw new Exception("There current grammar `$queryGrammarClass` doesn't support binary uuids. Only  MySql and SQLite connections are supported.");
+        ], true)) {
+            throw new \RuntimeException("There current grammar `$queryGrammarClass` doesn't support binary uuids. Only  MySql and SQLite connections are supported.");
         }
         if ($queryGrammar instanceof IlluminateSQLiteGrammar) {
             $grammar = new SQLiteGrammar();

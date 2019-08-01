@@ -32,7 +32,7 @@ class ProjectsController extends Controller
             $pathParts = pathinfo($value);
             return $pathParts['extension'] === 'gcode';
         })->reject(static function ($value, $key) {
-            return substr($value, 0, 2) === '._';
+            return strpos($value, '._') === 0;
         });
 
         return view('projects.index', ['projects' => $projects]);
