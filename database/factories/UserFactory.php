@@ -10,14 +10,15 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
+use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(User::class, static function (Faker $faker) {
     return [
         'name'           => $faker->name,
         'email'          => $faker->unique()->safeEmail,
-        'password'       => bcrypt($faker->password),
+        'password'       => bcrypt('volta'),
         'remember_token' => Str::random(10),
         'api_token'      => Str::random(32),
         'last_login'     => $faker->dateTime,

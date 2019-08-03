@@ -16,10 +16,10 @@ use Money\Currency;
 use Cknow\Money\Money;
 use Faker\Generator as Faker;
 
-$factory->define(\App\Machine::class, function (Faker $faker) {
+$factory->define(\App\Machine::class, static function (Faker $faker) {
     $products = Product::where('class', 'machine')->get();
     $product_models = $products->pluck('name', 'id')->all();
-    $product_model_id = $faker->randomElement(\array_keys($product_models));
+    $product_model_id = $faker->randomElement(array_keys($product_models));
     $user_id = $faker->randomElement(User::all()->pluck('id')->toArray());
 
     // Retrieve the subunit Number of the Currency assigned to the User account
@@ -37,15 +37,15 @@ $factory->define(\App\Machine::class, function (Faker $faker) {
     $ratio = 10 ** $subUnit;
 
     return [
-        'user_id' => $user_id,
-        'model_id' => $product_model_id,
-        'reference_id' => null,
-        'name' => $product_models[$product_model_id],
-        'acquisition_cost' => $faker->numberBetween($ratio, 10000 * $ratio),
-        'residual_value' => $faker->numberBetween($ratio, 1000 * $ratio),
-        'maintenance_cost' => $faker->numberBetween($ratio, 4000 * $ratio),
-        'lifespan' => $faker->numberBetween(1, 15),
-        'operating_hours' => $faker->numberBetween(100, 1500),
+        'user_id'            => $user_id,
+        'model_id'           => $product_model_id,
+        'reference_id'       => null,
+        'name'               => 'My ' . $product_models[$product_model_id],
+        'acquisition_cost'   => $faker->numberBetween($ratio, 10000 * $ratio),
+        'residual_value'     => $faker->numberBetween($ratio, 1000 * $ratio),
+        'maintenance_cost'   => $faker->numberBetween($ratio, 4000 * $ratio),
+        'lifespan'           => $faker->numberBetween(1, 15),
+        'operating_hours'    => $faker->numberBetween(100, 1500),
         'energy_consumption' => $faker->numberBetween(20, 500),
     ];
 });

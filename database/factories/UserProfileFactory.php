@@ -10,10 +10,11 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
+use App\UserProfile;
 use Cknow\Money\Money;
 use Faker\Generator as Faker;
 
-$factory->define(\App\UserProfile::class, static function (Faker $faker) {
+$factory->define(UserProfile::class, static function (Faker $faker) {
     $preferences['dashboard']['clock']['type'] = $faker->randomElement(['analog', 'digital']);
     $preferences['dashboard']['weather']['system_of_measure'] = $faker->randomElement(['metric', 'imperial']);
 
@@ -22,6 +23,6 @@ $factory->define(\App\UserProfile::class, static function (Faker $faker) {
         'language'    => $faker->randomElement(['en-US', 'ja-JP']),
         'country'     => $faker->countryCode,
         'city'        => $faker->city,
-        'preferences' => \json_encode($preferences),
+        'preferences' => json_encode($preferences),
     ];
 });
