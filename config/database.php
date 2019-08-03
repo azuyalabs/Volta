@@ -34,16 +34,16 @@ return [
     'connections' => [
 
         'sqlite' => [
-            'driver' => 'sqlite',
+            'driver'   => 'sqlite',
             'database' => database_path(env('DB_DATABASE', 'volta.sqlite')),
-            'prefix' => '',
+            'prefix'   => '',
         ],
 
         // In Memory Database used for unit testing
         'unit_test' => [
-            'driver' => 'sqlite',
+            'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix' => '',
+            'prefix'   => '',
         ],
 
     ],
@@ -77,9 +77,9 @@ return [
         'client' => 'predis',
 
         'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'host'     => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
+            'port'     => env('REDIS_PORT', 6379),
             'database' => 0,
         ],
 
