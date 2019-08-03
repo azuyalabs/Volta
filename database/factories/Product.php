@@ -18,9 +18,9 @@ $factory->define(Product::class, function (Faker $faker) {
     $class = ['machine', 'filament'];
 
     return [
-        'name' => $faker->domainWord,
-        'slug' => $faker->slug,
-        'class' => $faker->randomElement($class),
+        'name'            => $faker->domainWord,
+        'slug'            => $faker->slug,
+        'class'           => $faker->randomElement($class),
         'manufacturer_id' => $faker->randomElement(Manufacturer::all()->pluck('id')->all()),
     ];
 });

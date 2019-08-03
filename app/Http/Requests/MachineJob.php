@@ -34,13 +34,13 @@ class MachineJob extends FormRequest
     public function rules()
     {
         return [
-            'job_id' => 'sometimes|required|string|size:16',
-            'name' => 'sometimes|required|min:2',
-            'machine' => 'exists:machines,id',
+            'job_id'   => 'sometimes|required|string|size:16',
+            'name'     => 'sometimes|required|min:2',
+            'machine'  => 'exists:machines,id',
             'duration' => 'integer|min:0',
-            'status' => 'sometimes|in:success,failed,in_progress',
-            'type' => 'sometimes|in:laser,3dprinter,router',
-            'details' => 'sometimes|json'
+            'status'   => 'sometimes|in:success,failed,in_progress',
+            'type'     => 'sometimes|in:laser,3dprinter,router',
+            'details'  => 'sometimes|json'
         ];
     }
 }

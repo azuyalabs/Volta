@@ -15,8 +15,8 @@ use Spatie\ModelStatus\Status;
 
 $factory->define(Status::class, function (Faker $faker) {
     return [
-        'name' => $faker->randomElement(['printing', 'offline', 'finishing', 'cancelling', 'resuming']),
+        'name'       => $faker->randomElement(['printing', 'offline', 'finishing', 'cancelling', 'resuming']),
         'model_type' => $faker->randomElement(['App\Machine', 'App\FilamentSpool']),
-        'model_id' => $faker->numberBetween(1, 1000),
+        'model_id'   => $faker->numberBetween(1, 1000),
     ];
 });

@@ -27,9 +27,9 @@ $factory->define(\App\SpoolCalibration::class, function (Faker $faker) {
     }
 
     return [
-        'spool_id' => $faker->randomElement(Spool::all()->pluck('id')->all()),
+        'spool_id'      => $faker->randomElement(Spool::all()->pluck('id')->all()),
         'calibrated_at' => '',
-        'type' => $mType,
-        'measurements' => $measurements
+        'type'          => $mType,
+        'measurements'  => $measurements
     ];
 });

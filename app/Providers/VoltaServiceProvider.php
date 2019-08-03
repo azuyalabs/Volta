@@ -14,6 +14,7 @@ namespace App\Providers;
 
 use Exception;
 use Ramsey\Uuid\Uuid;
+use RuntimeException;
 use Ramsey\Uuid\UuidFactory;
 use Illuminate\Database\Connection;
 use Illuminate\Support\Facades\Log;
@@ -46,10 +47,10 @@ class VoltaServiceProvider extends ServiceProvider
     protected function registerServices(): void
     {
         $services = [
-            'Contracts\Repositories\WeatherRepository' => 'Repositories\OpenWeatherMapRepository',
+            'Contracts\Repositories\WeatherRepository'       => 'Repositories\OpenWeatherMapRepository',
             'Contracts\Repositories\FilamentSpoolRepository' => 'Repositories\FilamentSpoolRepository',
-            'Contracts\Repositories\MachineJobRepository' => 'Repositories\MachineJobRepository',
-            'Contracts\Repositories\ManufacturerRepository' => 'Repositories\ManufacturerRepository'
+            'Contracts\Repositories\MachineJobRepository'    => 'Repositories\MachineJobRepository',
+            'Contracts\Repositories\ManufacturerRepository'  => 'Repositories\ManufacturerRepository'
         ];
 
         foreach ($services as $key => $value) {
@@ -84,10 +85,10 @@ class VoltaServiceProvider extends ServiceProvider
         // Inject all views with custom variables
         view()->composer('*', static function ($view) {
             $variables = [
-                'locale' => auth()->user()->profile->language ?? 'en-US',
-                'currency' => auth()->user()->profile->currency ?? 'USD',
-                'country' => auth()->user()->profile->country ?? 'US',
-                'city' => auth()->user()->profile->city ?? 'New York',
+                'locale'      => auth()->user()->profile->language ?? 'en-US',
+                'currency'    => auth()->user()->profile->currency ?? 'USD',
+                'country'     => auth()->user()->profile->country ?? 'US',
+                'city'        => auth()->user()->profile->city ?? 'New York',
                 'preferences' => auth()->user()->profile->preferences ?? [],
             ];
 
@@ -117,7 +118,7 @@ class VoltaServiceProvider extends ServiceProvider
     protected function optimizeUuids(): void
     {
         $factory = new UuidFactory();
-        $codec = new OrderedTimeCodec($factory->getUuidBuilder());
+        $codec   = new OrderedTimeCodec($factory->getUuidBuilder());
         $factory->setCodec($codec);
         Uuid::setFactory($factory);
     }
@@ -132,13 +133,13 @@ class VoltaServiceProvider extends ServiceProvider
      */
     protected function createGrammarFromConnection(Connection $connection): Grammar
     {
-        $queryGrammar = $connection->getQueryGrammar();
+        $queryGrammar      = $connection->getQueryGrammar();
         $queryGrammarClass = get_class($queryGrammar);
         if (!in_array($queryGrammarClass, [
             IlluminateMySqlGrammar::class,
             IlluminateSQLiteGrammar::class,
         ], true)) {
-            throw new \RuntimeException("There current grammar `$queryGrammarClass` doesn't support binary uuids. Only  MySql and SQLite connections are supported.");
+            throw new RuntimeException("There current grammar `$queryGrammarClass` doesn't support binary uuids. Only  MySql and SQLite connections are supported.");
         }
         if ($queryGrammar instanceof IlluminateSQLiteGrammar) {
             $grammar = new SQLiteGrammar();

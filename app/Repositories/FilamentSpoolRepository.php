@@ -82,9 +82,9 @@ class FilamentSpoolRepository implements Contract
                 ]
             )->get();
 
-        $statistics['count'] = $summary[0]->count ?? 0;
+        $statistics['count']  = $summary[0]->count ?? 0;
         $statistics['weight'] = (int)($summary[0]->weight_total ?? 0);
-        $statistics['value'] = (float)($summary[0]->price_total ?? 0);
+        $statistics['value']  = (float)($summary[0]->price_total ?? 0);
 
         return $statistics;
     }
@@ -96,7 +96,7 @@ class FilamentSpoolRepository implements Contract
     {
         $spool = $this->find($id);
 
-        $replica = $spool->replicate();
+        $replica        = $spool->replicate();
         $replica->usage = 0;
 
         return $replica->save();

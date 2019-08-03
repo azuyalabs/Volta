@@ -15,6 +15,6 @@ namespace App;
 class MachineJobType
 {
     public const THREE_D_PRINTER = '3dprinter';
-    public const ROUTER = 'router';
-    public const LASER = 'laser';
+    public const ROUTER          = 'router';
+    public const LASER           = 'laser';
 }

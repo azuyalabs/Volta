@@ -41,8 +41,8 @@ class GitHubApi
     {
         $redisClient = new PredisClient([
             'scheme' => 'tcp',
-            'host' => config('database.redis.default.host'),
-            'port' => config('database.redis.default.port'),
+            'host'   => config('database.redis.default.host'),
+            'port'   => config('database.redis.default.port'),
         ]);
 
         $pool = new PredisCachePool($redisClient);
@@ -70,8 +70,8 @@ class GitHubApi
 
             // Execute callback function to allow for customized version string
             return [
-                'name' => $friendlyName ?? $repoName,
-                'version' => is_callable($callback) ? $callback(trim($release['tag_name'])) : trim($release['tag_name']),
+                'name'         => $friendlyName ?? $repoName,
+                'version'      => is_callable($callback) ? $callback(trim($release['tag_name'])) : trim($release['tag_name']),
                 'release_date' => (new Carbon(trim($release['published_at'])))->toIso8601String(),
             ];
         } catch (RuntimeException $e) {
@@ -90,8 +90,8 @@ class GitHubApi
                 $tagCommit = $this->client->repo()->commits()->show($userName, $repoName, $lastTag['commit']['sha']);
 
                 return [
-                    'name' => $friendlyName ?? $repoName,
-                    'version' => $lastTag['name'],
+                    'name'         => $friendlyName ?? $repoName,
+                    'version'      => $lastTag['name'],
                     'release_date' => (new Carbon(trim($tagCommit['commit']['author']['date'])))->toIso8601String(),
                 ];
             }
@@ -101,8 +101,8 @@ class GitHubApi
         }
 
         return [
-            'name' => null,
-            'version' => null,
+            'name'         => null,
+            'version'      => null,
             'release_date' => null,
         ];
     }

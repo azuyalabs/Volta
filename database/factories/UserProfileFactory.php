@@ -18,10 +18,10 @@ $factory->define(\App\UserProfile::class, static function (Faker $faker) {
     $preferences['dashboard']['weather']['system_of_measure'] = $faker->randomElement(['metric', 'imperial']);
 
     return [
-        'currency' => $faker->randomElement(Money::getCurrencies()->getIterator()),
-        'language' => $faker->randomElement(['en-US', 'ja-JP']),
-        'country' => $faker->countryCode,
-        'city' => $faker->city,
+        'currency'    => $faker->randomElement(Money::getCurrencies()->getIterator()),
+        'language'    => $faker->randomElement(['en-US', 'ja-JP']),
+        'country'     => $faker->countryCode,
+        'city'        => $faker->city,
         'preferences' => \json_encode($preferences),
     ];
 });

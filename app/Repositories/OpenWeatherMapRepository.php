@@ -40,23 +40,23 @@ class OpenWeatherMapRepository implements Contract
             $this->weather = (new LaravelOWM())->getCurrentWeather($city, 'en', 'metric', true);
 
             return [
-                'city' => $this->weather->city->name,
-                'state' => $this->getState(),
+                'city'        => $this->weather->city->name,
+                'state'       => $this->getState(),
                 'temperature' => [
                     'value' => $this->weather->temperature->getValue(),
-                    'uom' => $this->weather->temperature->getUnit() === '&deg;C' ? 'celsius' : null,
+                    'uom'   => $this->weather->temperature->getUnit() === '&deg;C' ? 'celsius' : null,
                 ],
                 'humidity' => [
                     'value' => $this->weather->humidity->getValue(),
-                    'uom' => $this->weather->humidity->getUnit(),
+                    'uom'   => $this->weather->humidity->getUnit(),
                 ],
                 'windspeed' => [
                     'value' => $this->weather->wind->speed->getValue(),
-                    'uom' => $this->weather->wind->speed->getUnit(),
+                    'uom'   => $this->weather->wind->speed->getUnit(),
                 ],
                 'sun' => [
                     'rise' => $this->weather->sun->rise->format(DateTime::ATOM),
-                    'set' => $this->weather->sun->set->format(DateTime::ATOM),
+                    'set'  => $this->weather->sun->set->format(DateTime::ATOM),
                 ]
             ];
         } catch (Exception $e) {

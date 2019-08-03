@@ -34,9 +34,9 @@ class Product extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2',
+            'name'         => 'required|min:2',
             'manufacturer' => 'exists:manufacturers,slug',
-            'class' => 'in:machine,filament'
+            'class'        => 'in:machine,filament'
         ];
     }
 }

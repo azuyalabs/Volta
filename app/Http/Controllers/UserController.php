@@ -77,14 +77,14 @@ class UserController extends Controller
         ]);
         $requestData = $request->all();
 
-        $collection = collect($requestData);
+        $collection      = collect($requestData);
         $userRequestData = $collection->filter(static function ($value, $key) {
             return in_array($key, (new User())->getFillable(), true);
         });
 
         $user->update($userRequestData->all());
 
-        $collectionP = collect($requestData);
+        $collectionP        = collect($requestData);
         $profileRequestData = $collectionP->filter(static function ($value, $key) {
             return in_array($key, (new UserProfile())->getFillable(), true);
         });
@@ -113,9 +113,9 @@ class UserController extends Controller
         return view(
             'users.preferences.' . str_replace('.', '_', $setting),
             [
-                'component' => $component,
-                'part' => $part,
-                'index' => $this->getPreferencesIndex(),
+                'component'   => $component,
+                'part'        => $part,
+                'index'       => $this->getPreferencesIndex(),
                 'preferences' => auth()->user()->profile->preferences[$component] ?? []
             ]
         );
@@ -145,25 +145,25 @@ class UserController extends Controller
     {
         return [
             'volta' => [
-                'name' => __('preferences.components.volta'),
+                'name'    => __('preferences.components.volta'),
                 'enabled' => false,
-                'parts' => [
+                'parts'   => [
                     'main' => [
-                        'url' => '/preferences/volta.main',
+                        'url'  => '/preferences/volta.main',
                         'name' => 'General'
                     ]
                 ]
             ],
             'dashboard' => [
-                'name' => __('preferences.components.dashboard'),
+                'name'    => __('preferences.components.dashboard'),
                 'enabled' => true,
-                'parts' => [
+                'parts'   => [
                     'clock' => [
-                        'url' => '/preferences/dashboard.clock',
+                        'url'  => '/preferences/dashboard.clock',
                         'name' => __('preferences.clock.name')
                     ],
                     'weather' => [
-                        'url' => '/preferences/dashboard.weather',
+                        'url'  => '/preferences/dashboard.weather',
                         'name' => __('preferences.weather.name')
                     ]
                 ]

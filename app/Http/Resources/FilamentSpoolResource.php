@@ -28,27 +28,27 @@ class FilamentSpoolResource extends JsonResource
     {
         return [
             'type' => 'filamentspools',
-            'id' => (string)$this->{$this->getRouteKeyName()},
+            'id'   => (string)$this->{$this->getRouteKeyName()},
 
             'attributes' => [
-                'name' => $this->name,
-                'manufacturer' => $this->manufacturer->name,
-                'material' => $this->material,
-                'weight' => $this->weight,
-                'diameter' => $this->diameter,
-                'density' => $this->density,
-                'color' => $this->color,
-                'color_value' => $this->color_value,
+                'name'           => $this->name,
+                'manufacturer'   => $this->manufacturer->name,
+                'material'       => $this->material,
+                'weight'         => $this->weight,
+                'diameter'       => $this->diameter,
+                'density'        => $this->density,
+                'color'          => $this->color,
+                'color_value'    => $this->color_value,
                 'purchase_price' => $this->purchase_price,
-                'unit_price' => [
-                    'length' => $this->priceperlength,
-                    'weight' => $this->priceperweight,
-                    'volume' => $this->pricepervolume,
+                'unit_price'     => [
+                    'length'   => $this->priceperlength,
+                    'weight'   => $this->priceperweight,
+                    'volume'   => $this->pricepervolume,
                     'kilogram' => $this->priceperkilogram
                 ],
                 'length' => [
                     'capacity' => $this->length,
-                    'usage' => $this->usage,
+                    'usage'    => $this->usage,
                 ]
             ],
             'links' => [

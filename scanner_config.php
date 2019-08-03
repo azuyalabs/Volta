@@ -15,7 +15,7 @@ $scanFiles = [];
 
 return [
     'composerJsonPath' => $projectPath . '/composer.json',
-    'vendorPath' => $projectPath . '/vendor/',
-    'scanDirectories' => $scanDirectories,
-    'scanFiles' => $scanFiles
+    'vendorPath'       => $projectPath . '/vendor/',
+    'scanDirectories'  => $scanDirectories,
+    'scanFiles'        => $scanFiles
 ];

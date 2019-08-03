@@ -61,8 +61,8 @@ class RegisterController extends Controller
     protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -77,8 +77,8 @@ class RegisterController extends Controller
     protected function create(array $data): User
     {
         $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
@@ -86,10 +86,10 @@ class RegisterController extends Controller
         $user->save();
 
         // Create a user profile with default settings.
-        $profile = new UserProfile();
-        $preferences['dashboard']['clock']['type'] = 'analog';
+        $profile                                                  = new UserProfile();
+        $preferences['dashboard']['clock']['type']                = 'analog';
         $preferences['dashboard']['weather']['system_of_measure'] = 'metric';
-        $profile->preferences = json_encode($preferences);
+        $profile->preferences                                     = json_encode($preferences);
 
         $user->profile()->save($profile);
 

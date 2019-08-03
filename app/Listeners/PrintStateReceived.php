@@ -46,7 +46,7 @@ class PrintStateReceived
     {
         $machine = Machine::firstOrCreate(
             ['reference_id' => $event->status['id']],
-            ['name' => $event->status['name'],
+            ['name'       => $event->status['name'],
                 'user_id' => auth()->user()->id,
             ]
         );
@@ -67,16 +67,16 @@ class PrintStateReceived
                             'job_id' => hash('fnv1a64', $event->status['id'] . $event->status['printjob']['filename'] . $event->status['printjob']['started_at'])
                         ],
                         [
-                            'user_id' => auth()->user()->id,
-                            'name' => $event->status['printjob']['filename'],
+                            'user_id'    => auth()->user()->id,
+                            'name'       => $event->status['printjob']['filename'],
                             'started_at' => $event->status['printjob']['started_at'],
-                            'type' => MachineJobType::THREE_D_PRINTER,
+                            'type'       => MachineJobType::THREE_D_PRINTER,
                             'machine_id' => $machine->id,
-                            'status' => MachineJobStatus::IN_PROGRESS,
+                            'status'     => MachineJobStatus::IN_PROGRESS,
                         ]
                     );
 
-                    $job->status = $event->status['printjob']['status'];
+                    $job->status   = $event->status['printjob']['status'];
                     $job->duration = (int)$event->status['printjob']['time_elapsed'];
 
                     // Save details

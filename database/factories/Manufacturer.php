@@ -15,11 +15,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Manufacturer::class, function (Faker $faker) {
     return [
-        'name' => $faker->company,
-        'slug' => $faker->slug,
-        'country' => $faker->countryCode,
-        'website' => $faker->url,
-        'filament_supplier' => $faker->boolean,
+        'name'               => $faker->company,
+        'slug'               => $faker->slug,
+        'country'            => $faker->countryCode,
+        'website'            => $faker->url,
+        'filament_supplier'  => $faker->boolean,
         'equipment_supplier' => $faker->boolean,
     ];
 });

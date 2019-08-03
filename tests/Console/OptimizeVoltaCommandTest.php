@@ -40,7 +40,7 @@ class OptimizeVoltaCommandTest extends TestCase
         $this->artisan(self::OPTIMIZE_COMMAND)->expectsOutput('Old model statuses pruned.');
 
         $unique_models = DB::table('statuses')->distinct()->count('model_id');
-        $row_count = DB::table('statuses')->count();
+        $row_count     = DB::table('statuses')->count();
 
         $this->assertSame($row_count, Status::query()->count());
         $this->assertSame($unique_models, $row_count);

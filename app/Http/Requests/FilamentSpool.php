@@ -34,13 +34,13 @@ class FilamentSpool extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:128',
+            'name'         => 'required|max:128',
             'manufacturer' => 'exists:manufacturers,id',
-            'material' => 'in:pla,abs,pet',
-            'weight' => 'required|numeric|min:1',
-            'diameter' => 'required|numeric|min:1|max:5',
-            'density' => 'required|numeric|min:1|max:5',
-            'color' => 'required|string'
+            'material'     => 'in:pla,abs,pet',
+            'weight'       => 'required|numeric|min:1',
+            'diameter'     => 'required|numeric|min:1|max:5',
+            'density'      => 'required|numeric|min:1|max:5',
+            'color'        => 'required|string'
         ];
     }
 }

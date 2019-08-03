@@ -84,15 +84,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => Authenticate::class,
-        'auth.basic' => AuthenticateWithBasicAuth::class,
-        'bindings' => SubstituteBindings::class,
-        'cache.headers' => SetCacheHeaders::class,
-        'can' => Authorize::class,
-        'guest' => RedirectIfAuthenticated::class,
-        'throttle' => ThrottleRequests::class,
+        'auth'            => Authenticate::class,
+        'auth.basic'      => AuthenticateWithBasicAuth::class,
+        'bindings'        => SubstituteBindings::class,
+        'cache.headers'   => SetCacheHeaders::class,
+        'can'             => Authorize::class,
+        'guest'           => RedirectIfAuthenticated::class,
+        'throttle'        => ThrottleRequests::class,
         'octoprintclient' => TrustOctoPrintClient::class,
-        'signed' => ValidateSignature::class,
-        'verified' => EnsureEmailIsVerified::class,
+        'signed'          => ValidateSignature::class,
+        'verified'        => EnsureEmailIsVerified::class,
     ];
 }

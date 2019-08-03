@@ -14,7 +14,7 @@ namespace App;
 
 class MachineJobStatus
 {
-    public const SUCCESS = 'success';
-    public const FAILED = 'failed';
+    public const SUCCESS     = 'success';
+    public const FAILED      = 'failed';
     public const IN_PROGRESS = 'in_progress';
 }

@@ -45,7 +45,7 @@ class MachineCollectionResource extends ResourceCollection
                 'self' => route('machines.index'),
             ],
             'meta' => [
-                'currency' => auth()->user()->profile->currency ?? 'USD',
+                'currency'            => auth()->user()->profile->currency ?? 'USD',
                 'total_lifetime_cost' => $this->collection->sum(static function ($machine) {
                     return $machine->acquisition_cost->getAmount();
                 })

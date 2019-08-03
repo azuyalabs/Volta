@@ -94,7 +94,7 @@ class ManufacturersController extends Controller
     {
         return view('manufacturers.edit', [
             'manufacturer' => $this->manufacturers->find($id),
-            'countries' => app(CountryRepository::class)->all()
+            'countries'    => app(CountryRepository::class)->all()
         ]);
     }
 
@@ -110,7 +110,7 @@ class ManufacturersController extends Controller
     {
         // Force checkbox values as the unchecked fields are not included in the HTTP request.
         $request['equipment_supplier'] = $request->has('equipment_supplier') ? 1 : 0 ?? 0;
-        $request['filament_supplier'] = $request->has('filament_supplier') ? 1 : 0 ?? 0;
+        $request['filament_supplier']  = $request->has('filament_supplier') ? 1 : 0  ?? 0;
 
         if ($this->manufacturers->update($id, $request)) {
             return redirect('manufacturers')->with('success', __('manufacturers.flash_manufacturer_updated'));

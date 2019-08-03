@@ -92,7 +92,7 @@ class FilamentSpoolsController extends Controller
     public function edit($id)
     {
         return view('spools.edit', [
-            'spool' => $this->spools->find($id),
+            'spool'               => $this->spools->find($id),
             'spool_manufacturers' => Manufacturer::IsFilamentSupplier()->orderBy('name', 'asc')->get()->pluck('name', 'id')
         ]);
     }

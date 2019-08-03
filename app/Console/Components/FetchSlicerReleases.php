@@ -73,8 +73,8 @@ class FetchSlicerReleases extends Command
     private function getSimplify3DRelease()
     {
         return [
-            'name' => 'Simplify3D',
-            'version' => '4.1.0',
+            'name'         => 'Simplify3D',
+            'version'      => '4.1.0',
             'release_date' => '2018-11-06'
         ];
     }

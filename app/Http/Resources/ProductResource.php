@@ -30,8 +30,8 @@ class ProductResource extends JsonResource
             'type' => 'products',
 
             'attributes' => [
-                'id' => (string)$this->slug,
-                'name' => $this->name,
+                'id'           => (string)$this->slug,
+                'name'         => $this->name,
                 'manufacturer' => ManufacturerResource::make($this->manufacturer),
             ],
             'links' => [

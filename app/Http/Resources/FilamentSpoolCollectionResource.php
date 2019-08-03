@@ -45,8 +45,8 @@ class FilamentSpoolCollectionResource extends ResourceCollection
                 'self' => route('filamentspools.index'),
             ],
             'meta' => [
-                'currency' => 'JPY',
-                'count' => $this->collection->count(),
+                'currency'       => 'JPY',
+                'count'          => $this->collection->count(),
                 'purchase_value' => $this->collection->sum(static function ($spool) {
                     return $spool->purchase_price;
                 })

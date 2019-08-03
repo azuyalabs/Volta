@@ -43,7 +43,7 @@ class WeatherFetched implements ShouldBroadcast
     public function __construct(string $city, array $weather)
     {
         $this->weather = $weather;
-        $this->city = $city;
+        $this->city    = $city;
     }
 
     /**

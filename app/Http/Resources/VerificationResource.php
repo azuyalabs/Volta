@@ -27,8 +27,8 @@ class VerificationResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'name' => $this->name,
-            'email' => $this->email,
+            'name'      => $this->name,
+            'email'     => $this->email,
             'api_token' => $this->api_token,
         ];
     }

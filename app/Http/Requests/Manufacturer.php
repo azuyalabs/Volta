@@ -35,7 +35,7 @@ class Manufacturer extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:4',
+            'name'    => 'required|min:4',
             'website' => 'sometimes|nullable|url',
             'country' => [static function ($attribute, $value, $fail) {
                 if (!in_array($value, array_keys(app(CountryRepository::class)->all()))) {
@@ -43,7 +43,7 @@ class Manufacturer extends FormRequest
                 }
             }],
             'equipment_supplier' => 'boolean',
-            'filament_supplier' => 'boolean',
+            'filament_supplier'  => 'boolean',
         ];
     }
 }

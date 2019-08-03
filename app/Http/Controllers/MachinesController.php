@@ -40,7 +40,7 @@ class MachinesController extends Controller
      */
     public function index(Request $request)
     {
-        $statistics = json_decode($this->statistics()->content());
+        $statistics = json_decode($this->statistics()->content(), true);
 
         return view('machines.index', ['statistics' => $statistics]);
     }
@@ -67,7 +67,7 @@ class MachinesController extends Controller
 
     protected function getProductModelList(): array
     {
-        $pm = Product::with('manufacturer:id,name')->where('class', 'machine')->get()->sortBy('name');
+        $pm     = Product::with('manufacturer:id,name')->where('class', 'machine')->get()->sortBy('name');
         $groups = [];
         foreach ($pm as $model) {
             $groups[$model->manufacturer->name][$model->id] = $model->name;
@@ -129,7 +129,7 @@ class MachinesController extends Controller
     public function update(Request $request, Machine $machine)
     {
         $this->validate($request, [
-            'name' => 'required|min:2|max:128',
+            'name'            => 'required|min:2|max:128',
             'operating_hours' => 'required'
         ]);
         $requestData = $request->all();

@@ -26,7 +26,7 @@ class ProductResourceTest extends TestCase
 
         $this->assertArraySubset([
             'attributes' => [
-                'id' => $product->slug,
+                'id'   => $product->slug,
                 'name' => $product->name,
             ]
         ], $resource);

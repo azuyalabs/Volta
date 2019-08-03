@@ -25,17 +25,17 @@ $factory->define(FilamentSpool::class, function (Faker $faker) {
     $density = $faker->randomElement([1.04, 1.05, 1.25, 1.24, 1.30]);
 
     return [
-        'name' => $faker->randomElement($manufacturers->pluck('name')->all()) . ' ' . $color . ' ' . \strtoupper($material),
-        'material' => $material,
+        'name'           => $faker->randomElement($manufacturers->pluck('name')->all()) . ' ' . $color . ' ' . \strtoupper($material),
+        'material'       => $material,
         'purchase_price' => $faker->numberBetween(10000, 70000),
-        'weight' => $weight,
-        'diameter' => $diameter,
-        'density' => $density,
-        'color' => $color,
-        'color_value' => $faker->hexColor,
-        'usage' => $faker->randomFloat(2, 1, ($weight / $density) / (M_PI * (($diameter / 2) ** 2))),
+        'weight'         => $weight,
+        'diameter'       => $diameter,
+        'density'        => $density,
+        'color'          => $color,
+        'color_value'    => $faker->hexColor,
+        'usage'          => $faker->randomFloat(2, 1, ($weight / $density) / (M_PI * (($diameter / 2) ** 2))),
 
-        'user_id' => $faker->randomElement(User::all()->pluck('id')->toArray()),
+        'user_id'         => $faker->randomElement(User::all()->pluck('id')->toArray()),
         'manufacturer_id' => $faker->randomElement($manufacturers->pluck('id')->all()),
     ];
 });

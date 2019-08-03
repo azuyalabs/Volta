@@ -18,8 +18,8 @@ use RuntimeException;
 class GCode extends SplFileObject
 {
     const KISSSLICER = 'KISSlicer';
-    const SLIC3RPE = 'Slic3rPE';
-    const CURA = 'Cura';
+    const SLIC3RPE   = 'Slic3rPE';
+    const CURA       = 'Cura';
     const SIMPLIFY3D = 'Simplify3D';
     public $printUsedFilamentLength;
     public $printUsedFilamentVolume;
@@ -146,12 +146,12 @@ class GCode extends SplFileObject
                     }
 
                     if (preg_match("/^;   filamentDensities,(\S+)/i", $line, $match)) {
-                        $densities = explode('|', $match[1]);
+                        $densities             = explode('|', $match[1]);
                         $this->filamentDensity = (float)$densities[0];
                     }
 
                     if (preg_match("/^;   filamentDiameters,(\S+)/i", $line, $match)) {
-                        $diameters = explode('|', $match[1]);
+                        $diameters              = explode('|', $match[1]);
                         $this->filamentDiameter = (float)$diameters[0];
                     }
 
@@ -184,7 +184,7 @@ class GCode extends SplFileObject
                     }
                 }
 
-                $filamentArea = (M_PI * $this->filamentDiameter ** 2) / 4;
+                $filamentArea                  = (M_PI * $this->filamentDiameter ** 2)            / 4;
                 $this->printUsedFilamentVolume = ($filamentArea * $this->printUsedFilamentLength) / 1000;
                 $this->printUsedFilamentWeight = $this->printUsedFilamentVolume * $this->filamentDensity;
 

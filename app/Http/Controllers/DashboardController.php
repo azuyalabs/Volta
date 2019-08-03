@@ -28,11 +28,11 @@ class DashboardController extends Controller
         $lang = auth()->user()->profile->language ?? 'en-US';
 
         $machines = Machine::mypaired()->get();
-        $refs = $machines->pluck('reference_id')->all();
+        $refs     = $machines->pluck('reference_id')->all();
 
         return view('dashboard')->with(
             [
-                'lang' => $lang,
+                'lang'     => $lang,
                 'machines' => $refs,
             ]
         );

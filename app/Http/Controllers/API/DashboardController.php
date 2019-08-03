@@ -35,7 +35,7 @@ class DashboardController extends Controller
             $exitCode = Artisan::call($command);
             if ($exitCode === 0) {
                 return response()->json([
-                    'status' => 'ok',
+                    'status'  => 'ok',
                     'message' => sprintf('Command `%s` executed successfully.', $command)], 200);
             }
         } catch (CommandNotFoundException $e) {

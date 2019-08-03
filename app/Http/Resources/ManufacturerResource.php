@@ -31,13 +31,13 @@ class ManufacturerResource extends JsonResource
             'type' => 'manufacturers',
 
             'attributes' => [
-                'id' => (string)$this->slug,
-                'name' => $this->name,
-                'country' => $this->country,
-                'website' => $this->website,
-                'filament_supplier' => $this->filament_supplier,
+                'id'                 => (string)$this->slug,
+                'name'               => $this->name,
+                'country'            => $this->country,
+                'website'            => $this->website,
+                'filament_supplier'  => $this->filament_supplier,
                 'equipment_supplier' => $this->equipment_supplier,
-                'product_count' => $this->models->count()
+                'product_count'      => $this->models->count()
             ],
             'links' => [
                 'self' => getenv('APP_URL') . '/api/manufacturers/' . $this->slug,

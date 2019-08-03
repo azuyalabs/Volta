@@ -61,23 +61,23 @@ class PrinterController extends Controller
         // Validate the submitted data
         $validatedData = $request->validate(
             [
-                'id' => ['required', 'string', 'max:100', $validPrinterIdRule],
-                'name' => 'required|string',
+                'id'    => ['required', 'string', 'max:100', $validPrinterIdRule],
+                'name'  => 'required|string',
                 'state' => 'required|string',
 
                 'extruder_temperature.current' => 'numeric|min:0|max:300',
-                'heatbed_temperature.current' => 'numeric|min:0|max:150',
+                'heatbed_temperature.current'  => 'numeric|min:0|max:150',
 
                 'extruder_temperature.target' => 'numeric|min:0|max:300',
-                'heatbed_temperature.target' => 'numeric|min:0|max:150',
+                'heatbed_temperature.target'  => 'numeric|min:0|max:150',
 
-                'printjob.filename' => 'nullable|string',
-                'printjob.time_elapsed' => 'numeric|min:0',
-                'printjob.time_remaining' => 'numeric|min:0',
-                'printjob.progress' => 'integer|min:0|max:100',
+                'printjob.filename'        => 'nullable|string',
+                'printjob.time_elapsed'    => 'numeric|min:0',
+                'printjob.time_remaining'  => 'numeric|min:0',
+                'printjob.progress'        => 'integer|min:0|max:100',
                 'printjob.filament_length' => 'numeric|min:0',
-                'printjob.started_at' => 'string',
-                'printjob.status' => 'string'
+                'printjob.started_at'      => 'string',
+                'printjob.status'          => 'string'
             ]
         );
 
@@ -87,7 +87,7 @@ class PrinterController extends Controller
         event(new PrinterStatusFetched($validatedData));
 
         return response()->json([
-            'status' => 'ok',
+            'status'  => 'ok',
             'message' => sprintf('Data for printer `%s` successfully received.', $validPrinterIdRule->printerId)
         ], 201);
     }

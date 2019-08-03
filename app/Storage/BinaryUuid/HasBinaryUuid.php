@@ -112,7 +112,7 @@ trait HasBinaryUuid
             if (! array_key_exists($attributeKey, $array)) {
                 continue;
             }
-            $uuidKey = $this->getRelatedBinaryKeyName($attributeKey);
+            $uuidKey              = $this->getRelatedBinaryKeyName($attributeKey);
             $array[$attributeKey] = $this->{$uuidKey};
         }
 
@@ -154,8 +154,8 @@ trait HasBinaryUuid
     protected function uuidTextAttribute($key)
     {
         $uuidAttributes = $this->getUuidAttributes();
-        $suffix = $this->getUuidSuffix();
-        $offset = -strlen($suffix);
+        $suffix         = $this->getUuidSuffix();
+        $offset         = -strlen($suffix);
 
         if (substr($key, $offset) === $suffix && in_array($uuidKey = substr($key, 0, $offset), $uuidAttributes)) {
             return $uuidKey;

@@ -28,20 +28,20 @@ class PrintJobResource extends JsonResource
     {
         return [
             'type' => 'printjobs',
-            'id' => (string)$this->gcode_filename,
+            'id'   => (string)$this->gcode_filename,
 
             'attributes' => [
-                'name' => $this->gcode_filename,
-                'filamentInLength' => $this->printUsedFilamentLength,
-                'filamentDiameter' => $this->filamentDiameter,
-                'filamentDensity' => $this->filamentDensity,
+                'name'                  => $this->gcode_filename,
+                'filamentInLength'      => $this->printUsedFilamentLength,
+                'filamentDiameter'      => $this->filamentDiameter,
+                'filamentDensity'       => $this->filamentDensity,
                 'estimatedPrintingTime' => $this->estimatedPrintingTime,
-                'slicer' => $this->slicer,
-                'bedTemperature' => $this->bedTemperature,
-                'hotendTemperature' => $this->hotendTemperature,
-                'layerHeight' => $this->layerHeight,
-                'fillDensity' => $this->fillDensity,
-                'perimeterSpeed' => $this->perimeterSpeed,
+                'slicer'                => $this->slicer,
+                'bedTemperature'        => $this->bedTemperature,
+                'hotendTemperature'     => $this->hotendTemperature,
+                'layerHeight'           => $this->layerHeight,
+                'fillDensity'           => $this->fillDensity,
+                'perimeterSpeed'        => $this->perimeterSpeed,
             ],
             'links' => [
                 'self' => route('printjobs.show', ['printjob' => $this->gcode_filename]),

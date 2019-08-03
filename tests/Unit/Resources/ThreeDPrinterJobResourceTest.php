@@ -34,13 +34,13 @@ class ThreeDPrinterJobResourceTest extends TestCase
 
         $this->assertArraySubset([
             'attributes' => [
-                'name' => $job->name,
-                'job_id' => $job->job_id,
-                'status' => $job->status,
-                'duration' => $job->duration,
+                'name'       => $job->name,
+                'job_id'     => $job->job_id,
+                'status'     => $job->status,
+                'duration'   => $job->duration,
                 'started_at' => $job->started_at,
-                'machine' => $job->machine,
-                'details' => $job->details,
+                'machine'    => $job->machine,
+                'details'    => $job->details,
             ]
         ], $resource);
 
