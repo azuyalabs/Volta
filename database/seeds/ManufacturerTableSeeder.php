@@ -25,6 +25,6 @@ class ManufacturerTableSeeder extends Seeder
      */
     public function run(): void
     {
-        factory(Manufacturer::class, 10)->create();
+        factory(Manufacturer::class, 30)->create();
     }
 }

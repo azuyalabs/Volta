@@ -10,6 +10,7 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
+use App\UserProfile;
 use Illuminate\Database\Seeder;
 
 /**
@@ -24,8 +25,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        factory(App\User::class, 5)->create()->each(function ($u) {
-            $u->profile()->save(factory(App\UserProfile::class)->make());
+        factory(App\User::class, 25)->create()->each(static function ($user) {
+            $user->profile()->save(factory(UserProfile::class)->make());
         });
     }
 }

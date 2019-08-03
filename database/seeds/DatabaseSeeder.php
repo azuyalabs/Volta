@@ -28,5 +28,12 @@ class DatabaseSeeder extends Seeder
             ManufacturerTableSeeder::class,
             ProductsTableSeeder::class,
         ]);
+
+        // Seed fake data for development
+        if (app()->isLocal()) {
+            $this->call([
+                MachinesTableSeeder::class,
+            ]);
+        }
     }
 }
