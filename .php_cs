@@ -9,8 +9,12 @@ $finder = Symfony\Component\Finder\Finder::create()
 
 return PhpCsFixer\Config::create()->setRiskyAllowed(true)->setRules([
     '@PSR2'                      => true,
-    'array_syntax' => ['syntax' => 'short'],
-    'ordered_imports' => ['sortAlgorithm' => 'length'],
-    'no_unused_imports' => true,
+        'array_syntax'           => ['syntax' => 'short'],
+        'binary_operator_spaces' => [
+            'default' => 'align',
+        ],
 
-])->setFinder($finder);
+        'ordered_imports'   => ['sortAlgorithm' => 'length'],
+        'no_unused_imports' => true,
+        'single_quote'      => true,
+])->setLineEnding("\n")->setFinder($finder);
