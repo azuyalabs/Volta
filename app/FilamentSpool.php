@@ -13,9 +13,9 @@
 namespace App;
 
 use Cknow\Money\Money;
+use UnexpectedValueException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use UnexpectedValueException;
 
 /**
  * Class representing the model for a Filament Spool.
