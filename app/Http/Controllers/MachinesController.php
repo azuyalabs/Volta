@@ -40,7 +40,7 @@ class MachinesController extends Controller
      */
     public function index(Request $request)
     {
-        $statistics = json_decode($this->statistics()->content(), true);
+        $statistics = json_decode($this->statistics()->content(), false);
 
         return view('machines.index', ['statistics' => $statistics]);
     }
