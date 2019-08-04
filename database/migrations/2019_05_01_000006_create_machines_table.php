@@ -32,10 +32,11 @@ class CreateMachinesTable extends Migration
     public function up(): void
     {
         if (!Schema::hasTable(self::TABLE_NAME)) {
-            Schema::create(self::TABLE_NAME, function (Blueprint $table) {
+            Schema::create(self::TABLE_NAME, static function (Blueprint $table) {
                 $table->increments('id');
 
                 $table->string('name');
+                $table->string('slug');
                 $table->mediumInteger('acquisition_cost')->default(0);
                 $table->mediumInteger('residual_value')->nullable()->default(0);
                 $table->mediumInteger('maintenance_cost')->nullable()->default(0);

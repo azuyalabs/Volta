@@ -17,6 +17,7 @@ use App\Traits\Monetary;
 use Spatie\ModelStatus\HasStatuses;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -30,6 +31,7 @@ class Machine extends Model
     use SoftDeletes;
     use Monetary;
     use HasStatuses;
+    use Sluggable;
 
     public $money_attributes = [
         'acquisition_cost', 'residual_value', 'maintenance_cost'
@@ -115,6 +117,34 @@ class Machine extends Model
     public function scopeMyPaired($query): Builder
     {
         return $query->mine()->where('reference_id', '<>', '');
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
+    /**
+     * @param Builder $query
+     * @param Model $model
+     * @param string $attribute
+     * @param array $config
+     * @param string $slug
+     *
+     * @return Builder
+     */
+    public function scopeWithUniqueSlugConstraints(Builder $query, Model $model, $attribute, $config, $slug): Builder
+    {
+        return $query->where('user_id', $model->user->getKey());
     }
 
     /**

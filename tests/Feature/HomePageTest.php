@@ -16,15 +16,11 @@ use Tests\TestCase;
 
 class HomePageTest extends TestCase
 {
-    /**
-     * Test that the homepage is accessible.
-     *
-     * @return void
-     */
-    public function test_homepage_is_accessible()
+    /** @test */
+    public function homepage_is_accessible(): void
     {
         $response = $this->get('/');
-        $response->assertStatus(200);
-        $response->assertSee('Volta');
+        $response->assertStatus(302);
+        $response->assertSee('volta');
     }
 }

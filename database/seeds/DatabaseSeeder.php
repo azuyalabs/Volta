@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         // Seed fake data for development
         if (app()->isLocal()) {
             $this->call([
+                UsersTableSeeder::class,
                 MachinesTableSeeder::class,
             ]);
         }
