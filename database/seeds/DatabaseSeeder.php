@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 UsersTableSeeder::class,
                 MachinesTableSeeder::class,
+                FilamentSpoolsTableSeeder::class,
             ]);
         }
     }
