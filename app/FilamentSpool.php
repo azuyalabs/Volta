@@ -13,10 +13,9 @@
 namespace App;
 
 use Cknow\Money\Money;
-use UnexpectedValueException;
 use Illuminate\Database\Eloquent\Model;
-use App\Storage\BinaryUuid\HasBinaryUuid;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use UnexpectedValueException;
 
 /**
  * Class representing the model for a Filament Spool.
@@ -25,7 +24,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class FilamentSpool extends Model
 {
-    use HasBinaryUuid;
 
     /**
      * @inheritdoc
@@ -52,7 +50,7 @@ class FilamentSpool extends Model
     /**
      * @inheritdoc
      */
-    protected $hidden = ['uuid', 'user_id', 'created_at', 'updated_at'];
+    protected $hidden = ['user_id', 'created_at', 'updated_at'];
 
     /**
      * @inheritdoc
