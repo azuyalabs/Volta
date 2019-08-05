@@ -120,6 +120,8 @@ class FilamentSpoolsController extends Controller
      */
     public function show($id)
     {
+        $spool = $this->spools->find($id);
+        $spool->bookmark();
         return view('spools.show', ['spool' => $this->spools->find($id)]);
     }
 

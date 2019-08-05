@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Bookmark extends Model
 {
@@ -16,7 +17,7 @@ class Bookmark extends Model
     /**
      * Get the owning bookmarkable model.
      */
-    public function bookmarkable()
+    public function bookmarkable(): MorphTo
     {
         return $this->morphTo();
     }

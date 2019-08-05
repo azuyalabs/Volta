@@ -14,6 +14,7 @@ namespace App\Traits;
 
 use App\User;
 use App\Bookmark;
+use App\Events\BookmarkCreated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -72,9 +73,11 @@ trait Bookmarkable
         if ($this->isBookmarkedBy(Auth::user())) {
             $this->bookmarks()->where('user_id', Auth::user()->id)->delete();
         } else {
-            $this->bookmarks()->save(
-                new Bookmark(['user_id' => Auth::user()->id])
-            );
+            $bookmark = new Bookmark(['user_id' => Auth::user()->id]);
+
+            event(new BookmarkCreated($bookmark, Auth::user()));
+
+            $this->bookmarks()->save($bookmark);
         }
     }
 }
