@@ -21,7 +21,7 @@
     "apexcharts": "^3.8",
     "axios": "^0.19",
     "bootstrap": "^4.3",
-    "bootstrap-vue": "2.0.0-rc.16",
+    "bootstrap-vue": "2.0.0-rc.27",
     "dinero.js": "^1.6",
     "epic-spinners": "^1.0.4",
     "github-api": "^3.0",
