@@ -12,8 +12,8 @@
 
 namespace App;
 
-use App\Traits\Bookmarkable;
 use Cknow\Money\Money;
+use App\Traits\Bookmarkable;
 use UnexpectedValueException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -64,7 +64,7 @@ class FilamentSpool extends Model
      *
      * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -74,7 +74,7 @@ class FilamentSpool extends Model
      *
      * @return BelongsTo
      */
-    public function manufacturer()
+    public function manufacturer(): BelongsTo
     {
         return $this->belongsTo(Manufacturer::class);
     }
@@ -86,7 +86,7 @@ class FilamentSpool extends Model
      */
     public function getLengthAttribute(): float
     {
-        if ($this->density === 0 || $this->diameter === 0) {
+        if (0 === $this->density || 0 === $this->diameter) {
             throw new UnexpectedValueException('Density can not be zero.');
         }
 
@@ -112,7 +112,7 @@ class FilamentSpool extends Model
      */
     public function getPricePerKilogramAttribute(): Money
     {
-        if ($this->weight === 0) {
+        if (0 === $this->weight) {
             throw new UnexpectedValueException('Weight can not be zero.');
         }
 
