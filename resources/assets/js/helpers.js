@@ -76,8 +76,8 @@ export function durationFormat(value) {
     return durationElements.length == 1
         ? durationElements[0]
         : durationElements.slice(0, durationElements.length - 1).join(', ') +
-              ' and ' +
-              durationElements[durationElements.length - 1];
+        ' and ' +
+        durationElements[durationElements.length - 1];
 }
 
 /**
@@ -156,14 +156,16 @@ export function moneyFormat(value, currency) {
     }
 
     return Dinero({
-        amount: parseInt(value),
+        amount: parseInt(value, 10),
         currency: currency,
-        precision: currencyDefinition.hasOwnProperty(currency)
-            ? currencyDefinition[currency]['precision']
-            : 2,
+        precision: 0,
+        // TODO: Change precision once we can support decimals for Monetary amounts
+        //precision: currencyDefinition.hasOwnProperty(currency)
+        //   ? currencyDefinition[currency]['precision']
+        //  : 2,
     }).toFormat(
         currencyDefinition.hasOwnProperty(currency)
             ? currencyDefinition[currency]['format']
-            : '$0,0.00'
+            : '$0,0.00',
     );
 }
