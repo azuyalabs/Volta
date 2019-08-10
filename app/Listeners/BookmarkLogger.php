@@ -27,6 +27,8 @@ class BookmarkLogger
      */
     public function handle(BookmarkCreated $event): void
     {
-        Log::info('User '.$event->user->name . ' - '.$event->bookmark->bookmarkable->name);
+        if (null !== $event->bookmark->bookmarkable) {
+            Log::info('User '.$event->user->name . ' - '.$event->bookmark->bookmarkable->name);
+        }
     }
 }
