@@ -144,25 +144,26 @@ export function moneyFormat(value, currency) {
         UGX: 0,
         UYI: 0,
         UYW: 4,
-        VND: 0,
+        VND: {
+            precision: 0,
+            format: '$0,0',
+        },
         VUV: 0,
         XAF: 0,
         XOF: 0,
         XPF: 0,
     };
 
-    if (!currency) {
+    if (typeof currency === 'undefined') {
         currency = window.Volta.currency;
     }
 
     return Dinero({
         amount: parseInt(value, 10),
         currency: currency,
-        precision: 0,
-        // TODO: Change precision once we can support decimals for Monetary amounts
-        //precision: currencyDefinition.hasOwnProperty(currency)
-        //   ? currencyDefinition[currency]['precision']
-        //  : 2,
+        precision: currencyDefinition.hasOwnProperty(currency)
+            ? currencyDefinition[currency]['precision']
+            : 2,
     }).toFormat(
         currencyDefinition.hasOwnProperty(currency)
             ? currencyDefinition[currency]['format']
