@@ -12,8 +12,8 @@
 
 namespace App\Events;
 
-use App\Bookmark;
 use App\User;
+use App\Bookmark;
 use Illuminate\Queue\SerializesModels;
 
 class BookmarkCreated
@@ -32,6 +32,6 @@ class BookmarkCreated
     public function __construct(Bookmark $bookmark, User $user)
     {
         $this->bookmark = $bookmark;
-        $this->user = $user;
+        $this->user     = $user;
     }
 }
