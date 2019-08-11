@@ -13,7 +13,6 @@
 namespace App;
 
 use Cknow\Money\Money;
-use App\Traits\Bookmarkable;
 use UnexpectedValueException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,7 +24,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class FilamentSpool extends Model
 {
-    use Bookmarkable;
 
     /**
      * @inheritdoc

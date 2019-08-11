@@ -14,7 +14,6 @@ namespace App;
 
 use Cknow\Money\Money;
 use App\Traits\Monetary;
-use App\Traits\Bookmarkable;
 use Spatie\ModelStatus\HasStatuses;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -33,7 +32,6 @@ class Machine extends Model
     use Monetary;
     use HasStatuses;
     use Sluggable;
-    use Bookmarkable;
 
     public $money_attributes = [
         'acquisition_cost', 'residual_value', 'maintenance_cost'
