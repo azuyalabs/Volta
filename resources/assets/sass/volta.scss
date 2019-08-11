@@ -1,0 +1,26 @@
+/*!
+ * This file is part of the Volta Project.
+ *
+ * Copyright (c) 2018 - 2019. AzuyaLabs
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author Sacha Telgenhof <me@sachatelgenhof.com>
+ */
+// Initialization
+@import 'utilities/mixins';
+@import 'variables';
+
+// 3rd Party Vendor
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/dist/bootstrap-vue.min.css';
+@import 'svg-icons';
+@import '~vue-status-indicator/dist/vue-status-indicator.css';
+
+// Core Styling
+@import 'common';
+@import 'forms';
+@import 'data_table';
+@import 'metrics';
+@import 'cards';

@@ -1,5 +1,16 @@
-import Echo from 'laravel-echo';
+/*
+ * This file is part of the Volta Project.
+ *
+ * Copyright (c) 2018 - 2019. AzuyaLabs
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author Sacha Telgenhof <me@sachatelgenhof.com>
+ */
+
 import Vue from 'vue';
+import Echo from 'laravel-echo';
 import VueI18n from 'vue-i18n';
 import VueSVGIcon from 'vue-svgicon';
 import Progress from 'vue-multiple-progress';
@@ -10,6 +21,18 @@ Vue.use(VueI18n);
 Vue.use(VueSVGIcon);
 Vue.use(Progress);
 
+// Page specific components
+// TODO: Eligible for dynamic import, but Laravel Mix v4 has some issues with dynamic imports, chunking.
+Vue.component('Dashboard', require('./components/Dashboard/Dashboard').default);
+Vue.component('Placeholder', require('./components/Dashboard/Placeholder').default);
+Vue.component('Volta', require('./components/Dashboard/Volta').default);
+Vue.component('Clock', require('./components/Dashboard/Clock').default);
+Vue.component('SlicerReleases', require('./components/Dashboard/SlicerReleases').default);
+Vue.component('FirmwareReleases', require('./components/Dashboard/FirmwareReleases').default);
+Vue.component('Holidays', require('./components/Dashboard/Holidays').default);
+Vue.component('Printer', require('./components/Dashboard/Printer').default);
+Vue.component('Weather', require('./components/Dashboard/Weather').default);
+
 const i18n = new VueI18n({
     locale: window.Volta.locale,
     fallbackLocale: 'en-US',
@@ -19,37 +42,6 @@ new Vue({
     i18n,
 
     el: '#dashboard',
-
-    components: {
-        Dashboard: () =>
-            import(
-                './components/Dashboard/Dashboard' /* webpackChunkName: "js/dashboard/Dashboard" */
-            ),
-        Placeholder: () =>
-            import(
-                './components/Dashboard/Placeholder' /* webpackChunkName: "js/dashboard/Placeholder" */
-            ),
-        Volta: () =>
-            import('./components/Dashboard/Volta' /* webpackChunkName: "js/dashboard/Volta" */),
-        Clock: () =>
-            import('./components/Dashboard/Clock' /* webpackChunkName: "js/dashboard/Clock" */),
-        SlicerReleases: () =>
-            import(
-                './components/Dashboard/SlicerReleases' /* webpackChunkName: "js/dashboard/SlicerReleases" */
-            ),
-        FirmwareReleases: () =>
-            import(
-                './components/Dashboard/FirmwareReleases' /* webpackChunkName: "js/dashboard/FirmwareReleases" */
-            ),
-        Holidays: () =>
-            import(
-                './components/Dashboard/Holidays' /* webpackChunkName: "js/dashboard/Holidays" */
-            ),
-        Printer: () =>
-            import('./components/Dashboard/Printer' /* webpackChunkName: "js/dashboard/Printer" */),
-        Weather: () =>
-            import('./components/Dashboard/Weather' /* webpackChunkName: "js/dashboard/Weather" */),
-    },
 
     created() {
         let options = {

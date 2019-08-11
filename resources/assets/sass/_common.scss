@@ -1,13 +1,13 @@
-@import 'utilities/mixins';
-@import 'variables';
-@import '~bootstrap/scss/bootstrap';
-@import '~bootstrap-vue/dist/bootstrap-vue';
-@import 'svg-icons';
-//@import '~vue-status-indicator/dist/vue-status-indicator.css';
-@import 'forms';
-@import 'data_table';
-@import 'metrics';
-@import 'cards';
+/*!
+ * This file is part of the Volta Project.
+ *
+ * Copyright (c) 2018 - 2019. AzuyaLabs
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author Sacha Telgenhof <me@sachatelgenhof.com>
+ */
 
 html {
     overflow-y: scroll;

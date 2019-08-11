@@ -11,7 +11,7 @@
     <title>@yield('title') - {{ config('app.name') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/volta.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="volta" v-cloak>
@@ -215,6 +215,6 @@
 <!-- Scripts -->
 <script src="{{ asset('js/manifest.js') }}"></script>
 <script src="{{ asset('js/vendor.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/volta.js') }}"></script>
 </body>
 </html>

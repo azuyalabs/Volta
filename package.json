@@ -12,10 +12,14 @@
     "@babel/preset-env": "^7.5",
     "cross-env": "^5.1",
     "jquery": "^3.2",
-    "laravel-mix": "^3.0",
+    "laravel-mix": "^4.1.2",
     "lodash": "^4.17",
     "popper.js": "^1.14",
-    "prettier": "^1.15"
+    "prettier": "^1.15",
+    "resolve-url-loader": "3.1.0",
+    "sass": "^1.22.9",
+    "sass-loader": "7.*",
+    "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
     "apexcharts": "^3.8",

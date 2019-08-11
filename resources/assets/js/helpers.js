@@ -76,8 +76,8 @@ export function durationFormat(value) {
     return durationElements.length == 1
         ? durationElements[0]
         : durationElements.slice(0, durationElements.length - 1).join(', ') +
-        ' and ' +
-        durationElements[durationElements.length - 1];
+              ' and ' +
+              durationElements[durationElements.length - 1];
 }
 
 /**
@@ -167,6 +167,6 @@ export function moneyFormat(value, currency) {
     }).toFormat(
         currencyDefinition.hasOwnProperty(currency)
             ? currencyDefinition[currency]['format']
-            : '$0,0.00',
+            : '$0,0.00'
     );
 }
