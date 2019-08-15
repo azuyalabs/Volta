@@ -15,14 +15,14 @@ namespace App\Http\Requests;
 use App\Repositories\CountryRepository;
 use Illuminate\Foundation\Http\FormRequest;
 
-class Manufacturer extends FormRequest
+class ManufacturerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return auth()->user()->hasRole('admin');
     }
@@ -32,18 +32,19 @@ class Manufacturer extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name'    => 'required|min:4',
+            'name'    => 'required|min:2',
             'website' => 'sometimes|nullable|url',
             'country' => [static function ($attribute, $value, $fail) {
-                if (!in_array($value, array_keys(app(CountryRepository::class)->all()))) {
+                if (!array_key_exists($value, app(CountryRepository::class)->all())) {
                     $fail($attribute);
                 }
             }],
             'equipment_supplier' => 'boolean',
             'filament_supplier'  => 'boolean',
+            'system'             => 'boolean',
         ];
     }
 }

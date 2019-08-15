@@ -19,7 +19,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Repositories\CountryRepository;
 use App\Repositories\ManufacturerRepository;
-use App\Http\Requests\Manufacturer as ManufacturerRequest;
+use App\Http\Requests\ManufacturerRequest as ManufacturerRequest;
 
 /**
  * Controller handling the management of manufacturers
@@ -57,6 +57,18 @@ class ManufacturersController extends Controller
         $statistics = json_decode($this->statistics()->content());
 
         return view('manufacturers.index', ['statistics' => $statistics]);
+    }
+
+    /**
+     * Display a listing of manufacturers.
+     *
+     * @param Manufacturer $manufacturer
+     *
+     * @return View
+     */
+    public function show(Manufacturer $manufacturer)
+    {
+        return view('manufacturers.show', ['manufacturer' => $manufacturer]);
     }
 
     /**

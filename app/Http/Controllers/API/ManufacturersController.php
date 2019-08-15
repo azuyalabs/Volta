@@ -20,7 +20,7 @@ use App\Http\Resources\ManufacturerResource;
 use App\QueryOptions\ManufacturerQueryOptions;
 use App\Contracts\Repositories\ManufacturerRepository;
 use App\Http\Resources\ManufacturerCollectionResource;
-use App\Http\Requests\Manufacturer as ManufacturerRequest;
+use App\Http\Requests\ManufacturerRequest as ManufacturerRequest;
 
 class ManufacturersController extends Controller
 {

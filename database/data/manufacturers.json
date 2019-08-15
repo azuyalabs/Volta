@@ -1,0 +1,674 @@
+{
+  "3d-print-works": {
+    "name": "3DPrintWorks",
+    "country": "GB",
+    "website": "https://3d-print-works.com/",
+    "filament_supplier": true,
+    "equipment_supplier": false
+  },
+  "3d-printlife": {
+    "name": "3DPrintlife",
+    "country": "US",
+    "website": "https://www.3dprintlife.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "3d-solutech": {
+    "name": "3DSolutech",
+    "country": "US",
+    "website": "http://www.3dsolutech.com",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "3d-fuel": {
+    "name": "3D-Fuel",
+    "country": "US",
+    "website": "https://www.3dfuel.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "3d4makers": {
+    "name": "3D4Makers",
+    "country": "NL",
+    "website": "https://www.3d4makers.com",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "3dxtech": {
+    "name": "3DXTech",
+    "country": "US",
+    "website": "https://www.3dxtech.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "3r3dtm": {
+    "name": "3R3DTM",
+    "country": "ES",
+    "website": "http://www.3r3dtm.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "3dk-berlin": {
+    "name": "3dkBerlin",
+    "country": "DE",
+    "website": "https://3dk.berlin/de/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "abg-filament": {
+    "name": "ABGFilament",
+    "country": "TR",
+    "website": "https://abgfilament.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "addifrance": {
+    "name": "Addifrance",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "algix-3d": {
+    "name": "Algix3D",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "all-professional-3d": {
+    "name": "AllProfessional3D",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "aprintapro": {
+    "name": "AprintaPro",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "azurefilm": {
+    "name": "AzureFilm",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "black-magic-3d": {
+    "name": "BlackMagic3D",
+    "country": "US",
+    "website": "https://www.blackmagic3d.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "bnk": {
+    "name": "BnK",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "breathe-3dp": {
+    "name": "Breathe-3DP",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "compost3d": {
+    "name": "COMPOST3D",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "colorfabb": {
+    "name": "Colorfabb",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "colorilab": {
+    "name": "ColoriLAB",
+    "country": "CA",
+    "website": "https://3d.colorifilament.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "das-filament": {
+    "name": "DasFilament",
+    "country": "DE",
+    "website": "https://www.dasfilament.de",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "esun": {
+    "name": "eSun",
+    "country": "CN",
+    "website": "",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "eumakers": {
+    "name": "EUMakers",
+    "country": "IT",
+    "website": "http://www.eumakers.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "essentium": {
+    "name": "Essentium",
+    "country": "US",
+    "website": "https://essentium3d.com",
+    "filament_supplier": true,
+    "equipment_supplier": true
+  },
+  "extrude-ltd": {
+    "name": "ExtrudeLtd",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "extrudr": {
+    "name": "Extrudr",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "faberdashery": {
+    "name": "Faberdashery",
+    "country": "GB",
+    "website": "http://www.faberdashery.co.uk/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "fiberforce": {
+    "name": "FiberForce",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "fiberlogy": {
+    "name": "Fiberlogy",
+    "country": "PL",
+    "website": "http://www.fiberlogy.com",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "filaflex": {
+    "name": "FilaFlex",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "filament-pm": {
+    "name": "FilamentPM",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "filamentarno": {
+    "name": "Filamentarno",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "filamentive": {
+    "name": "Filamentive",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "filaprint": {
+    "name": "Filaprint",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "fillamentum": {
+    "name": "Fillamentum",
+    "country": "CZ",
+    "website": "https://fillamentum.com",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "forefront-filament": {
+    "name": "ForefrontFilament",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "formfutura": {
+    "name": "Formfutura",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "h-and-h-3d-plastics": {
+    "name": "HAndH3dPlastics",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "hatchbox": {
+    "name": "Hatchbox",
+    "country": "US",
+    "website": "https://hatchbox3d.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "haydale": {
+    "name": "Haydale",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "ice-filaments": {
+    "name": "IceFilaments",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "indmatec": {
+    "name": "Indmatec",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "inland": {
+    "name": "Inland",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "innofil-3d": {
+    "name": "Innofil3D",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "kodak": {
+    "name": "Kodak",
+    "country": "US",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "lay-filaments": {
+    "name": "LayFilaments",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "mtb3d": {
+    "name": "MTB3D",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "make-shaper": {
+    "name": "MakeShaper",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "matterhackers": {
+    "name": "MatterHackers",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "meltink3d": {
+    "name": "MeltInk3D",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "neema3d": {
+    "name": "NEEMA3D",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "ninjaflex": {
+    "name": "NinjaFlex",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "owa": {
+    "name": "OWA",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "owens-corning": {
+    "name": "OWENSCORNING",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "oo-kuma": {
+    "name": "Oo-Kuma",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "orbi-tech": {
+    "name": "Orbi-Tech",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "philament": {
+    "name": "Philament",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "plastfab": {
+    "name": "Plastfab",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "polymaker": {
+    "name": "Polymaker",
+    "country": "CN",
+    "website": "http://www.polymaker.com",
+    "filament_supplier": 0,
+    "equipment_supplier": true
+  },
+  "proto-pasta": {
+    "name": "ProtoPasta",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "rec": {
+    "name": "REC",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "real-filament": {
+    "name": "RealFilament",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "refil": {
+    "name": "Refil",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "smart-materials-3d": {
+    "name": "SMARTMATERIALS3D",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "spectrum-filaments": {
+    "name": "SpectrumFilaments",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "taulman-3d": {
+    "name": "Taulman3D",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "the-virtual-foundry": {
+    "name": "TheVirtualFoundry",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "treed": {
+    "name": "TreeD",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "tridea": {
+    "name": "Tridea",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "type-a-machines": {
+    "name": "TypeAMachines",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "ultimaker": {
+    "name": "Ultimaker",
+    "country": "NL",
+    "website": null,
+    "filament_supplier": 0,
+    "equipment_supplier": true
+  },
+  "verbatim": {
+    "name": "Verbatim",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "voltivo": {
+    "name": "Voltivo",
+    "country": "TW",
+    "website": "https://www.voltivo.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "willowflex": {
+    "name": "WillowFlex",
+    "country": "DE",
+    "website": "https://www.willow-flex.com/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "add-north": {
+    "name": "AddNorth",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "rigid-ink": {
+    "name": "RigidInk",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "spoolworks-by-e3d": {
+    "name": "SpoolWorksByE3D",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "twobears": {
+    "name": "TwoBears",
+    "country": "",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "prusa": {
+    "name": "Prusa",
+    "country": "CZ",
+    "website": "https://www.prusa3d.com/",
+    "filament_supplier": true,
+    "equipment_supplier": true
+  },
+  "hp": {
+    "name": "HP",
+    "country": "US",
+    "website": "",
+    "filament_supplier": 0,
+    "equipment_supplier": 0
+  },
+  "micromake": {
+    "name": "MicroMake",
+    "country": "CN",
+    "website": null,
+    "filament_supplier": true,
+    "equipment_supplier": true
+  },
+  "shenzhen-superstar-technology": {
+    "name": "ShenzhenSuperstarTechnology",
+    "country": "CN",
+    "website": "http://super-star.com.cn/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "carbide-3d": {
+    "name": "Carbide3D",
+    "country": "US",
+    "website": "http://carbide3d.com/",
+    "filament_supplier": 0,
+    "equipment_supplier": true
+  },
+  "openbuilds": {
+    "name": "OpenBuilds",
+    "country": "US",
+    "website": "http://openbuildspartstore.com/",
+    "filament_supplier": 0,
+    "equipment_supplier": true
+  },
+  "raise3d": {
+    "name": "Raise3D",
+    "country": "US",
+    "website": "https://www.raise3d.com",
+    "filament_supplier": 0,
+    "equipment_supplier": true
+  },
+  "creality3d": {
+    "name": "Creality3D",
+    "country": "CN",
+    "website": "https://www.creality3d.cn/",
+    "filament_supplier": true,
+    "equipment_supplier": true
+  },
+  "priline": {
+    "name": "Priline",
+    "country": "CN",
+    "website": "https://www.facebook.com/priline/",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "peachclover": {
+    "name": "PeachClover",
+    "country": "JP",
+    "website": "",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "lulzbot": {
+    "name": "LulzBot",
+    "country": "US",
+    "website": "https://www.lulzbot.com",
+    "filament_supplier": 0,
+    "equipment_supplier": true
+  },
+  "monoprice": {
+    "name": "Monoprice",
+    "country": "US",
+    "website": "https://www.monoprice.com",
+    "filament_supplier": true,
+    "equipment_supplier": true
+  },
+  "3dcreators": {
+    "name": "3Dcreators",
+    "country": "JP",
+    "website": null,
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "reprapper": {
+    "name": "RepRapper",
+    "country": "CN",
+    "website": "http://www.reprappertech.com",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "sunlu": {
+    "name": "Sunlu",
+    "country": "CN",
+    "website": "http://www.sunlugw.com",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  },
+  "anycubic": {
+    "name": "ANYCUBIC",
+    "country": "CN",
+    "website": "http://www.anycubic3d.com",
+    "filament_supplier": 0,
+    "equipment_supplier": true
+  },
+  "formbot": {
+    "name": "FORMBOT",
+    "country": "CN",
+    "website": "https://www.formbot3d.com",
+    "filament_supplier": true,
+    "equipment_supplier": true
+  },
+  "3d-LL": {
+    "name": "3DLL",
+    "country": "US",
+    "website": "http://www.3dsolutech.com",
+    "filament_supplier": true,
+    "equipment_supplier": 0
+  }
+}

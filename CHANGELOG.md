@@ -26,10 +26,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   ![Print Job Caption](../images/docs/volta_printjobs_caption.png "Print Job Caption")
 
 ### Fixed
+- Updated 3rd Party Vendors to solve security vulnaribility (Upgraded to Laravel Mix v4). Unfortunately, there
+  are some issues with dynamic import, so temporarily reverted to regular method of importing components until
+  the issue has been resolved.
 - After registering a new account, Volta redirects to an unknown page (/home). [\#12](https://github.com/azuyalabs/yasumi/issue/12)
 - The UsersTableSeeder would fail when running a migration command with seed option. Removed the UsersTableSeeder and MachinesTableSeeder as these are only need to be used for development. [\#11](https://github.com/azuyalabs/yasumi/issue/11)
 
 ### Removed
+- Temporary code of the Bookmarking feature.
 
 
 ## [0.0.11] - 2019/02/18

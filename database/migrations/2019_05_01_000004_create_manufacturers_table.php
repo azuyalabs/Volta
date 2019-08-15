@@ -32,7 +32,7 @@ class CreateManufacturersTable extends Migration
     public function up(): void
     {
         if (!Schema::hasTable(self::TABLE_NAME)) {
-            Schema::create(self::TABLE_NAME, function (Blueprint $table) {
+            Schema::create(self::TABLE_NAME, static function (Blueprint $table) {
                 $table->increments('id');
 
                 $table->string('name')->unique()->collation('utf8_bin');
@@ -41,6 +41,7 @@ class CreateManufacturersTable extends Migration
                 $table->string('website')->nullable();
                 $table->boolean('filament_supplier')->default(false);
                 $table->boolean('equipment_supplier')->default(false);
+                $table->boolean('system')->default(false);
 
                 $table->timestamps();
                 $table->softDeletes();

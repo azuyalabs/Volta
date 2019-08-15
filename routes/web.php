@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\ManufacturersController;
+
 Auth::routes();
 
 Route::get('/', 'UserController@home')->name('home');
@@ -40,3 +42,5 @@ Route::resource('threedprinterjobs', 'ThreeDPrinterJobsController');
 
 // Dashboard
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::resource('manufacturers', 'ManufacturersController');

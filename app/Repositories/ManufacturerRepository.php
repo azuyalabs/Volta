@@ -15,7 +15,7 @@ namespace App\Repositories;
 use App\Manufacturer;
 use Illuminate\Database\Eloquent\Collection;
 use App\QueryOptions\ManufacturerQueryOptions;
-use App\Http\Requests\Manufacturer as ManufacturerRequest;
+use App\Http\Requests\ManufacturerRequest as ManufacturerRequest;
 use App\Contracts\Repositories\ManufacturerRepository as Contract;
 
 /**
