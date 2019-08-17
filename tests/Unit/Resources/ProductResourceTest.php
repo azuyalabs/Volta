@@ -15,12 +15,14 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ManufacturerResource;
+use App\Manufacturer;
+use App\Product;
 
 class ProductResourceTest extends TestCase
 {
     public function testCorrectDataIsReturnedInResponse(): void
     {
-        $resource = (new ProductResource($product = factory('App\Product')->create(['manufacturer_id' => factory('App\Manufacturer')->create()])))->jsonSerialize();
+        $resource = (new ProductResource($product = factory(Product::class)->create(['manufacturer_id' => factory(Manufacturer::class)->create()])))->jsonSerialize();
 
         $this->assertArraySubset(['type' => 'products'], $resource);
 

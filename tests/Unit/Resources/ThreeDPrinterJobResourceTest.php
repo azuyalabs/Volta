@@ -16,6 +16,7 @@ use App\Machine;
 use Tests\TestCase;
 use App\MachineJobType;
 use App\Http\Resources\ThreeDPrinterJobResource;
+use App\MachineJob;
 
 /**
  * Class containing cases for testing the 3D Printer Job Resource class.
@@ -27,7 +28,7 @@ class ThreeDPrinterJobResourceTest extends TestCase
     /** @test */
     public function it_can_return_a_correct_response(): void
     {
-        $resource = (new ThreeDPrinterJobResource($job = factory('App\MachineJob')->create(['type' => MachineJobType::THREE_D_PRINTER])))->jsonSerialize();
+        $resource = (new ThreeDPrinterJobResource($job = factory(MachineJob::class)->create(['type' => MachineJobType::THREE_D_PRINTER])))->jsonSerialize();
 
         $this->assertArraySubset(['type' => '3dprinterjobs', 'id' => $job->uuid_text], $resource);
         $this->assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/threedprinterjobs/' . $job->uuid_text]], $resource);

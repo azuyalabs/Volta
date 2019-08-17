@@ -14,6 +14,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Http\Resources\FilamentSpoolResource;
+use App\FilamentSpool;
 
 /**
  * Class containing cases for testing the Filament Spool Resource class.
@@ -25,7 +26,7 @@ class FilamentSpoolResourceTest extends TestCase
     /** @test */
     public function it_can_return_a_correct_response(): void
     {
-        $resource = (new FilamentSpoolResource($spool = factory('App\FilamentSpool')->create()))->jsonSerialize();
+        $resource = (new FilamentSpoolResource($spool = factory(FilamentSpool::class)->create()))->jsonSerialize();
 
         $this->assertArraySubset(['type' => 'filamentspools', 'id' => $spool->uuid_text], $resource);
 

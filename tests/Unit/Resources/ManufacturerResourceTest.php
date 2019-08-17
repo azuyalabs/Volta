@@ -15,12 +15,13 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Repositories\CountryRepository;
 use App\Http\Resources\ManufacturerResource;
+use App\Manufacturer;
 
 class ManufacturerResourceTest extends TestCase
 {
     public function testCorrectDataIsReturnedInResponse(): void
     {
-        $resource = (new ManufacturerResource($manufacturer = factory('App\Manufacturer')->create()))->jsonSerialize();
+        $resource = (new ManufacturerResource($manufacturer = factory(Manufacturer::class)->create()))->jsonSerialize();
 
         $this->assertArraySubset(['type' => 'manufacturers'], $resource);
 

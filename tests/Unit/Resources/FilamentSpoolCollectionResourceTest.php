@@ -14,6 +14,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Http\Resources\FilamentSpoolCollectionResource;
+use App\FilamentSpool;
 
 /**
  * Class containing cases for testing the Filament Spool Resource Collection class.
@@ -27,7 +28,7 @@ class FilamentSpoolCollectionResourceTest extends TestCase
     /** @test */
     public function it_can_return_a_correct_response(): void
     {
-        $resource = (new FilamentSpoolCollectionResource($spools = factory('App\FilamentSpool', 2)->create()))->jsonSerialize();
+        $resource = (new FilamentSpoolCollectionResource($spools = factory(FilamentSpool::class, 2)->create()))->jsonSerialize();
 
         $this->assertArrayHasKey('data', $resource);
     }
