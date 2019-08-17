@@ -37,7 +37,8 @@ class ManufacturerResource extends JsonResource
                 'website'            => $this->website,
                 'filament_supplier'  => $this->filament_supplier,
                 'equipment_supplier' => $this->equipment_supplier,
-                'product_count'      => $this->models->count()
+                'product_count'      => $this->models->count(),
+                'system'             => $this->system
             ],
             'links' => [
                 'self' => getenv('APP_URL') . '/api/manufacturers/' . $this->slug,
