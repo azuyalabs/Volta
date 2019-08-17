@@ -29,12 +29,13 @@
     "predis/predis": "^1.1",
     "punic/punic": "^3.4",
     "pusher/pusher-php-server": "3.3",
-    "spatie/laravel-model-status": "^1.6",
+    "spatie/laravel-model-status": "^1.7",
     "spatie/laravel-permission": "^2.37",
     "symfony/dom-crawler": "^4.3",
     "league/plates": "^3.3"
   },
   "require-dev": {
+    "dms/phpunit-arraysubset-asserts": "^0.1.0",
     "doctrine/dbal": "^2.9",
     "filp/whoops": "~2.4",
     "friendsofphp/php-cs-fixer": "^2.15",
@@ -42,7 +43,7 @@
     "mockery/mockery": "~1.2",
     "nunomaduro/collision": "~3.0",
     "nunomaduro/larastan": "^0.3",
-    "phpunit/phpunit": "~7.5"
+    "phpunit/phpunit": "~8.3"
   },
   "autoload": {
     "classmap": [
