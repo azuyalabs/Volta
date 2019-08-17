@@ -32,6 +32,6 @@ class UserTest extends TestCase
         $user->generateAPIToken();
 
         $this->assertIsString($user->api_token);
-        $this->assertEquals(32, \strlen($user->api_token));
+        $this->assertEquals(32, strlen($user->api_token));
     }
 }

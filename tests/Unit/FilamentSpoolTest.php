@@ -16,6 +16,7 @@ use App\FilamentSpool;
 use Cknow\Money\Money;
 use Faker\Factory as Faker;
 use Tests\TestCase;
+use UnexpectedValueException;
 
 /**
  * Class containing cases for testing the Filament Spool class.
@@ -58,7 +59,7 @@ class FilamentSpoolTest extends TestCase
     /** @test */
     public function it_throws_an_exception_for_price_per_kilogram_when_weight_is_zero(): void
     {
-        $this->expectException(\UnexpectedValueException::class);
+        $this->expectException(UnexpectedValueException::class);
 
         $spool = factory(FilamentSpool::class)->create(['weight' => 0]);
 
@@ -87,7 +88,7 @@ class FilamentSpoolTest extends TestCase
     /** @test */
     public function it_throws_an_exception_for_length_when_density_is_zero(): void
     {
-        $this->expectException(\UnexpectedValueException::class);
+        $this->expectException(UnexpectedValueException::class);
 
         $spool = factory(FilamentSpool::class)->create(['density' => 0]);
 
@@ -97,7 +98,7 @@ class FilamentSpoolTest extends TestCase
     /** @test */
     public function it_throws_an_exception_for_length_when_diameter_is_zero(): void
     {
-        $this->expectException(\UnexpectedValueException::class);
+        $this->expectException(UnexpectedValueException::class);
 
         $spool = factory(FilamentSpool::class)->create(['diameter' => 0]);
 
@@ -207,7 +208,7 @@ class FilamentSpoolTest extends TestCase
         $otherData = $this->PricePerKilogramDataProvider();
         $data = [];
         foreach ($otherData as $sample) {
-            $data[] = [$sample[0], $sample[1], (int)\round($sample[0] / $sample[1])];
+            $data[] = [$sample[0], $sample[1], (int)round($sample[0] / $sample[1])];
         }
         return $data;
     }
@@ -222,7 +223,7 @@ class FilamentSpoolTest extends TestCase
             $purchase_price = Faker::create()->numberBetween(1, 500000);
             $weight = Faker::create()->numberBetween(400, 5000);
 
-            $data[] = [$purchase_price, $weight, (int)\round((1000 / $weight) * $purchase_price)];
+            $data[] = [$purchase_price, $weight, (int)round((1000 / $weight) * $purchase_price)];
         }
         return $data;
     }
@@ -235,7 +236,7 @@ class FilamentSpoolTest extends TestCase
         $otherData = $this->PricePerLengthDataProvider();
         $data = [];
         foreach ($otherData as $sample) {
-            $data[] = [$sample[0], $sample[1], $sample[2], (int)\round($sample[0] / ($sample[1] / $sample[2]))];
+            $data[] = [$sample[0], $sample[1], $sample[2], (int)round($sample[0] / ($sample[1] / $sample[2]))];
         }
         return $data;
     }
@@ -249,7 +250,7 @@ class FilamentSpoolTest extends TestCase
         $data = [];
         foreach ($lengthData as $sample) {
             $purchase_price = Faker::create()->numberBetween(1, 500000);
-            $data[] = [$purchase_price, $sample[0], $sample[1], $sample[2], (int)\round($purchase_price / $sample[3])];
+            $data[] = [$purchase_price, $sample[0], $sample[1], $sample[2], (int)round($purchase_price / $sample[3])];
         }
         return $data;
     }

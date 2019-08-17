@@ -30,6 +30,6 @@ class MachineJobTest extends TestCase
         $job_id = $job->job_id;
 
         $this->assertIsString($job_id);
-        $this->assertSame(16, \strlen($job_id));
+        $this->assertSame(16, strlen($job_id));
     }
 }

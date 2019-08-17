@@ -19,6 +19,8 @@ use App\MachineJobStatus;
 use App\MachineJobType;
 use App\QueryOptions\MachineJobQueryOptions;
 use App\Repositories\MachineJobRepository;
+use DateTime;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
 
@@ -51,12 +53,12 @@ class MachineJobRepositoryTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_retrieve_all_machine_jobs_of_a_user(): void
     {
-        $samples = \random_int(2, 50);
-        $user_id = \random_int(1, 20);
+        $samples = random_int(2, 50);
+        $user_id = random_int(1, 20);
 
         $collection = factory(MachineJob::class, $samples)->create(['user_id' => $user_id]);
 
@@ -70,12 +72,12 @@ class MachineJobRepositoryTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_delete_a_machine_job_by_uuid(): void
     {
-        $samples = \random_int(2, 50);
-        $user_id = \random_int(1, 20);
+        $samples = random_int(2, 50);
+        $user_id = random_int(1, 20);
 
         $collection = factory(MachineJob::class, $samples)->create(['user_id' => $user_id]);
 
@@ -104,7 +106,7 @@ class MachineJobRepositoryTest extends TestCase
         $update['started_at'] = $this->faker->dateTime();
         $update['duration'] = $this->faker->numberBetween(0, 50000);
         $update['type'] = $this->faker->randomElement([MachineJobType::THREE_D_PRINTER, MachineJobType::ROUTER, MachineJobType::LASER]);
-        $update['details'] = \json_encode($this->faker->shuffleArray([$this->faker->word, $this->faker->word, $this->faker->word]));
+        $update['details'] = json_encode($this->faker->shuffleArray([$this->faker->word, $this->faker->word, $this->faker->word]));
 
         $request = new MachineJobRequest($update);
 
@@ -136,7 +138,7 @@ class MachineJobRepositoryTest extends TestCase
         $request['duration'] = $this->faker->numberBetween(0, 50000);
         $request['type'] = $this->faker->randomElement([MachineJobType::THREE_D_PRINTER, MachineJobType::ROUTER, MachineJobType::LASER]);
         $request['machine_id'] = $this->faker->randomElement(Machine::all()->pluck('id')->toArray());
-        $request['details'] = \json_encode($this->faker->shuffleArray([$this->faker->word, $this->faker->word, $this->faker->word]));
+        $request['details'] = json_encode($this->faker->shuffleArray([$this->faker->word, $this->faker->word, $this->faker->word]));
 
         $result = $repository->store($job->user_id, (new MachineJobRequest($request)));
 
@@ -144,7 +146,7 @@ class MachineJobRepositoryTest extends TestCase
         $this->assertInstanceOf(MachineJob::class, $result);
         $this->assertSame($request['name'], $result->name);
         $this->assertSame($request['status'], $result->status);
-        $this->assertSame($request['started_at']->format(\DateTime::ATOM), $result->started_at->format(\DateTime::ATOM));
+        $this->assertSame($request['started_at']->format(DateTime::ATOM), $result->started_at->format(DateTime::ATOM));
         $this->assertSame($request['duration'], $result->duration);
         $this->assertSame($request['type'], $result->type);
         $this->assertSame($request['machine_id'], $result->machine_id);
@@ -154,12 +156,12 @@ class MachineJobRepositoryTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_retrieve_print_activity_of_a_user(): void
     {
-        $samples = \random_int(2, 50);
-        $user_id = \random_int(1, 20);
+        $samples = random_int(2, 50);
+        $user_id = random_int(1, 20);
 
         factory(MachineJob::class, $samples)->create(['user_id' => $user_id]);
 
@@ -176,12 +178,12 @@ class MachineJobRepositoryTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_retrieve_print_job_success_rate_of_a_user(): void
     {
-        $samples = \random_int(2, 50);
-        $user_id = \random_int(1, 20);
+        $samples = random_int(2, 50);
+        $user_id = random_int(1, 20);
 
         factory(MachineJob::class, $samples)->create(['user_id' => $user_id, 'type' => MachineJobType::THREE_D_PRINTER]);
 

@@ -30,7 +30,7 @@ class ThreeDPrinterJobResourceTest extends TestCase
         $resource = (new ThreeDPrinterJobResource($job = factory('App\MachineJob')->create(['type' => MachineJobType::THREE_D_PRINTER])))->jsonSerialize();
 
         $this->assertArraySubset(['type' => '3dprinterjobs', 'id' => $job->uuid_text], $resource);
-        $this->assertArraySubset(['links' => ['self' => \getenv('APP_URL') . '/api/threedprinterjobs/' . $job->uuid_text]], $resource);
+        $this->assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/threedprinterjobs/' . $job->uuid_text]], $resource);
 
         $this->assertArraySubset([
             'attributes' => [

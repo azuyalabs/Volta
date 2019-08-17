@@ -31,14 +31,14 @@ class MachineJobQueryOptionTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_filter_jobs_by_type(): void
     {
-        $user_id = \random_int(1, 10);
+        $user_id = random_int(1, 10);
         $type = MachineJobType::THREE_D_PRINTER;
 
-        factory(MachineJob::class, \random_int(2, 50))->create(['user_id' => $user_id]);
+        factory(MachineJob::class, random_int(2, 50))->create(['user_id' => $user_id]);
 
         $filter = new MachineJobQueryOptions();
         $filter->type($type);
@@ -54,14 +54,14 @@ class MachineJobQueryOptionTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_returns_empty_when_filter_type_value_is_not_present(): void
     {
-        $user_id = \random_int(1, 10);
+        $user_id = random_int(1, 10);
         $type = MachineJobType::LASER;
 
-        factory(MachineJob::class, \random_int(2, 50))->create(['user_id' => $user_id, 'type' => $type]);
+        factory(MachineJob::class, random_int(2, 50))->create(['user_id' => $user_id, 'type' => $type]);
 
         // Assert filter with a non existing value returns zero/nothing
         $filter = new MachineJobQueryOptions();
@@ -76,13 +76,13 @@ class MachineJobQueryOptionTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_filter_jobs_by_machines(): void
     {
-        $user_id = \random_int(1, 10);
+        $user_id = random_int(1, 10);
 
-        factory(MachineJob::class, \random_int(2, 50))->create(['user_id' => $user_id]);
+        factory(MachineJob::class, random_int(2, 50))->create(['user_id' => $user_id]);
 
         // Assert with a single machine
         $machines = Machine::all()->pluck('id')->random(1);
@@ -100,13 +100,13 @@ class MachineJobQueryOptionTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_filter_jobs_by_multiple_machines(): void
     {
-        $user_id = \random_int(1, 10);
+        $user_id = random_int(1, 10);
 
-        factory(MachineJob::class, \random_int(2, 100))->create(['user_id' => $user_id]);
+        factory(MachineJob::class, random_int(2, 100))->create(['user_id' => $user_id]);
 
         // Assert with multiple machine
         $machines = Machine::all()->pluck('id')->random(3);
@@ -117,19 +117,19 @@ class MachineJobQueryOptionTest extends TestCase
         $result = (new MachineJobRepository())->all($user_id, $filter);
 
         $this->assertInstanceOf(Collection::class, $result);
-        $this->assertNotEmpty(\array_intersect($machines->toArray(), $result->pluck('machine_id')->all()));
+        $this->assertNotEmpty(array_intersect($machines->toArray(), $result->pluck('machine_id')->all()));
     }
 
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_returns_empty_when_filter_machines_value_is_not_present(): void
     {
-        $user_id = \random_int(1, 10);
+        $user_id = random_int(1, 10);
 
-        factory(MachineJob::class, \random_int(2, 50))->create(['user_id' => $user_id]);
+        factory(MachineJob::class, random_int(2, 50))->create(['user_id' => $user_id]);
 
         // Assert filter with a non existing value returns zero/nothing
         $id = $this->faker->numberBetween(1000);
@@ -145,13 +145,13 @@ class MachineJobQueryOptionTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_filter_jobs_by_statuses(): void
     {
-        $user_id = \random_int(1, 10);
+        $user_id = random_int(1, 10);
 
-        factory(MachineJob::class, \random_int(2, 50))->create(['user_id' => $user_id]);
+        factory(MachineJob::class, random_int(2, 50))->create(['user_id' => $user_id]);
 
         // Assert with a single status
         $filter = new MachineJobQueryOptions();
@@ -166,13 +166,13 @@ class MachineJobQueryOptionTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_filter_jobs_by_multiple_statuses(): void
     {
-        $user_id = \random_int(1, 10);
+        $user_id = random_int(1, 10);
 
-        factory(MachineJob::class, \random_int(2, 50))->create(['user_id' => $user_id]);
+        factory(MachineJob::class, random_int(2, 50))->create(['user_id' => $user_id]);
 
         // Assert with multiple statuses
         $filter = new MachineJobQueryOptions();
@@ -188,13 +188,13 @@ class MachineJobQueryOptionTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_returns_empty_when_filter_status_value_is_not_present(): void
     {
-        $user_id = \random_int(1, 10);
+        $user_id = random_int(1, 10);
 
-        factory(MachineJob::class, \random_int(2, 50))->create(['user_id' => $user_id]);
+        factory(MachineJob::class, random_int(2, 50))->create(['user_id' => $user_id]);
 
         // Assert filter with a non existing value returns zero/nothing
         $filter = new MachineJobQueryOptions();
@@ -209,21 +209,21 @@ class MachineJobQueryOptionTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_filter_jobs_by_start_date_period(): void
     {
-        $user_id = \random_int(1, 10);
+        $user_id = random_int(1, 10);
 
         $startedAtDate = $this->faker->dateTimeBetween('-1 year', 'now');
 
-        factory(MachineJob::class, \random_int(2, 100))->create(['user_id' => $user_id, 'started_at' => $startedAtDate]);
+        factory(MachineJob::class, random_int(2, 100))->create(['user_id' => $user_id, 'started_at' => $startedAtDate]);
 
         $filter = new MachineJobQueryOptions();
         $startDate = clone $startedAtDate;
-        $filter->start_date_period((new \DatePeriod(
-            $startDate->sub(new \DateInterval('P1M')),
-            new \DateInterval('P1D'),
+        $filter->start_date_period((new DatePeriod(
+            $startDate->sub(new DateInterval('P1M')),
+            new DateInterval('P1D'),
             $startedAtDate
         )
         ));
@@ -233,6 +233,6 @@ class MachineJobQueryOptionTest extends TestCase
         // Assert filtered value is picked up and other types not
         $this->assertInstanceOf(Collection::class, $result);
         $this->assertGreaterThan($startDate, $startedAtDate);
-        $this->assertLessThan(new \DateTime(), $startedAtDate);
+        $this->assertLessThan(new DateTime(), $startedAtDate);
     }
 }

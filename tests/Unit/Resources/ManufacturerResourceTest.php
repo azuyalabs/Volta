@@ -35,7 +35,7 @@ class ManufacturerResourceTest extends TestCase
             ]
         ], $resource);
 
-        $this->assertArraySubset(['links' => ['self' => \getenv('APP_URL') . '/api/manufacturers/' . $manufacturer->slug]], $resource);
+        $this->assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/manufacturers/' . $manufacturer->slug]], $resource);
 
         $this->assertArraySubset(['meta' => ['country.name' => app(CountryRepository::class)->getName($manufacturer->country)]], $resource);
     }

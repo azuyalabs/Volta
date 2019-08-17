@@ -57,7 +57,7 @@ class MonitorEndpointTest extends PrinterMonitorController
         $response->assertStatus(201);
         $response->assertJson([
             'status' => 'ok',
-            'message' => \sprintf('Data for printer `%s` successfully received.', $printer)
+            'message' => sprintf('Data for printer `%s` successfully received.', $printer)
         ]);
     }
 
@@ -71,13 +71,13 @@ class MonitorEndpointTest extends PrinterMonitorController
     private function encryptPrinterID($data, $key): string
     {
         // Generate an initialization vector
-        $iv = \openssl_random_pseudo_bytes(\openssl_cipher_iv_length('aes-256-cfb8'));
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cfb8'));
 
         // Encrypt the data using AES 256 encryption in CFB8 mode using our encryption key and initialization vector.
-        $encrypted = \openssl_encrypt($data, 'aes-256-cfb8', $key, 1, $iv);
+        $encrypted = openssl_encrypt($data, 'aes-256-cfb8', $key, 1, $iv);
 
         // The $iv is just as important as the key for decrypting, so save it with our encrypted data using a unique separator (::)
-        return \base64_encode($encrypted . '::' . $iv);
+        return base64_encode($encrypted . '::' . $iv);
     }
 
     /** @test */

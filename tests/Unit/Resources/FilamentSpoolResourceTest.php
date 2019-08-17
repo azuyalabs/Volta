@@ -53,6 +53,6 @@ class FilamentSpoolResourceTest extends TestCase
             ]
         ], $resource);
 
-        $this->assertArraySubset(['links' => ['self' => \getenv('APP_URL') . '/api/filamentspools/' . $spool->uuid_text]], $resource);
+        $this->assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/filamentspools/' . $spool->uuid_text]], $resource);
     }
 }

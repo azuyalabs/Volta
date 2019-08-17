@@ -33,6 +33,6 @@ class ProductResourceTest extends TestCase
 
         $this->assertInstanceOf(ManufacturerResource::class, $resource['attributes']['manufacturer']);
 
-        $this->assertArraySubset(['links' => ['self' => \getenv('APP_URL') . '/api/products/' . $product->slug]], $resource);
+        $this->assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/products/' . $product->slug]], $resource);
     }
 }
