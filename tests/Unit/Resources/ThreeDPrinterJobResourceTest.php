@@ -25,7 +25,7 @@ use App\Http\Resources\ThreeDPrinterJobResource;
 class ThreeDPrinterJobResourceTest extends TestCase
 {
     /** @test */
-    public function it_can_return_a_correct_response()
+    public function it_can_return_a_correct_response(): void
     {
         $resource = (new ThreeDPrinterJobResource($job = factory('App\MachineJob')->create(['type' => MachineJobType::THREE_D_PRINTER])))->jsonSerialize();
 

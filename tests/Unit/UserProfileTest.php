@@ -24,7 +24,7 @@ use App\UserProfile;
 class UserProfileTest extends TestCase
 {
     /** @test */
-    public function it_can_get_preferences_of_a_user()
+    public function it_can_get_preferences_of_a_user(): void
     {
         $user = User::find(1);
 

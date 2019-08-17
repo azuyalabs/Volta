@@ -18,7 +18,7 @@ use App\Http\Resources\ManufacturerResource;
 
 class ManufacturerResourceTest extends TestCase
 {
-    public function testCorrectDataIsReturnedInResponse()
+    public function testCorrectDataIsReturnedInResponse(): void
     {
         $resource = (new ManufacturerResource($manufacturer = factory('App\Manufacturer')->create()))->jsonSerialize();
 

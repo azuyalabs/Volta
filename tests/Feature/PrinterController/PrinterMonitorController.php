@@ -42,7 +42,7 @@ class PrinterMonitorController extends TestCase
      *
      * @param TestResponse $response
      */
-    public function assertUnauthenticated(TestResponse $response)
+    public function assertUnauthenticated(TestResponse $response): void: void
     {
         $response->assertStatus(401);
         $response->assertJson(['message' => 'Unauthenticated.']);

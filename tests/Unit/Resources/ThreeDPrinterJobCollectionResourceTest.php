@@ -25,7 +25,7 @@ use App\Http\Resources\ThreeDPrinterJobCollectionResource;
 class ThreeDPrinterJobCollectionResourceTest extends TestCase
 {
     /** @test */
-    public function it_can_return_a_correct_response()
+    public function it_can_return_a_correct_response(): void
     {
         $resource = (new ThreeDPrinterJobCollectionResource($jos = factory('App\MachineJob', 2)->create()))->jsonSerialize();
 

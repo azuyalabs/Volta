@@ -18,7 +18,7 @@ use App\Http\Resources\ManufacturerResource;
 
 class ProductResourceTest extends TestCase
 {
-    public function testCorrectDataIsReturnedInResponse()
+    public function testCorrectDataIsReturnedInResponse(): void
     {
         $resource = (new ProductResource($product = factory('App\Product')->create(['manufacturer_id' => factory('App\Manufacturer')->create()])))->jsonSerialize();
 

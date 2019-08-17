@@ -23,7 +23,7 @@ use Tests\TestCase;
 class UserTest extends TestCase
 {
     /** @test */
-    public function it_can_generate_an_api_token()
+    public function it_can_generate_an_api_token(): void
     {
         $user = factory(User::class)->create(['api_token' => null]);
 

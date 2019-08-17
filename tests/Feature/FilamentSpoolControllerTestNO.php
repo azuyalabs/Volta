@@ -22,7 +22,7 @@ class FilamentSpoolControllerTestNO extends TestCase
      *
      * @return void
      */
-    public function nottestIndexSuccess()
+    public function nottestIndexSuccess(): void
     {
         $user = factory(User::class)->create();
 

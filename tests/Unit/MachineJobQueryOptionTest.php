@@ -33,7 +33,7 @@ class MachineJobQueryOptionTest extends TestCase
      *
      * @throws \Exception
      */
-    public function it_can_filter_jobs_by_type()
+    public function it_can_filter_jobs_by_type(): void
     {
         $user_id = \random_int(1, 10);
         $type    = MachineJobType::THREE_D_PRINTER;
@@ -56,7 +56,7 @@ class MachineJobQueryOptionTest extends TestCase
      *
      * @throws \Exception
      */
-    public function it_returns_empty_when_filter_type_value_is_not_present()
+    public function it_returns_empty_when_filter_type_value_is_not_present(): void
     {
         $user_id = \random_int(1, 10);
         $type    = MachineJobType::LASER;
@@ -78,7 +78,7 @@ class MachineJobQueryOptionTest extends TestCase
      *
      * @throws \Exception
      */
-    public function it_can_filter_jobs_by_machines()
+    public function it_can_filter_jobs_by_machines(): void
     {
         $user_id = \random_int(1, 10);
 
@@ -102,7 +102,7 @@ class MachineJobQueryOptionTest extends TestCase
      *
      * @throws \Exception
      */
-    public function it_can_filter_jobs_by_multiple_machines()
+    public function it_can_filter_jobs_by_multiple_machines(): void
     {
         $user_id = \random_int(1, 10);
 
@@ -125,7 +125,7 @@ class MachineJobQueryOptionTest extends TestCase
      *
      * @throws \Exception
      */
-    public function it_returns_empty_when_filter_machines_value_is_not_present()
+    public function it_returns_empty_when_filter_machines_value_is_not_present(): void
     {
         $user_id = \random_int(1, 10);
 
@@ -147,7 +147,7 @@ class MachineJobQueryOptionTest extends TestCase
      *
      * @throws \Exception
      */
-    public function it_can_filter_jobs_by_statuses()
+    public function it_can_filter_jobs_by_statuses(): void
     {
         $user_id = \random_int(1, 10);
 
@@ -168,7 +168,7 @@ class MachineJobQueryOptionTest extends TestCase
      *
      * @throws \Exception
      */
-    public function it_can_filter_jobs_by_multiple_statuses()
+    public function it_can_filter_jobs_by_multiple_statuses(): void
     {
         $user_id = \random_int(1, 10);
 
@@ -190,7 +190,7 @@ class MachineJobQueryOptionTest extends TestCase
      *
      * @throws \Exception
      */
-    public function it_returns_empty_when_filter_status_value_is_not_present()
+    public function it_returns_empty_when_filter_status_value_is_not_present(): void
     {
         $user_id = \random_int(1, 10);
 
@@ -211,7 +211,7 @@ class MachineJobQueryOptionTest extends TestCase
      *
      * @throws \Exception
      */
-    public function it_can_filter_jobs_by_start_date_period()
+    public function it_can_filter_jobs_by_start_date_period(): void
     {
         $user_id = \random_int(1, 10);
 

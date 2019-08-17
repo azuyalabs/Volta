@@ -27,7 +27,7 @@ class VerifyEndpointTest extends PrinterMonitorController
     private const API_ENDPOINT = '/api/printer/verify';
 
     /** @test */
-    public function it_can_correctly_verify_the_client()
+    public function it_can_correctly_verify_the_client(): void: void
     {
         $user = factory(User::class)->create();
 
@@ -41,7 +41,7 @@ class VerifyEndpointTest extends PrinterMonitorController
     }
 
     /** @test */
-    public function it_returns_400_status_when_user_agent_header_is_not_present()
+    public function it_returns_400_status_when_user_agent_header_is_not_present(): void: void
     {
         $user = factory(User::class)->create();
 
@@ -55,7 +55,7 @@ class VerifyEndpointTest extends PrinterMonitorController
     }
 
     /** @test */
-    public function it_rejects_access_when_user_agent_header_is_incorrect()
+    public function it_rejects_access_when_user_agent_header_is_incorrect(): void
     {
         $user = factory(User::class)->create();
 
@@ -68,7 +68,7 @@ class VerifyEndpointTest extends PrinterMonitorController
     }
 
     /** @test */
-    public function it_rejects_access_when_no_credentials_are_provided()
+    public function it_rejects_access_when_no_credentials_are_provided(): void
     {
         $response = $this->withHeaders([
             'Accept'     => self::ACCEPT_HEADER,
@@ -79,7 +79,7 @@ class VerifyEndpointTest extends PrinterMonitorController
     }
 
     /** @test */
-    public function it_returns_406_status_when_accept_header_is_not_supported()
+    public function it_returns_406_status_when_accept_header_is_not_supported(): void
     {
         $user = factory(User::class)->create();
 

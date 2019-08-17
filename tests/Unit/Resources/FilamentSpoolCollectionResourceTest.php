@@ -25,7 +25,7 @@ use App\Http\Resources\FilamentSpoolCollectionResource;
 class FilamentSpoolCollectionResourceTest extends TestCase
 {
     /** @test */
-    public function it_can_return_a_correct_response()
+    public function it_can_return_a_correct_response(): void
     {
         $resource = (new FilamentSpoolCollectionResource($spools = factory('App\FilamentSpool', 2)->create()))->jsonSerialize();
 

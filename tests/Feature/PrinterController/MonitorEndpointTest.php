@@ -24,7 +24,7 @@ class MonitorEndpointTest extends PrinterMonitorController
     private const API_ENDPOINT = '/api/printer/monitor';
 
     /** @test */
-    public function it_returns_405_status_when_unsupported_method_is_used()
+    public function it_returns_405_status_when_unsupported_method_is_used(): void: void
     {
         $user = factory(User::class)->create();
 
@@ -37,7 +37,7 @@ class MonitorEndpointTest extends PrinterMonitorController
     }
 
     /** @test */
-    public function it_can_submit_monitor_data_correctly()
+    public function it_can_submit_monitor_data_correctly(): void: void
     {
         $user    = factory(User::class)->create();
         $printer = 'ender3@192.168.1.10:5000';
@@ -68,7 +68,7 @@ class MonitorEndpointTest extends PrinterMonitorController
      * @param $key string the encryption key (the users' API token)
      * @return string string the encrypted printer address
      */
-    private function encryptPrinterID($data, $key)
+    private function encryptPrinterID($data, $key): string: string
     {
         // Generate an initialization vector
         $iv = \openssl_random_pseudo_bytes(\openssl_cipher_iv_length('aes-256-cfb8'));
@@ -81,7 +81,7 @@ class MonitorEndpointTest extends PrinterMonitorController
     }
 
     /** @test */
-    public function it_returns_422_status_when_using_invalid_printer_id()
+    public function it_returns_422_status_when_using_invalid_printer_id(): void: void
     {
         $user    = factory(User::class)->create();
         $printer = 'mk25@192.168.1.10:5000';
@@ -108,7 +108,7 @@ class MonitorEndpointTest extends PrinterMonitorController
     }
 
     /** @test */
-    public function it_returns_422_status_when_no_data_is_submitted()
+    public function it_returns_422_status_when_no_data_is_submitted(): void: void
     {
         $user = factory(User::class)->create();
 

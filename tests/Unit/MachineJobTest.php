@@ -25,7 +25,7 @@ use Tests\TestCase;
 class MachineJobTest extends TestCase
 {
     /** @test */
-    public function it_can_correctly_establish_the_job_id()
+    public function it_can_correctly_establish_the_job_id(): void
     {
         $job = factory(MachineJob::class)->create();
 
