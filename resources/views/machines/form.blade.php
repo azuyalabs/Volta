@@ -29,7 +29,7 @@
     {!! Form::label('acquisition_cost', __('machines.acquisition_cost'), ['class' => 'col-md-4 control-label']); !!}
     <div class="input-group col-md-6">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="acquisition_cost_currency">@CurrencySymbol(Auth::_user()->profile->currency)</span>
+            <span class="input-group-text" id="acquisition_cost_currency">@CurrencySymbol(Auth::user()->profile->currency)</span>
         </div>
         {!! Form::number('acquisition_cost', isset($machine) ? $machine->acquisition_cost->formatByDecimal() : 0, ['class' => $errors->has('acquisition_cost') ? 'form-control is-invalid' : 'form-control', 'id'=> 'acquisition_cost', 'aria-label' => __('machines.acquisition_cost'), 'aria-describedby' => 'acquisition_cost_currency']); !!}
         <small id="acquisition_costHelpBlock" class="form-text text-muted w-100">
@@ -44,7 +44,7 @@
     <div class="input-group col-md-6">
         <div class="input-group-prepend">
             <span class="input-group-text"
-                  id="residual_value_currency">@CurrencySymbol(Auth::_user()->profile->currency)</span>
+                  id="residual_value_currency">@CurrencySymbol(Auth::user()->profile->currency)</span>
         </div>
         {!! Form::number('residual_value', isset($machine) ? $machine->residual_value->formatByDecimal() : 0, ['class' => $errors->has('residual_value') ? 'form-control is-invalid' : 'form-control', 'id'=> 'residual_value', 'aria-label' => __('machines.residual_value'), 'aria-describedby' => 'residual_value_currency']); !!}
         <small id="residual_valueHelpBlock" class="form-text text-muted w-100">
@@ -58,7 +58,7 @@
     {!! Form::label('maintenance_cost', __('machines.maintenance_cost'), ['class' => 'col-md-4 control-label']); !!}
     <div class="input-group col-md-6">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="maintenance_cost_currency">@CurrencySymbol(Auth::_user()->profile->currency)</span>
+            <span class="input-group-text" id="maintenance_cost_currency">@CurrencySymbol(Auth::user()->profile->currency)</span>
         </div>
         {!! Form::number('maintenance_cost', isset($machine) ? $machine->maintenance_cost->formatByDecimal() : 0, ['class' => $errors->has('maintenance_cost') ? 'form-control is-invalid' : 'form-control', 'id'=> 'maintenance_cost', 'aria-label' => __('machines.maintenance_cost'), 'aria-describedby' => 'maintenance_cost_currency']); !!}
         <small id="maintenance_costHelpBlock" class="form-text text-muted w-100">

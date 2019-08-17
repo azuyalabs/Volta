@@ -8,7 +8,7 @@
     @lang('profile.subtitle')
 @endsection
 @section('page-content')
-    <form method="POST" action="{{ url('/profile/' . $_user->id) }}" accept-charset="UTF-8"
+    <form method="POST" action="{{ url('/profile/' . $user->id) }}" accept-charset="UTF-8"
           enctype="multipart/form-data">
         {{ method_field('PATCH') }}
         @csrf
@@ -18,7 +18,7 @@
             <div class="col-md-6">
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}" name="name" type="text"
                        id="name"
-                       value="{{ $_user->name }}" required>
+                       value="{{ $user->name }}" required>
                 {!! $errors->first('name', '<p class="invalid-feedback">:message</p>') !!}
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="col-md-6">
                 <input class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" name="email" type="email"
                        id="email"
-                       value="{{ $_user->email }}" required>
+                       value="{{ $user->email }}" required>
                 {!! $errors->first('email', '<p class="invalid-feedback">:message</p>') !!}
             </div>
         </div>
@@ -36,7 +36,7 @@
             <div class="col-md-6">
                 <input class="form-control {{ $errors->has('api_token') ? 'is-invalid' : ''}}" name="api_token"
                        type="text" id="api_token"
-                       value="{{ $_user->api_token }}" required disabled>
+                       value="{{ $user->api_token }}" required disabled>
                 <small id="apiTokenHelpBlock" class="form-text text-muted">
                     @lang('profile.apiTokenHelpBlock')
                 </small>
@@ -50,7 +50,7 @@
                         class="form-control {{ $errors->has('language') ? 'is-invalid' : ''}}"
                         id="language" disabled>
                     @foreach (['en-US' => 'English', 'ja-JP' => 'Japanese'] as $optionKey => $optionValue)
-                        <option value="{{ $optionKey }}" {{ (isset($_user->profile->language) && $_user->profile->language === $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
+                        <option value="{{ $optionKey }}" {{ (isset($user->profile->language) && $user->profile->language === $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
                     @endforeach
                 </select>
                 <small id="languageHelpBlock" class="form-text text-muted">
@@ -64,7 +64,7 @@
             <div class="col-md-6">
                 <input class="form-control {{ $errors->has('city') ? 'is-invalid' : ''}}" name="city" type="text"
                        id="city"
-                       value="{{ $_user->profile->city }}">
+                       value="{{ $user->profile->city }}">
                 <small id="cityHelpBlock" class="form-text text-muted">
                     @lang('profile.cityHelpBlock')
                 </small>
@@ -78,7 +78,7 @@
                         class="form-control {{ $errors->has('country') ? 'is-invalid' : ''}}"
                         id="country">
                     @foreach (Punic\Territory::getCountries() as $optionKey => $optionValue)
-                        <option value="{{ $optionKey }}" {{ (isset($_user->profile->country) && $_user->profile->country === $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
+                        <option value="{{ $optionKey }}" {{ (isset($user->profile->country) && $user->profile->country === $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
                     @endforeach
                 </select>
                 <small id="countryHelpBlock" class="form-text text-muted">
@@ -94,7 +94,7 @@
                         class="form-control {{ $errors->has('currency') ? 'is-invalid' : ''}}"
                         id="currency">
                     @foreach (Punic\Currency::getAllCurrencies() as $optionKey => $optionValue)
-                        <option value="{{ $optionKey }}" {{ (isset($_user->profile->currency) && $_user->profile->currency === $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
+                        <option value="{{ $optionKey }}" {{ (isset($user->profile->currency) && $user->profile->currency === $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
                     @endforeach
                 </select>
                 <small id="currencyHelpBlock" class="form-text text-muted">
