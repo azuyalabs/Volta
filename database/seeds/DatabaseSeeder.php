@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    private function createDefaultUser() : void
+    private function createDefaultUser(): void
     {
         $admin = User::create([
             'name'           => 'Alessandro Volta',
@@ -54,11 +54,12 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
             'api_token'      => Str::random(32),
         ]);
-        
+
         $preferences['dashboard']['clock']['type']                = 'analog';
         $preferences['dashboard']['weather']['system_of_measure'] = 'metric';
 
-        $profile = UserProfile::create([
+        $profile = new UserProfile();
+        $profile->fill([
             'currency'    => 'USD',
             'language'    => 'en-US',
             'country'     => 'IT',
@@ -68,10 +69,9 @@ class DatabaseSeeder extends Seeder
 
         $admin->profile()->save($profile);
 
-
         $adminRoleName = 'admin';
-        $role          = Role::create(['name' => $adminRoleName]);
-        
+        Role::create(['name' => $adminRoleName]);
+
         $admin->assignRole($adminRoleName);
     }
 }

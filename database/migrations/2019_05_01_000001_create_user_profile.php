@@ -32,9 +32,8 @@ class CreateUserProfile extends Migration
     public function up(): void
     {
         if (!Schema::hasTable(self::TABLE_NAME)) {
-            Schema::create(self::TABLE_NAME, function (Blueprint $table) {
-                $table->integer('user_id')->unsigned()->nullable();
-
+            Schema::create(self::TABLE_NAME, static function (Blueprint $table) {
+                $table->unsignedInteger('user_id');
                 $table->char('currency', 3)->default('USD');
                 $table->char('language', 5)->default('en-US');
                 $table->char('country', 2)->default('US');
