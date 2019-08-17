@@ -219,7 +219,7 @@ class MachineJobQueryOptionTest extends TestCase
     {
         $user_id = random_int(1, 10);
 
-        $startedAtDate = $this->faker->dateTimeBetween('-1 year', 'now');
+        $startedAtDate = $this->faker->dateTimeBetween('-1 year');
 
         factory(MachineJob::class, random_int(2, 100))->create(['user_id' => $user_id, 'started_at' => $startedAtDate]);
 
