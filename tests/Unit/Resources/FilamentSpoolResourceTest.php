@@ -12,9 +12,11 @@
 
 namespace Tests\Unit;
 
+use App\User;
 use Tests\TestCase;
-use App\Http\Resources\FilamentSpoolResource;
 use App\FilamentSpool;
+use App\Http\Resources\FilamentSpoolResource;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 
 /**
  * Class containing cases for testing the Filament Spool Resource class.
@@ -23,14 +25,20 @@ use App\FilamentSpool;
  */
 class FilamentSpoolResourceTest extends TestCase
 {
-    /** @test */
+    use ArraySubsetAsserts;
+
+    /** @test
+     *
+     * @throws \Exception
+     */
     public function it_can_return_a_correct_response(): void
     {
-        $resource = (new FilamentSpoolResource($spool = factory(FilamentSpool::class)->create()))->jsonSerialize();
+        $user     = factory(User::class)->create();
+        $resource = (new FilamentSpoolResource($spool = factory(FilamentSpool::class)->create(['user_id' => $user->id])))->jsonSerialize();
 
-        $this->assertArraySubset(['type' => 'filamentspools', 'id' => $spool->uuid_text], $resource);
+        self::assertArraySubset(['type' => 'filamentspools', 'id' => $spool->id], $resource);
 
-        $this->assertArraySubset([
+        self::assertArraySubset([
             'attributes' => [
                 'name'           => $spool->name,
                 'manufacturer'   => $spool->manufacturer->name,
@@ -54,6 +62,6 @@ class FilamentSpoolResourceTest extends TestCase
             ]
         ], $resource);
 
-        $this->assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/filamentspools/' . $spool->uuid_text]], $resource);
+        self::assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/filamentspools/' . $spool->id]], $resource);
     }
 }

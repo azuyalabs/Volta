@@ -12,21 +12,29 @@
 
 namespace Tests\Unit;
 
+use App\Product;
 use Tests\TestCase;
+use App\Manufacturer;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ManufacturerResource;
-use App\Manufacturer;
-use App\Product;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 
 class ProductResourceTest extends TestCase
 {
+    use ArraySubsetAsserts;
+
+    /**
+     * @test
+     *
+     * @throws \Exception
+     */
     public function testCorrectDataIsReturnedInResponse(): void
     {
         $resource = (new ProductResource($product = factory(Product::class)->create(['manufacturer_id' => factory(Manufacturer::class)->create()])))->jsonSerialize();
 
-        $this->assertArraySubset(['type' => 'products'], $resource);
+        self::assertArraySubset(['type' => 'products'], $resource);
 
-        $this->assertArraySubset([
+        self::assertArraySubset([
             'attributes' => [
                 'id'   => $product->slug,
                 'name' => $product->name,
@@ -35,6 +43,6 @@ class ProductResourceTest extends TestCase
 
         $this->assertInstanceOf(ManufacturerResource::class, $resource['attributes']['manufacturer']);
 
-        $this->assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/products/' . $product->slug]], $resource);
+        self::assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/products/' . $product->slug]], $resource);
     }
 }

@@ -13,19 +13,27 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use App\Manufacturer;
 use App\Repositories\CountryRepository;
 use App\Http\Resources\ManufacturerResource;
-use App\Manufacturer;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 
 class ManufacturerResourceTest extends TestCase
 {
+    use ArraySubsetAsserts;
+
+    /**
+     * @test
+     *
+     * @throws \Exception
+     */
     public function testCorrectDataIsReturnedInResponse(): void
     {
         $resource = (new ManufacturerResource($manufacturer = factory(Manufacturer::class)->create()))->jsonSerialize();
 
-        $this->assertArraySubset(['type' => 'manufacturers'], $resource);
+        self::assertArraySubset(['type' => 'manufacturers'], $resource);
 
-        $this->assertArraySubset([
+        self::assertArraySubset([
             'attributes' => [
                 'id'                 => $manufacturer->slug,
                 'name'               => $manufacturer->name,
@@ -36,8 +44,8 @@ class ManufacturerResourceTest extends TestCase
             ]
         ], $resource);
 
-        $this->assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/manufacturers/' . $manufacturer->slug]], $resource);
+        self::assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/manufacturers/' . $manufacturer->slug]], $resource);
 
-        $this->assertArraySubset(['meta' => ['country.name' => app(CountryRepository::class)->getName($manufacturer->country)]], $resource);
+        self::assertArraySubset(['meta' => ['country.name' => app(CountryRepository::class)->getName($manufacturer->country)]], $resource);
     }
 }

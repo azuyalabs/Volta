@@ -12,6 +12,7 @@
 
 namespace Tests\Unit;
 
+use App\User;
 use DateTime;
 use Exception;
 use DatePeriod;
@@ -23,7 +24,6 @@ use App\MachineJobType;
 use App\MachineJobStatus;
 use App\Repositories\MachineJobRepository;
 use App\QueryOptions\MachineJobQueryOptions;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class containing cases for testing the Machine Job Query Option class.
@@ -32,6 +32,29 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class MachineJobQueryOptionTest extends TestCase
 {
+    /**
+     * @var User $user user instance to use for creating Spool instances
+     */
+    private $_user;
+
+    /** @inheritDoc */
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->_user    = factory(User::class)->create();
+        factory(Machine::class, 50)->create(['user_id' => $this->_user->id]);
+    }
+
+    /** @inheritDoc
+     *
+     * @throws \Throwable
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        $this->_user    = null;
+    }
+
     /**
      * @test
      *
@@ -42,7 +65,9 @@ class MachineJobQueryOptionTest extends TestCase
         $user_id = random_int(1, 10);
         $type    = MachineJobType::THREE_D_PRINTER;
 
-        factory(MachineJob::class, random_int(2, 50))->create(['user_id' => $user_id]);
+        //factory(MachineJob::class, random_int(2, 50))->create(['user_id' => $user_id, 'machine_id' => $this->_machine]);
+
+        $this->generateMachineJobs([], random_int(2, 50));
 
         $filter = new MachineJobQueryOptions();
         $filter->type($type);
@@ -50,7 +75,6 @@ class MachineJobQueryOptionTest extends TestCase
         $result = (new MachineJobRepository())->all($user_id, $filter);
 
         // Assert filtered value is picked up and other types not
-        $this->assertInstanceOf(Collection::class, $result);
         $this->assertSame($type, $result->pluck('type')->first());
         $this->assertNotSame(MachineJobType::LASER, $result->pluck('type')->first());
     }
@@ -97,7 +121,6 @@ class MachineJobQueryOptionTest extends TestCase
         $result  = (new MachineJobRepository())->all($user_id, $filter);
         $machine = $result->pluck('machine_id')->first() ?? $machines->first(); // Little hack :(
 
-        $this->assertInstanceOf(Collection::class, $result);
         $this->assertSame($machines->first(), $machine);
     }
 
@@ -120,7 +143,6 @@ class MachineJobQueryOptionTest extends TestCase
 
         $result = (new MachineJobRepository())->all($user_id, $filter);
 
-        $this->assertInstanceOf(Collection::class, $result);
         $this->assertNotEmpty(array_intersect($machines->toArray(), $result->pluck('machine_id')->all()));
     }
 
@@ -163,7 +185,6 @@ class MachineJobQueryOptionTest extends TestCase
 
         $result = (new MachineJobRepository())->all($user_id, $filter);
 
-        $this->assertInstanceOf(Collection::class, $result);
         $this->assertSame(MachineJobStatus::SUCCESS, $result->pluck('status')->first());
     }
 
@@ -184,7 +205,6 @@ class MachineJobQueryOptionTest extends TestCase
 
         $result = (new MachineJobRepository())->all($user_id, $filter);
 
-        $this->assertInstanceOf(Collection::class, $result);
         $this->assertContains(MachineJobStatus::SUCCESS, $result->pluck('status')->all());
         $this->assertNotContains(MachineJobStatus::IN_PROGRESS, $result->pluck('status')->all());
     }
@@ -234,8 +254,22 @@ class MachineJobQueryOptionTest extends TestCase
         $result = (new MachineJobRepository())->all($user_id, $filter);
 
         // Assert filtered value is picked up and other types not
-        $this->assertInstanceOf(Collection::class, $result);
         $this->assertGreaterThan($startDate, $startedAtDate);
         $this->assertLessThan(new DateTime(), $startedAtDate);
+    }
+
+    /**
+     * Creates test MachineJob instances with the given attribute values and given quantity
+     *
+     * @param array $modelData model attribute values
+     * @param int $amount number of instances to generate
+     */
+    private function generateMachineJobs(array $modelData = [], int $amount = 5)
+    {
+        $data               = ['user_id' => $this->_user->id];
+        $data['machine_id'] = $this->faker->randomElement(Machine::all()->pluck('id')->toArray());
+        $data               = array_merge($data, $modelData);
+
+        factory(MachineJob::class, $amount)->create($data);
     }
 }
