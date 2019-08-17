@@ -34,20 +34,4 @@ class MachineJobTest extends TestCase
         $this->assertIsString($job_id);
         $this->assertSame(16, \strlen($job_id));
     }
-
-    /** @test */
-    public function it_has_a_user_relationship()
-    {
-        $job = factory(MachineJob::class)->create();
-
-        $this->assertInstanceOf(User::class, $job->user);
-    }
-
-    /** @test */
-    public function it_has_a_machine_relationship()
-    {
-        $job = factory(MachineJob::class)->create();
-
-        $this->assertInstanceOf(Machine::class, $job->machine);
-    }
 }

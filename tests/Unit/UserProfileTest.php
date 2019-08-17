@@ -32,11 +32,4 @@ class UserProfileTest extends TestCase
         $this->assertArrayHasKey('dashboard', $user->profile->preferences);
     }
 
-    /** @test */
-    public function it_has_user_relationship()
-    {
-        $profile = UserProfile::where('user_id', 1)->first();
-
-        $this->assertInstanceOf(User::class, $profile->user);
-    }
 }
