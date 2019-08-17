@@ -12,8 +12,8 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use App\Http\Resources\FilamentSpoolResource;
+use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Filament Spool Resource class.
@@ -31,24 +31,24 @@ class FilamentSpoolResourceTest extends TestCase
 
         $this->assertArraySubset([
             'attributes' => [
-                'name'           => $spool->name,
-                'manufacturer'   => $spool->manufacturer->name,
-                'material'       => $spool->material,
-                'weight'         => $spool->weight,
-                'diameter'       => $spool->diameter,
-                'density'        => $spool->density,
-                'color'          => $spool->color,
-                'color_value'    => $spool->color_value,
+                'name' => $spool->name,
+                'manufacturer' => $spool->manufacturer->name,
+                'material' => $spool->material,
+                'weight' => $spool->weight,
+                'diameter' => $spool->diameter,
+                'density' => $spool->density,
+                'color' => $spool->color,
+                'color_value' => $spool->color_value,
                 'purchase_price' => $spool->purchase_price,
-                'unit_price'     => [
-                    'length'   => $spool->priceperlength,
-                    'weight'   => $spool->priceperweight,
-                    'volume'   => $spool->pricepervolume,
+                'unit_price' => [
+                    'length' => $spool->priceperlength,
+                    'weight' => $spool->priceperweight,
+                    'volume' => $spool->pricepervolume,
                     'kilogram' => $spool->priceperkilogram
                 ],
                 'length' => [
                     'capacity' => $spool->length,
-                    'usage'    => $spool->usage,
+                    'usage' => $spool->usage,
                 ]
             ]
         ], $resource);

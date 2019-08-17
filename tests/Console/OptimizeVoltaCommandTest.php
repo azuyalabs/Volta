@@ -12,9 +12,9 @@
 
 namespace Tests\Console;
 
-use Tests\TestCase;
-use Spatie\ModelStatus\Status;
 use Illuminate\Support\Facades\DB;
+use Spatie\ModelStatus\Status;
+use Tests\TestCase;
 
 /**
  * Class for testing the volta:prune console command
@@ -29,7 +29,7 @@ class OptimizeVoltaCommandTest extends TestCase
     private const OPTIMIZE_COMMAND = 'volta:optimize';
 
     /** @test */
-    public function it_can_prune_stale_statuses(): void: void
+    public function it_can_prune_stale_statuses(): void
     {
         $samples = 100;
         factory(Status::class, $samples)->create();
@@ -40,14 +40,14 @@ class OptimizeVoltaCommandTest extends TestCase
         $this->artisan(self::OPTIMIZE_COMMAND)->expectsOutput('Old model statuses pruned.');
 
         $unique_models = DB::table('statuses')->distinct()->count('model_id');
-        $row_count     = DB::table('statuses')->count();
+        $row_count = DB::table('statuses')->count();
 
         $this->assertSame($row_count, Status::query()->count());
         $this->assertSame($unique_models, $row_count);
     }
 
     /** @test */
-    public function it_can_vacuum_the_database(): void: void
+    public function it_can_vacuum_the_database(): void
     {
         $this->artisan(self::OPTIMIZE_COMMAND)->expectsOutput('Database vacuumed.');
     }

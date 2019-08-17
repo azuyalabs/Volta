@@ -12,9 +12,9 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use App\Repositories\CountryRepository;
 use App\Http\Resources\ManufacturerResource;
+use App\Repositories\CountryRepository;
+use Tests\TestCase;
 
 class ManufacturerResourceTest extends TestCase
 {
@@ -26,11 +26,11 @@ class ManufacturerResourceTest extends TestCase
 
         $this->assertArraySubset([
             'attributes' => [
-                'id'                 => $manufacturer->slug,
-                'name'               => $manufacturer->name,
-                'country'            => $manufacturer->country,
-                'website'            => $manufacturer->website,
-                'filament_supplier'  => $manufacturer->filament_supplier,
+                'id' => $manufacturer->slug,
+                'name' => $manufacturer->name,
+                'country' => $manufacturer->country,
+                'website' => $manufacturer->website,
+                'filament_supplier' => $manufacturer->filament_supplier,
                 'equipment_supplier' => $manufacturer->equipment_supplier,
             ]
         ], $resource);

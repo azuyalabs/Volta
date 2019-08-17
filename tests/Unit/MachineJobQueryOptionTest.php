@@ -14,12 +14,12 @@ namespace Tests\Unit;
 
 use App\Machine;
 use App\MachineJob;
-use Tests\TestCase;
-use App\MachineJobType;
 use App\MachineJobStatus;
-use App\Repositories\MachineJobRepository;
+use App\MachineJobType;
 use App\QueryOptions\MachineJobQueryOptions;
+use App\Repositories\MachineJobRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Machine Job Query Option class.
@@ -36,7 +36,7 @@ class MachineJobQueryOptionTest extends TestCase
     public function it_can_filter_jobs_by_type(): void
     {
         $user_id = \random_int(1, 10);
-        $type    = MachineJobType::THREE_D_PRINTER;
+        $type = MachineJobType::THREE_D_PRINTER;
 
         factory(MachineJob::class, \random_int(2, 50))->create(['user_id' => $user_id]);
 
@@ -59,7 +59,7 @@ class MachineJobQueryOptionTest extends TestCase
     public function it_returns_empty_when_filter_type_value_is_not_present(): void
     {
         $user_id = \random_int(1, 10);
-        $type    = MachineJobType::LASER;
+        $type = MachineJobType::LASER;
 
         factory(MachineJob::class, \random_int(2, 50))->create(['user_id' => $user_id, 'type' => $type]);
 
@@ -90,7 +90,7 @@ class MachineJobQueryOptionTest extends TestCase
         $filter = new MachineJobQueryOptions();
         $filter->machines($machines->toArray());
 
-        $result  = (new MachineJobRepository())->all($user_id, $filter);
+        $result = (new MachineJobRepository())->all($user_id, $filter);
         $machine = $result->pluck('machine_id')->first() ?? $machines->first(); // Little hack :(
 
         $this->assertInstanceOf(Collection::class, $result);
@@ -132,7 +132,7 @@ class MachineJobQueryOptionTest extends TestCase
         factory(MachineJob::class, \random_int(2, 50))->create(['user_id' => $user_id]);
 
         // Assert filter with a non existing value returns zero/nothing
-        $id     = $this->faker->numberBetween(1000);
+        $id = $this->faker->numberBetween(1000);
         $filter = new MachineJobQueryOptions();
         $filter->machines([$id]);
 
@@ -219,7 +219,7 @@ class MachineJobQueryOptionTest extends TestCase
 
         factory(MachineJob::class, \random_int(2, 100))->create(['user_id' => $user_id, 'started_at' => $startedAtDate]);
 
-        $filter    = new MachineJobQueryOptions();
+        $filter = new MachineJobQueryOptions();
         $startDate = clone $startedAtDate;
         $filter->start_date_period((new \DatePeriod(
             $startDate->sub(new \DateInterval('P1M')),

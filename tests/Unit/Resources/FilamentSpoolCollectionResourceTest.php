@@ -12,8 +12,8 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use App\Http\Resources\FilamentSpoolCollectionResource;
+use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Filament Spool Resource Collection class.

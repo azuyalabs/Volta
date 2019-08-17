@@ -12,8 +12,6 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Machine;
 use App\MachineJob;
 use Tests\TestCase;
 

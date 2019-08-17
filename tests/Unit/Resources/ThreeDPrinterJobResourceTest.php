@@ -12,10 +12,10 @@
 
 namespace Tests\Unit;
 
-use App\Machine;
-use Tests\TestCase;
-use App\MachineJobType;
 use App\Http\Resources\ThreeDPrinterJobResource;
+use App\Machine;
+use App\MachineJobType;
+use Tests\TestCase;
 
 /**
  * Class containing cases for testing the 3D Printer Job Resource class.
@@ -34,13 +34,13 @@ class ThreeDPrinterJobResourceTest extends TestCase
 
         $this->assertArraySubset([
             'attributes' => [
-                'name'       => $job->name,
-                'job_id'     => $job->job_id,
-                'status'     => $job->status,
-                'duration'   => $job->duration,
+                'name' => $job->name,
+                'job_id' => $job->job_id,
+                'status' => $job->status,
+                'duration' => $job->duration,
                 'started_at' => $job->started_at,
-                'machine'    => $job->machine,
-                'details'    => $job->details,
+                'machine' => $job->machine,
+                'details' => $job->details,
             ]
         ], $resource);
 

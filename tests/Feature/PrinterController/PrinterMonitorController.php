@@ -12,8 +12,8 @@
 
 namespace Tests\Feature\PrinterController;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\TestResponse;
+use Tests\TestCase;
 
 /**
  * Base Class containing for testing the Printer Monitor API endpoints.
@@ -42,7 +42,7 @@ class PrinterMonitorController extends TestCase
      *
      * @param TestResponse $response
      */
-    public function assertUnauthenticated(TestResponse $response): void: void
+    public function assertUnauthenticated(TestResponse $response): void
     {
         $response->assertStatus(401);
         $response->assertJson(['message' => 'Unauthenticated.']);

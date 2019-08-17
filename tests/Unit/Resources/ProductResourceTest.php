@@ -12,9 +12,9 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use App\Http\Resources\ProductResource;
 use App\Http\Resources\ManufacturerResource;
+use App\Http\Resources\ProductResource;
+use Tests\TestCase;
 
 class ProductResourceTest extends TestCase
 {
@@ -26,7 +26,7 @@ class ProductResourceTest extends TestCase
 
         $this->assertArraySubset([
             'attributes' => [
-                'id'   => $product->slug,
+                'id' => $product->slug,
                 'name' => $product->name,
             ]
         ], $resource);
