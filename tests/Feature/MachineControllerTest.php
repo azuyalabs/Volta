@@ -29,7 +29,7 @@ class MachineControllerTest extends TestCase
     public function it_can_display_a_list_of_machines(): void
     {
         $user     = factory(User::class)->create();
-        $machines = factory(Machine::class, 10)->create(['user_id' => $user->id]);
+        factory(Machine::class, 10)->create(['user_id' => $user->id]);
 
         $response = $this->actingAs($user)->get('/machines');
 
