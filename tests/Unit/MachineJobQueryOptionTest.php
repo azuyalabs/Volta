@@ -221,11 +221,10 @@ class MachineJobQueryOptionTest extends TestCase
 
         $filter = new MachineJobQueryOptions();
         $startDate = clone $startedAtDate;
-        $filter->start_date_period((new DatePeriod(
+        $filter->start_date_period(new DatePeriod(
             $startDate->sub(new DateInterval('P1M')),
             new DateInterval('P1D'),
             $startedAtDate
-        )
         ));
 
         $result = (new MachineJobRepository())->all($user_id, $filter);

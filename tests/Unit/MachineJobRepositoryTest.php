@@ -62,7 +62,7 @@ class MachineJobRepositoryTest extends TestCase
 
         $collection = factory(MachineJob::class, $samples)->create(['user_id' => $user_id]);
 
-        $result = (new MachineJobRepository())->all($user_id, (new MachineJobQueryOptions()));
+        $result = (new MachineJobRepository())->all($user_id, new MachineJobQueryOptions());
 
         $this->assertInstanceOf(Collection::class, $result);
         $this->assertSame($collection->count(), $result->count());
@@ -88,8 +88,8 @@ class MachineJobRepositoryTest extends TestCase
         $result = $repository->delete($job_id, $user_id);
 
         $this->assertTrue($result);
-        $this->assertSame($samples - 1, $repository->all($user_id, (new MachineJobQueryOptions()))->count());
-        $this->assertNotContains($job_id, $repository->all($user_id, (new MachineJobQueryOptions()))->pluck('uuid'));
+        $this->assertSame($samples - 1, $repository->all($user_id, new MachineJobQueryOptions())->count());
+        $this->assertNotContains($job_id, $repository->all($user_id, new MachineJobQueryOptions())->pluck('uuid'));
     }
 
     /**
@@ -129,7 +129,7 @@ class MachineJobRepositoryTest extends TestCase
         $job = factory(MachineJob::class)->create(); // Create a Machine Job record
 
         $repository = new MachineJobRepository();
-        $jobs_count = $repository->all($job->user_id, (new MachineJobQueryOptions()))->count(); // Get the number of records before creation
+        $jobs_count = $repository->all($job->user_id, new MachineJobQueryOptions())->count(); // Get the number of records before creation
 
         $request['status'] = $this->faker->randomElement([MachineJobStatus::SUCCESS, MachineJobStatus::FAILED, MachineJobStatus::IN_PROGRESS]);
         $request['job_id'] = $this->faker->ean13 . 'abc';
@@ -140,9 +140,9 @@ class MachineJobRepositoryTest extends TestCase
         $request['machine_id'] = $this->faker->randomElement(Machine::all()->pluck('id')->toArray());
         $request['details'] = json_encode($this->faker->shuffleArray([$this->faker->word, $this->faker->word, $this->faker->word]));
 
-        $result = $repository->store($job->user_id, (new MachineJobRequest($request)));
+        $result = $repository->store($job->user_id, new MachineJobRequest($request));
 
-        $this->assertSame($jobs_count + 1, $repository->all($job->user_id, (new MachineJobQueryOptions()))->count());
+        $this->assertSame($jobs_count + 1, $repository->all($job->user_id, new MachineJobQueryOptions())->count());
         $this->assertInstanceOf(MachineJob::class, $result);
         $this->assertSame($request['name'], $result->name);
         $this->assertSame($request['status'], $result->status);
