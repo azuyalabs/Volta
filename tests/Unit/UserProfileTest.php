@@ -13,8 +13,8 @@
 namespace Tests\Unit;
 
 use App\User;
-use App\UserProfile;
 use Tests\TestCase;
+use App\UserProfile;
 
 /**
  * Class containing cases for testing the User class.
@@ -31,5 +31,4 @@ class UserProfileTest extends TestCase
         $this->assertInstanceOf(UserProfile::class, $user->profile);
         $this->assertArrayHasKey('dashboard', $user->profile->preferences);
     }
-
 }

@@ -29,7 +29,7 @@ class MonitorEndpointTest extends PrinterMonitorController
         $user = factory(User::class)->create();
 
         $response = $this->withHeaders([
-            'Accept' => self::ACCEPT_HEADER,
+            'Accept'     => self::ACCEPT_HEADER,
             'User-Agent' => self::USER_AGENT
         ])->actingAs($user, self::GUARD)->get(self::API_ENDPOINT);
 
@@ -39,24 +39,24 @@ class MonitorEndpointTest extends PrinterMonitorController
     /** @test */
     public function it_can_submit_monitor_data_correctly(): void
     {
-        $user = factory(User::class)->create();
+        $user    = factory(User::class)->create();
         $printer = 'ender3@192.168.1.10:5000';
 
         $response = $this->withHeaders([
-            'Accept' => self::ACCEPT_HEADER,
+            'Accept'     => self::ACCEPT_HEADER,
             'User-Agent' => self::USER_AGENT
         ])->actingAs($user, self::GUARD)->post(
             self::API_ENDPOINT,
             [
-                'id' => $this->encryptPrinterID($printer, $user->api_token),
-                'name' => 'Ender 3',
+                'id'    => $this->encryptPrinterID($printer, $user->api_token),
+                'name'  => 'Ender 3',
                 'state' => 'offline'
             ]
         );
 
         $response->assertStatus(201);
         $response->assertJson([
-            'status' => 'ok',
+            'status'  => 'ok',
             'message' => sprintf('Data for printer `%s` successfully received.', $printer)
         ]);
     }
@@ -83,17 +83,17 @@ class MonitorEndpointTest extends PrinterMonitorController
     /** @test */
     public function it_returns_422_status_when_using_invalid_printer_id(): void
     {
-        $user = factory(User::class)->create();
+        $user    = factory(User::class)->create();
         $printer = 'mk25@192.168.1.10:5000';
 
         $response = $this->withHeaders([
-            'Accept' => self::ACCEPT_HEADER,
+            'Accept'     => self::ACCEPT_HEADER,
             'User-Agent' => self::USER_AGENT
         ])->actingAs($user, self::GUARD)->post(
             self::API_ENDPOINT,
             [
-                'id' => $this->encryptPrinterID($printer, $this->faker->word),
-                'name' => 'Prusa MK2.5',
+                'id'    => $this->encryptPrinterID($printer, $this->faker->word),
+                'name'  => 'Prusa MK2.5',
                 'state' => 'printing'
             ]
         );
@@ -113,15 +113,15 @@ class MonitorEndpointTest extends PrinterMonitorController
         $user = factory(User::class)->create();
 
         $response = $this->withHeaders([
-            'Accept' => self::ACCEPT_HEADER,
+            'Accept'     => self::ACCEPT_HEADER,
             'User-Agent' => self::USER_AGENT
         ])->actingAs($user, self::GUARD)->post(self::API_ENDPOINT);
 
         $response->assertStatus(422);
         $response->assertJson([
             'errors' => [
-                'id' => ['The id field is required.'],
-                'name' => ['The name field is required.'],
+                'id'    => ['The id field is required.'],
+                'name'  => ['The name field is required.'],
                 'state' => ['The state field is required.']
             ],
             'message' => 'The given data was invalid.'

@@ -12,10 +12,10 @@
 
 namespace Tests\Unit;
 
+use Tests\TestCase;
 use App\FilamentSpool;
 use Cknow\Money\Money;
 use Faker\Factory as Faker;
-use Tests\TestCase;
 use UnexpectedValueException;
 
 /**
@@ -206,7 +206,7 @@ class FilamentSpoolTest extends TestCase
     public function PricePerWeightDataProvider(): array
     {
         $otherData = $this->PricePerKilogramDataProvider();
-        $data = [];
+        $data      = [];
         foreach ($otherData as $sample) {
             $data[] = [$sample[0], $sample[1], (int)round($sample[0] / $sample[1])];
         }
@@ -221,7 +221,7 @@ class FilamentSpoolTest extends TestCase
         $data = [];
         for ($y = 1; $y <= self::ITERATIONS; $y++) {
             $purchase_price = Faker::create()->numberBetween(1, 500000);
-            $weight = Faker::create()->numberBetween(400, 5000);
+            $weight         = Faker::create()->numberBetween(400, 5000);
 
             $data[] = [$purchase_price, $weight, (int)round((1000 / $weight) * $purchase_price)];
         }
@@ -234,7 +234,7 @@ class FilamentSpoolTest extends TestCase
     public function PricePerVolumeDataProvider(): array
     {
         $otherData = $this->PricePerLengthDataProvider();
-        $data = [];
+        $data      = [];
         foreach ($otherData as $sample) {
             $data[] = [$sample[0], $sample[1], $sample[2], (int)round($sample[0] / ($sample[1] / $sample[2]))];
         }
@@ -247,10 +247,10 @@ class FilamentSpoolTest extends TestCase
     public function PricePerLengthDataProvider(): array
     {
         $lengthData = $this->LengthDataProvider();
-        $data = [];
+        $data       = [];
         foreach ($lengthData as $sample) {
             $purchase_price = Faker::create()->numberBetween(1, 500000);
-            $data[] = [$purchase_price, $sample[0], $sample[1], $sample[2], (int)round($purchase_price / $sample[3])];
+            $data[]         = [$purchase_price, $sample[0], $sample[1], $sample[2], (int)round($purchase_price / $sample[3])];
         }
         return $data;
     }
@@ -262,8 +262,8 @@ class FilamentSpoolTest extends TestCase
     {
         $data = [];
         for ($y = 1; $y <= self::ITERATIONS; $y++) {
-            $weight = Faker::create()->numberBetween(1, 5000);
-            $density = Faker::create()->randomFloat(2, 1, 5);
+            $weight   = Faker::create()->numberBetween(1, 5000);
+            $density  = Faker::create()->randomFloat(2, 1, 5);
             $diameter = Faker::create()->randomFloat(2, 1, 5);
 
             $data[] = [$weight, $density, $diameter, ($weight / $density) / (M_PI * (($diameter / 2) ** 2))];

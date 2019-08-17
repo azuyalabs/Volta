@@ -12,17 +12,17 @@
 
 namespace Tests\Unit;
 
-use App\Http\Requests\MachineJob as MachineJobRequest;
-use App\Machine;
-use App\MachineJob;
-use App\MachineJobStatus;
-use App\MachineJobType;
-use App\QueryOptions\MachineJobQueryOptions;
-use App\Repositories\MachineJobRepository;
 use DateTime;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
+use App\Machine;
+use App\MachineJob;
 use Tests\TestCase;
+use App\MachineJobType;
+use App\MachineJobStatus;
+use App\Repositories\MachineJobRepository;
+use App\QueryOptions\MachineJobQueryOptions;
+use Illuminate\Database\Eloquent\Collection;
+use App\Http\Requests\MachineJob as MachineJobRequest;
 
 /**
  * Class containing cases for testing the Machine Job Repository class.
@@ -101,12 +101,12 @@ class MachineJobRepositoryTest extends TestCase
 
         $repository = new MachineJobRepository();
 
-        $update['status'] = $this->faker->randomElement([MachineJobStatus::SUCCESS, MachineJobStatus::FAILED, MachineJobStatus::IN_PROGRESS]);
-        $update['name'] = $this->faker->word;
+        $update['status']     = $this->faker->randomElement([MachineJobStatus::SUCCESS, MachineJobStatus::FAILED, MachineJobStatus::IN_PROGRESS]);
+        $update['name']       = $this->faker->word;
         $update['started_at'] = $this->faker->dateTime();
-        $update['duration'] = $this->faker->numberBetween(0, 50000);
-        $update['type'] = $this->faker->randomElement([MachineJobType::THREE_D_PRINTER, MachineJobType::ROUTER, MachineJobType::LASER]);
-        $update['details'] = json_encode($this->faker->shuffleArray([$this->faker->word, $this->faker->word, $this->faker->word]));
+        $update['duration']   = $this->faker->numberBetween(0, 50000);
+        $update['type']       = $this->faker->randomElement([MachineJobType::THREE_D_PRINTER, MachineJobType::ROUTER, MachineJobType::LASER]);
+        $update['details']    = json_encode($this->faker->shuffleArray([$this->faker->word, $this->faker->word, $this->faker->word]));
 
         $request = new MachineJobRequest($update);
 
@@ -131,14 +131,14 @@ class MachineJobRepositoryTest extends TestCase
         $repository = new MachineJobRepository();
         $jobs_count = $repository->all($job->user_id, new MachineJobQueryOptions())->count(); // Get the number of records before creation
 
-        $request['status'] = $this->faker->randomElement([MachineJobStatus::SUCCESS, MachineJobStatus::FAILED, MachineJobStatus::IN_PROGRESS]);
-        $request['job_id'] = $this->faker->ean13 . 'abc';
-        $request['name'] = $this->faker->word;
+        $request['status']     = $this->faker->randomElement([MachineJobStatus::SUCCESS, MachineJobStatus::FAILED, MachineJobStatus::IN_PROGRESS]);
+        $request['job_id']     = $this->faker->ean13 . 'abc';
+        $request['name']       = $this->faker->word;
         $request['started_at'] = $this->faker->dateTime();
-        $request['duration'] = $this->faker->numberBetween(0, 50000);
-        $request['type'] = $this->faker->randomElement([MachineJobType::THREE_D_PRINTER, MachineJobType::ROUTER, MachineJobType::LASER]);
+        $request['duration']   = $this->faker->numberBetween(0, 50000);
+        $request['type']       = $this->faker->randomElement([MachineJobType::THREE_D_PRINTER, MachineJobType::ROUTER, MachineJobType::LASER]);
         $request['machine_id'] = $this->faker->randomElement(Machine::all()->pluck('id')->toArray());
-        $request['details'] = json_encode($this->faker->shuffleArray([$this->faker->word, $this->faker->word, $this->faker->word]));
+        $request['details']    = json_encode($this->faker->shuffleArray([$this->faker->word, $this->faker->word, $this->faker->word]));
 
         $result = $repository->store($job->user_id, new MachineJobRequest($request));
 
@@ -165,7 +165,7 @@ class MachineJobRepositoryTest extends TestCase
 
         factory(MachineJob::class, $samples)->create(['user_id' => $user_id]);
 
-        $filter = new MachineJobQueryOptions();
+        $filter       = new MachineJobQueryOptions();
         $filter->type = MachineJobType::THREE_D_PRINTER;
 
         $result = (new MachineJobRepository())->activity($user_id, $filter);
@@ -187,7 +187,7 @@ class MachineJobRepositoryTest extends TestCase
 
         factory(MachineJob::class, $samples)->create(['user_id' => $user_id, 'type' => MachineJobType::THREE_D_PRINTER]);
 
-        $filter = new MachineJobQueryOptions();
+        $filter       = new MachineJobQueryOptions();
         $filter->type = MachineJobType::THREE_D_PRINTER;
 
         $result = (new MachineJobRepository())->success_rate($user_id, $filter);

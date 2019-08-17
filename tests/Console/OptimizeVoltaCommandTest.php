@@ -12,9 +12,9 @@
 
 namespace Tests\Console;
 
-use Illuminate\Support\Facades\DB;
-use Spatie\ModelStatus\Status;
 use Tests\TestCase;
+use Spatie\ModelStatus\Status;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class for testing the volta:prune console command
@@ -40,7 +40,7 @@ class OptimizeVoltaCommandTest extends TestCase
         $this->artisan(self::OPTIMIZE_COMMAND)->expectsOutput('Old model statuses pruned.');
 
         $unique_models = DB::table('statuses')->distinct()->count('model_id');
-        $row_count = DB::table('statuses')->count();
+        $row_count     = DB::table('statuses')->count();
 
         $this->assertSame($row_count, Status::query()->count());
         $this->assertSame($unique_models, $row_count);

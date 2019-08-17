@@ -21,6 +21,4 @@ use Tests\TestCase;
  */
 class ManufacturerTest extends TestCase
 {
-
-
 }

@@ -11,7 +11,6 @@
 |
 */
 
-use App\Http\Controllers\ManufacturersController;
 
 Auth::routes();
 

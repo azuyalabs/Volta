@@ -32,7 +32,7 @@ class VerifyEndpointTest extends PrinterMonitorController
         $user = factory(User::class)->create();
 
         $response = $this->withHeaders([
-            'Accept' => self::ACCEPT_HEADER,
+            'Accept'     => self::ACCEPT_HEADER,
             'User-Agent' => self::USER_AGENT
         ])->actingAs($user, self::GUARD)->get(self::API_ENDPOINT);
 
@@ -46,7 +46,7 @@ class VerifyEndpointTest extends PrinterMonitorController
         $user = factory(User::class)->create();
 
         $response = $this->withHeaders([
-            'Accept' => self::ACCEPT_HEADER,
+            'Accept'     => self::ACCEPT_HEADER,
             'User-Agent' => null
         ])->actingAs($user, self::GUARD)->get(self::API_ENDPOINT);
 
@@ -60,7 +60,7 @@ class VerifyEndpointTest extends PrinterMonitorController
         $user = factory(User::class)->create();
 
         $response = $this->withHeaders([
-            'Accept' => self::ACCEPT_HEADER,
+            'Accept'     => self::ACCEPT_HEADER,
             'User-Agent' => 'LuckyLuke/1.0'
         ])->actingAs($user, self::GUARD)->get(self::API_ENDPOINT);
 
@@ -71,7 +71,7 @@ class VerifyEndpointTest extends PrinterMonitorController
     public function it_rejects_access_when_no_credentials_are_provided(): void
     {
         $response = $this->withHeaders([
-            'Accept' => self::ACCEPT_HEADER,
+            'Accept'     => self::ACCEPT_HEADER,
             'User-Agent' => self::USER_AGENT
         ])->get(self::API_ENDPOINT);
 
@@ -84,7 +84,7 @@ class VerifyEndpointTest extends PrinterMonitorController
         $user = factory(User::class)->create();
 
         $response = $this->withHeaders([
-            'Accept' => 'application/xml',
+            'Accept'     => 'application/xml',
             'User-Agent' => self::USER_AGENT
         ])->actingAs($user, self::GUARD)->get(self::API_ENDPOINT);
 

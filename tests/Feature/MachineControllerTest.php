@@ -12,10 +12,10 @@
 
 namespace Tests\Feature;
 
-use App\Machine;
 use App\User;
-use App\UserProfile;
+use App\Machine;
 use Tests\TestCase;
+use App\UserProfile;
 
 /**
  * Class containing cases for testing the Machine Controller.
@@ -28,7 +28,7 @@ class MachineControllerTest extends TestCase
     /** @test */
     public function it_can_display_a_list_of_machines(): void
     {
-        $user = factory(User::class)->create();
+        $user     = factory(User::class)->create();
         $machines = factory(Machine::class, 10)->create(['user_id' => $user->id]);
 
         $response = $this->actingAs($user)->get('/machines');

@@ -12,8 +12,8 @@
 
 namespace Tests\Unit;
 
-use App\Http\Resources\ThreeDPrinterJobCollectionResource;
 use Tests\TestCase;
+use App\Http\Resources\ThreeDPrinterJobCollectionResource;
 
 /**
  * Class containing cases for testing the 3D Printer Job Resource Collection class.
