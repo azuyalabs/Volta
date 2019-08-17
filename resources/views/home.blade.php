@@ -13,14 +13,14 @@
             </div>
         @endif
 
-        @if (!Auth::user()->last_login)
+        @if (!Auth::_user()->last_login)
             <b-modal id="modal-center" centered ok-only :visible="true">
                 <template slot="modal-header">
                     <div class="container-fluid text-center">
                         <img src="{{ url('/images/volta-logo.png') }}" width="205" alt="{{ config('app.name') }}">
                     </div>
                 </template>
-                <h1 class="display-6 text-center">Hello, {{ Auth::user()->name }}!</h1>
+                <h1 class="display-6 text-center">Hello, {{ Auth::_user()->name }}!</h1>
                 <p class="lead">and welcome to {{ config('app.name', 'Laravel') }}! Thank you so much for your help in
                     testing the first prototype of {{ config('app.name', 'Laravel') }}.</p>
                 <p>With the first step - creating your Volta account - done, please navigate to

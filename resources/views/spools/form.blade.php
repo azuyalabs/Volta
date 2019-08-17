@@ -36,7 +36,7 @@
     <div class="input-group col-md-6">
         <div class="input-group-prepend">
             <span class="input-group-text"
-                  id="purchase_price_currency">@CurrencySymbol(Auth::user()->profile->currency)</span>
+                  id="purchase_price_currency">@CurrencySymbol(Auth::_user()->profile->currency)</span>
         </div>
         {!! Form::number('purchase_price', $spool->purchase_price ?? 0, ['class' => $errors->has('manufacturer_id') ? 'form-control w-50 is-invalid' : 'form-control w-50', 'id'=>
         'purchase_price', 'aria-label' => __('spools.purchase_price'), 'aria-describedby' => 'purchase_price']);

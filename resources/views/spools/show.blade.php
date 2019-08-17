@@ -12,7 +12,7 @@
             <div class="col-7"><h1 class="display-5">{{ $spool->name }}</h1>
                 <p class="text-muted">by {{ $spool->manufacturer->name }}
                     @if (!empty($spool->manufacturer->country))
-                        ({{ Punic\Territory::getName($spool->manufacturer->country, Auth::user()->profile->language) }})
+                        ({{ Punic\Territory::getName($spool->manufacturer->country, Auth::_user()->profile->language) }})
                     @endif
                 </p>
             </div>
