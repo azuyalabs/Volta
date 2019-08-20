@@ -33,6 +33,7 @@ class ManufacturersTableSeeder extends Seeder
 
         $rules = (new ManufacturerRequest())->rules();
 
+        $stats = [];
 
         $stats['new']     = 0;
         $stats['skipped'] = 0;
