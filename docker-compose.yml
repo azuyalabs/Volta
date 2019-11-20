@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  fpm:
+    build:
+      context: ./docker/fpm
+    #links:
+    #  - postgres
+    volumes:
+      - .:/var/www/html/docker
+    working_dir: /var/www/html/docker
+    #environment:
+    #  - APP_ENV=${APP_ENV}
+
+  nginx:
+    build:
+      context: ./docker/nginx
+    links:
+      - fpm
+    volumes:
+      - .:/var/www/html/docker
+    ports:
+      - 80:80
+      - 443:443
+
+  # Development prompt
+  cli:
+    build: ./docker/cli
+    volumes:
+      - .:/web
+    working_dir: /web
+    stdin_open: true
+    tty: true
