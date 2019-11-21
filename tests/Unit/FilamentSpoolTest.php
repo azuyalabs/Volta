@@ -12,6 +12,7 @@
 
 namespace Tests\Unit;
 
+use App\User;
 use Tests\TestCase;
 use App\FilamentSpool;
 use Cknow\Money\Money;
@@ -28,7 +29,29 @@ class FilamentSpoolTest extends TestCase
     /**
      * Number of iterations generating test samples
      */
-    private const ITERATIONS = 2;
+    private const ITERATIONS = 5;
+
+    /**
+     * @var User $user user instance to use for creating Spool instances
+     */
+    private $_user;
+
+    /** @inheritDoc */
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->_user = factory(User::class)->create();
+    }
+
+    /** @inheritDoc
+     *
+     * @throws \Throwable
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        $this->_user = null;
+    }
 
     /**
      * @test
@@ -41,7 +64,7 @@ class FilamentSpoolTest extends TestCase
      */
     public function it_calculates_correct_price_per_kilogram($price, $weight, $expected): void
     {
-        $spool = factory(FilamentSpool::class)->create(['purchase_price' => $price, 'weight' => $weight]);
+        $spool = $this->createSpoolInstance(['purchase_price' => $price, 'weight' => $weight]);
 
         $this->assertInstanceOf(Money::class, $spool->priceperkilogram);
         $this->assertEquals($expected, $spool->priceperkilogram->getAmount());
@@ -50,7 +73,7 @@ class FilamentSpoolTest extends TestCase
     /** @test */
     public function it_calculates_price_per_kilogram_as_zero_when_price_zero(): void
     {
-        $spool = factory(FilamentSpool::class)->create(['purchase_price' => 0]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => 0]);
 
         $this->assertInstanceOf(Money::class, $spool->priceperkilogram);
         $this->assertEquals(0, $spool->priceperkilogram->getAmount());
@@ -61,7 +84,7 @@ class FilamentSpoolTest extends TestCase
     {
         $this->expectException(UnexpectedValueException::class);
 
-        $spool = factory(FilamentSpool::class)->create(['weight' => 0]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'weight' => 0]);
 
         $this->assertEquals(0, $spool->priceperkilogram);
     }
@@ -78,7 +101,7 @@ class FilamentSpoolTest extends TestCase
      */
     public function it_calculates_correct_spool_length($weight, $density, $diameter, $expected): void
     {
-        $spool = factory(FilamentSpool::class)->create(['density' => $density, 'diameter' => $diameter, 'weight' => $weight]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'density' => $density, 'diameter' => $diameter, 'weight' => $weight]);
 
         $this->assertIsFloat($spool->length);
         $this->assertGreaterThan(0, $spool->length);
@@ -90,7 +113,7 @@ class FilamentSpoolTest extends TestCase
     {
         $this->expectException(UnexpectedValueException::class);
 
-        $spool = factory(FilamentSpool::class)->create(['density' => 0]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'density' => 0]);
 
         $this->assertEquals(0, $spool->length);
     }
@@ -100,7 +123,7 @@ class FilamentSpoolTest extends TestCase
     {
         $this->expectException(UnexpectedValueException::class);
 
-        $spool = factory(FilamentSpool::class)->create(['diameter' => 0]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'diameter' => 0]);
 
         $this->assertEquals(0, $spool->length);
     }
@@ -108,7 +131,7 @@ class FilamentSpoolTest extends TestCase
     /** @test */
     public function it_calculates_spool_length_is_zero_when_weight_is_zero(): void
     {
-        $spool = factory(FilamentSpool::class)->create(['weight' => 0]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'weight' => 0]);
 
         $this->assertIsFloat($spool->length);
         $this->assertEquals(0, $spool->length);
@@ -127,7 +150,7 @@ class FilamentSpoolTest extends TestCase
      */
     public function it_calculates_correct_price_per_length($price, $weight, $density, $diameter, $expected): void
     {
-        $spool = factory(FilamentSpool::class)->create(['purchase_price' => $price, 'density' => $density, 'diameter' => $diameter, 'weight' => $weight]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => $price, 'density' => $density, 'diameter' => $diameter, 'weight' => $weight]);
 
         $this->assertInstanceOf(Money::class, $spool->priceperlength);
         $this->assertEquals($expected, $spool->priceperlength->getAmount());
@@ -136,7 +159,7 @@ class FilamentSpoolTest extends TestCase
     /** @test */
     public function it_calculates_price_per_length_as_zero_when_price_zero(): void
     {
-        $spool = factory(FilamentSpool::class)->create(['purchase_price' => 0]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => 0]);
 
         $this->assertInstanceOf(Money::class, $spool->priceperlength);
         $this->assertEquals(0, $spool->priceperlength->getAmount());
@@ -153,7 +176,7 @@ class FilamentSpoolTest extends TestCase
      */
     public function it_calculates_correct_price_per_weight($price, $weight, $expected): void
     {
-        $spool = factory(FilamentSpool::class)->create(['purchase_price' => $price, 'weight' => $weight]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => $price, 'weight' => $weight]);
 
         $this->assertInstanceOf(Money::class, $spool->priceperweight);
         $this->assertEquals($expected, $spool->priceperweight->getAmount());
@@ -162,7 +185,7 @@ class FilamentSpoolTest extends TestCase
     /** @test */
     public function it_calculates_price_per_weight_as_zero_when_price_zero(): void
     {
-        $spool = factory(FilamentSpool::class)->create(['purchase_price' => 0]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => 0]);
 
         $this->assertInstanceOf(Money::class, $spool->priceperweight);
         $this->assertEquals(0, $spool->priceperweight->getAmount());
@@ -180,7 +203,7 @@ class FilamentSpoolTest extends TestCase
      */
     public function it_calculates_correct_price_per_volume($price, $weight, $density, $expected): void
     {
-        $spool = factory(FilamentSpool::class)->create(['purchase_price' => $price, 'weight' => $weight, 'density' => $density]);
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => $price, 'weight' => $weight, 'density' => $density]);
 
         $this->assertInstanceOf(Money::class, $spool->pricepervolume);
         $this->assertEquals($expected, $spool->pricepervolume->getAmount());
@@ -189,7 +212,7 @@ class FilamentSpoolTest extends TestCase
     /** @test */
     public function it_can_mark_spool_as_empty(): void
     {
-        $spool = factory(FilamentSpool::class)->create();
+        $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id]);
 
         $this->assertLessThanOrEqual($spool->length, $spool->usage);
         $this->assertFalse($spool->isEmpty());
@@ -269,5 +292,19 @@ class FilamentSpoolTest extends TestCase
             $data[] = [$weight, $density, $diameter, ($weight / $density) / (M_PI * (($diameter / 2) ** 2))];
         }
         return $data;
+    }
+
+    /**
+     * Creates a test FilamentSpool instance with the given attribute values
+     *
+     * @param array $modelData model attribute values
+     *
+     * @return FilamentSpool
+     */
+    private function createSpoolInstance(array $modelData): FilamentSpool
+    {
+        $data = ['user_id' => $this->_user->id];
+        $data = array_merge($data, $modelData);
+        return factory(FilamentSpool::class)->create($data);
     }
 }
