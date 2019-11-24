@@ -10,6 +10,8 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
+declare(strict_types=1);
+
 namespace Volta\Domain\ValueObject;
 
 use Ramsey\Uuid\Uuid;
@@ -64,7 +66,7 @@ abstract class Id
     }
 
     /**
-     * Doctrine force you to have __toString on identifiers
+     * Doctrine requires to have __toString on identifiers
      *
      * @see getValue
      */
