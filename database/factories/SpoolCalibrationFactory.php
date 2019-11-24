@@ -23,7 +23,7 @@ $factory->define(\App\SpoolCalibration::class, function (Faker $faker) {
         $measurements = '{"date": "' . $faker->dateTimeThisMonth()->format(DATE_ATOM) . '", "value": ' . $faker->numberBetween(
             10,
             80
-            ) . '}';
+        ) . '}';
     }
 
     return [
