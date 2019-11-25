@@ -38,6 +38,7 @@
     "symfony/translation": "4.3.8"
   },
   "require-dev": {
+    "roave/security-advisories": "dev-master",
     "dms/phpunit-arraysubset-asserts": "^0.1.0",
     "doctrine/dbal": "^2.9",
     "filp/whoops": "~2.4",
