@@ -75,13 +75,10 @@
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
       "@php artisan package:discover"
     ],
-    "test": "vendor/bin/phpunit",
-    "format": [
-      "vendor/bin/php-cs-fixer fix"
-    ],
-    "analyse": [
-      "@php artisan code:analyse --level=5"
-    ]
+    "phpunit": "phpunit --stop-on-failure --colors=always",
+    "phpspec": "phpspec run --stop-on-failure --ansi",
+    "format": "vendor/bin/php-cs-fixer fix",
+    "analyse": "@php artisan code:analyse --level=5"
   },
   "config": {
     "preferred-install": "dist",
