@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace spec\Volta\Domain;
 
+use Money\Money;
+use Money\Currency;
 use PhpSpec\ObjectBehavior;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\ValueObject\FilamentSpoolId;
@@ -24,7 +26,8 @@ class FilamentSpoolSpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             new FilamentSpoolId(),
-            'Midnight Blue'
+            'Midnight Blue',
+            new Money(100, new Currency('USD'))
         );
     }
 
@@ -41,5 +44,25 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_name(): void
     {
         $this->getName()->shouldBe('Midnight Blue');
+    }
+
+    public function it_can_update_the_name(): void
+    {
+        $newName = 'PLA Old Purple';
+        $this->setName($newName);
+        $this->getName()->shouldBe($newName);
+    }
+
+    public function it_has_a_purchase_price(): void
+    {
+        $this->getPurchasePrice()->shouldReturnAnInstanceOf(Money::class);
+    }
+
+    public function it_can_update_the_purchase_price(): void
+    {
+        $newPrice = new Money(4500, new Currency('JPY'));
+
+        $this->setPurchasePrice($newPrice);
+        $this->getPurchasePrice()->shouldBe($newPrice);
     }
 }
