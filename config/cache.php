@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
 
     /*
@@ -88,7 +90,7 @@ return [
 
     'prefix' => env(
         'CACHE_PREFIX',
-        str_slug('volta', '_') . '_cache'
+        Str::slug('volta', '_') . '_cache'
     ),
 
 ];
