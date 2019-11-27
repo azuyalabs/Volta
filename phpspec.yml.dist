@@ -1,0 +1,4 @@
+suites:
+  default:
+    namespace: Volta
+    psr4_prefix: Volta
