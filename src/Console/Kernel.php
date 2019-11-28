@@ -12,6 +12,7 @@
 
 namespace App\Console;
 
+use Volta\Console\VersionCommand;
 use App\Console\Components\FetchWeather;
 use App\Console\Components\FetchHolidays;
 use Illuminate\Console\Scheduling\Schedule;
@@ -37,7 +38,8 @@ class Kernel extends ConsoleKernel
         FetchFirmwareReleases::class,
         FetchSlicerReleases::class,
         FetchWeather::class,
-        SlicerProfilesCommand::class
+        SlicerProfilesCommand::class,
+        VersionCommand::class
     ];
 
     /**
@@ -47,7 +49,7 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         $schedule->command('dashboard:holidays')->twiceDaily();
         $schedule->command('dashboard:firmwares')->twiceDaily();
