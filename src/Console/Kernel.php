@@ -12,6 +12,7 @@
 
 namespace App\Console;
 
+use Volta\Console\UpdateCommand;
 use Volta\Console\VersionCommand;
 use App\Console\Components\FetchWeather;
 use App\Console\Components\FetchHolidays;
@@ -39,7 +40,8 @@ class Kernel extends ConsoleKernel
         FetchSlicerReleases::class,
         FetchWeather::class,
         SlicerProfilesCommand::class,
-        VersionCommand::class
+        VersionCommand::class,
+        UpdateCommand::class
     ];
 
     /**
