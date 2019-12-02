@@ -59,4 +59,14 @@ class Kernel extends ConsoleKernel
         $schedule->command('dashboard:weather')->everyFifteenMinutes();
         $schedule->command('volta:vacuum')->weeklyOn(0);
     }
+
+    /**
+     * Register the commands for the application.
+     *
+     * @return void
+     */
+    protected function commands(): void
+    {
+        $this->load(__DIR__.'/Commands');
+    }
 }
