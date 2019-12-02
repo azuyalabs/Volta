@@ -56,7 +56,6 @@
       "database/factories"
     ],
     "psr-4": {
-      "App\\": "app/",
       "Volta\\": "app/"
     },
     "files": [

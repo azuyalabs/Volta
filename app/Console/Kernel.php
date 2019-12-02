@@ -10,9 +10,10 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
+declare(strict_types=1);
+
 namespace App\Console;
 
-use Volta\Console\UpdateCommand;
 use Volta\Console\VersionCommand;
 use App\Console\Components\FetchWeather;
 use App\Console\Components\FetchHolidays;
@@ -41,7 +42,6 @@ class Kernel extends ConsoleKernel
         FetchWeather::class,
         SlicerProfilesCommand::class,
         VersionCommand::class,
-        UpdateCommand::class
     ];
 
     /**
@@ -68,5 +68,7 @@ class Kernel extends ConsoleKernel
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
+
+        require base_path('routes/console.php');
     }
 }

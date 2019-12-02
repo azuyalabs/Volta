@@ -10,7 +10,9 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-namespace Volta\Console;
+declare(strict_types=1);
+
+namespace Volta\Console\Commands;
 
 use Volta\Volta;
 use Illuminate\Console\Command;
