@@ -70,9 +70,16 @@ return [
         ],
 
         // Storage holding user-defined filament spool profiles
+        //'filaments' => [
+        //    'driver' => 'local',
+        //    'root'   => storage_path('app/filaments')
+        //]
         'filaments' => [
-            'driver' => 'local',
-            'root'   => storage_path('app/filaments')
+            'driver'                => 'gitlab',
+            'personal-access-token' => env('GITLAB_ACCESS_TOKEN', ''), // Personal access token
+            'project-id'            => env('GITLAB_PROJECT_ID'), // Project id of your repo
+            'branch'                => env('GITLAB_BRANCH', 'master'), // Branch that should be used
+            'base-url'              => env('GITLAB_BASE_URL', 'https://gitlab.com'), // Base URL of Gitlab server you want to use
         ]
     ],
 

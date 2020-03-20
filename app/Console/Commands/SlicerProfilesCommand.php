@@ -31,6 +31,11 @@ class SlicerProfilesCommand extends Command
     private const FILAMENTS_DISK = 'filaments';
 
     /**
+     * Name of the directory where the filament spool definitions are stored
+     */
+    private const FILAMENTS_DIRECTORY = 'filaments';
+
+    /**
      * Directory name where template files are stored
      */
     private const TEMPLATES_DIR = 'filaments/_templates';
@@ -119,12 +124,16 @@ class SlicerProfilesCommand extends Command
      */
     protected $plates;
 
+    protected $filamentsDirectory;
+
     /**
      * SlicerProfilesCommand constructor.
      */
     public function __construct()
     {
-        $this->plates = new Engine(storage_path('app/' . self::TEMPLATES_DIR), 'ini');
+        $this->plates             = new Engine(storage_path('app/' . self::TEMPLATES_DIR), 'ini');
+        $this->filamentsDirectory = Storage::disk(self::FILAMENTS_DISK);
+
         parent::__construct();
     }
 
@@ -135,14 +144,12 @@ class SlicerProfilesCommand extends Command
      */
     public function handle(): void
     {
-        //  $filamentFiles = File::glob(storage_path('app/' . self::FILAMENTS_DIR) . '/*.json');
-        $filamentFiles = Storage::disk(self::FILAMENTS_DISK)->files();
-        var_dump($filamentFiles);
+        $filamentFiles = $this->filamentsDirectory->listContents(self::FILAMENTS_DIRECTORY);
 
         $cura_material_settings = [];
 
-        foreach ($filamentFiles as $filamentDefinition) {
-            $f = \json_decode(Storage::disk(self::FILAMENTS_DISK)->get($filamentDefinition), true);
+        foreach ($filamentFiles as $definition) {
+            $f = \json_decode($this->filamentsDirectory->get(self::FILAMENTS_DISK . DIRECTORY_SEPARATOR . $definition['name']), true);
 
             // TODO: Implement Application exception
             if (null === $f) {
@@ -155,11 +162,11 @@ class SlicerProfilesCommand extends Command
 
             $filamentName = \implode(' ', [$f['brand'], $f['type'], $color, $f['diameter'] . 'mm']);
 
-            // Update original filament definition
-            if (!isset($f['id'])) {
-                $f = ['id' => Uuid::uuid4()] + $f;
-                \file_put_contents($filamentDefinition, \json_encode($f, JSON_PRETTY_PRINT));
-            }
+            // TODO: Update original filament definition
+            //if (!isset($f['id'])) {
+            //    $f = ['id' => Uuid::uuid4()] + $f;
+            //    \file_put_contents($definition, \json_encode($f, JSON_PRETTY_PRINT));
+            // }
 
             // Set defaults
             $f['filament_name']                 = $filamentName;
@@ -204,7 +211,7 @@ class SlicerProfilesCommand extends Command
             // Store Cura Material Settings
             $cura_material_settings[(string)$f['id']] = ['spool_weight' => $f['weight'], 'spool_cost' => $f['price']];
 
-            $this->info($filamentName . ' (' . \basename($filamentDefinition) . ')');
+            $this->info($filamentName . ' (' . $definition['filename'] . ')');
 
             # Info
             $f['instructions_url'] = $f['info']['instructions_url'] ?? '';
@@ -265,6 +272,12 @@ class SlicerProfilesCommand extends Command
             // Export profiles for each supported slicer
             foreach ($this->slicers as $slicer_id => $slicer_name) {
                 $outputDirectory = storage_path('app/' . self::PROFILES_DIR . DIRECTORY_SEPARATOR . $slicer_id);
+
+                // Create slicer profile directory if not exists
+                if (!\file_exists($outputDirectory) && !\mkdir($outputDirectory, 0777, true) && !\is_dir($outputDirectory)) {
+                    throw new \RuntimeException(\sprintf('Directory "%s" could not be created', $outputDirectory));
+                }
+
                 $profileFilename = $filamentName . '.ini';
 
                 if ('cura' === $slicer_id) {
@@ -272,11 +285,6 @@ class SlicerProfilesCommand extends Command
 
                     // Output Cura Material Settings (replace this in your cura.cfg file)
                     \file_put_contents($outputDirectory . DIRECTORY_SEPARATOR . 'cura_material_settings.txt', 'material_settings = ' . \json_encode($cura_material_settings));
-                }
-
-                // Create slicer profile directory if not exists
-                if (!\file_exists($outputDirectory) && !\mkdir($outputDirectory) && !\is_dir($outputDirectory)) {
-                    throw new \RuntimeException(\sprintf('Directory "%s" was not created', $outputDirectory));
                 }
 
                 // Save output

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "86a59f976033d6e4244e087b27dae0a7",
+    "content-hash": "f3d2b6a6a06a1638c2de64675f8db98b",
     "packages": [
         {
             "name": "azuyalabs/yasumi",
@@ -4256,6 +4256,105 @@
                 "uuid"
             ],
             "time": "2020-02-21T04:36:14+00:00"
+        },
+        {
+            "name": "royvoetman/flysystem-gitlab-storage",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RoyVoetman/Flysystem-Gitlab-storage.git",
+                "reference": "c1015bfc6f5274541291af7ecf377a3a657f3ffd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RoyVoetman/Flysystem-Gitlab-storage/zipball/c1015bfc6f5274541291af7ecf377a3a657f3ffd",
+                "reference": "c1015bfc6f5274541291af7ecf377a3a657f3ffd",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.3",
+                "league/flysystem": "^1.0",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RoyVoetman\\FlysystemGitlab\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roy Voetman",
+                    "email": "royvoetman@outlook.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Flysystem Adapter for the Gitlab Repository files API v4",
+            "keywords": [
+                "Flysystem",
+                "api",
+                "flysystem-gitlab",
+                "gitlab",
+                "laravel-storage",
+                "royvoetman",
+                "v4"
+            ],
+            "time": "2019-08-03T15:54:32+00:00"
+        },
+        {
+            "name": "royvoetman/laravel-gitlab-storage",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RoyVoetman/laravel-gitlab-storage.git",
+                "reference": "91f3d9013487c725f6f81195cb3bb8db5ae82cf9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RoyVoetman/laravel-gitlab-storage/zipball/91f3d9013487c725f6f81195cb3bb8db5ae82cf9",
+                "reference": "91f3d9013487c725f6f81195cb3bb8db5ae82cf9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "^5.1|^5.2|^5.3|^6.0|^7.0",
+                "illuminate/support": "^5.1|^5.2|^5.3|^6.0|^7.0",
+                "php": "^7.0",
+                "royvoetman/flysystem-gitlab-storage": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RoyVoetman\\LaravelGitlabStorage\\GitlabStorageServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RoyVoetman\\LaravelGitlabStorage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roy Voetman",
+                    "email": "royvoetman@outlook.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Gitlab Storage driver for Laravel",
+            "time": "2020-03-05T17:28:13+00:00"
         },
         {
             "name": "spatie/laravel-model-status",
