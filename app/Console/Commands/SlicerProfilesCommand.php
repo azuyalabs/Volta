@@ -10,7 +10,7 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-namespace App\Console;
+namespace Volta\Console\Commands;
 
 use Ramsey\Uuid\Uuid;
 use League\Plates\Engine;
