@@ -34,7 +34,7 @@
     "pusher/pusher-php-server": "3.3",
     "spatie/laravel-model-status": "^1.7",
     "spatie/laravel-permission": "^3.3",
-    "symfony/dom-crawler": "^4.3",
+    "symfony/dom-crawler": "^5.0",
     "symfony/translation": "4.3.8"
   },
   "require-dev": {
@@ -77,8 +77,13 @@
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
       "@php artisan package:discover"
     ],
-    "phpunit": "phpunit --stop-on-failure --colors=always",
-    "phpspec": "phpspec run --stop-on-failure --ansi",
+    "test": [
+      "@spec",
+      "@analyse",
+      "@unit-test"
+    ],
+    "spec": "phpspec run --stop-on-failure --ansi",
+    "unit-test": "phpunit --stop-on-failure --colors=always",
     "format": "vendor/bin/php-cs-fixer fix",
     "analyse": "@php artisan code:analyse --level=5"
   },
