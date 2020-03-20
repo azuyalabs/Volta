@@ -12,11 +12,11 @@
 
 namespace App\Console;
 
-use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 use League\Plates\Engine;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class that handles generating Slicer profiles
@@ -46,11 +46,11 @@ class SlicerProfilesCommand extends Command
      * @var array
      */
     protected $slicers = [
-        'slic3rpe' => 'Slic3rPE',
-        'cura' => 'Ultimaker Cura',
-        'slic3r' => 'Slic3r',
+        'slic3rpe'    => 'Slic3rPE',
+        'cura'        => 'Ultimaker Cura',
+        'slic3r'      => 'Slic3r',
         'prusaslicer' => 'Prusa Slicer',
-        'kisslicer' => 'KISSlicer'
+        'kisslicer'   => 'KISSlicer'
     ];
 
     /**
@@ -150,7 +150,7 @@ class SlicerProfilesCommand extends Command
                 continue;
             }
 
-            $color = $f['color']['name'] ?? $this->color2Name($f['color']['code']);
+            $color                  = $f['color']['name'] ?? $this->color2Name($f['color']['code']);
             $f['color']['rgba_int'] = \hexdec(ltrim($f['color']['code'], '#') . '00');
 
             $filamentName = \implode(' ', [$f['brand'], $f['type'], $color, $f['diameter'] . 'mm']);
@@ -162,21 +162,21 @@ class SlicerProfilesCommand extends Command
             }
 
             // Set defaults
-            $f['filament_name'] = $filamentName;
-            $f['bridge_fan_speed'] = $this->bridge_fan_speeds[$f['type']];
-            $f['disable_fan_first_layers'] = $this->disable_fan_first_layers[$f['type']];
-            $f['extrusion_multiplier'] = 1;
-            $f['cooling'] = $f['type'] === 'ABS' ? 0 : 1;
-            $f['fan_always_on'] = $f['type'] === 'ABS' ? 0 : 1;
-            $f['k_value'] = ($f['type'] === 'PET') ? 45 : 30;
-            $f['filament_notes'] = \sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
-            $f['filament_colour'] = $color;
-            $f['min_fan_speed'] = $this->min_fan_speed[$f['type']];
-            $f['max_fan_speed'] = $this->max_fan_speed[$f['type']];
-            $f['min_print_speed'] = ($f['type'] === 'ABS') ? 5 : 15;
-            $f['fan_below_layer_time'] = $this->fan_below_layer_time[$f['type']];
+            $f['filament_name']                 = $filamentName;
+            $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['type']];
+            $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['type']];
+            $f['extrusion_multiplier']          = 1;
+            $f['cooling']                       = $f['type'] === 'ABS' ? 0 : 1;
+            $f['fan_always_on']                 = $f['type'] === 'ABS' ? 0 : 1;
+            $f['k_value']                       = ($f['type'] === 'PET') ? 45 : 30;
+            $f['filament_notes']                = \sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
+            $f['filament_colour']               = $color;
+            $f['min_fan_speed']                 = $this->min_fan_speed[$f['type']];
+            $f['max_fan_speed']                 = $this->max_fan_speed[$f['type']];
+            $f['min_print_speed']               = ($f['type'] === 'ABS') ? 5 : 15;
+            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['type']];
             $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['type']];
-            $f['inherits'] = $this->inherits[$f['type']];
+            $f['inherits']                      = $this->inherits[$f['type']];
 
             if (!isset($f['first_layer_bed_temperature'])) {
                 $f['first_layer_bed_temperature'] = 60;
@@ -208,13 +208,13 @@ class SlicerProfilesCommand extends Command
 
             # Info
             $f['instructions_url'] = $f['info']['instructions_url'] ?? '';
-            $f['msds_url'] = $f['info']['msds_url'] ?? '';
-            $f['tds_url'] = $f['info']['tds_url'] ?? '';
+            $f['msds_url']         = $f['info']['msds_url']         ?? '';
+            $f['tds_url']          = $f['info']['tds_url']          ?? '';
 
             # Retrieve Linear Advance Calibration data
             if (isset($f['k_value_calibrations'])) {
                 $kValueCalibration = $f['k_value_calibrations'][0];
-                $kvalue = $kValueCalibration['value'];
+                $kvalue            = $kValueCalibration['value'];
                 if (isset($kvalue)) {
                     $f['k_value'] = $kvalue;
                     $f['filament_notes'] .= \sprintf('K Value last calibrated on %s\\n', $kValueCalibration['date']);
@@ -225,8 +225,8 @@ class SlicerProfilesCommand extends Command
 
             # Retrieve Diameter Calibration data
             if (isset($f['diameter_calibrations'])) {
-                $dm = collect($f['diameter_calibrations']);
-                $avg = $dm->pluck('measurements')->flatten()->average();
+                $dm     = collect($f['diameter_calibrations']);
+                $avg    = $dm->pluck('measurements')->flatten()->average();
                 $margin = $avg - $f['diameter'];
 
                 if (isset($avg)) {
@@ -249,7 +249,7 @@ class SlicerProfilesCommand extends Command
                 $avg_extrusion_width = $em->pluck('extrusion_width')->flatten()->average();
 
                 $average = $em->pluck('measurements')->flatten()->average();
-                $margin = $average - $avg_extrusion_width;
+                $margin  = $average - $avg_extrusion_width;
 
                 if (isset($newMultiplier)) {
                     $this->info(\sprintf('Extrusion Width      : %.3fmm [%.3fmm (%.2f%%)]', $average, $margin, ($margin / $avg_extrusion_width * 100)));
@@ -284,7 +284,7 @@ class SlicerProfilesCommand extends Command
                     $outputDirectory . DIRECTORY_SEPARATOR . $profileFilename,
                     $this->plates->render($slicer_id, [
                         'generated_on' => (new \DateTime())->format(\DATE_ATOM),
-                        'profile' => $f
+                        'profile'      => $f
                     ])
                 );
             }
@@ -308,7 +308,7 @@ class SlicerProfilesCommand extends Command
             $color = \substr($color, \strlen($needle));
         }
 
-        $response = \file_get_contents('http://www.thecolorapi.com/id?hex=' . $color);
+        $response  = \file_get_contents('http://www.thecolorapi.com/id?hex=' . $color);
         $color_api = \json_decode($response, true);
 
         return $color_api['name']['value'] ?? $color;
