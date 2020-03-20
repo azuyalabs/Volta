@@ -7,8 +7,8 @@ services:
     #links:
     #  - postgres
     volumes:
-      - .:/var/www/html/docker
-    working_dir: /var/www/html/docker
+      - .:/var/www/html/app
+    working_dir: /var/www/html/app
     #environment:
     #  - APP_ENV=${APP_ENV}
 
@@ -18,7 +18,7 @@ services:
     links:
       - fpm
     volumes:
-      - .:/var/www/html/docker
+      - .:/var/www/html/app
     ports:
       - 80:80
       - 443:443
@@ -27,7 +27,7 @@ services:
   cli:
     build: ./docker/cli
     volumes:
-      - .:/web
-    working_dir: /web
+      - .:/app
+    working_dir: /app
     stdin_open: true
     tty: true
