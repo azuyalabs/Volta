@@ -19,20 +19,11 @@ use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool
 {
-    /**
-     * @var FilamentSpoolId
-     */
     private $id;
 
-    /**
-     * @var string
-     */
     private $name;
 
-    /**
-     * @var Money
-     */
-    private $purchasePrice;
+     private $purchasePrice;
 
     public function __construct(
         FilamentSpoolId $id,
@@ -44,45 +35,28 @@ class FilamentSpool
         $this->purchasePrice = $purchasePrice;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return FilamentSpoolId
-     */
     public function getId(): FilamentSpoolId
     {
         return $this->id;
     }
 
-    /**
-     * @param string $name
-     * @return FilamentSpool
-     */
     public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    /**
-     * @param Money $purchasePrice
-     * @return FilamentSpool
-     */
     public function setPurchasePrice(Money $purchasePrice): self
     {
         $this->purchasePrice = $purchasePrice;
         return $this;
     }
 
-    /**
-     * @return Money
-     */
     public function getPurchasePrice(): Money
     {
         return $this->purchasePrice;

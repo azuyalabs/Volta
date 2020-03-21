@@ -19,14 +19,8 @@ use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
 class Manufacturer
 {
-    /**
-     * @var ManufacturerId
-     */
     private $id;
 
-    /**
-     * @var ManufacturerName
-     */
     private $name;
 
     private $filamentSupplier;
@@ -50,11 +44,6 @@ class Manufacturer
         return $this->equipmentSupplier;
     }
 
-    /**
-     * @param bool $equipmentSupplier
-     *
-     * @return Manufacturer
-     */
     public function setIsEquipmentSupplier(bool $equipmentSupplier): Manufacturer
     {
         $this->equipmentSupplier = $equipmentSupplier;
@@ -66,47 +55,28 @@ class Manufacturer
         return $this->filamentSupplier;
     }
 
-    /**
-     * @param bool $filamentSupplier
-     *
-     * @return Manufacturer
-     */
     public function setIsFilamentSupplier(bool $filamentSupplier): Manufacturer
     {
         $this->filamentSupplier = $filamentSupplier;
         return $this;
     }
 
-    /**
-     * @return ManufacturerName
-     */
     public function getName(): ManufacturerName
     {
         return $this->name;
     }
 
-    /**
-     * @param ManufacturerName $name
-     * @return Manufacturer
-     */
     public function setName(ManufacturerName $name): Manufacturer
     {
         $this->name = $name;
         return $this;
     }
 
-    /**
-     * @return ManufacturerId
-     */
     public function getId(): ManufacturerId
     {
         return $this->id;
     }
 
-    /**
-     * @param ManufacturerId $id
-     * @return Manufacturer
-     */
     public function setId(ManufacturerId $id): Manufacturer
     {
         $this->id = $id;

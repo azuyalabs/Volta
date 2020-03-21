@@ -8,9 +8,6 @@ use Volta\Domain\Exception\Manufacturer\BlankManufacturerNameException;
 
 class ManufacturerName
 {
-    /**
-     * @var string
-     */
     private $value;
 
     public function __construct(string $value)
@@ -19,9 +16,6 @@ class ManufacturerName
         $this->validate();
     }
 
-    /**
-     * @return string
-     */
     public function getValue(): string
     {
         return $this->value;
@@ -32,9 +26,6 @@ class ManufacturerName
         return $this->value === $other->value;
     }
 
-    /**
-     * @throws BlankManufacturerNameException
-     */
     private function validate(): void
     {
         if (empty($this->value)) {
