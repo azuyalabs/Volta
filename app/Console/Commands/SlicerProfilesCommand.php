@@ -15,7 +15,6 @@ namespace Volta\Console\Commands;
 use DateTime;
 use Exception;
 use Money\Money;
-use Volta\Domain\ValueObject\FilamentSpoolId;
 use function ceil;
 use function mkdir;
 use Money\Currency;
@@ -38,7 +37,9 @@ use function file_get_contents;
 use function file_put_contents;
 use Illuminate\Console\Command;
 use Volta\Domain\FilamentSpool;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
@@ -168,16 +169,12 @@ class SlicerProfilesCommand extends Command
      */
     public function handle(): void
     {
-        $filamentFiles = $this->filamentsDirectory->listContents(self::FILAMENTS_DIRECTORY);
+        $filamentFiles = $this->getFilamentFiles();
 
         $cura_material_settings = [];
 
-        foreach ($filamentFiles as $definition) {
-            $f = json_decode($this->filamentsDirectory->get(
-                self::FILAMENTS_DIRECTORY .
-                DIRECTORY_SEPARATOR .
-                $definition['name']
-            ), true);
+        foreach ($filamentFiles as $filamentFile) {
+            $f = $this->getFilamentSpoolData($filamentFile);
 
             // TODO: Implement Application exception
             if (null === $f) {
@@ -193,14 +190,14 @@ class SlicerProfilesCommand extends Command
             // TODO: Update original filament definition
             //if (!isset($f['id'])) {
             //    $f = ['id' => Uuid::uuid4()] + $f;
-            //    \file_put_contents($definition, \json_encode($f, JSON_PRETTY_PRINT));
+            //    \file_put_contents($filamentFile, \json_encode($f, JSON_PRETTY_PRINT));
             // }
 
             $spool = new FilamentSpool(
                 new FilamentSpoolId(),
                 new Manufacturer(
                     new ManufacturerId(),
-                    new ManufacturerName($f['manufacturer']),
+                    new ManufacturerName($f['brand']),
                     true,
                     false
                 ),
@@ -250,7 +247,7 @@ class SlicerProfilesCommand extends Command
             // Store Cura Material Settings
             $cura_material_settings[(string)$f['id']] = ['spool_weight' => $f['weight'], 'spool_cost' => $f['price']];
 
-            $this->info($filamentName . ' (' . $definition['filename'] . ')');
+            $this->info($filamentName . ' (' . $filamentFile['filename'] . ')');
 
             # Info
             $f['instructions_url'] = $f['info']['instructions_url'] ?? '';
@@ -359,5 +356,29 @@ class SlicerProfilesCommand extends Command
         $color_api = json_decode($response, true);
 
         return $color_api['name']['value'] ?? $color;
+    }
+
+    private function getFilamentFiles(): array
+    {
+        static $CACHE_KEY = 'filament_files';
+
+        if (!Cache::has($CACHE_KEY)) {
+            Cache::put($CACHE_KEY, $this->filamentsDirectory->listContents(self::FILAMENTS_DIRECTORY));
+        }
+        return Cache::get($CACHE_KEY);
+    }
+
+    private function getFilamentSpoolData($filamentFile): array
+    {
+        $CACHE_KEY = 'filament_spool_' . $filamentFile['id'];
+
+        if (!Cache::has($CACHE_KEY)) {
+            Cache::put($CACHE_KEY, json_decode($this->filamentsDirectory->get(
+                self::FILAMENTS_DIRECTORY .
+                DIRECTORY_SEPARATOR .
+                $filamentFile['name']
+            ), true));
+        }
+        return Cache::get($CACHE_KEY);
     }
 }
