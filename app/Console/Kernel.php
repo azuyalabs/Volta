@@ -17,9 +17,9 @@ namespace App\Console;
 use App\Console\Components\FetchWeather;
 use App\Console\Components\FetchHolidays;
 use Illuminate\Console\Scheduling\Schedule;
+use App\Console\Commands\SlicerProfilesCommand;
 use App\Console\Components\FetchSlicerReleases;
 use App\Console\Components\FetchFirmwareReleases;
-use Volta\Console\Commands\SlicerProfilesCommand;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 /**

@@ -10,7 +10,7 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-namespace Volta\Console\Commands;
+namespace App\Console\Commands;
 
 use DateTime;
 use Exception;
@@ -46,7 +46,7 @@ use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 /**
  * Class that handles generating Slicer profiles
  *
- * @package App\Console
+ * @package App\Console\Commands
  */
 class SlicerProfilesCommand extends Command
 {
