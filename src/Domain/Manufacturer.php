@@ -31,14 +31,34 @@ class Manufacturer
 
     private $filamentSupplier;
 
+    private $equipmentSupplier;
+
     public function __construct(
         ManufacturerId $id,
         ManufacturerName $name,
-        bool $filamentSupplier
+        bool $filamentSupplier,
+        bool $equipmentSupplier
     ) {
-        $this->id               = $id;
-        $this->name             = $name;
-        $this->filamentSupplier = $filamentSupplier;
+        $this->id                = $id;
+        $this->name              = $name;
+        $this->filamentSupplier  = $filamentSupplier;
+        $this->equipmentSupplier = $equipmentSupplier;
+    }
+
+    public function isEquipmentSupplier(): bool
+    {
+        return $this->equipmentSupplier;
+    }
+
+    /**
+     * @param bool $equipmentSupplier
+     *
+     * @return Manufacturer
+     */
+    public function setIsEquipmentSupplier(bool $equipmentSupplier): Manufacturer
+    {
+        $this->equipmentSupplier = $equipmentSupplier;
+        return $this;
     }
 
     public function isFilamentSupplier(): bool

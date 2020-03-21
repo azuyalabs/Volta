@@ -25,7 +25,8 @@ class ManufacturerSpec extends ObjectBehavior
         $this->beConstructedWith(
             new ManufacturerId(),
             new ManufacturerName('ABC Plastics'),
-            true
+            true,
+            false
         );
     }
 
@@ -54,5 +55,16 @@ class ManufacturerSpec extends ObjectBehavior
     {
         $this->setIsFilamentSupplier(false);
         $this->isFilamentSupplier()->shouldBe(false);
+    }
+
+    public function it_tells_if_manufacturer_is_equipment_supplier(): void
+    {
+        $this->isEquipmentSupplier()->shouldBe(false);
+    }
+
+    public function it_can_set_manufacturer_is_equipment_supplier(): void
+    {
+        $this->setIsEquipmentSupplier(true);
+        $this->isEquipmentSupplier()->shouldBe(true);
     }
 }
