@@ -197,9 +197,7 @@ class SlicerProfilesCommand extends Command
                 new FilamentSpoolId(),
                 new Manufacturer(
                     new ManufacturerId(),
-                    new ManufacturerName($f['brand']),
-                    true,
-                    false
+                    new ManufacturerName($f['brand'])
                 ),
                 $filamentName,
                 new Money($f['price'], new Currency('JPY'))

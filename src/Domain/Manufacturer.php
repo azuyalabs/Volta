@@ -23,20 +23,16 @@ class Manufacturer
 
     private $name;
 
-    private $filamentSupplier;
+    private $filamentSupplier = false;
 
-    private $equipmentSupplier;
+    private $equipmentSupplier = false;
 
     public function __construct(
         ManufacturerId $id,
-        ManufacturerName $name,
-        bool $filamentSupplier,
-        bool $equipmentSupplier
+        ManufacturerName $name
     ) {
         $this->id                = $id;
         $this->name              = $name;
-        $this->filamentSupplier  = $filamentSupplier;
-        $this->equipmentSupplier = $equipmentSupplier;
     }
 
     public function isEquipmentSupplier(): bool
