@@ -14,8 +14,11 @@ namespace Volta\Console\Commands;
 
 use DateTime;
 use Exception;
+use Money\Money;
+use Volta\Domain\ValueObject\FilamentSpoolId;
 use function ceil;
 use function mkdir;
+use Money\Currency;
 use const DATE_ATOM;
 use function hexdec;
 use function is_dir;
@@ -30,10 +33,14 @@ use function json_decode;
 use function json_encode;
 use function str_replace;
 use League\Plates\Engine;
+use Volta\Domain\Manufacturer;
 use function file_get_contents;
 use function file_put_contents;
 use Illuminate\Console\Command;
+use Volta\Domain\FilamentSpool;
 use Illuminate\Support\Facades\Storage;
+use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
+use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
 /**
  * Class that handles generating Slicer profiles
@@ -189,6 +196,18 @@ class SlicerProfilesCommand extends Command
             //    \file_put_contents($definition, \json_encode($f, JSON_PRETTY_PRINT));
             // }
 
+            $spool = new FilamentSpool(
+                new FilamentSpoolId(),
+                new Manufacturer(
+                    new ManufacturerId(),
+                    new ManufacturerName($f['manufacturer']),
+                    true,
+                    false
+                ),
+                $filamentName,
+                new Money($f['price'], new Currency('JPY'))
+            );
+
             // Set defaults
             $f['filament_name']                 = $filamentName;
             $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['type']];
@@ -234,9 +253,9 @@ class SlicerProfilesCommand extends Command
             $this->info($filamentName . ' (' . $definition['filename'] . ')');
 
             # Info
-            $f['instructions_url'] = $f['info']['instructions_url']          ?? '';
-            $f['msds_url']         = $f['info']['msds_url']                  ?? '';
-            $f['tds_url']          = $f['info']['tds_url']                   ?? '';
+            $f['instructions_url'] = $f['info']['instructions_url'] ?? '';
+            $f['msds_url']         = $f['info']['msds_url']         ?? '';
+            $f['tds_url']          = $f['info']['tds_url']          ?? '';
 
             # Retrieve Linear Advance Calibration data
             if (isset($f['k_value_calibrations'])) {
