@@ -51,7 +51,7 @@ class ManufacturerSpec extends ObjectBehavior
         $this->isFilamentSupplier()->shouldBe(true);
     }
 
-    public function it_can_set_f_manufacturer_is_filament_supplier(ManufacturerFilamentSupplier $filamentSupplier): void
+    public function it_can_set_manufacturer_is_filament_supplier(ManufacturerFilamentSupplier $filamentSupplier): void
     {
         $filamentSupplier->isFilamentSupplier()->willReturn(false);
         $this->setIsFilamentSupplier($filamentSupplier);
