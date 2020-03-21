@@ -80,7 +80,7 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getManufacturer()->shouldReturnAnInstanceOf(Manufacturer::class);
     }
 
-    public function it_can_update_manufacturer(Manufacturer $manufacturer)
+    public function it_can_update_manufacturer(Manufacturer $manufacturer): void
     {
         $this->setManufacturer($manufacturer);
         $this->getManufacturer()->shouldBe($manufacturer);
