@@ -22,7 +22,7 @@ use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpoolSpec extends ObjectBehavior
 {
-    public function let():void
+    public function let(): void
     {
         $this->beConstructedWith(
             new FilamentSpoolId(),

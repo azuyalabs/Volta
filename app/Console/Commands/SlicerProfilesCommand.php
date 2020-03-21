@@ -24,7 +24,6 @@ use function strpos;
 use function substr;
 use function implode;
 use function sprintf;
-use Ramsey\Uuid\Uuid;
 use RuntimeException;
 use function file_exists;
 use function json_decode;
@@ -34,7 +33,6 @@ use League\Plates\Engine;
 use function file_get_contents;
 use function file_put_contents;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 /**
