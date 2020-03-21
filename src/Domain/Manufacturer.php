@@ -16,6 +16,7 @@ namespace Volta\Domain;
 
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
+use Volta\Domain\ValueObject\Manufacturer\ManufacturerFilamentSupplier;
 
 class Manufacturer
 {
@@ -29,12 +30,34 @@ class Manufacturer
      */
     private $name;
 
+    /**
+     * @var ManufacturerFilamentSupplier
+     */
+    private $filamentSupplier;
+
     public function __construct(
         ManufacturerId $id,
-        ManufacturerName $name
+        ManufacturerName $name,
+        ManufacturerFilamentSupplier $filamentSupplier
     ) {
-        $this->id   = $id;
-        $this->name = $name;
+        $this->id               = $id;
+        $this->name             = $name;
+        $this->filamentSupplier = $filamentSupplier;
+    }
+
+    public function isFilamentSupplier(): bool
+    {
+        return $this->filamentSupplier->isFilamentSupplier();
+    }
+
+    /**
+     * @param ManufacturerFilamentSupplier $filamentSupplier
+     * @return Manufacturer
+     */
+    public function setIsFilamentSupplier(ManufacturerFilamentSupplier $filamentSupplier): Manufacturer
+    {
+        $this->filamentSupplier = $filamentSupplier;
+        return $this;
     }
 
     /**
