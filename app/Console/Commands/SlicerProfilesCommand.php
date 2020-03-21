@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Storage;
 use League\Plates\Engine;
 use Money\Currency;
 use Money\Money;
+use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use RuntimeException;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
@@ -170,7 +171,7 @@ class SlicerProfilesCommand extends Command
                 continue;
             }
 
-            $this->info('>Processing '. $filamentFile['basename']);
+            $this->info('>Processing ' . $filamentFile['basename']);
 
 //            $color                  = $f['color']['name'] ?? $this->color2Name($f['color']['code']);
 //            $f['color']['rgba_int'] = hexdec(ltrim($f['color']['code'], '#') . '00');
@@ -191,8 +192,8 @@ class SlicerProfilesCommand extends Command
                 ),
                 $f['product']['name']
             );
-            $spool->setPurchasePrice(new Money($f['purchase_price']['value'], new Currency($f['purchase_price']['currency'])));
-
+            $spool->setPurchasePrice(new Money($f['purchase_price']['value'], new Currency($f['purchase_price']['currency'])))
+                ->setWeight(new Mass($f['product']['spool_weight'], 'gram'));
 
             continue;
 
@@ -242,8 +243,8 @@ class SlicerProfilesCommand extends Command
 
             # Info
             $f['instructions_url'] = $f['info']['instructions_url'] ?? '';
-            $f['msds_url']         = $f['info']['msds_url']         ?? '';
-            $f['tds_url']          = $f['info']['tds_url']          ?? '';
+            $f['msds_url']         = $f['info']['msds_url']                 ?? '';
+            $f['tds_url']          = $f['info']['tds_url']                   ?? '';
 
             # Retrieve Linear Advance Calibration data
             if (isset($f['k_value_calibrations'])) {

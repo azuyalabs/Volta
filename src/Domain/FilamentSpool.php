@@ -92,4 +92,15 @@ class FilamentSpool
         $this->purchasePrice = $purchasePrice;
         return $this;
     }
+
+    public function getPricePerWeight(): Money
+    {
+        if (0 === $this->weight->toNativeUnit()) {
+            throw new \UnexpectedValueException('Weight can not be zero.');
+        }
+
+        $pr = clone $this->getPurchasePrice();
+
+        return $pr->divide($this->weight->toNativeUnit());
+    }
 }
