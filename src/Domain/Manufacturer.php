@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Volta\Domain;
 
-use Volta\Domain\ValueObject\ManufacturerId;
+use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
 class Manufacturer

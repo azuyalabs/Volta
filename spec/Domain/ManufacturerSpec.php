@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace spec\Volta\Domain;
 
 use PhpSpec\ObjectBehavior;
-use Volta\Domain\ValueObject\ManufacturerId;
+use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
 class ManufacturerSpec extends ObjectBehavior
