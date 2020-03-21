@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Volta\Domain;
 
 use Money\Money;
+use Money\Currency;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool
@@ -30,13 +31,13 @@ class FilamentSpool
     public function __construct(
         FilamentSpoolId $id,
         Manufacturer $manufacturer,
-        string $name,
-        Money $purchasePrice
+        string $name
     ) {
         $this->id            = $id;
         $this->name          = $name;
-        $this->purchasePrice = $purchasePrice;
         $this->manufacturer  = $manufacturer;
+
+        $this->purchasePrice = new Money(0, new Currency('USD'));
     }
 
     public function getManufacturer(): Manufacturer
@@ -44,10 +45,6 @@ class FilamentSpool
         return $this->manufacturer;
     }
 
-    /**
-     * @param Manufacturer $manufacturer
-     * @return FilamentSpool
-     */
     public function setManufacturer(Manufacturer $manufacturer): FilamentSpool
     {
         $this->manufacturer = $manufacturer;

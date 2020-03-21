@@ -199,9 +199,9 @@ class SlicerProfilesCommand extends Command
                     new ManufacturerId(),
                     new ManufacturerName($f['brand'])
                 ),
-                $filamentName,
-                new Money($f['price'], new Currency('JPY'))
+                $filamentName
             );
+            $spool->setPurchasePrice(new Money($f['price'], new Currency('JPY')));
 
             // Set defaults
             $f['filament_name']                 = $filamentName;

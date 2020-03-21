@@ -31,12 +31,9 @@ class FilamentSpoolSpec extends ObjectBehavior
             new FilamentSpoolId(),
             new Manufacturer(
                 new ManufacturerId(),
-                new ManufacturerName('ABC Plastics'),
-                true,
-                false
+                new ManufacturerName('ABC Plastics')
             ),
-            'Midnight Blue',
-            new Money(100, new Currency('USD'))
+            'Midnight Blue'
         );
     }
 
