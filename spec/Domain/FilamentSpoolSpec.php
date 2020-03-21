@@ -17,6 +17,7 @@ namespace spec\Volta\Domain;
 use Money\Currency;
 use Money\Money;
 use PhpSpec\ObjectBehavior;
+use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpoolId;
@@ -81,5 +82,16 @@ class FilamentSpoolSpec extends ObjectBehavior
     {
         $this->setManufacturer($manufacturer);
         $this->getManufacturer()->shouldBe($manufacturer);
+    }
+
+    public function it_has_a_weight(): void
+    {
+        $this->getWeight()->shouldReturnAnInstanceOf(Mass::class);
+    }
+
+    public function it_can_update_weight(Mass $weight): void
+    {
+        $this->setWeight($weight);
+        $this->getWeight()->shouldBe($weight);
     }
 }

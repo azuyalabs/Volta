@@ -16,6 +16,7 @@ namespace Volta\Domain;
 
 use Money\Currency;
 use Money\Money;
+use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool
@@ -28,6 +29,8 @@ class FilamentSpool
 
     private $manufacturer;
 
+    private $weight;
+
     public function __construct(
         FilamentSpoolId $id,
         Manufacturer $manufacturer,
@@ -38,6 +41,18 @@ class FilamentSpool
         $this->manufacturer  = $manufacturer;
 
         $this->purchasePrice = new Money(0, new Currency('USD'));
+        $this->weight        = new Mass(0, 'kilogram');
+    }
+
+    public function getWeight(): Mass
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(Mass $weight): FilamentSpool
+    {
+        $this->weight = $weight;
+        return $this;
     }
 
     public function getManufacturer(): Manufacturer
@@ -56,25 +71,25 @@ class FilamentSpool
         return $this->name;
     }
 
-    public function getId(): FilamentSpoolId
-    {
-        return $this->id;
-    }
-
     public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    public function setPurchasePrice(Money $purchasePrice): self
+    public function getId(): FilamentSpoolId
     {
-        $this->purchasePrice = $purchasePrice;
-        return $this;
+        return $this->id;
     }
 
     public function getPurchasePrice(): Money
     {
         return $this->purchasePrice;
+    }
+
+    public function setPurchasePrice(Money $purchasePrice): self
+    {
+        $this->purchasePrice = $purchasePrice;
+        return $this;
     }
 }

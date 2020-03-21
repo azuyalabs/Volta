@@ -166,10 +166,16 @@ class SlicerProfilesCommand extends Command
                 continue;
             }
 
-            $color                  = $f['color']['name'] ?? $this->color2Name($f['color']['code']);
-            $f['color']['rgba_int'] = hexdec(ltrim($f['color']['code'], '#') . '00');
+            if (!isset($f['product'])) {
+                continue;
+            }
 
-            $filamentName = implode(' ', [$f['brand'], $f['type'], $color, $f['diameter'] . 'mm']);
+            $this->info('>Processing '. $filamentFile['basename']);
+
+//            $color                  = $f['color']['name'] ?? $this->color2Name($f['color']['code']);
+//            $f['color']['rgba_int'] = hexdec(ltrim($f['color']['code'], '#') . '00');
+
+//            $filamentName = implode(' ', [$f['brand'], $f['type'], $color, $f['diameter'] . 'mm']);
 
             // TODO: Update original filament definition
             //if (!isset($f['id'])) {
@@ -181,11 +187,14 @@ class SlicerProfilesCommand extends Command
                 new FilamentSpoolId(),
                 new Manufacturer(
                     new ManufacturerId(),
-                    new ManufacturerName($f['brand'])
+                    new ManufacturerName($f['product']['manufacturer'])
                 ),
-                $filamentName
+                $f['product']['name']
             );
-            $spool->setPurchasePrice(new Money($f['price'], new Currency('JPY')));
+            $spool->setPurchasePrice(new Money($f['purchase_price']['value'], new Currency($f['purchase_price']['currency'])));
+
+
+            continue;
 
             // Set defaults
             $f['filament_name']                 = $filamentName;
