@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace App\Console;
 
-use Volta\Console\VersionCommand;
 use App\Console\Components\FetchWeather;
 use App\Console\Components\FetchHolidays;
 use Illuminate\Console\Scheduling\Schedule;

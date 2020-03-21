@@ -10,9 +10,9 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-namespace Volta\Console;
+namespace App\Console;
 
-use Volta\Volta;
+use App\Volta;
 use Illuminate\Console\Command;
 
 class VersionCommand extends Command

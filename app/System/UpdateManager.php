@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-namespace Volta\App\System;
+namespace App\System;
 
 class UpdateManager
 {

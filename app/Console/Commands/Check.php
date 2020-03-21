@@ -12,10 +12,10 @@
 
 declare(strict_types=1);
 
-namespace Volta\Console\Commands;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Volta\App\System\UpdateManager;
+use App\System\UpdateManager;
 
 class Check extends Command
 {

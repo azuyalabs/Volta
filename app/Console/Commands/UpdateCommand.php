@@ -12,9 +12,9 @@
 
 declare(strict_types=1);
 
-namespace Volta\Console\Commands;
+namespace App\Console\Commands;
 
-use Volta\Volta;
+use App\Volta;
 use Illuminate\Console\Command;
 
 class UpdateCommand extends Command

@@ -10,7 +10,7 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-namespace Volta;
+namespace App;
 
 /**
  * Class Volta

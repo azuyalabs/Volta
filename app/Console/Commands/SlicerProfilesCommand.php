@@ -168,7 +168,11 @@ class SlicerProfilesCommand extends Command
         $cura_material_settings = [];
 
         foreach ($filamentFiles as $definition) {
-            $f = json_decode($this->filamentsDirectory->get(self::FILAMENTS_DISK . DIRECTORY_SEPARATOR . $definition['name']), true);
+            $f = json_decode($this->filamentsDirectory->get(
+                self::FILAMENTS_DIRECTORY .
+                DIRECTORY_SEPARATOR .
+                $definition['name']
+            ), true);
 
             // TODO: Implement Application exception
             if (null === $f) {
@@ -226,16 +230,15 @@ class SlicerProfilesCommand extends Command
 
             $f['price_per_cm3'] = ($f['price'] * $f['density']) / $f['weight'];
 
-
             // Store Cura Material Settings
             $cura_material_settings[(string)$f['id']] = ['spool_weight' => $f['weight'], 'spool_cost' => $f['price']];
 
             $this->info($filamentName . ' (' . $definition['filename'] . ')');
 
             # Info
-            $f['instructions_url'] = $f['info']['instructions_url'] ?? '';
-            $f['msds_url']         = $f['info']['msds_url']         ?? '';
-            $f['tds_url']          = $f['info']['tds_url']          ?? '';
+            $f['instructions_url'] = $f['info']['instructions_url']          ?? '';
+            $f['msds_url']         = $f['info']['msds_url']                  ?? '';
+            $f['tds_url']          = $f['info']['tds_url']                   ?? '';
 
             # Retrieve Linear Advance Calibration data
             if (isset($f['k_value_calibrations'])) {
