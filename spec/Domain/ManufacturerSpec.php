@@ -17,7 +17,6 @@ namespace spec\Volta\Domain;
 use PhpSpec\ObjectBehavior;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
-use Volta\Domain\ValueObject\Manufacturer\ManufacturerFilamentSupplier;
 
 class ManufacturerSpec extends ObjectBehavior
 {
@@ -26,7 +25,7 @@ class ManufacturerSpec extends ObjectBehavior
         $this->beConstructedWith(
             new ManufacturerId(),
             new ManufacturerName('ABC Plastics'),
-            new ManufacturerFilamentSupplier(true)
+            true
         );
     }
 
@@ -51,10 +50,9 @@ class ManufacturerSpec extends ObjectBehavior
         $this->isFilamentSupplier()->shouldBe(true);
     }
 
-    public function it_can_set_manufacturer_is_filament_supplier(ManufacturerFilamentSupplier $filamentSupplier): void
+    public function it_can_set_manufacturer_is_filament_supplier(): void
     {
-        $filamentSupplier->isFilamentSupplier()->willReturn(false);
-        $this->setIsFilamentSupplier($filamentSupplier);
+        $this->setIsFilamentSupplier(false);
         $this->isFilamentSupplier()->shouldBe(false);
     }
 }
