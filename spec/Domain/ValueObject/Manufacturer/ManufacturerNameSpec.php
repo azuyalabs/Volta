@@ -16,6 +16,7 @@ namespace spec\Volta\Domain\ValueObject\Manufacturer;
 
 use PhpSpec\ObjectBehavior;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
+use Volta\Domain\Exception\Manufacturer\BlankManufacturerNameException;
 
 class ManufacturerNameSpec extends ObjectBehavior
 {
@@ -35,7 +36,7 @@ class ManufacturerNameSpec extends ObjectBehavior
         $this->beConstructedWith('');
 
         $this
-            ->shouldThrow(Exception\InvalidIManufacturerNameException::class)
+            ->shouldThrow(BlankManufacturerNameException::class)
             ->duringInstantiation();
     }
 
