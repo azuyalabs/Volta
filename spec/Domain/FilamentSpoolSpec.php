@@ -17,8 +17,11 @@ namespace spec\Volta\Domain;
 use Money\Money;
 use Money\Currency;
 use PhpSpec\ObjectBehavior;
+use Volta\Domain\Manufacturer;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\ValueObject\FilamentSpoolId;
+use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
+use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
 class FilamentSpoolSpec extends ObjectBehavior
 {
@@ -26,6 +29,12 @@ class FilamentSpoolSpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             new FilamentSpoolId(),
+            new Manufacturer(
+                new ManufacturerId(),
+                new ManufacturerName('ABC Plastics'),
+                true,
+                false
+            ),
             'Midnight Blue',
             new Money(100, new Currency('USD'))
         );
@@ -64,5 +73,16 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setPurchasePrice($newPrice);
         $this->getPurchasePrice()->shouldBe($newPrice);
+    }
+
+    public function it_has_a_manufacturer(): void
+    {
+        $this->getManufacturer()->shouldReturnAnInstanceOf(Manufacturer::class);
+    }
+
+    public function it_can_update_manufacturer(Manufacturer $manufacturer)
+    {
+        $this->setManufacturer($manufacturer);
+        $this->getManufacturer()->shouldBe($manufacturer);
     }
 }

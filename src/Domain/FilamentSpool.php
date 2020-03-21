@@ -23,16 +23,35 @@ class FilamentSpool
 
     private $name;
 
-     private $purchasePrice;
+    private $purchasePrice;
+
+    private $manufacturer;
 
     public function __construct(
         FilamentSpoolId $id,
+        Manufacturer $manufacturer,
         string $name,
         Money $purchasePrice
     ) {
         $this->id            = $id;
         $this->name          = $name;
         $this->purchasePrice = $purchasePrice;
+        $this->manufacturer  = $manufacturer;
+    }
+
+    public function getManufacturer(): Manufacturer
+    {
+        return $this->manufacturer;
+    }
+
+    /**
+     * @param Manufacturer $manufacturer
+     * @return FilamentSpool
+     */
+    public function setManufacturer(Manufacturer $manufacturer): FilamentSpool
+    {
+        $this->manufacturer = $manufacturer;
+        return $this;
     }
 
     public function getName(): string
