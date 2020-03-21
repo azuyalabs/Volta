@@ -13,14 +13,14 @@
 namespace App\Providers;
 
 use App\Machine;
-use App\Product;
 use App\Manufacturer;
-use Laravel\Passport\Passport;
 use App\Policies\MachinePolicy;
-use App\Policies\ProductPolicy;
 use App\Policies\ManufacturerPolicy;
-use Illuminate\Support\Facades\Gate;
+use App\Policies\ProductPolicy;
+use App\Product;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {

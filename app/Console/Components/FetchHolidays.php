@@ -12,15 +12,15 @@
 
 namespace App\Console\Components;
 
+use App\Events\Holidays\HolidaysFetched;
+use App\UserProfile;
 use DateTime;
 use Exception;
-use Yasumi\Yasumi;
-use Yasumi\Holiday;
-use App\UserProfile;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use App\Events\Holidays\HolidaysFetched;
 use Yasumi\Filters\OfficialHolidaysFilter;
+use Yasumi\Holiday;
+use Yasumi\Yasumi;
 
 /**
  * Class for handling the fetching of public holidays.

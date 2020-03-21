@@ -12,8 +12,8 @@
 
 namespace App;
 
-use SplFileObject;
 use RuntimeException;
+use SplFileObject;
 
 class GCode extends SplFileObject
 {

@@ -12,13 +12,13 @@
 
 namespace App\Listeners;
 
-use Exception;
+use App\Events\PrinterMonitor\PrinterStatusFetched;
 use App\Machine;
 use App\MachineJob;
-use App\MachineJobType;
 use App\MachineJobStatus;
+use App\MachineJobType;
+use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Events\PrinterMonitor\PrinterStatusFetched;
 
 /**
  * Class PrintStateReceived

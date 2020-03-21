@@ -12,8 +12,8 @@
 
 namespace Tests\Feature\PrinterController;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\TestResponse;
+use Tests\TestCase;
 
 /**
  * Base Class containing for testing the Printer Monitor API endpoints.

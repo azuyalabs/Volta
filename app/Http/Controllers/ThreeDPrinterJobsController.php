@@ -12,8 +12,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 /**
  * Controller handling the management of 3D Printer Jobs

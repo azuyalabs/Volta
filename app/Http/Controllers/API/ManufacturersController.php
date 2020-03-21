@@ -12,15 +12,15 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Contracts\Repositories\ManufacturerRepository;
+use App\Http\Requests\ManufacturerRequest as ManufacturerRequest;
+use App\Http\Resources\ManufacturerCollectionResource;
+use App\Http\Resources\ManufacturerResource;
 use App\Manufacturer;
+use App\QueryOptions\ManufacturerQueryOptions;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use App\Http\Resources\ManufacturerResource;
-use App\QueryOptions\ManufacturerQueryOptions;
-use App\Contracts\Repositories\ManufacturerRepository;
-use App\Http\Resources\ManufacturerCollectionResource;
-use App\Http\Requests\ManufacturerRequest as ManufacturerRequest;
 
 class ManufacturersController extends Controller
 {

@@ -12,18 +12,18 @@
 
 namespace Tests\Unit;
 
+use App\Machine;
+use App\MachineJob;
+use App\MachineJobStatus;
+use App\MachineJobType;
+use App\QueryOptions\MachineJobQueryOptions;
+use App\Repositories\MachineJobRepository;
 use App\User;
+use DateInterval;
+use DatePeriod;
 use DateTime;
 use Exception;
-use DatePeriod;
-use App\Machine;
-use DateInterval;
-use App\MachineJob;
 use Tests\TestCase;
-use App\MachineJobType;
-use App\MachineJobStatus;
-use App\Repositories\MachineJobRepository;
-use App\QueryOptions\MachineJobQueryOptions;
 
 /**
  * Class containing cases for testing the Machine Job Query Option class.

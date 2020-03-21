@@ -13,8 +13,8 @@
 namespace App\Contracts\Repositories;
 
 use App\FilamentSpool;
-use Illuminate\Support\Collection;
 use App\Http\Requests\FilamentSpool as FilamentSpoolRequest;
+use Illuminate\Support\Collection;
 
 /**
  * Filament Spool Repository contract.

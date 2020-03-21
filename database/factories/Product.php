@@ -10,8 +10,8 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-use App\Product;
 use App\Manufacturer;
+use App\Product;
 use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {

@@ -14,12 +14,12 @@ declare(strict_types=1);
 
 namespace App\Console;
 
-use App\Console\Components\FetchWeather;
-use App\Console\Components\FetchHolidays;
-use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\SlicerProfilesCommand;
-use App\Console\Components\FetchSlicerReleases;
 use App\Console\Components\FetchFirmwareReleases;
+use App\Console\Components\FetchHolidays;
+use App\Console\Components\FetchSlicerReleases;
+use App\Console\Components\FetchWeather;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 /**
@@ -67,7 +67,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

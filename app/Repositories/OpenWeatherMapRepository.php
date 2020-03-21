@@ -12,12 +12,12 @@
 
 namespace App\Repositories;
 
+use App\Contracts\Repositories\WeatherRepository as Contract;
+use Cmfcmf\OpenWeatherMap\CurrentWeather;
 use DateTime;
 use Exception;
 use Gmopx\LaravelOWM\LaravelOWM;
 use Illuminate\Support\Facades\Log;
-use Cmfcmf\OpenWeatherMap\CurrentWeather;
-use App\Contracts\Repositories\WeatherRepository as Contract;
 
 /**
  * Class representing actions to retrieve weather information using the OpenWeatherMap service.

@@ -12,12 +12,12 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
+use App\Events\PrinterMonitor\PrinterStatusFetched;
+use App\Http\Resources\VerificationResource;
 use App\Rules\ValidPrinterId;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Resources\VerificationResource;
-use App\Events\PrinterMonitor\PrinterStatusFetched;
 
 /**
  * Class PrinterController

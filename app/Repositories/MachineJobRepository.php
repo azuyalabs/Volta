@@ -12,12 +12,12 @@
 
 namespace App\Repositories;
 
+use App\Contracts\Repositories\MachineJobRepository as Contract;
+use App\Http\Requests\MachineJob as MachineJobRequest;
 use App\MachineJob;
-use Illuminate\Support\Facades\DB;
 use App\QueryOptions\MachineJobQueryOptions;
 use Illuminate\Database\Eloquent\Collection;
-use App\Http\Requests\MachineJob as MachineJobRequest;
-use App\Contracts\Repositories\MachineJobRepository as Contract;
+use Illuminate\Support\Facades\DB;
 
 /**
  * The Machine Job Repository with Eloquent as the data backend.

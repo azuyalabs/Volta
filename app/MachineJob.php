@@ -12,13 +12,13 @@
 
 namespace App;
 
-use DatePeriod;
-use Illuminate\Database\Eloquent\Model;
-use App\Storage\BinaryUuid\HasBinaryUuid;
-use Illuminate\Database\Eloquent\Builder;
 use App\QueryOptions\MachineJobQueryOptions;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Storage\BinaryUuid\HasBinaryUuid;
+use DatePeriod;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class representing the model for a Machine Job.

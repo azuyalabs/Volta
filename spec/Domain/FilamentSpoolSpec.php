@@ -14,11 +14,11 @@ declare(strict_types=1);
 
 namespace spec\Volta\Domain;
 
-use Money\Money;
 use Money\Currency;
+use Money\Money;
 use PhpSpec\ObjectBehavior;
-use Volta\Domain\Manufacturer;
 use Volta\Domain\FilamentSpool;
+use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;

@@ -12,13 +12,13 @@
 
 namespace App\Services;
 
-use Exception;
-use Carbon\Carbon;
-use Github\Client;
-use Predis\Client as PredisClient;
-use Illuminate\Support\Facades\Log;
-use Github\Exception\RuntimeException;
 use Cache\Adapter\Predis\PredisCachePool;
+use Carbon\Carbon;
+use Exception;
+use Github\Client;
+use Github\Exception\RuntimeException;
+use Illuminate\Support\Facades\Log;
+use Predis\Client as PredisClient;
 
 /**
  * Class containing convenience methods for interacting with the Github API.

@@ -12,10 +12,10 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Response;
-use App\Http\Resources\FilamentSpoolResource;
 use App\Contracts\Repositories\FilamentSpoolRepository;
 use App\Http\Resources\FilamentSpoolCollectionResource;
+use App\Http\Resources\FilamentSpoolResource;
+use Illuminate\Http\Response;
 
 class FilamentSpoolsController extends Controller
 {

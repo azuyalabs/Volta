@@ -10,12 +10,12 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-use App\MachineJobType;
 use App\MachineJobStatus;
+use App\MachineJobType;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 
 /**
  * Migration class for creating the Machine Jobs table.

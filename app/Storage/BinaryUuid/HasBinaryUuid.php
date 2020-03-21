@@ -13,9 +13,9 @@
 namespace App\Storage\BinaryUuid;
 
 use Exception;
-use Ramsey\Uuid\Uuid;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Replacement (i.e. clone) of the spatie/laravel-binary-uuid package.

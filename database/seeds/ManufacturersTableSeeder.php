@@ -10,11 +10,11 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
+use App\Http\Requests\ManufacturerRequest;
 use App\Manufacturer;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\ManufacturerRequest;
 
 /**
  * Class for seeding the Manufacturers table

@@ -12,8 +12,8 @@
 
 namespace App\Repositories;
 
-use App\Product;
 use App\Contracts\Repositories\ProductRepository as Contract;
+use App\Product;
 
 class ProductRepository implements Contract
 {

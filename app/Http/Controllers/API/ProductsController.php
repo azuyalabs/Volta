@@ -12,15 +12,15 @@
 
 namespace App\Http\Controllers\API;
 
-use Exception;
-use App\Product;
-use App\Manufacturer;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use App\Http\Resources\ProductResource;
 use App\Http\Requests\Product as ProductRequest;
 use App\Http\Resources\ProductCollectionResource;
+use App\Http\Resources\ProductResource;
+use App\Manufacturer;
+use App\Product;
+use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProductsController extends Controller
 {

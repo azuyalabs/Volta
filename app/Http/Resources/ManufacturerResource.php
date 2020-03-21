@@ -12,8 +12,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use App\Repositories\CountryRepository;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ManufacturerResource extends JsonResource

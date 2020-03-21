@@ -12,18 +12,18 @@
 
 namespace App\Http\Controllers\API;
 
-use Exception;
-use DatePeriod;
-use DateInterval;
-use DateTimeImmutable;
-use App\MachineJobStatus;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use App\QueryOptions\MachineJobQueryOptions;
 use App\Contracts\Repositories\MachineJobRepository;
 use App\Http\Requests\MachineJob as MachineJobRequest;
 use App\Http\Resources\ThreeDPrinterJobCollectionResource;
+use App\MachineJobStatus;
+use App\QueryOptions\MachineJobQueryOptions;
+use DateInterval;
+use DatePeriod;
+use DateTimeImmutable;
+use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 abstract class MachineJobController extends Controller
 {

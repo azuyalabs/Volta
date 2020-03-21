@@ -12,8 +12,8 @@
 
 use App\User;
 use App\UserProfile;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 
 /**

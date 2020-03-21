@@ -12,11 +12,11 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
+use App\Http\Resources\ManufacturerResource;
 use App\Manufacturer;
 use App\Repositories\CountryRepository;
-use App\Http\Resources\ManufacturerResource;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use Tests\TestCase;
 
 class ManufacturerResourceTest extends TestCase
 {

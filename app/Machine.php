@@ -12,14 +12,14 @@
 
 namespace App;
 
-use Cknow\Money\Money;
 use App\Traits\Monetary;
-use Spatie\ModelStatus\HasStatuses;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
+use Cknow\Money\Money;
 use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\ModelStatus\HasStatuses;
 
 /**
  * Class representing the model for a Machine (e.g. 3D Printer, Laser Cutter, etc.).

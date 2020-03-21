@@ -12,8 +12,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Routing\Controller;
 
 class ResetPasswordController extends Controller
 {

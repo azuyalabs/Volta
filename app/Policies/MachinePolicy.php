@@ -12,8 +12,8 @@
 
 namespace App\Policies;
 
-use App\User;
 use App\Machine;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**

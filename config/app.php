@@ -1,7 +1,7 @@
 <?php
 
-use BladeSvg\BladeSvgServiceProvider;
 use App\Providers\VoltaServiceProvider;
+use BladeSvg\BladeSvgServiceProvider;
 
 return [
 

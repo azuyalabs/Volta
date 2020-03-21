@@ -12,8 +12,8 @@
 
 namespace App\Storage\BinaryUuid;
 
-use Illuminate\Support\Fluent;
 use Illuminate\Database\Schema\Grammars\MySqlGrammar as IlluminateMySqlGrammar;
+use Illuminate\Support\Fluent;
 
 class MySqlGrammar extends IlluminateMySqlGrammar
 {

@@ -15,8 +15,8 @@ declare(strict_types=1);
 namespace spec\Volta\Domain\ValueObject\Manufacturer;
 
 use PhpSpec\ObjectBehavior;
-use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 use Volta\Domain\Exception\Manufacturer\BlankManufacturerNameException;
+use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
 class ManufacturerNameSpec extends ObjectBehavior
 {

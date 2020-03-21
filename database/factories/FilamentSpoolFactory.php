@@ -10,9 +10,9 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-use App\User;
-use App\Manufacturer;
 use App\FilamentSpool;
+use App\Manufacturer;
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(FilamentSpool::class, function (Faker $faker) {

@@ -12,13 +12,13 @@
 
 namespace App\Http\Controllers\API;
 
-use Exception;
+use App\Http\Resources\MachineCollectionResource;
+use App\Http\Resources\MachineResource;
 use App\Machine;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\MachineResource;
-use App\Http\Resources\MachineCollectionResource;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class MachinesController extends Controller
 {

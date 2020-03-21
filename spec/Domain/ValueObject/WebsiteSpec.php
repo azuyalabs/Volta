@@ -15,8 +15,8 @@ declare(strict_types=1);
 namespace spec\Volta\Domain\ValueObject;
 
 use PhpSpec\ObjectBehavior;
-use Volta\Domain\ValueObject\Website;
 use Volta\Domain\Exception\InvalidWebsiteException;
+use Volta\Domain\ValueObject\Website;
 
 class WebsiteSpec extends ObjectBehavior
 {

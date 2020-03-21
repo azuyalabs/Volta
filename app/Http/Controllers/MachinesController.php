@@ -12,12 +12,12 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use App\Machine;
 use App\Product;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MachinesController extends Controller
 {

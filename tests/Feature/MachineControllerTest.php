@@ -12,10 +12,10 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Machine;
-use Tests\TestCase;
+use App\User;
 use App\UserProfile;
+use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Machine Controller.

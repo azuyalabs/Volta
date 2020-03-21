@@ -12,11 +12,11 @@
 
 namespace Tests\Unit;
 
-use App\User;
-use Tests\TestCase;
 use App\FilamentSpool;
 use App\Http\Resources\FilamentSpoolResource;
+use App\User;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Filament Spool Resource class.

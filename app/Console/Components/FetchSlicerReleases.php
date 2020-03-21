@@ -12,12 +12,12 @@
 
 namespace App\Console\Components;
 
-use Carbon\Carbon;
-use App\Services\GitHubApi;
-use Illuminate\Support\Arr;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 use App\Events\SlicerReleases\SlicerReleasesFetched;
+use App\Services\GitHubApi;
+use Carbon\Carbon;
+use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class for getting the latest release version of major 3D printer Slicer applications.

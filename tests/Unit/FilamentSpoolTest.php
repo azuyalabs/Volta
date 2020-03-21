@@ -12,11 +12,11 @@
 
 namespace Tests\Unit;
 
-use App\User;
-use Tests\TestCase;
 use App\FilamentSpool;
+use App\User;
 use Cknow\Money\Money;
 use Faker\Factory as Faker;
+use Tests\TestCase;
 use UnexpectedValueException;
 
 /**

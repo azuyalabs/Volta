@@ -12,8 +12,8 @@
 
 namespace App\Repositories;
 
-use Punic\Territory;
 use App\Contracts\Repositories\CountryRepository as Contract;
+use Punic\Territory;
 
 class CountryRepository implements Contract
 {

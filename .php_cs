@@ -14,7 +14,7 @@ return PhpCsFixer\Config::create()->setRiskyAllowed(true)->setRules([
             'default' => 'align',
         ],
 
-        'ordered_imports'   => ['sortAlgorithm' => 'length'],
+        'ordered_imports'   => ['sortAlgorithm' => 'alpha'],
         'no_unused_imports' => true,
         'single_quote'      => true,
 ])->setLineEnding("\n")->setFinder($finder);

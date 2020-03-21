@@ -13,8 +13,8 @@
 namespace Tests\Unit;
 
 use App\User;
-use Tests\TestCase;
 use App\UserProfile;
+use Tests\TestCase;
 
 /**
  * Class containing cases for testing the User class.

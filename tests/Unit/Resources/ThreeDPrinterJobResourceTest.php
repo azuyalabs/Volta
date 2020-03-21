@@ -12,12 +12,12 @@
 
 namespace Tests\Unit;
 
+use App\Http\Resources\ThreeDPrinterJobResource;
 use App\Machine;
 use App\MachineJob;
-use Tests\TestCase;
 use App\MachineJobType;
-use App\Http\Resources\ThreeDPrinterJobResource;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use Tests\TestCase;
 
 /**
  * Class containing cases for testing the 3D Printer Job Resource class.

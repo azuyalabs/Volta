@@ -12,10 +12,10 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Manufacturer;
-use Illuminate\Database\Eloquent\Collection;
-use App\QueryOptions\ManufacturerQueryOptions;
 use App\Http\Requests\ManufacturerRequest as ManufacturerRequest;
+use App\Manufacturer;
+use App\QueryOptions\ManufacturerQueryOptions;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Manufacturer Repository contract.

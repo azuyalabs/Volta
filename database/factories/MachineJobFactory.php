@@ -10,10 +10,10 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
-use App\User;
 use App\Machine;
-use App\MachineJobType;
 use App\MachineJobStatus;
+use App\MachineJobType;
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(\App\MachineJob::class, function (Faker $faker) {

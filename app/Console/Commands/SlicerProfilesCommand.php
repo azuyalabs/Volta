@@ -14,15 +14,15 @@ namespace App\Console\Commands;
 
 use DateTime;
 use Exception;
-use Money\Money;
-use Money\Currency;
-use RuntimeException;
-use League\Plates\Engine;
-use Volta\Domain\Manufacturer;
 use Illuminate\Console\Command;
-use Volta\Domain\FilamentSpool;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use League\Plates\Engine;
+use Money\Currency;
+use Money\Money;
+use RuntimeException;
+use Volta\Domain\FilamentSpool;
+use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
@@ -320,26 +320,6 @@ class SlicerProfilesCommand extends Command
         $this->info('Profiles successfully generated for ' . implode(', ', $this->slicers));
     }
 
-    /**
-     * Get the name of a colour based on its hexadecimal code
-     *
-     * @param string $color the colour hexadecimal code
-     * @return string the name of the colour
-     */
-    protected function color2Name(string $color): string
-    {
-        // Strip any preceding hash character
-        $needle = '#';
-        if (strpos($color, $needle) >= 0) {
-            $color = substr($color, strlen($needle));
-        }
-
-        $response  = file_get_contents('http://www.thecolorapi.com/id?hex=' . $color);
-        $color_api = json_decode($response, true);
-
-        return $color_api['name']['value'] ?? $color;
-    }
-
     private function getFilamentFiles(): array
     {
         static $CACHE_KEY = 'filament_files';
@@ -362,5 +342,25 @@ class SlicerProfilesCommand extends Command
             ), true));
         }
         return Cache::get($CACHE_KEY);
+    }
+
+    /**
+     * Get the name of a colour based on its hexadecimal code
+     *
+     * @param string $color the colour hexadecimal code
+     * @return string the name of the colour
+     */
+    protected function color2Name(string $color): string
+    {
+        // Strip any preceding hash character
+        $needle = '#';
+        if (strpos($color, $needle) >= 0) {
+            $color = substr($color, strlen($needle));
+        }
+
+        $response  = file_get_contents('http://www.thecolorapi.com/id?hex=' . $color);
+        $color_api = json_decode($response, true);
+
+        return $color_api['name']['value'] ?? $color;
     }
 }

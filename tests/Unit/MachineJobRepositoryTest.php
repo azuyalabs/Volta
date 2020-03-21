@@ -12,17 +12,17 @@
 
 namespace Tests\Unit;
 
-use DateTime;
-use Exception;
+use App\Http\Requests\MachineJob as MachineJobRequest;
 use App\Machine;
 use App\MachineJob;
-use Tests\TestCase;
-use App\MachineJobType;
 use App\MachineJobStatus;
-use App\Repositories\MachineJobRepository;
+use App\MachineJobType;
 use App\QueryOptions\MachineJobQueryOptions;
+use App\Repositories\MachineJobRepository;
+use DateTime;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
-use App\Http\Requests\MachineJob as MachineJobRequest;
+use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Machine Job Repository class.

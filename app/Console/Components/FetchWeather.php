@@ -12,11 +12,11 @@
 
 namespace App\Console\Components;
 
+use App\Contracts\Repositories\WeatherRepository;
+use App\Events\Weather\WeatherFetched;
 use App\UserProfile;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use App\Events\Weather\WeatherFetched;
-use App\Contracts\Repositories\WeatherRepository;
 
 /**
  * Class for handling the retrieval of weather data.

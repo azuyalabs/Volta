@@ -12,9 +12,9 @@
 
 namespace Tests\Console;
 
-use Tests\TestCase;
-use Spatie\ModelStatus\Status;
 use Illuminate\Support\Facades\DB;
+use Spatie\ModelStatus\Status;
+use Tests\TestCase;
 
 /**
  * Class for testing the volta:prune console command

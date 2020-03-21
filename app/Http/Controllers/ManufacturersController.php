@@ -12,14 +12,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ManufacturerRequest as ManufacturerRequest;
 use App\Manufacturer;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use App\Repositories\CountryRepository;
 use App\Repositories\ManufacturerRepository;
-use App\Http\Requests\ManufacturerRequest as ManufacturerRequest;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 /**
  * Controller handling the management of manufacturers

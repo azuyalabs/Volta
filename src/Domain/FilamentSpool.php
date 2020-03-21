@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Volta\Domain;
 
-use Money\Money;
 use Money\Currency;
+use Money\Money;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool

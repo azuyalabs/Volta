@@ -12,8 +12,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Routing\Controller;
 
 /**
  * This controller is responsible for handling email verification for any

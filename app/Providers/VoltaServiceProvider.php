@@ -12,20 +12,20 @@
 
 namespace App\Providers;
 
-use Exception;
-use Ramsey\Uuid\Uuid;
-use RuntimeException;
-use Ramsey\Uuid\UuidFactory;
-use Illuminate\Database\Connection;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\ServiceProvider;
-use Ramsey\Uuid\Codec\OrderedTimeCodec;
 use App\Storage\BinaryUuid\MySqlGrammar;
 use App\Storage\BinaryUuid\SQLiteGrammar;
-use Illuminate\Database\Schema\Grammars\Grammar;
+use Exception;
+use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Grammars\MySqlGrammar as IlluminateMySqlGrammar;
 use Illuminate\Database\Query\Grammars\SQLiteGrammar as IlluminateSQLiteGrammar;
+use Illuminate\Database\Schema\Grammars\Grammar;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\ServiceProvider;
+use Ramsey\Uuid\Codec\OrderedTimeCodec;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidFactory;
+use RuntimeException;
 
 class VoltaServiceProvider extends ServiceProvider
 {

@@ -13,10 +13,10 @@
 namespace App\Http\Controllers\API;
 
 use App\GCode;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Resources\PrintJobResource;
 use App\Http\Resources\MachineCollectionResource;
+use App\Http\Resources\PrintJobResource;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\Storage;
 
 class PrintJobsController extends Controller
 {

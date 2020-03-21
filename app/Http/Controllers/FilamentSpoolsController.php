@@ -12,16 +12,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Manufacturer;
+use App\Contracts\Repositories\FilamentSpoolRepository;
 use App\FilamentSpool;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Http\Requests\FilamentSpool as FilamentSpoolRequest;
+use App\Manufacturer;
+use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use App\Contracts\Repositories\FilamentSpoolRepository;
-use Illuminate\Database\Eloquent\JsonEncodingException;
-use App\Http\Requests\FilamentSpool as FilamentSpoolRequest;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 /**
  * Controller handling the management of filament spools
