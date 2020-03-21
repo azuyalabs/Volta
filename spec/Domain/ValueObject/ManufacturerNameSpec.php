@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Volta\Domain\ValueObject;
+namespace spec\Volta\Domain\ValueObject\Manufacturer;
 
 use PhpSpec\ObjectBehavior;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
@@ -38,7 +38,6 @@ class ManufacturerNameSpec extends ObjectBehavior
             ->shouldThrow(Exception\InvalidIManufacturerNameException::class)
             ->duringInstantiation();
     }
-
 
     public function it_compares_equality(): void
     {
