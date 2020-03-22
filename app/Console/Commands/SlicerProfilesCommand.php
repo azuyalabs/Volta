@@ -215,7 +215,7 @@ class SlicerProfilesCommand extends Command
             $tpl    = new SlicerTemplate();
             $mapper->mapFromDomain($spool, $tpl);
             print_r($tpl);
-continue;
+            continue;
 
             // Set defaults
             $f['filament_name']                 = $filamentName;

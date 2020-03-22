@@ -20,7 +20,7 @@ namespace spec\Volta\Application\DataTransformer\FilamentSpool;
  {
      public function it_has_diameter(): void
      {
-         $this->getDiameter()->shouldBe(0.0);
+         $this->getDiameter()->shouldBeNull();
          $this->setDiameter(1.75);
          $this->getDiameter()->shouldBe(1.75);
      }
