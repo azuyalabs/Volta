@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Storage;
 use League\Plates\Engine;
 use Money\Currency;
 use Money\Money;
+use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use RuntimeException;
 use Volta\Domain\FilamentSpool;
@@ -193,9 +194,16 @@ class SlicerProfilesCommand extends Command
                 $f['product']['name']
             );
             $spool->setPurchasePrice(new Money($f['purchase_price']['value'], new Currency($f['purchase_price']['currency'])))
-                ->setWeight(new Mass($f['product']['spool_weight'], 'gram'));
+                ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
+                ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'));
 
+            echo $spool->getManufacturer()->getName()->getValue().PHP_EOL;
+            echo $spool->getName().PHP_EOL;
+            echo $spool->getWeight().PHP_EOL;
+            echo $spool->getPurchasePrice()->getAmount().PHP_EOL;
             echo $spool->getPricePerWeight()->getAmount().PHP_EOL;
+            echo $spool->getPricePerKilogram()->getAmount() / 1000 .PHP_EOL;
+            echo $spool->getDiameter().PHP_EOL;
 
             continue;
 
