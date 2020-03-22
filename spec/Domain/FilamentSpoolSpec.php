@@ -18,6 +18,7 @@ use Money\Currency;
 use Money\Money;
 use PhpSpec\ObjectBehavior;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpoolId;
@@ -114,6 +115,6 @@ class FilamentSpoolSpec extends ObjectBehavior
         $weight          = new Mass(0, 'gram');
 
         $this->setWeight($weight);
-        $this->shouldThrow(\UnexpectedValueException::class)->duringGetPricePerWeight();
+        $this->shouldThrow(ZeroWeightException::class)->duringGetPricePerWeight();
     }
 }

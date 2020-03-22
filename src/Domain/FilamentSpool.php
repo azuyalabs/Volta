@@ -17,6 +17,7 @@ namespace Volta\Domain;
 use Money\Currency;
 use Money\Money;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool
@@ -103,7 +104,7 @@ class FilamentSpool
         $weight = $this->weight->toNativeUnit();
 
         if (abs($weight-0) < PHP_FLOAT_EPSILON) {
-            throw new \UnexpectedValueException('Weight can not be zero.');
+            throw new ZeroWeightException();
         }
 
         $pr = clone $this->getPurchasePrice();
