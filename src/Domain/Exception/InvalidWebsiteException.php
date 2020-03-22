@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Volta\Domain\Exception;
 
-class InvalidWebsiteException extends \InvalidArgumentException implements Exception
+class InvalidWebsiteException extends \UnexpectedValueException implements Exception
 {
     public function __construct(
         string $message = 'invalid website address',

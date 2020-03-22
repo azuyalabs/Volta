@@ -16,7 +16,7 @@ namespace Volta\Domain\Exception\Manufacturer;
 
 use Volta\Domain\Exception\Exception;
 
-class BlankManufacturerNameException extends \InvalidArgumentException implements Exception
+class BlankManufacturerNameException extends \UnexpectedValueException implements Exception
 {
     public function __construct(
         string $message = 'manufacturer name can not be blank',

@@ -26,7 +26,7 @@ class BlankManufacturerNameExceptionSpec extends ObjectBehavior
 
     public function it_is_an_spl_invalid_argument_exception(): void
     {
-        $this->shouldBeAnInstanceOf(\InvalidArgumentException::class);
+        $this->shouldBeAnInstanceOf(\UnexpectedValueException::class);
     }
 
     public function it_has_a_descriptive_message(): void

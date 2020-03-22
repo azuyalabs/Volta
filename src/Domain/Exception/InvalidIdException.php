@@ -14,6 +14,13 @@ declare(strict_types=1);
 
 namespace Volta\Domain\Exception;
 
-class InvalidIdException extends \InvalidArgumentException implements Exception
+class InvalidIdException extends \UnexpectedValueException implements Exception
 {
+    public function __construct(
+        string $message = 'id is invalid',
+        int $code = 0,
+        \Throwable $previous = null
+    ) {
+        parent::__construct($message, $code, $previous);
+    }
 }

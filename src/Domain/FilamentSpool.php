@@ -93,6 +93,11 @@ class FilamentSpool
         return $this;
     }
 
+    /**
+     * Get the weight equivalent (gram) price for this spool.
+     *
+     * @return Money
+     */
     public function getPricePerWeight(): Money
     {
         $weight = $this->weight->toNativeUnit();

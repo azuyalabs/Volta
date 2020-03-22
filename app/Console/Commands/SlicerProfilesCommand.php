@@ -195,6 +195,8 @@ class SlicerProfilesCommand extends Command
             $spool->setPurchasePrice(new Money($f['purchase_price']['value'], new Currency($f['purchase_price']['currency'])))
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'));
 
+            echo $spool->getPricePerWeight()->getAmount().PHP_EOL;
+
             continue;
 
             // Set defaults
