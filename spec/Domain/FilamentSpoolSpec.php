@@ -95,15 +95,25 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getWeight()->shouldBe($weight);
     }
 
-    public function it_has_a_price_per_weight()
+    public function it_has_a_price_per_weight(): void
     {
-        $price  = new Money(4500, new Currency('JPY'));
-        $weight = new Mass(850, 'gram');
-
-        $pricePerWeight = new Money(55, new Currency('JPY'));
+        static $currency = 'JPY';
+        $price           = new Money(5700, new Currency($currency));
+        $weight          = new Mass(850, 'gram');
 
         $this->setWeight($weight);
         $this->setPurchasePrice($price);
-        $this->getPricePerWeight()->shouldBe($pricePerWeight);
+
+        $this->getPricePerWeight()->shouldBeAnInstanceOf(Money::class);
+        $this->getPricePerWeight()->getAmount()->shouldBeLike(6706);
+        $this->getPricePerWeight()->getCurrency()->getCode()->shouldBe($currency);
+    }
+
+    public function it_throws_exception_price_per_weight_on_weight_is_zero(): void
+    {
+        $weight          = new Mass(0, 'gram');
+
+        $this->setWeight($weight);
+        $this->shouldThrow(\UnexpectedValueException::class)->duringGetPricePerWeight();
     }
 }

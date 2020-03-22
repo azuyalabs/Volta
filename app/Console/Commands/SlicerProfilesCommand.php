@@ -242,8 +242,8 @@ class SlicerProfilesCommand extends Command
             $this->info($filamentName . ' (' . $filamentFile['filename'] . ')');
 
             # Info
-            $f['instructions_url'] = $f['info']['instructions_url'] ?? '';
-            $f['msds_url']         = $f['info']['msds_url']                 ?? '';
+            $f['instructions_url'] = $f['info']['instructions_url']          ?? '';
+            $f['msds_url']         = $f['info']['msds_url']                  ?? '';
             $f['tds_url']          = $f['info']['tds_url']                   ?? '';
 
             # Retrieve Linear Advance Calibration data
