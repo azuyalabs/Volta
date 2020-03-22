@@ -37,9 +37,9 @@ class FilamentSpool
         Manufacturer $manufacturer,
         string $name
     ) {
-        $this->id            = $id;
-        $this->name          = $name;
-        $this->manufacturer  = $manufacturer;
+        $this->id           = $id;
+        $this->name         = $name;
+        $this->manufacturer = $manufacturer;
 
         $this->purchasePrice = new Money(0, new Currency('USD'));
         $this->weight        = new Mass(0, 'kilogram');
@@ -103,12 +103,33 @@ class FilamentSpool
     {
         $weight = $this->weight->toNativeUnit();
 
-        if (abs($weight-0) < PHP_FLOAT_EPSILON) {
+        if (abs($weight - 0) < PHP_FLOAT_EPSILON) {
             throw new ZeroWeightException();
         }
 
         $pr = clone $this->getPurchasePrice();
 
         return $pr->divide($weight);
+    }
+
+    /**
+     * Get the kilogram equivalent price for this spool.
+     *
+     * Some manufacturers supply filament spools in quantities other than 1000 gram. This method allows for equal
+     * comparison between different spools of different weight quantities.
+     *
+     * @return Money
+     */
+    public function getPricePerKilogram(): Money
+    {
+        $weight = $this->weight->toNativeUnit();
+
+        if (abs($weight - 0) < PHP_FLOAT_EPSILON) {
+            throw new ZeroWeightException();
+        }
+
+        $pr = clone $this->getPurchasePrice();
+
+        return $pr->multiply(1000 / $weight);
     }
 }
