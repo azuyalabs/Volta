@@ -177,7 +177,9 @@ class SlicerProfilesCommand extends Command
 //            $color                  = $f['color']['name'] ?? $this->color2Name($f['color']['code']);
 //            $f['color']['rgba_int'] = hexdec(ltrim($f['color']['code'], '#') . '00');
 
-//            $filamentName = implode(' ', [$f['brand'], $f['type'], $color, $f['diameter'] . 'mm']);
+            $color = $f['product']['color']['name'];
+
+            $filamentName = implode(' ', [$f['product']['manufacturer'], $f['product']['type'], $color, $f['product']['diameter']['value'] . 'mm']);
 
             // TODO: Update original filament definition
             //if (!isset($f['id'])) {
@@ -197,32 +199,30 @@ class SlicerProfilesCommand extends Command
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
                 ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'));
 
-            echo $spool->getManufacturer()->getName()->getValue().PHP_EOL;
-            echo $spool->getName().PHP_EOL;
-            echo $spool->getWeight().PHP_EOL;
-            echo $spool->getPurchasePrice()->getAmount().PHP_EOL;
-            echo $spool->getPricePerWeight()->getAmount().PHP_EOL;
-            echo $spool->getPricePerKilogram()->getAmount() / 1000 .PHP_EOL;
-            echo $spool->getDiameter().PHP_EOL;
-
-            continue;
+            echo $spool->getManufacturer()->getName()->getValue() . PHP_EOL;
+            echo $spool->getName() . PHP_EOL;
+            echo $spool->getWeight() . PHP_EOL;
+            echo $spool->getPurchasePrice()->getAmount() . PHP_EOL;
+            echo $spool->getPricePerWeight()->getAmount() . PHP_EOL;
+            echo $spool->getPricePerKilogram()->getAmount() / 1000 . PHP_EOL;
+            echo $spool->getDiameter() . PHP_EOL;
 
             // Set defaults
             $f['filament_name']                 = $filamentName;
-            $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['type']];
-            $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['type']];
+            $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['product']['type']];
+            $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['product']['type']];
             $f['extrusion_multiplier']          = 1;
-            $f['cooling']                       = $f['type'] === 'ABS' ? 0 : 1;
-            $f['fan_always_on']                 = $f['type'] === 'ABS' ? 0 : 1;
-            $f['k_value']                       = ($f['type'] === 'PET') ? 45 : 30;
+            $f['cooling']                       = $f['product']['type'] === 'ABS' ? 0 : 1;
+            $f['fan_always_on']                 = $f['product']['type'] === 'ABS' ? 0 : 1;
+            $f['k_value']                       = ($f['product']['type'] === 'PET') ? 45 : 30;
             $f['filament_notes']                = sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
             $f['filament_colour']               = $color;
-            $f['min_fan_speed']                 = $this->min_fan_speed[$f['type']];
-            $f['max_fan_speed']                 = $this->max_fan_speed[$f['type']];
-            $f['min_print_speed']               = ($f['type'] === 'ABS') ? 5 : 15;
-            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['type']];
-            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['type']];
-            $f['inherits']                      = $this->inherits[$f['type']];
+            $f['min_fan_speed']                 = $this->min_fan_speed[$f['product']['type']];
+            $f['max_fan_speed']                 = $this->max_fan_speed[$f['product']['type']];
+            $f['min_print_speed']               = ($f['product']['type'] === 'ABS') ? 5 : 15;
+            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['product']['type']];
+            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['product']['type']];
+            $f['inherits']                      = $this->inherits[$f['product']['type']];
 
             if (!isset($f['first_layer_bed_temperature'])) {
                 $f['first_layer_bed_temperature'] = 60;
@@ -244,10 +244,10 @@ class SlicerProfilesCommand extends Command
                 $f['keep_warm_temperature'] = ceil($f['next_layer_temperature'] * 0.65);
             }
 
-            $f['price_per_cm3'] = ($f['price'] * $f['density']) / $f['weight'];
+            $f['price_per_cm3'] = ($f['purchase_price']['value'] * $f['product']['density']) / $f['product']['spool_weight'];
 
             // Store Cura Material Settings
-            $cura_material_settings[(string)$f['id']] = ['spool_weight' => $f['weight'], 'spool_cost' => $f['price']];
+            $cura_material_settings[(string)$f['id']] = ['spool_weight' => $f['product']['spool_weight'], 'spool_cost' => $f['purchase_price']['value']];
 
             $this->info($filamentName . ' (' . $filamentFile['filename'] . ')');
 
@@ -272,11 +272,11 @@ class SlicerProfilesCommand extends Command
             if (isset($f['diameter_calibrations'])) {
                 $dm     = collect($f['diameter_calibrations']);
                 $avg    = $dm->pluck('measurements')->flatten()->average();
-                $margin = $avg - $f['diameter'];
+                $margin = $avg - $f['product']['diameter']['value'];
 
                 if (isset($avg)) {
-                    $this->info(sprintf('Filament Diameter    : %.3fmm [%.3fmm (%.2f%%)]', $avg, $margin, ($margin / $f['diameter'] * 100)));
-                    $f['diameter'] = sprintf('%.3f', $avg);
+                    $this->info(sprintf('Filament Diameter    : %.3fmm [%.3fmm (%.2f%%)]', $avg, $margin, ($margin / $f['product']['diameter']['value'] * 100)));
+                    $f['product']['diameter']['value'] = sprintf('%.3f', $avg);
                     $f['filament_notes'] .= sprintf('Filament diameter last calibrated on %s\\n', $dm->pluck('date')->max());
                 }
             } else {
