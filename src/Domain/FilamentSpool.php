@@ -16,7 +16,9 @@ namespace Volta\Domain;
 
 use Money\Currency;
 use Money\Money;
+use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
@@ -32,6 +34,8 @@ class FilamentSpool
 
     private $weight;
 
+    private $diameter;
+
     public function __construct(
         FilamentSpoolId $id,
         Manufacturer $manufacturer,
@@ -43,6 +47,22 @@ class FilamentSpool
 
         $this->purchasePrice = new Money(0, new Currency('USD'));
         $this->weight        = new Mass(0, 'kilogram');
+        $this->diameter      = new Length(0, 'millimeter');
+    }
+
+    public function getDiameter(): Length
+    {
+        return $this->diameter;
+    }
+
+    public function setDiameter(Length $diameter): FilamentSpool
+    {
+        if (abs($diameter->toNativeUnit() - 0) < PHP_FLOAT_EPSILON) {
+            throw new ZeroDiameterException();
+        }
+
+        $this->diameter = $diameter;
+        return $this;
     }
 
     public function getWeight(): Mass
@@ -83,17 +103,6 @@ class FilamentSpool
         return $this->id;
     }
 
-    public function getPurchasePrice(): Money
-    {
-        return $this->purchasePrice;
-    }
-
-    public function setPurchasePrice(Money $purchasePrice): self
-    {
-        $this->purchasePrice = $purchasePrice;
-        return $this;
-    }
-
     /**
      * Get the weight equivalent (gram) price for this spool.
      *
@@ -110,6 +119,17 @@ class FilamentSpool
         $pr = clone $this->getPurchasePrice();
 
         return $pr->divide($weight);
+    }
+
+    public function getPurchasePrice(): Money
+    {
+        return $this->purchasePrice;
+    }
+
+    public function setPurchasePrice(Money $purchasePrice): self
+    {
+        $this->purchasePrice = $purchasePrice;
+        return $this;
     }
 
     /**

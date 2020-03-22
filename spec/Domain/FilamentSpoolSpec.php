@@ -17,7 +17,9 @@ namespace spec\Volta\Domain;
 use Money\Currency;
 use Money\Money;
 use PhpSpec\ObjectBehavior;
+use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
@@ -112,7 +114,7 @@ class FilamentSpoolSpec extends ObjectBehavior
 
     public function it_throws_exception_price_per_weight_on_weight_is_zero(): void
     {
-        $weight          = new Mass(0, 'gram');
+        $weight = new Mass(0, 'gram');
 
         $this->setWeight($weight);
         $this->shouldThrow(ZeroWeightException::class)->duringGetPricePerWeight();
@@ -134,9 +136,28 @@ class FilamentSpoolSpec extends ObjectBehavior
 
     public function it_throws_exception_price_per_kilogram_on_weight_is_zero(): void
     {
-        $weight          = new Mass(0, 'gram');
+        $weight = new Mass(0, 'gram');
 
         $this->setWeight($weight);
         $this->shouldThrow(ZeroWeightException::class)->duringGetPricePerKilogram();
+    }
+
+    public function it_has_a_diameter(): void
+    {
+        $this->getDiameter()->shouldReturnAnInstanceOf(Length::class);
+    }
+
+    public function it_can_update_diameter(): void
+    {
+        $diameter = new Length(0.1, 'meters');
+
+        $this->setDiameter($diameter);
+        $this->getDiameter()->shouldBe($diameter);
+    }
+
+    public function it_throws_exception_setting_diameter_to_zero(): void
+    {
+        $this->shouldThrow(ZeroDiameterException::class)
+            ->duringSetDiameter(new Length(0, 'meters'));
     }
 }
