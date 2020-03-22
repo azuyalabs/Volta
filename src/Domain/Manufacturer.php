@@ -78,4 +78,9 @@ class Manufacturer
         $this->id = $id;
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getName()->getValue();
+    }
 }

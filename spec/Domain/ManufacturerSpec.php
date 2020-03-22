@@ -65,4 +65,9 @@ class ManufacturerSpec extends ObjectBehavior
         $this->setIsEquipmentSupplier(true);
         $this->isEquipmentSupplier()->shouldBe(true);
     }
+
+    public function it_can_be_representated_as_a_string(): void
+    {
+        $this->__toString()->shouldBe('ABC Plastics');
+    }
 }
