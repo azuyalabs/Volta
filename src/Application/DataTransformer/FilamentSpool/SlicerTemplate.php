@@ -16,7 +16,19 @@ namespace Volta\Application\DataTransformer\FilamentSpool;
 
 class SlicerTemplate
 {
-    private $diameter = 0;
+    private $diameter = 0.0;
+
+    private $manufacturer;
+
+    public function getManufacturer()
+    {
+        return $this->manufacturer;
+    }
+
+    public function setManufacturer($manufacturer): void
+    {
+        $this->manufacturer = $manufacturer;
+    }
 
     public function getDiameter(): float
     {

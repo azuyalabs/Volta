@@ -23,6 +23,8 @@ use Money\Money;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use RuntimeException;
+use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplate;
+use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateMapper;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpoolId;
@@ -206,6 +208,14 @@ class SlicerProfilesCommand extends Command
             echo $spool->getPricePerWeight()->getAmount() . PHP_EOL;
             echo $spool->getPricePerKilogram()->getAmount() / 1000 . PHP_EOL;
             echo $spool->getDiameter() . PHP_EOL;
+
+
+
+            $mapper = new SlicerTemplateMapper();
+            $tpl    = new SlicerTemplate();
+            $mapper->mapFromDomain($spool, $tpl);
+            print_r($tpl);
+continue;
 
             // Set defaults
             $f['filament_name']                 = $filamentName;

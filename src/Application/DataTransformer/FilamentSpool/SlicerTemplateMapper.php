@@ -20,7 +20,8 @@ class SlicerTemplateMapper
 {
     public function mapFromDomain(FilamentSpool $spool, SlicerTemplate $dto): void
     {
-        $dto->setDiameter($spool->getDiameter()->toNativeUnit());
+        //$dto->setDiameter($spool->getDiameter()->toNativeUnit());
+        $dto->setManufacturer($spool->getManufacturer()->getName()->getValue());
         /*
         $dto->setName($reviewer->getName()->getValue());
         $dto->setGender($reviewer->getGender()->getValue());
