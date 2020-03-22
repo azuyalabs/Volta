@@ -121,14 +121,14 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_price_per_kilogram(): void
     {
         static $currency = 'USD';
-        $price           = new Money(28, new Currency($currency));
+        $price           = new Money(2800, new Currency($currency));
         $weight          = new Mass(750, 'gram');
 
         $this->setWeight($weight);
         $this->setPurchasePrice($price);
 
         $this->getPricePerWeight()->shouldBeAnInstanceOf(Money::class);
-        $this->getPricePerWeight()->getAmount()->shouldBeLike(37);
+        $this->getPricePerWeight()->getAmount()->shouldBeLike(3733);
         $this->getPricePerWeight()->getCurrency()->getCode()->shouldBe($currency);
     }
 
