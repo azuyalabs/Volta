@@ -33,7 +33,7 @@ class SlicerTemplateMapperSpec extends ObjectBehavior
 
         $this->mapFromDomain($spool, $dto);
 
-        //$dto->setDiameter(2.1)->shouldHaveBeenCalled();
+        //$dto->setDiameter(0)->shouldHaveBeenCalled();
         $dto->setManufacturer('ABC Plastics')->shouldHaveBeenCalled();
     }
 }

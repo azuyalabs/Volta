@@ -17,14 +17,15 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Item;
+use League\Fractal\Serializer\ArraySerializer;
 use League\Plates\Engine;
 use Money\Currency;
 use Money\Money;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use RuntimeException;
-use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplate;
-use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateMapper;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpoolId;
@@ -201,20 +202,22 @@ class SlicerProfilesCommand extends Command
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
                 ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'));
 
-            echo $spool->getManufacturer()->getName()->getValue() . PHP_EOL;
-            echo $spool->getName() . PHP_EOL;
-            echo $spool->getWeight() . PHP_EOL;
-            echo $spool->getPurchasePrice()->getAmount() . PHP_EOL;
-            echo $spool->getPricePerWeight()->getAmount() . PHP_EOL;
-            echo $spool->getPricePerKilogram()->getAmount() / 1000 . PHP_EOL;
-            echo $spool->getDiameter() . PHP_EOL;
+            $fractal  = new Manager();
+            $fractal->setSerializer(new ArraySerializer());
+            $resource = new Item($spool, static function (FilamentSpool $spool) {
+                return [
+                    'id'           => $spool->getId()->getValue(),
+                    'name'         => $spool->getName(),
+                    'manufacturer' => $spool->getManufacturer()->getName()->getValue(),
+                    'diameter'     => $spool->getDiameter()->toNativeUnit(),
+                    'weight'       => $spool->getWeight()->toNativeUnit(),
+                    'price'        => $spool->getPurchasePrice()->getAmount()
+                ];
+            });
 
+            $d=$fractal->createData($resource)->toArray();
+            print_r($d);
 
-
-            $mapper = new SlicerTemplateMapper();
-            $tpl    = new SlicerTemplate();
-            $mapper->mapFromDomain($spool, $tpl);
-            print_r($tpl);
             continue;
 
             // Set defaults
