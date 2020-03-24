@@ -25,7 +25,7 @@ use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use RuntimeException;
 use Spatie\Fractalistic\Fractal;
-use Volta\Application\DataTransformer\FilamentSpool\FilamentSpoolSlicerTemplateTransformer;
+use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateTransformer;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpoolId;
@@ -204,7 +204,7 @@ class SlicerProfilesCommand extends Command
 
             // Transform into a flat array structure
             $s = Fractal::create()
-                ->item($spool, new FilamentSpoolSlicerTemplateTransformer)
+                ->item($spool, new SlicerTemplateTransformer)
                 ->serializeWith(new ArraySerializer())
                 ->toArray();
             print_r($s);

@@ -16,6 +16,13 @@ class ManufacturerName
         $this->validate();
     }
 
+    private function validate(): void
+    {
+        if (empty($this->value)) {
+            throw new BlankManufacturerNameException();
+        }
+    }
+
     public function getValue(): string
     {
         return $this->value;
@@ -24,12 +31,5 @@ class ManufacturerName
     public function isEqual(ManufacturerName $other): bool
     {
         return $this->value === $other->value;
-    }
-
-    private function validate(): void
-    {
-        if (empty($this->value)) {
-            throw new BlankManufacturerNameException();
-        }
     }
 }

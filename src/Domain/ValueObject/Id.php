@@ -33,9 +33,22 @@ abstract class Id
         $this->value = Uuid::uuid4();
     }
 
-    public function getValue(): string
+    /**
+     * @param string $id
+     *
+     * @return Id
+     * @throws \Exception
+     */
+    public static function fromString(string $id): Id
     {
-        return $this->value->toString();
+        if (!Uuid::isValid($id)) {
+            throw new InvalidIdException(sprintf('Invalid Id for %s', static::class));
+        }
+
+        $result        = new static();
+        $result->value = Uuid::fromString($id);
+
+        return $result;
     }
 
     public function isEqual(Id $value): bool
@@ -47,22 +60,9 @@ abstract class Id
         return $this->getValue() === $value->getValue();
     }
 
-    /**
-     * @param string $id
-     *
-     * @return Id
-     * @throws \Exception
-     */
-    public static function fromString(string $id): Id
+    public function getValue(): string
     {
-        if (! Uuid::isValid($id)) {
-            throw new InvalidIdException(sprintf('Invalid Id for %s', static::class));
-        }
-
-        $result        = new static();
-        $result->value = Uuid::fromString($id);
-
-        return $result;
+        return $this->value->toString();
     }
 
     /**

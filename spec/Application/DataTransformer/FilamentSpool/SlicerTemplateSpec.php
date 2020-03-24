@@ -14,21 +14,21 @@ declare(strict_types=1);
 
 namespace spec\Volta\Application\DataTransformer\FilamentSpool;
 
- use PhpSpec\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
- class SlicerTemplateSpec extends ObjectBehavior
- {
-     public function it_has_diameter(): void
-     {
-         $this->getDiameter()->shouldBeNull();
-         $this->setDiameter(1.75);
-         $this->getDiameter()->shouldBe(1.75);
-     }
+class SlicerTemplateSpec extends ObjectBehavior
+{
+    public function it_has_diameter(): void
+    {
+        $this->getDiameter()->shouldBeNull();
+        $this->setDiameter(1.75);
+        $this->getDiameter()->shouldBe(1.75);
+    }
 
-     public function it_has_manufacturer(): void
-     {
-         $this->getManufacturer()->shouldBeNull();
-         $this->setManufacturer('ABC Plastics');
-         $this->getManufacturer()->shouldBe('ABC Plastics');
-     }
- }
+    public function it_has_manufacturer(): void
+    {
+        $this->getManufacturer()->shouldBeNull();
+        $this->setManufacturer('ABC Plastics');
+        $this->getManufacturer()->shouldBe('ABC Plastics');
+    }
+}

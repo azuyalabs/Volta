@@ -31,8 +31,8 @@ class Manufacturer
         ManufacturerId $id,
         ManufacturerName $name
     ) {
-        $this->id                = $id;
-        $this->name              = $name;
+        $this->id   = $id;
+        $this->name = $name;
     }
 
     public function isEquipmentSupplier(): bool
@@ -57,17 +57,6 @@ class Manufacturer
         return $this;
     }
 
-    public function getName(): ManufacturerName
-    {
-        return $this->name;
-    }
-
-    public function setName(ManufacturerName $name): Manufacturer
-    {
-        $this->name = $name;
-        return $this;
-    }
-
     public function getId(): ManufacturerId
     {
         return $this->id;
@@ -82,5 +71,16 @@ class Manufacturer
     public function __toString()
     {
         return $this->getName()->getValue();
+    }
+
+    public function getName(): ManufacturerName
+    {
+        return $this->name;
+    }
+
+    public function setName(ManufacturerName $name): Manufacturer
+    {
+        $this->name = $name;
+        return $this;
     }
 }

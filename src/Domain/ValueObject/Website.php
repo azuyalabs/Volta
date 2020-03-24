@@ -26,6 +26,13 @@ class Website
         $this->validate();
     }
 
+    private function validate(): void
+    {
+        if (false === \filter_var($this->value, \FILTER_VALIDATE_URL)) {
+            throw new InvalidWebsiteException('inval');
+        }
+    }
+
     public function getValue(): string
     {
         return $this->value;
@@ -33,17 +40,10 @@ class Website
 
     public function isEqual(Website $website): bool
     {
-        if (! $website instanceof static) {
+        if (!$website instanceof static) {
             return false;
         }
 
         return $website->value === $this->value;
-    }
-
-    private function validate(): void
-    {
-        if (false === \filter_var($this->value, \FILTER_VALIDATE_URL)) {
-            throw new InvalidWebsiteException('inval');
-        }
     }
 }

@@ -6,7 +6,7 @@ namespace Volta\Application\DataTransformer\FilamentSpool;
 use League\Fractal\TransformerAbstract;
 use Volta\Domain\FilamentSpool;
 
-class FilamentSpoolSlicerTemplateTransformer extends TransformerAbstract
+class SlicerTemplateTransformer extends TransformerAbstract
 {
     public function transform(FilamentSpool $spool): array
     {
@@ -14,8 +14,8 @@ class FilamentSpoolSlicerTemplateTransformer extends TransformerAbstract
             'id'           => $spool->getId()->getValue(),
             'name'         => $spool->getName(),
             'manufacturer' => $spool->getManufacturer()->getName()->getValue(),
-            'diameter'     => $spool->getDiameter()->toNativeUnit(),
-            'weight'       => $spool->getWeight()->toNativeUnit(),
+            'diameter'     => $spool->getDiameter()->toUnit('millimeters'),
+            'weight'       => $spool->getWeight()->toUnit('grams'),
             'price'        => $spool->getPurchasePrice()->getAmount()
         ];
     }
