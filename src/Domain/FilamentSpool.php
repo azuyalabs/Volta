@@ -20,6 +20,7 @@ use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
+use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool
@@ -36,6 +37,8 @@ class FilamentSpool
 
     private $diameter;
 
+    private $material_type;
+
     public function __construct(
         FilamentSpoolId $id,
         Manufacturer $manufacturer,
@@ -48,6 +51,18 @@ class FilamentSpool
         $this->purchasePrice = new Money(0, new Currency('USD'));
         $this->weight        = new Mass(0, 'kilogram');
         $this->diameter      = new Length(0, 'millimeter');
+        $this->material_type = new MaterialType(MaterialType::MATERIALTYPE_PLA);
+    }
+
+    public function getMaterialType(): MaterialType
+    {
+        return $this->material_type;
+    }
+
+    public function setMaterialType(MaterialType $material_type): FilamentSpool
+    {
+        $this->material_type = $material_type;
+        return $this;
     }
 
     public function getDiameter(): Length

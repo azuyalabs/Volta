@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Volta\Application\DataTransformer\FilamentSpool;
@@ -11,12 +12,13 @@ class SlicerTemplateTransformer extends TransformerAbstract
     public function transform(FilamentSpool $spool): array
     {
         return [
-            'id'           => $spool->getId()->getValue(),
-            'name'         => $spool->getName(),
-            'manufacturer' => $spool->getManufacturer()->getName()->getValue(),
-            'diameter'     => $spool->getDiameter()->toUnit('millimeters'),
-            'weight'       => $spool->getWeight()->toUnit('grams'),
-            'price'        => $spool->getPurchasePrice()->getAmount()
+            'id'            => $spool->getId()->getValue(),
+            'name'          => $spool->getName(),
+            'manufacturer'  => $spool->getManufacturer()->getName()->getValue(),
+            'diameter'      => $spool->getDiameter()->toUnit('millimeters'),
+            'weight'        => $spool->getWeight()->toUnit('grams'),
+            'price'         => $spool->getPurchasePrice()->getAmount(),
+            'material'      => $spool->getMaterialType()->getValue()
         ];
     }
 }

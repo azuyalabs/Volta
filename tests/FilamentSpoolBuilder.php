@@ -7,6 +7,7 @@ use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
+use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
@@ -23,6 +24,8 @@ class FilamentSpoolBuilder
 
     private $name;
 
+    private $material;
+
     public function __construct()
     {
         $this->id           = new FilamentSpoolId();
@@ -30,6 +33,7 @@ class FilamentSpoolBuilder
         $this->name         = 'Glowy Pink';
         $this->diameter     = new Length(0.0, 'millimeters');
         $this->weight       = new Mass(0.0, 'grams');
+        $this->material     = new MaterialType(MaterialType::MATERIALTYPE_PETG);
     }
 
     public function withWeight(Mass $weight): void
@@ -57,6 +61,11 @@ class FilamentSpoolBuilder
         $this->name = $name;
     }
 
+    public function withMaterialType(MaterialType $type): void
+    {
+        $this->material = $type;
+    }
+
     public function build(): FilamentSpool
     {
         $spool = new FilamentSpool(
@@ -66,6 +75,7 @@ class FilamentSpoolBuilder
         );
         $spool->setDiameter($this->diameter);
         $spool->setWeight($this->weight);
+        $spool->setMaterialType($this->material);
 
         return $spool;
     }

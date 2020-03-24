@@ -28,6 +28,7 @@ use Spatie\Fractalistic\Fractal;
 use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateTransformer;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
+use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
@@ -200,7 +201,8 @@ class SlicerProfilesCommand extends Command
             );
             $spool->setPurchasePrice(new Money($f['purchase_price']['value'], new Currency($f['purchase_price']['currency'])))
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
-                ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'));
+                ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
+                ->setMaterialType(new MaterialType($f['product']['type']));
 
             // Transform into a flat array structure
             $s = Fractal::create()

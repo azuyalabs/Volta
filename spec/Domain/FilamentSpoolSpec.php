@@ -23,6 +23,7 @@ use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
+use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
@@ -159,5 +160,18 @@ class FilamentSpoolSpec extends ObjectBehavior
     {
         $this->shouldThrow(ZeroDiameterException::class)
             ->duringSetDiameter(new Length(0, 'meters'));
+    }
+
+    public function it_has_a_materialtype(): void
+    {
+        $this->getMaterialType()->shouldReturnAnInstanceOf(MaterialType::class);
+    }
+
+    public function it_can_update_materialtype(): void
+    {
+        $type = new MaterialType('PP');
+
+        $this->setMaterialType($type);
+        $this->getMaterialType()->shouldBe($type);
     }
 }
