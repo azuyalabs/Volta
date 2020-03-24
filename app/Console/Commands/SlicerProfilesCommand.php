@@ -17,8 +17,6 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use League\Fractal\Manager;
-use League\Fractal\Resource\Item;
 use League\Fractal\Serializer\ArraySerializer;
 use League\Plates\Engine;
 use Money\Currency;
@@ -27,6 +25,7 @@ use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use RuntimeException;
 use Spatie\Fractalistic\Fractal;
+use Volta\Application\DataTransformer\FilamentSpool\FilamentSpoolSlicerTemplateTransformer;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpoolId;
@@ -203,16 +202,10 @@ class SlicerProfilesCommand extends Command
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
                 ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'));
 
-            $s = Fractal::create()->item($spool, static function (FilamentSpool $spool) {
-                return [
-                    'id'           => $spool->getId()->getValue(),
-                    'name'         => $spool->getName(),
-                    'manufacturer' => $spool->getManufacturer()->getName()->getValue(),
-                    'diameter'     => $spool->getDiameter()->toNativeUnit(),
-                    'weight'       => $spool->getWeight()->toNativeUnit(),
-                    'price'        => $spool->getPurchasePrice()->getAmount()
-                ];
-            })->serializeWith(new ArraySerializer())->toArray();
+            $s = Fractal::create()
+                ->item($spool, new FilamentSpoolSlicerTemplateTransformer)
+                ->serializeWith(new ArraySerializer())
+                ->toArray();
             print_r($s);
 
             continue;
