@@ -26,6 +26,7 @@ use Money\Money;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use RuntimeException;
+use Spatie\Fractalistic\Fractal;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpoolId;
@@ -202,9 +203,7 @@ class SlicerProfilesCommand extends Command
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
                 ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'));
 
-            $fractal  = new Manager();
-            $fractal->setSerializer(new ArraySerializer());
-            $resource = new Item($spool, static function (FilamentSpool $spool) {
+            $s = Fractal::create()->item($spool, static function (FilamentSpool $spool) {
                 return [
                     'id'           => $spool->getId()->getValue(),
                     'name'         => $spool->getName(),
@@ -213,10 +212,8 @@ class SlicerProfilesCommand extends Command
                     'weight'       => $spool->getWeight()->toNativeUnit(),
                     'price'        => $spool->getPurchasePrice()->getAmount()
                 ];
-            });
-
-            $d=$fractal->createData($resource)->toArray();
-            print_r($d);
+            })->serializeWith(new ArraySerializer())->toArray();
+            print_r($s);
 
             continue;
 

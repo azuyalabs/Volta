@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea7af8b0b3111840a34a9cc84be9ef34",
+    "content-hash": "805eee5958ac63a5c715cec2c55e2577",
     "packages": [
         {
             "name": "azuyalabs/yasumi",
@@ -3511,20 +3511,20 @@
         },
         {
             "name": "phpoption/phpoption",
-            "version": "1.7.2",
+            "version": "1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-option.git",
-                "reference": "77f7c4d2e65413aff5b5a8cc8b3caf7a28d81959"
+                "reference": "4acfd6a4b33a509d8c88f50e5222f734b6aeebae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/77f7c4d2e65413aff5b5a8cc8b3caf7a28d81959",
-                "reference": "77f7c4d2e65413aff5b5a8cc8b3caf7a28d81959",
+                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/4acfd6a4b33a509d8c88f50e5222f734b6aeebae",
+                "reference": "4acfd6a4b33a509d8c88f50e5222f734b6aeebae",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9 || ^7.0"
+                "php": "^5.5.9 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.3",
@@ -3562,20 +3562,20 @@
                 "php",
                 "type"
             ],
-            "time": "2019-12-15T19:35:24+00:00"
+            "time": "2020-03-21T18:07:53+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.25",
+            "version": "2.0.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "c18159618ed7cd7ff721ac1a8fec7860a475d2f0"
+                "reference": "09655fcc1f8bab65727be036b28f6f20311c126c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/c18159618ed7cd7ff721ac1a8fec7860a475d2f0",
-                "reference": "c18159618ed7cd7ff721ac1a8fec7860a475d2f0",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/09655fcc1f8bab65727be036b28f6f20311c126c",
+                "reference": "09655fcc1f8bab65727be036b28f6f20311c126c",
                 "shasum": ""
             },
             "require": {
@@ -3654,7 +3654,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2020-02-25T04:16:50+00:00"
+            "time": "2020-03-13T04:15:39+00:00"
         },
         {
             "name": "predis/predis",
@@ -4470,6 +4470,57 @@
             ],
             "description": "A Gitlab Storage driver for Laravel",
             "time": "2020-03-05T17:28:13+00:00"
+        },
+        {
+            "name": "spatie/fractalistic",
+            "version": "2.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/fractalistic.git",
+                "reference": "9d7594c4e9ed2657eb017db93ab6dbb58f56e049"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/fractalistic/zipball/9d7594c4e9ed2657eb017db93ab6dbb58f56e049",
+                "reference": "9d7594c4e9ed2657eb017db93ab6dbb58f56e049",
+                "shasum": ""
+            },
+            "require": {
+                "league/fractal": "^0.19.0",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "illuminate/pagination": "~5.3.0|~5.4.0",
+                "phpunit/phpunit": "^5.7.21"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Fractalistic\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A developer friendly wrapper around Fractal",
+            "homepage": "https://github.com/spatie/fractalistic",
+            "keywords": [
+                "api",
+                "fractal",
+                "fractalistic",
+                "spatie",
+                "transform"
+            ],
+            "time": "2020-01-31T11:54:45+00:00"
         },
         {
             "name": "spatie/laravel-model-status",
@@ -7776,16 +7827,16 @@
         },
         {
             "name": "nunomaduro/larastan",
-            "version": "v0.5.2",
+            "version": "v0.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/larastan.git",
-                "reference": "a4cc1d5861123ea4c6b5c966a092063fb70a144b"
+                "reference": "d5ef8812cefb4ef951f18f27e70e5fd8a81cd2bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/a4cc1d5861123ea4c6b5c966a092063fb70a144b",
-                "reference": "a4cc1d5861123ea4c6b5c966a092063fb70a144b",
+                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/d5ef8812cefb4ef951f18f27e70e5fd8a81cd2bf",
+                "reference": "d5ef8812cefb4ef951f18f27e70e5fd8a81cd2bf",
                 "shasum": ""
             },
             "require": {
@@ -7844,7 +7895,7 @@
                 "php",
                 "static analysis"
             ],
-            "time": "2020-02-10T12:49:03+00:00"
+            "time": "2020-03-22T21:22:21+00:00"
         },
         {
             "name": "phan/phan",
@@ -8410,16 +8461,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.17",
+            "version": "0.12.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "b2c37bda79fdb11d801ce208ce391cffc0f572e6"
+                "reference": "1ce27fe29c8660a27926127d350d53d80c4d4286"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b2c37bda79fdb11d801ce208ce391cffc0f572e6",
-                "reference": "b2c37bda79fdb11d801ce208ce391cffc0f572e6",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1ce27fe29c8660a27926127d350d53d80c4d4286",
+                "reference": "1ce27fe29c8660a27926127d350d53d80c4d4286",
                 "shasum": ""
             },
             "require": {
@@ -8445,7 +8496,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2020-03-17T15:39:11+00:00"
+            "time": "2020-03-22T16:51:47+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
