@@ -202,6 +202,7 @@ class SlicerProfilesCommand extends Command
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
                 ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'));
 
+            // Transform into a flat array structure
             $s = Fractal::create()
                 ->item($spool, new FilamentSpoolSlicerTemplateTransformer)
                 ->serializeWith(new ArraySerializer())
