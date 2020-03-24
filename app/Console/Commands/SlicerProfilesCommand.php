@@ -183,7 +183,6 @@ class SlicerProfilesCommand extends Command
 
             $color = $f['product']['color']['name'];
 
-            $filamentName = implode(' ', [$f['product']['manufacturer'], $f['product']['type'], $color, $f['product']['diameter']['value'] . 'mm']);
 
             // TODO: Update original filament definition
             //if (!isset($f['id'])) {
@@ -205,30 +204,31 @@ class SlicerProfilesCommand extends Command
                 ->setMaterialType(new MaterialType($f['product']['type']));
 
             // Transform into a flat array structure
-            $s = Fractal::create()
+            $f = Fractal::create()
                 ->item($spool, new SlicerTemplateTransformer)
                 ->serializeWith(new ArraySerializer())
                 ->toArray();
-            print_r($s);
 
-            continue;
+            $filamentName = implode(' ', [$f['manufacturer'], $f['material'], $color, $f['diameter'] . 'mm']);
+
+
 
             // Set defaults
             $f['filament_name']                 = $filamentName;
-            $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['product']['type']];
-            $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['product']['type']];
+            $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['material']];
+            $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['material']];
             $f['extrusion_multiplier']          = 1;
-            $f['cooling']                       = $f['product']['type'] === 'ABS' ? 0 : 1;
-            $f['fan_always_on']                 = $f['product']['type'] === 'ABS' ? 0 : 1;
-            $f['k_value']                       = ($f['product']['type'] === 'PET') ? 45 : 30;
+            $f['cooling']                       = $f['material'] === 'ABS' ? 0 : 1;
+            $f['fan_always_on']                 = $f['material'] === 'ABS' ? 0 : 1;
+            $f['k_value']                       = ($f['material'] === 'PET') ? 45 : 30;
             $f['filament_notes']                = sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
             $f['filament_colour']               = $color;
-            $f['min_fan_speed']                 = $this->min_fan_speed[$f['product']['type']];
-            $f['max_fan_speed']                 = $this->max_fan_speed[$f['product']['type']];
-            $f['min_print_speed']               = ($f['product']['type'] === 'ABS') ? 5 : 15;
-            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['product']['type']];
-            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['product']['type']];
-            $f['inherits']                      = $this->inherits[$f['product']['type']];
+            $f['min_fan_speed']                 = $this->min_fan_speed[$f['material']];
+            $f['max_fan_speed']                 = $this->max_fan_speed[$f['material']];
+            $f['min_print_speed']               = ($f['material'] === 'ABS') ? 5 : 15;
+            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];
+            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['material']];
+            $f['inherits']                      = $this->inherits[$f['material']];
 
             if (!isset($f['first_layer_bed_temperature'])) {
                 $f['first_layer_bed_temperature'] = 60;
@@ -250,10 +250,10 @@ class SlicerProfilesCommand extends Command
                 $f['keep_warm_temperature'] = ceil($f['next_layer_temperature'] * 0.65);
             }
 
-            $f['price_per_cm3'] = ($f['purchase_price']['value'] * $f['product']['density']) / $f['product']['spool_weight'];
+            $f['price_per_cm3'] = ($f['price'] * $f['density']) / $f['weight'];
 
             // Store Cura Material Settings
-            $cura_material_settings[(string)$f['id']] = ['spool_weight' => $f['product']['spool_weight'], 'spool_cost' => $f['purchase_price']['value']];
+            $cura_material_settings[(string)$f['id']] = ['spool_weight' => $f['weight'], 'spool_cost' => $f['purchase_price']['value']];
 
             $this->info($filamentName . ' (' . $filamentFile['filename'] . ')');
 
