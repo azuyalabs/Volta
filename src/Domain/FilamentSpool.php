@@ -76,14 +76,14 @@ class FilamentSpool
         );
     }
 
-    public function getColor(): Color
+    public function getManufacturer(): Manufacturer
     {
-        return $this->color;
+        return $this->manufacturer;
     }
 
-    public function setColor(Color $color): FilamentSpool
+    public function setManufacturer(Manufacturer $manufacturer): FilamentSpool
     {
-        $this->color = $color;
+        $this->manufacturer = $manufacturer;
         return $this;
     }
 
@@ -95,6 +95,17 @@ class FilamentSpool
     public function setMaterialType(MaterialType $material_type): FilamentSpool
     {
         $this->material_type = $material_type;
+        return $this;
+    }
+
+    public function getColor(): Color
+    {
+        return $this->color;
+    }
+
+    public function setColor(Color $color): FilamentSpool
+    {
+        $this->color = $color;
         return $this;
     }
 
@@ -121,17 +132,6 @@ class FilamentSpool
     public function setWeight(Mass $weight): FilamentSpool
     {
         $this->weight = $weight;
-        return $this;
-    }
-
-    public function getManufacturer(): Manufacturer
-    {
-        return $this->manufacturer;
-    }
-
-    public function setManufacturer(Manufacturer $manufacturer): FilamentSpool
-    {
-        $this->manufacturer = $manufacturer;
         return $this;
     }
 
