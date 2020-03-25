@@ -205,7 +205,7 @@ class SlicerProfilesCommand extends Command
                 ->setMaterialType(new MaterialType($f['product']['type']))
                 ->setColor(new Color(new ColorName($f['product']['color']['name']), new Hex($f['product']['color']['code'])));
 
-           $this->info($spool->getDisplayName()->getValue() . ' (' . $filamentFile['basename'] . ')');
+            $this->info($spool->getDisplayName()->getValue() . ' (' . $filamentFile['basename'] . ')');
 
 
 
