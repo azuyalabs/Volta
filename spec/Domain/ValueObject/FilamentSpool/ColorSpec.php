@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace spec\Volta\Domain\ValueObject\FilamentSpool;
 
+use OzdemirBurak\Iris\Color\Hex;
 use PhpSpec\ObjectBehavior;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
@@ -22,7 +23,10 @@ class ColorSpec extends ObjectBehavior
 {
     public function let(): void
     {
-        $this->beConstructedWith(new ColorName('White'));
+        $this->beConstructedWith(
+            new ColorName('White'),
+            new Hex('#ffffff')
+        );
     }
 
     public function it_has_color_name(): void
@@ -31,9 +35,18 @@ class ColorSpec extends ObjectBehavior
         $this->getColorName()->getValue()->shouldBe('White');
     }
 
+    public function it_has_color_code(): void
+    {
+        $this->getColorCode()->shouldBeAnInstanceOf(Hex::class);
+        $this->getColorCode()->__toString()->shouldBe('#ffffff');
+    }
+
     public function it_compares_equality(): void
     {
-        $other = new Color(new ColorName('Orange'));
+        $other = new Color(
+            new ColorName('Orange'),
+            new Hex('#ffa500')
+        );
         $this->shouldNotBeEqual($other);
 
         $this->shouldBeEqual($this);

@@ -14,18 +14,18 @@ declare(strict_types=1);
 
 namespace Volta\Domain\ValueObject\FilamentSpool;
 
+use OzdemirBurak\Iris\Color\Hex;
+
 class Color
 {
     private $name;
 
-    public function __construct(ColorName $name)
+    private $code;
+
+    public function __construct(ColorName $name, Hex $code)
     {
         $this->name = $name;
-        $this->validate();
-    }
-
-    private function validate(): void
-    {
+        $this->code = $code;
     }
 
     public function getColorName(): ColorName
@@ -33,8 +33,14 @@ class Color
         return $this->name;
     }
 
+    public function getColorCode(): Hex
+    {
+        return $this->code;
+    }
+
     public function isEqual(Color $other): bool
     {
-        return $this->name === $other->getColorName();
+        return $this->name === $other->getColorName()
+            && $this->code === $other->getColorCode();
     }
 }
