@@ -12,15 +12,15 @@ class SlicerTemplateTransformer extends TransformerAbstract
     public function transform(FilamentSpool $spool): array
     {
         return [
-            'id'            => $spool->getId()->getValue(),
-            'name'          => $spool->getName(),
-            'manufacturer'  => $spool->getManufacturer()->getName()->getValue(),
-            'diameter'      => $spool->getDiameter()->toUnit('millimeters'),
-            'weight'        => $spool->getWeight()->toUnit('grams'),
-            'price'         => $spool->getPurchasePrice()->getAmount(),
-            'material'      => $spool->getMaterialType()->getValue(),
-            'color'         => $spool->getColor()->getColorName()->getValue(),
-            'color_code'    => (string)$spool->getColor()->getColorCode()
+            'id'           => $spool->getId()->getValue(),
+            'name'         => $spool->getName(),
+            'manufacturer' => $spool->getManufacturer()->getName()->getValue(),
+            'diameter'     => $spool->getDiameter()->toUnit('millimeters'),
+            'weight'       => $spool->getWeight()->toUnit('grams'),
+            'price'        => $spool->getPurchasePrice()->getAmount(),
+            'material'     => $spool->getMaterialType()->getValue(),
+            'color'        => $spool->getColor()->getColorName()->getValue(),
+            'color_code'   => (string)$spool->getColor()->getColorCode()
         ];
     }
 }

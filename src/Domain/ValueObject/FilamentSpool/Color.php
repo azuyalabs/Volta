@@ -28,6 +28,12 @@ class Color
         $this->code = $code;
     }
 
+    public function isEqual(Color $other): bool
+    {
+        return $this->name === $other->getColorName()
+            && $this->code === $other->getColorCode();
+    }
+
     public function getColorName(): ColorName
     {
         return $this->name;
@@ -36,11 +42,5 @@ class Color
     public function getColorCode(): Hex
     {
         return $this->code;
-    }
-
-    public function isEqual(Color $other): bool
-    {
-        return $this->name === $other->getColorName()
-            && $this->code === $other->getColorCode();
     }
 }
