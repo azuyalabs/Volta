@@ -18,7 +18,9 @@ class SlicerTemplateTransformer extends TransformerAbstract
             'diameter'      => $spool->getDiameter()->toUnit('millimeters'),
             'weight'        => $spool->getWeight()->toUnit('grams'),
             'price'         => $spool->getPurchasePrice()->getAmount(),
-            'material'      => $spool->getMaterialType()->getValue()
+            'material'      => $spool->getMaterialType()->getValue(),
+            'color'         => $spool->getColor()->getColorName()->getValue(),
+            'color_code'    => (string)$spool->getColor()->getColorCode()
         ];
     }
 }

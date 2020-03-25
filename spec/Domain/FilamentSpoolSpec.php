@@ -16,6 +16,7 @@ namespace spec\Volta\Domain;
 
 use Money\Currency;
 use Money\Money;
+use OzdemirBurak\Iris\Color\Hex;
 use PhpSpec\ObjectBehavior;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
@@ -23,6 +24,8 @@ use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
+use Volta\Domain\ValueObject\FilamentSpool\Color;
+use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
@@ -173,5 +176,18 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setMaterialType($type);
         $this->getMaterialType()->shouldBe($type);
+    }
+
+    public function it_has_a_color(): void
+    {
+        $this->getColor()->shouldReturnAnInstanceOf(Color::class);
+    }
+
+    public function it_can_update_color(): void
+    {
+        $color = new Color(new ColorName('Blue'), new Hex('#0000ff'));
+
+        $this->setColor($color);
+        $this->getColor()->shouldBe($color);
     }
 }

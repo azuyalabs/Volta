@@ -21,6 +21,7 @@ use League\Fractal\Serializer\ArraySerializer;
 use League\Plates\Engine;
 use Money\Currency;
 use Money\Money;
+use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use RuntimeException;
@@ -28,6 +29,8 @@ use Spatie\Fractalistic\Fractal;
 use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateTransformer;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
+use Volta\Domain\ValueObject\FilamentSpool\Color;
+use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
@@ -201,7 +204,8 @@ class SlicerProfilesCommand extends Command
             $spool->setPurchasePrice(new Money($f['purchase_price']['value'], new Currency($f['purchase_price']['currency'])))
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
                 ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
-                ->setMaterialType(new MaterialType($f['product']['type']));
+                ->setMaterialType(new MaterialType($f['product']['type']))
+                ->setColor(new Color(new ColorName($f['product']['color']['name']), new Hex($f['product']['color']['code'])));
 
             // Transform into a flat array structure
             $f = Fractal::create()
@@ -209,6 +213,8 @@ class SlicerProfilesCommand extends Command
                 ->serializeWith(new ArraySerializer())
                 ->toArray();
 
+            print_r($f);
+            continue;
             $filamentName = implode(' ', [$f['manufacturer'], $f['material'], $color, $f['diameter'] . 'mm']);
 
 

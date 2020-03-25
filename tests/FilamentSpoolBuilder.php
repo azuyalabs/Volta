@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
+use Volta\Domain\ValueObject\FilamentSpool\Color;
+use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
@@ -26,6 +29,8 @@ class FilamentSpoolBuilder
 
     private $material;
 
+    private $color;
+
     public function __construct()
     {
         $this->id           = new FilamentSpoolId();
@@ -34,6 +39,7 @@ class FilamentSpoolBuilder
         $this->diameter     = new Length(0.0, 'millimeters');
         $this->weight       = new Mass(0.0, 'grams');
         $this->material     = new MaterialType(MaterialType::MATERIALTYPE_PETG);
+        $this->color        = new Color(new ColorName('Green'), new Hex('#00ff00'));
     }
 
     public function withWeight(Mass $weight): void
@@ -66,6 +72,11 @@ class FilamentSpoolBuilder
         $this->material = $type;
     }
 
+    public function withColor(Color $color): void
+    {
+        $this->color = $color;
+    }
+
     public function build(): FilamentSpool
     {
         $spool = new FilamentSpool(
@@ -76,6 +87,7 @@ class FilamentSpoolBuilder
         $spool->setDiameter($this->diameter);
         $spool->setWeight($this->weight);
         $spool->setMaterialType($this->material);
+        $spool->setColor($this->color);
 
         return $spool;
     }

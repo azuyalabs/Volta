@@ -16,10 +16,13 @@ namespace Volta\Domain;
 
 use Money\Currency;
 use Money\Money;
+use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
+use Volta\Domain\ValueObject\FilamentSpool\Color;
+use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
@@ -39,6 +42,8 @@ class FilamentSpool
 
     private $material_type;
 
+    private $color;
+
     public function __construct(
         FilamentSpoolId $id,
         Manufacturer $manufacturer,
@@ -52,6 +57,18 @@ class FilamentSpool
         $this->weight        = new Mass(0, 'kilogram');
         $this->diameter      = new Length(0, 'millimeter');
         $this->material_type = new MaterialType(MaterialType::MATERIALTYPE_PLA);
+        $this->color         = new Color(new ColorName('Red'), new Hex('#ff0000'));
+    }
+
+    public function getColor(): Color
+    {
+        return $this->color;
+    }
+
+    public function setColor(Color $color): FilamentSpool
+    {
+        $this->color = $color;
+        return $this;
     }
 
     public function getMaterialType(): MaterialType
