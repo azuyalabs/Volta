@@ -179,8 +179,6 @@ class SlicerProfilesCommand extends Command
                 continue;
             }
 
-            $this->info('>Processing ' . $filamentFile['basename']);
-
 //            $color                  = $f['color']['name'] ?? $this->color2Name($f['color']['code']);
 //            $f['color']['rgba_int'] = hexdec(ltrim($f['color']['code'], '#') . '00');
 
@@ -206,6 +204,10 @@ class SlicerProfilesCommand extends Command
                 ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
                 ->setMaterialType(new MaterialType($f['product']['type']))
                 ->setColor(new Color(new ColorName($f['product']['color']['name']), new Hex($f['product']['color']['code'])));
+
+           $this->info($spool->getDisplayName()->getValue() . ' (' . $filamentFile['basename'] . ')');
+
+
 
             // Transform into a flat array structure
             $f = Fractal::create()
@@ -262,7 +264,7 @@ class SlicerProfilesCommand extends Command
             // Store Cura Material Settings
             $cura_material_settings[(string)$f['id']] = ['spool_weight' => $f['weight'], 'spool_cost' => $f['purchase_price']['value']];
 
-            $this->info($filamentName . ' (' . $filamentFile['filename'] . ')');
+
 
             # Info
             $f['instructions_url'] = $f['info']['instructions_url']          ?? '';
