@@ -222,7 +222,6 @@ class SlicerProfilesCommand extends Command
 
 
             // Set defaults
-            $f['filament_name']                 = $filamentName;
             $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['material']];
             $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['material']];
             $f['extrusion_multiplier']          = 1;
