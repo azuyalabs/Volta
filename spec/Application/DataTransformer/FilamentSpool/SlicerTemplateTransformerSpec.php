@@ -42,7 +42,8 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'price'        => 0,
                 'material'     => 'PETG',
                 'color'        => 'Red',
-                'color_code'   => '#ff0000'
+                'color_code'   => '#ff0000',
+                'display_name' => 'ABC Plastics PETG Red 1.75mm'
             ]
         );
     }

@@ -26,6 +26,7 @@ use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
+use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
@@ -189,5 +190,10 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setColor($color);
         $this->getColor()->shouldBe($color);
+    }
+
+    public function it_has_a_display_name(): void
+    {
+        $this->getDisplayName()->shouldReturnAnInstanceOf(DisplayName::class);
     }
 }

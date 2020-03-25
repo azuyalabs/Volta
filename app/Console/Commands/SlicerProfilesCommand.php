@@ -214,6 +214,8 @@ class SlicerProfilesCommand extends Command
                 ->toArray();
 
             print_r($f);
+
+
             continue;
             $filamentName = implode(' ', [$f['manufacturer'], $f['material'], $color, $f['diameter'] . 'mm']);
 

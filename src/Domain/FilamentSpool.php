@@ -23,6 +23,7 @@ use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
+use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
@@ -58,6 +59,21 @@ class FilamentSpool
         $this->diameter      = new Length(0, 'millimeter');
         $this->material_type = new MaterialType(MaterialType::MATERIALTYPE_PLA);
         $this->color         = new Color(new ColorName('Red'), new Hex('#ff0000'));
+    }
+
+    public function getDisplayName(): DisplayName
+    {
+        return new DisplayName(
+            implode(
+                ' ',
+                [
+                    $this->getManufacturer()->getName()->getValue(),
+                    $this->getMaterialType()->getValue(),
+                    $this->getColor()->getColorName()->getValue(),
+                    $this->getDiameter()->toUnit('millimeter') . 'mm'
+                ]
+            )
+        );
     }
 
     public function getColor(): Color

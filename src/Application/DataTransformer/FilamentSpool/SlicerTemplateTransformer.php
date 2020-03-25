@@ -20,7 +20,8 @@ class SlicerTemplateTransformer extends TransformerAbstract
             'price'        => $spool->getPurchasePrice()->getAmount(),
             'material'     => $spool->getMaterialType()->getValue(),
             'color'        => $spool->getColor()->getColorName()->getValue(),
-            'color_code'   => (string)$spool->getColor()->getColorCode()
+            'color_code'   => (string)$spool->getColor()->getColorCode(),
+            'display_name' => $spool->getDisplayName()->getValue()
         ];
     }
 }
