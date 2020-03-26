@@ -19,6 +19,7 @@ use Money\Money;
 use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use Volta\Domain\Exception\FilamentSpool\BlankColorNameException;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
@@ -30,8 +31,6 @@ use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool
 {
-    private const DEFAULT_MIN_FAN_SPEED = 0;
-
     private $id;
 
     private $name;
@@ -47,8 +46,6 @@ class FilamentSpool
     private $material_type;
 
     private $color;
-
-    private $minimum_fan_speed;
 
     protected $min_fan_speed_definition = [
         MaterialType::MATERIALTYPE_PLA                          => 100,
@@ -71,24 +68,17 @@ class FilamentSpool
         $this->diameter          = new Length(0, 'millimeter');
         $this->material_type     = new MaterialType(MaterialType::MATERIALTYPE_PLA);
         $this->color             = new Color(new ColorName('Red'), new Hex('#ff0000'));
-        $this->minimum_fan_speed = new MinimumFanSpeed(self::DEFAULT_MIN_FAN_SPEED);
     }
 
     public function getMinimumFanSpeed(): MinimumFanSpeed
     {
-        $value = self::DEFAULT_MIN_FAN_SPEED;
-        switch ($this->material_type->getValue()) {
-            case MaterialType::MATERIALTYPE_ABS:
-                $value = $this->min_fan_speed_definition[MaterialType::MATERIALTYPE_ABS];
-                break;
-            case MaterialType::MATERIALTYPE_PETG:
-                $value = $this->min_fan_speed_definition[MaterialType::MATERIALTYPE_PETG];
-                break;
+        if (!array_key_exists($this->material_type->getValue(), $this->min_fan_speed_definition)) {
+            throw new BlankColorNameException();
         }
 
-        $this->minimum_fan_speed->setValue($value);
+        $value = $this->min_fan_speed_definition[$this->material_type->getValue()];
 
-        return $this->minimum_fan_speed;
+        return new MinimumFanSpeed($value);
     }
 
     public function getDisplayName(): DisplayName

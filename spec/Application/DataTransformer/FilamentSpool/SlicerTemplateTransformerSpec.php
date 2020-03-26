@@ -34,16 +34,17 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
 
         $this->transform($spool)->shouldIterateLike(
             [
-                'id'           => $spool->getId()->getValue(),
-                'name'         => 'Glowy Pink',
-                'manufacturer' => 'ABC Plastics',
-                'diameter'     => 1.75,
-                'weight'       => 900,
-                'price'        => 0,
-                'material'     => 'PETG',
-                'color'        => 'Red',
-                'color_code'   => '#ff0000',
-                'display_name' => 'ABC Plastics PETG Red 1.75mm'
+                'id'            => $spool->getId()->getValue(),
+                'name'          => 'Glowy Pink',
+                'manufacturer'  => 'ABC Plastics',
+                'diameter'      => 1.75,
+                'weight'        => 900,
+                'price'         => 0,
+                'material'      => 'PETG',
+                'color'         => 'Red',
+                'color_code'    => '#ff0000',
+                'display_name'  => 'ABC Plastics PETG Red 1.75mm',
+                'min_fan_speed' => 30
             ]
         );
     }

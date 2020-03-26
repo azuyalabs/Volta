@@ -91,13 +91,6 @@ class SlicerProfilesCommand extends Command
     protected $disable_fan_first_layers = ['PLA' => 1, 'Woodfill' => 1, 'ABS' => 0, 'PET' => 3];
 
     /**
-     * Common settings for 'Min Fan Speed' (by filament type)
-     *
-     * @var array
-     */
-    protected $min_fan_speed = ['PLA' => 100, 'Woodfill' => 100, 'ABS' => 15, 'PET' => 30];
-
-    /**
      * Common settings for 'Max Fan Speed' (by filament type)
      *
      * @var array
@@ -232,7 +225,6 @@ class SlicerProfilesCommand extends Command
             $f['k_value']                       = ($f['material'] === 'PET') ? 45 : 30;
             $f['filament_notes']                = sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
             $f['filament_colour']               = $color;
-            $f['min_fan_speed']                 = $this->min_fan_speed[$f['material']];
             $f['max_fan_speed']                 = $this->max_fan_speed[$f['material']];
             $f['min_print_speed']               = ($f['material'] === 'ABS') ? 5 : 15;
             $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];

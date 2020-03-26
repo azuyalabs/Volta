@@ -31,11 +31,6 @@ class MinimumFanSpeedSpec extends ObjectBehavior
         $this->getValue()->shouldBe(55);
     }
 
-    public function it_can_update_value(): void
-    {
-        $this->setValue(33);
-        $this->getValue()->shouldBe(33);
-    }
 
     public function it_throws_an_exception_when_value_exceeds_maximum_upon_creation(): void
     {
@@ -43,13 +38,6 @@ class MinimumFanSpeedSpec extends ObjectBehavior
         $this
             ->shouldThrow(MaximumValueMinimumFanSpeedException::class)
             ->duringInstantiation();
-    }
-
-    public function it_throws_an_exception_when_new_value_exceeds_maximum(): void
-    {
-        $this
-            ->shouldThrow(MaximumValueMinimumFanSpeedException::class)
-            ->during('setValue', [298]);
     }
 
     public function it_compares_equality(): void

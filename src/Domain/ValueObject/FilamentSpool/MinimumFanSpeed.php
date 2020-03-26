@@ -20,7 +20,8 @@ class MinimumFanSpeed
 
     public function __construct(int $value)
     {
-        $this->setValue($value);
+        $this->value = $value;
+        $this->validate();
     }
 
     private function validate(): void
@@ -28,12 +29,6 @@ class MinimumFanSpeed
         if (100 < $this->value) {
             throw new MaximumValueMinimumFanSpeedException();
         }
-    }
-
-    public function setValue(int $value): void
-    {
-        $this->value = $value;
-        $this->validate();
     }
 
     public function getValue(): int
