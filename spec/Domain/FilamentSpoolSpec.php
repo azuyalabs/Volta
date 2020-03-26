@@ -204,5 +204,8 @@ class FilamentSpoolSpec extends ObjectBehavior
     {
         $this->getMinimumFanSpeed()->shouldReturnAnInstanceOf(MinimumFanSpeed::class);
         $this->getMinimumFanSpeed()->getValue()->shouldBe(0);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
+        $this->getMinimumFanSpeed()->getValue()->shouldBe(15);
     }
 }
