@@ -28,6 +28,7 @@ use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
+use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
@@ -182,6 +183,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_color(): void
     {
         $this->getColor()->shouldReturnAnInstanceOf(Color::class);
+        $this->getColor()->getColorName()->getValue()->shouldBe('Red');
     }
 
     public function it_can_update_color(): void
@@ -195,5 +197,12 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_display_name(): void
     {
         $this->getDisplayName()->shouldReturnAnInstanceOf(DisplayName::class);
+        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics PLA Red 0mm');
+    }
+
+    public function it_has_a_minimum_fan_speed(): void
+    {
+        $this->getMinimumFanSpeed()->shouldReturnAnInstanceOf(MinimumFanSpeed::class);
+        $this->getMinimumFanSpeed()->getValue()->shouldBe(0);
     }
 }

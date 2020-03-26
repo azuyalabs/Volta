@@ -25,6 +25,7 @@ use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
+use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool
@@ -45,6 +46,8 @@ class FilamentSpool
 
     private $color;
 
+    private $minimum_fan_speed;
+
     public function __construct(
         FilamentSpoolId $id,
         Manufacturer $manufacturer,
@@ -54,11 +57,17 @@ class FilamentSpool
         $this->name         = $name;
         $this->manufacturer = $manufacturer;
 
-        $this->purchasePrice = new Money(0, new Currency('USD'));
-        $this->weight        = new Mass(0, 'kilogram');
-        $this->diameter      = new Length(0, 'millimeter');
-        $this->material_type = new MaterialType(MaterialType::MATERIALTYPE_PLA);
-        $this->color         = new Color(new ColorName('Red'), new Hex('#ff0000'));
+        $this->purchasePrice     = new Money(0, new Currency('USD'));
+        $this->weight            = new Mass(0, 'kilogram');
+        $this->diameter          = new Length(0, 'millimeter');
+        $this->material_type     = new MaterialType(MaterialType::MATERIALTYPE_PLA);
+        $this->color             = new Color(new ColorName('Red'), new Hex('#ff0000'));
+        $this->minimum_fan_speed = new MinimumFanSpeed(0);
+    }
+
+    public function getMinimumFanSpeed(): MinimumFanSpeed
+    {
+        return $this->minimum_fan_speed;
     }
 
     public function getDisplayName(): DisplayName
