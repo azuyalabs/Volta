@@ -156,19 +156,13 @@ class SlicerProfilesCommand extends Command
             $f = $this->getFilamentSpoolData($filamentFile);
 
             // TODO: Implement Application exception
-            if (null === $f) {
-                echo 'definition is empty. not valid!!';
-                continue;
-            }
-
-            if (!isset($f['product'])) {
+            if (null === $f || !isset($f['product'])) {
+                echo 'Invalid Definition (Empty or Old version?)';
                 continue;
             }
 
 //            $color                  = $f['color']['name'] ?? $this->color2Name($f['color']['code']);
 //            $f['color']['rgba_int'] = hexdec(ltrim($f['color']['code'], '#') . '00');
-
-            $color = $f['product']['color']['name'];
 
 
             // TODO: Update original filament definition
@@ -193,8 +187,6 @@ class SlicerProfilesCommand extends Command
 
             $this->info($spool->getDisplayName()->getValue() . ' (' . $filamentFile['basename'] . ')');
 
-
-
             // Transform into a flat array structure
             $f = Fractal::create()
                 ->item($spool, new SlicerTemplateTransformer)
@@ -202,8 +194,6 @@ class SlicerProfilesCommand extends Command
                 ->toArray();
 
             print_r($f);
-
-
             continue;
             $filamentName = implode(' ', [$f['manufacturer'], $f['material'], $color, $f['diameter'] . 'mm']);
 
@@ -218,7 +208,6 @@ class SlicerProfilesCommand extends Command
             $f['k_value']                       = ($f['material'] === 'PET') ? 45 : 30;
             $f['filament_notes']                = sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
             $f['filament_colour']               = $color;
-            $f['max_fan_speed']                 = $this->max_fan_speed[$f['material']];
             $f['min_print_speed']               = ($f['material'] === 'ABS') ? 5 : 15;
             $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];
             $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['material']];
