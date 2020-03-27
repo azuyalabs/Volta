@@ -44,7 +44,8 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'color'         => 'Red',
                 'color_code'    => '#ff0000',
                 'display_name'  => 'ABC Plastics PETG Red 1.75mm',
-                'min_fan_speed' => 30
+                'min_fan_speed' => 30,
+                'max_fan_speed' => 50
             ]
         );
     }

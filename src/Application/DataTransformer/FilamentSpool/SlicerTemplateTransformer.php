@@ -22,7 +22,8 @@ class SlicerTemplateTransformer extends TransformerAbstract
             'color'         => $spool->getColor()->getColorName()->getValue(),
             'color_code'    => (string)$spool->getColor()->getColorCode(),
             'display_name'  => $spool->getDisplayName()->getValue(),
-            'min_fan_speed' => $spool->getMinimumFanSpeed()->getValue()
+            'min_fan_speed' => $spool->getMinimumFanSpeed()->getValue(),
+            'max_fan_speed' => $spool->getMaximumFanSpeed()->getValue()
         ];
     }
 }

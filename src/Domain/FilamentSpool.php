@@ -26,6 +26,7 @@ use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
+use Volta\Domain\ValueObject\FilamentSpool\MaximumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
@@ -51,8 +52,15 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_PLA                          => 100,
         'Woodfill'                                              => 100,
         MaterialType::MATERIALTYPE_ABS                          => 15,
-        MaterialType::MATERIALTYPE_PETG                         => 30]
-    ;
+        MaterialType::MATERIALTYPE_PETG                         => 30
+    ];
+
+    protected $max_fan_speed_definition = [
+        MaterialType::MATERIALTYPE_PLA                          => 100,
+        'Woodfill'                                              => 100,
+        MaterialType::MATERIALTYPE_ABS                          => 30,
+        MaterialType::MATERIALTYPE_PETG                         => 50
+    ];
 
     public function __construct(
         FilamentSpoolId $id,
@@ -79,6 +87,17 @@ class FilamentSpool
         $value = $this->min_fan_speed_definition[$this->material_type->getValue()];
 
         return new MinimumFanSpeed($value);
+    }
+
+    public function getMaximumFanSpeed(): MaximumFanSpeed
+    {
+        if (!array_key_exists($this->material_type->getValue(), $this->max_fan_speed_definition)) {
+            throw new BlankColorNameException();
+        }
+
+        $value = $this->max_fan_speed_definition[$this->material_type->getValue()];
+
+        return new MaximumFanSpeed($value);
     }
 
     public function getDisplayName(): DisplayName

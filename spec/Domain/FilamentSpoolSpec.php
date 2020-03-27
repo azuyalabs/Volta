@@ -28,6 +28,7 @@ use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
+use Volta\Domain\ValueObject\FilamentSpool\MaximumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
@@ -216,5 +217,23 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
         $this->getMinimumFanSpeed()->getValue()->shouldBe(100);
+    }
+
+    public function it_has_a_maximum_fan_speed(): void
+    {
+        $this->getMaximumFanSpeed()->shouldReturnAnInstanceOf(MaximumFanSpeed::class);
+        $this->getMaximumFanSpeed()->getValue()->shouldBe(100);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
+        $this->getMaximumFanSpeed()->getValue()->shouldBe(30);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
+        $this->getMaximumFanSpeed()->getValue()->shouldBe(100);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->getMaximumFanSpeed()->getValue()->shouldBe(50);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
+        $this->getMaximumFanSpeed()->getValue()->shouldBe(100);
     }
 }

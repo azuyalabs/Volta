@@ -91,13 +91,6 @@ class SlicerProfilesCommand extends Command
     protected $disable_fan_first_layers = ['PLA' => 1, 'Woodfill' => 1, 'ABS' => 0, 'PET' => 3];
 
     /**
-     * Common settings for 'Max Fan Speed' (by filament type)
-     *
-     * @var array
-     */
-    protected $max_fan_speed = ['PLA' => 100, 'Woodfill' => 100, 'ABS' => 30, 'PET' => 50];
-
-    /**
      * Mapping for the parent filament
      *
      * @var array

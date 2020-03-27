@@ -15,27 +15,27 @@ declare(strict_types=1);
 namespace spec\Volta\Domain\ValueObject\FilamentSpool;
 
 use PhpSpec\ObjectBehavior;
-use Volta\Domain\Exception\FilamentSpool\MaximumValueMinimumFanSpeedException;
+use Volta\Domain\Exception\FilamentSpool\MaximumValueMaximumFanSpeedException;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
 
-class MinimumFanSpeedSpec extends ObjectBehavior
+class MaximumFanSpeedSpec extends ObjectBehavior
 {
     public function let(): void
     {
-        $this->beConstructedWith(55);
+        $this->beConstructedWith(73);
     }
 
     public function it_has_value(): void
     {
         $this->getValue()->shouldBeInteger();
-        $this->getValue()->shouldBe(55);
+        $this->getValue()->shouldBe(73);
     }
 
     public function it_throws_an_exception_when_value_exceeds_maximum(): void
     {
-        $this->beConstructedWith(115);
+        $this->beConstructedWith(123);
         $this
-            ->shouldThrow(MaximumValueMinimumFanSpeedException::class)
+            ->shouldThrow(MaximumValueMaximumFanSpeedException::class)
             ->duringInstantiation();
     }
 
