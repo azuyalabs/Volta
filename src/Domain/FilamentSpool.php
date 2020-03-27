@@ -71,10 +71,6 @@ class FilamentSpool
 
     public function getMinimumFanSpeed(): MinimumFanSpeed
     {
-        if (!array_key_exists($this->material_type->getValue(), $this->min_fan_speed_definition)) {
-            throw new BlankColorNameException();
-        }
-
         $value = $this->min_fan_speed_definition[$this->material_type->getValue()];
 
         return new MinimumFanSpeed($value);
@@ -82,10 +78,6 @@ class FilamentSpool
 
     public function getMaximumFanSpeed(): MaximumFanSpeed
     {
-        if (!array_key_exists($this->material_type->getValue(), $this->max_fan_speed_definition)) {
-            throw new BlankColorNameException();
-        }
-
         $value = $this->max_fan_speed_definition[$this->material_type->getValue()];
 
         return new MaximumFanSpeed($value);
