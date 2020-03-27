@@ -67,7 +67,7 @@ class FilamentSpool
         $this->purchasePrice      = new Money(0, new Currency('USD'));
         $this->weight             = new Mass(0, 'kilogram');
         $this->diameter           = new Length(0, 'millimeter');
-        $this->diameter_tolerance = new Length(0, 'millimeter');
+        $this->diameter_tolerance = new Length(0.05, 'millimeter');
         $this->material_type      = new MaterialType(MaterialType::MATERIALTYPE_PLA);
         $this->color              = new Color(new ColorName('Red'), new Hex('#ff0000'));
     }
