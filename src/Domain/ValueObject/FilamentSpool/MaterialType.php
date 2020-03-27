@@ -18,11 +18,11 @@ use Volta\Domain\Exception\FilamentSpool\InvalidMaterialTypeException;
 
 class MaterialType
 {
-    public const MATERIALTYPE_PLA        = 'PLA';
-    public const MATERIALTYPE_ABS        = 'ABS';
-    public const MATERIALTYPE_PETG       = 'PETG';
-    public const MATERIALTYPE_PP         = 'PP';
-    public const MATERIALTYPE_WOODFILL   = 'Woodfill';
+    public const MATERIALTYPE_PLA      = 'PLA';
+    public const MATERIALTYPE_ABS      = 'ABS';
+    public const MATERIALTYPE_PETG     = 'PETG';
+    public const MATERIALTYPE_PP       = 'PP';
+    public const MATERIALTYPE_WOODFILL = 'Woodfill';
 
     private $value;
 
