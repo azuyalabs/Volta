@@ -37,18 +37,21 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_ABS  => 15,
         MaterialType::MATERIALTYPE_PETG => 30
     ];
+
     protected $max_fan_speed_definition = [
         MaterialType::MATERIALTYPE_PLA  => 100,
         'Woodfill'                      => 100,
         MaterialType::MATERIALTYPE_ABS  => 30,
         MaterialType::MATERIALTYPE_PETG => 50
     ];
+
     private $id;
     private $name;
     private $purchasePrice;
     private $manufacturer;
     private $weight;
     private $diameter;
+    private $diameter_tolerance;
     private $material_type;
     private $color;
 
@@ -61,11 +64,12 @@ class FilamentSpool
         $this->name         = $name;
         $this->manufacturer = $manufacturer;
 
-        $this->purchasePrice = new Money(0, new Currency('USD'));
-        $this->weight        = new Mass(0, 'kilogram');
-        $this->diameter      = new Length(0, 'millimeter');
-        $this->material_type = new MaterialType(MaterialType::MATERIALTYPE_PLA);
-        $this->color         = new Color(new ColorName('Red'), new Hex('#ff0000'));
+        $this->purchasePrice      = new Money(0, new Currency('USD'));
+        $this->weight             = new Mass(0, 'kilogram');
+        $this->diameter           = new Length(0, 'millimeter');
+        $this->diameter_tolerance = new Length(0, 'millimeter');
+        $this->material_type      = new MaterialType(MaterialType::MATERIALTYPE_PLA);
+        $this->color              = new Color(new ColorName('Red'), new Hex('#ff0000'));
     }
 
     public function getMinimumFanSpeed(): MinimumFanSpeed
@@ -142,6 +146,18 @@ class FilamentSpool
         }
 
         $this->diameter = $diameter;
+        return $this;
+    }
+
+    public function getDiameterTolerance(): Length
+    {
+        return $this->diameter_tolerance;
+    }
+
+    public function setDiameterTolerance(Length $diameter): FilamentSpool
+    {
+        $this->diameter_tolerance = $diameter;
+
         return $this;
     }
 

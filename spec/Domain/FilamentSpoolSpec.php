@@ -168,6 +168,19 @@ class FilamentSpoolSpec extends ObjectBehavior
             ->duringSetDiameter(new Length(0, 'meters'));
     }
 
+    public function it_has_a_diameter_tolerance(): void
+    {
+        $this->getDiameterTolerance()->shouldReturnAnInstanceOf(Length::class);
+    }
+
+    public function it_can_update_diameter_tolerance(): void
+    {
+        $diameter = new Length(0.03, 'millimeters');
+
+        $this->setDiameterTolerance($diameter);
+        $this->getDiameterTolerance()->shouldBe($diameter);
+    }
+
     public function it_has_a_materialtype(): void
     {
         $this->getMaterialType()->shouldReturnAnInstanceOf(MaterialType::class);
