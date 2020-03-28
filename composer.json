@@ -89,6 +89,11 @@
       "@spec",
       "@unit-test"
     ],
+    "dev": [
+      "@format",
+      "@spec",
+      "@analyse-src"
+    ],
     "spec": "phpspec run --stop-on-failure --ansi",
     "unit-test": "phpunit --stop-on-failure --colors=always",
     "format": "vendor/bin/php-cs-fixer fix",
