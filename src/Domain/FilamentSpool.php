@@ -235,6 +235,6 @@ class FilamentSpool
 
         $pr = clone $this->getPurchasePrice();
 
-        return $pr->multiply(1000 / $weight);
+        return $pr->multiply(1 / $weight);
     }
 }

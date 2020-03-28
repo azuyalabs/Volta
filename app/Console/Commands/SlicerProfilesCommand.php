@@ -198,7 +198,10 @@ class SlicerProfilesCommand extends Command
                 ->toArray();
 
             print_r($f);
-            echo $spool->getDiameterTolerance().PHP_EOL;
+            $this->info('Other information:');
+            $this->warn('Diameter Tolerance   : ' .$spool->getDiameterTolerance());
+            $this->warn('Price per kg         : ' .$spool->getPricePerKilogram()->getAmount());
+
             continue;
             $filamentName = implode(' ', [$f['manufacturer'], $f['material'], $color, $f['diameter'] . 'mm']);
 
