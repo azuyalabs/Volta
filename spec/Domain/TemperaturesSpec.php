@@ -18,6 +18,8 @@ use PhpSpec\ObjectBehavior;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureExceededAbsoluteMaximumException;
 use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureExceededAbsoluteMinimumException;
+use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureExceededAbsoluteMaximumException;
+use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureExceededAbsoluteMinimumException;
 use Volta\Domain\Temperatures;
 
 class TemperaturesSpec extends ObjectBehavior
@@ -27,12 +29,11 @@ class TemperaturesSpec extends ObjectBehavior
     public function let(): void
     {
         $this->beConstructedWith(
+            new Temperature(190.0, self::TEMPERATURE_UNIT),
             new Temperature(215.0, self::TEMPERATURE_UNIT),
         );
     }
 
-//
-    //MinimumPrintTemperature
     //MaximumBedTemperature
     //MinimumBedTemperature
 
@@ -52,15 +53,43 @@ class TemperaturesSpec extends ObjectBehavior
 
     public function it_throws_exception_when_max_print_temperature_exceeds_absolute_max(): void
     {
-        $this->beConstructedWith(new Temperature(689, self::TEMPERATURE_UNIT));
+        $this->beConstructedWith(null, new Temperature(689, self::TEMPERATURE_UNIT));
 
         $this->shouldThrow(MaximumPrintTemperatureExceededAbsoluteMaximumException::class)->duringInstantiation();
     }
 
     public function it_throws_exception_when_max_print_temperature_exceeds_absolute_min(): void
     {
-        $this->beConstructedWith(new Temperature(41, self::TEMPERATURE_UNIT));
+        $this->beConstructedWith(null, new Temperature(41, self::TEMPERATURE_UNIT));
 
         $this->shouldThrow(MaximumPrintTemperatureExceededAbsoluteMinimumException::class)->duringInstantiation();
+    }
+
+    public function it_has_minimum_print_temperature(): void
+    {
+        $this->getMinimumPrintTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getMinimumPrintTemperature()->toUnit(self::TEMPERATURE_UNIT)->shouldBe(190.0);
+    }
+
+    public function it_has_default_value_when_minimum_print_temperature_is_not_provided(): void
+    {
+        $this->beConstructedWith();
+
+        $this->getMinimumPrintTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getMinimumPrintTemperature()->toUnit(self::TEMPERATURE_UNIT)->shouldBe(Temperatures::DEFAULT_MIN_PRINT_TEMP);
+    }
+
+    public function it_throws_exception_when_min_print_temperature_exceeds_absolute_max(): void
+    {
+        $this->beConstructedWith(new Temperature(708, self::TEMPERATURE_UNIT));
+
+        $this->shouldThrow(MinimumPrintTemperatureExceededAbsoluteMaximumException::class)->duringInstantiation();
+    }
+
+    public function it_throws_exception_when_min_print_temperature_exceeds_absolute_min(): void
+    {
+        $this->beConstructedWith(new Temperature(13, self::TEMPERATURE_UNIT));
+
+        $this->shouldThrow(MinimumPrintTemperatureExceededAbsoluteMinimumException::class)->duringInstantiation();
     }
 }
