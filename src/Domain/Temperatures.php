@@ -16,6 +16,7 @@ namespace Volta\Domain;
 
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureExceededAbsoluteMaximumException;
+use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureExceededAbsoluteMinimumException;
 
 class Temperatures
 {
@@ -27,6 +28,8 @@ class Temperatures
 
     private const LOWER_MIN_BED_TEMP = 0.0;
 
+    private const TEMPERATURE_UNIT = 'celsius';
+
     // Ideally this should be set per material type
     public const DEFAULT_MAX_PRINT_TEMP = 200.0;
 
@@ -34,7 +37,7 @@ class Temperatures
 
     public function __construct(?Temperature $max_print_temperature = null)
     {
-        $this->max_print_temperature = $max_print_temperature ?? new Temperature(self::DEFAULT_MAX_PRINT_TEMP, 'celsius');
+        $this->max_print_temperature = $max_print_temperature ?? new Temperature(self::DEFAULT_MAX_PRINT_TEMP, self::TEMPERATURE_UNIT);
 
         $this->validate();
     }
@@ -46,8 +49,12 @@ class Temperatures
 
     private function validate(): void
     {
-        if (self::UPPER_MAX_PRINT_TEMP < $this->max_print_temperature->toNativeUnit()) {
+        if (self::UPPER_MAX_PRINT_TEMP < $this->max_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
             throw new MaximumPrintTemperatureExceededAbsoluteMaximumException();
+        }
+
+        if (self::LOWER_MIN_PRINT_TEMP > $this->max_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
+            throw new MaximumPrintTemperatureExceededAbsoluteMinimumException();
         }
     }
 }

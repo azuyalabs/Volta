@@ -17,6 +17,7 @@ namespace spec\Volta\Domain;
 use PhpSpec\ObjectBehavior;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureExceededAbsoluteMaximumException;
+use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureExceededAbsoluteMinimumException;
 use Volta\Domain\Temperatures;
 
 class TemperaturesSpec extends ObjectBehavior
@@ -30,7 +31,7 @@ class TemperaturesSpec extends ObjectBehavior
         );
     }
 
-//        MaximumPrintTemperature
+//
     //MinimumPrintTemperature
     //MaximumBedTemperature
     //MinimumBedTemperature
@@ -54,5 +55,12 @@ class TemperaturesSpec extends ObjectBehavior
         $this->beConstructedWith(new Temperature(689, self::TEMPERATURE_UNIT));
 
         $this->shouldThrow(MaximumPrintTemperatureExceededAbsoluteMaximumException::class)->duringInstantiation();
+    }
+
+    public function it_throws_exception_when_max_print_temperature_exceeds_absolute_min(): void
+    {
+        $this->beConstructedWith(new Temperature(41, self::TEMPERATURE_UNIT));
+
+        $this->shouldThrow(MaximumPrintTemperatureExceededAbsoluteMinimumException::class)->duringInstantiation();
     }
 }
