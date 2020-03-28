@@ -22,13 +22,13 @@ use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureExceededAbsolute
 
 class Temperatures
 {
-    private const UPPER_MAX_PRINT_TEMP = 500.0;
+    private const UPPER_BOUND_PRINT_TEMP = 500.0;
 
-    private const LOWER_MIN_PRINT_TEMP = 150.0;
+    private const LOWER_BOUND_PRINT_TEMP = 150.0;
 
-    private const UPPER_MAX_BED_TEMP = 150.0;
+    private const UPPER_BOUND_BED_TEMP = 150.0;
 
-    private const LOWER_MIN_BED_TEMP = 0.0;
+    private const LOWER_BOUND_BED_TEMP = 0.0;
 
     private const TEMPERATURE_UNIT = 'celsius';
 
@@ -53,20 +53,20 @@ class Temperatures
     private function validate(): void
     {
         // Maximum Print Temperature
-        if (self::UPPER_MAX_PRINT_TEMP < $this->max_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
+        if (self::UPPER_BOUND_PRINT_TEMP < $this->max_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
             throw new MaximumPrintTemperatureExceededAbsoluteMaximumException();
         }
 
-        if (self::LOWER_MIN_PRINT_TEMP > $this->max_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
+        if (self::LOWER_BOUND_PRINT_TEMP > $this->max_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
             throw new MaximumPrintTemperatureExceededAbsoluteMinimumException();
         }
 
         // Minimum Print Temperature
-        if (self::UPPER_MAX_PRINT_TEMP < $this->min_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
+        if (self::UPPER_BOUND_PRINT_TEMP < $this->min_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
             throw new MinimumPrintTemperatureExceededAbsoluteMaximumException();
         }
 
-        if (self::LOWER_MIN_PRINT_TEMP > $this->min_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
+        if (self::LOWER_BOUND_PRINT_TEMP > $this->min_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
             throw new MinimumPrintTemperatureExceededAbsoluteMinimumException();
         }
     }
