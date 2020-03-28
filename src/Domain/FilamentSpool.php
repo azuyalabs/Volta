@@ -54,6 +54,7 @@ class FilamentSpool
     private Length $diameter_tolerance;
     private MaterialType $material_type;
     private Color $color;
+    private Temperatures $temperatures;
 
     public function __construct(
         FilamentSpoolId $id,
@@ -70,6 +71,19 @@ class FilamentSpool
         $this->diameter_tolerance = new Length(0.05, 'millimeter');
         $this->material_type      = new MaterialType(MaterialType::MATERIALTYPE_PLA);
         $this->color              = new Color(new ColorName('Red'), new Hex('#ff0000'));
+        $this->temperatures       = new Temperatures();
+    }
+
+    public function getTemperatures(): Temperatures
+    {
+        return $this->temperatures;
+    }
+
+    public function setTemperatures(Temperatures $temperatures): FilamentSpool
+    {
+        $this->temperatures = $temperatures;
+
+        return $this;
     }
 
     public function getMinimumFanSpeed(): MinimumFanSpeed

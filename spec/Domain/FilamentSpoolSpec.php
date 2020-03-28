@@ -20,10 +20,12 @@ use OzdemirBurak\Iris\Color\Hex;
 use PhpSpec\ObjectBehavior;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
+use Volta\Domain\Temperatures;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
@@ -248,5 +250,24 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
         $this->getMaximumFanSpeed()->getValue()->shouldBe(100);
+    }
+
+    public function it_has_temperatures(): void
+    {
+        $this->getTemperatures()->shouldReturnAnInstanceOf(Temperatures::class);
+        $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MIN_PRINT_TEMP);
+        $this->getTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MAX_PRINT_TEMP);
+    }
+
+    public function it_can_update_temperatures(): void
+    {
+        $this->setTemperatures(
+            new Temperatures(
+                new Temperature(167, 'celsius'),
+                new Temperature(235, 'celsius')
+            )
+        );
+        $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius')->shouldBe(167.0);
+        $this->getTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')->shouldBe(235.0);
     }
 }

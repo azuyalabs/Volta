@@ -24,11 +24,13 @@ use Money\Money;
 use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use RuntimeException;
 use Spatie\Fractalistic\Fractal;
 use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateTransformer;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
+use Volta\Domain\Temperatures;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
@@ -189,6 +191,15 @@ class SlicerProfilesCommand extends Command
                 $spool->setDiameterTolerance(new Length($f['product']['diameter']['tolerance'], 'millimeters'));
             }
 
+            if (isset($f['product']['temperatures']['print'])) {
+                $spool->setTemperatures(
+                    new Temperatures(
+                        new Temperature($f['product']['temperatures']['print']['min'], 'celsius'),
+                        new Temperature($f['product']['temperatures']['print']['max'], 'celsius')
+                    )
+                );
+            }
+
             $this->info($spool->getDisplayName()->getValue() . ' (' . $filamentFile['basename'] . ')');
 
             // Transform into a flat array structure
@@ -199,8 +210,16 @@ class SlicerProfilesCommand extends Command
 
             print_r($f);
             $this->info('Other information:');
-            $this->warn('Diameter Tolerance   : ' .$spool->getDiameterTolerance());
-            $this->warn('Price per kg         : ' .$spool->getPricePerKilogram()->getAmount());
+            $this->warn('Diameter Tolerance      : ' .$spool->getDiameterTolerance());
+            $this->warn('Price per kg            : ' .$spool->getPricePerKilogram()->getAmount());
+            $this->warn(
+                sprintf(
+                    'Print Temperature Range : %0.0f - %0.0f',
+                    $spool->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius'),
+                    $spool->getTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')
+                )
+            );
+            $this->warn('Price per kg            : ' .$spool->getPricePerKilogram()->getAmount());
 
             continue;
             $filamentName = implode(' ', [$f['manufacturer'], $f['material'], $color, $f['diameter'] . 'mm']);
