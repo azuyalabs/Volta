@@ -24,7 +24,7 @@ class MaterialType
     public const MATERIALTYPE_PP       = 'PP';
     public const MATERIALTYPE_WOODFILL = 'Woodfill';
 
-    private $value;
+    private string $value;
 
     public function __construct(string $value)
     {

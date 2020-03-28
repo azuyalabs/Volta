@@ -8,7 +8,7 @@ use Volta\Domain\Exception\Manufacturer\BlankManufacturerNameException;
 
 class ManufacturerName
 {
-    private $value;
+    private string $value;
 
     public function __construct(string $value)
     {

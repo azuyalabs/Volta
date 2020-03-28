@@ -19,13 +19,13 @@ use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
 class Manufacturer
 {
-    private $id;
+    private ManufacturerId $id;
 
-    private $name;
+    private ManufacturerName $name;
 
-    private $filamentSupplier = false;
+    private bool $filamentSupplier = false;
 
-    private $equipmentSupplier = false;
+    private bool $equipmentSupplier = false;
 
     public function __construct(
         ManufacturerId $id,

@@ -16,7 +16,7 @@ use Volta\Domain\Exception\FilamentSpool\MaximumValueMinimumFanSpeedException;
  */
 class MinimumFanSpeed
 {
-    private $value;
+    private int $value;
 
     public function __construct(int $value)
     {

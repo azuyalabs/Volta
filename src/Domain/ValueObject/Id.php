@@ -28,7 +28,7 @@ abstract class Id
     /**
      * @throws \Exception
      */
-    public function __construct()
+    final public function __construct()
     {
         $this->value = Uuid::uuid4();
     }

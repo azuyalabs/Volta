@@ -18,9 +18,9 @@ use OzdemirBurak\Iris\Color\Hex;
 
 class Color
 {
-    private $name;
+    private ColorName $name;
 
-    private $code;
+    private Hex $code;
 
     public function __construct(ColorName $name, Hex $code)
     {

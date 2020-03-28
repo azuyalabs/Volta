@@ -8,7 +8,7 @@ use Volta\Domain\Exception\FilamentSpool\BlankDisplayNameException;
 
 class DisplayName
 {
-    private $value;
+    private string $value;
 
     public function __construct(string $value)
     {

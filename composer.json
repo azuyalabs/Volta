@@ -9,7 +9,7 @@
   "license": "MIT",
   "type": "project",
   "require": {
-    "php": ">=7.2",
+    "php": "^7.4",
     "ext-intl": "*",
     "ext-json": "*",
     "ext-openssl": "*",
@@ -92,7 +92,8 @@
     "spec": "phpspec run --stop-on-failure --ansi",
     "unit-test": "phpunit --stop-on-failure --colors=always",
     "format": "vendor/bin/php-cs-fixer fix",
-    "analyse": "phpstan analyse app --level=5"
+    "analyse": "phpstan analyse app --level=5",
+    "analyse-src": "phpstan analyse"
   },
   "config": {
     "optimize-autoloader": true,

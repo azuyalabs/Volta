@@ -31,29 +31,29 @@ use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool
 {
-    protected $min_fan_speed_definition = [
+    protected array $min_fan_speed_definition = [
         MaterialType::MATERIALTYPE_PLA  => 100,
         'Woodfill'                      => 100,
         MaterialType::MATERIALTYPE_ABS  => 15,
         MaterialType::MATERIALTYPE_PETG => 30
     ];
 
-    protected $max_fan_speed_definition = [
+    protected array $max_fan_speed_definition = [
         MaterialType::MATERIALTYPE_PLA  => 100,
         'Woodfill'                      => 100,
         MaterialType::MATERIALTYPE_ABS  => 30,
         MaterialType::MATERIALTYPE_PETG => 50
     ];
 
-    private $id;
-    private $name;
-    private $purchasePrice;
-    private $manufacturer;
-    private $weight;
-    private $diameter;
-    private $diameter_tolerance;
-    private $material_type;
-    private $color;
+    private FilamentSpoolId $id;
+    private string $name;
+    private Money $purchasePrice;
+    private Manufacturer $manufacturer;
+    private Mass $weight;
+    private Length $diameter;
+    private Length $diameter_tolerance;
+    private MaterialType $material_type;
+    private Color $color;
 
     public function __construct(
         FilamentSpoolId $id,

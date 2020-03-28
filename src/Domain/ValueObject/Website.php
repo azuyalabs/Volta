@@ -18,7 +18,7 @@ use Volta\Domain\Exception\InvalidWebsiteException;
 
 class Website
 {
-    private $value;
+    private string $value;
 
     public function __construct(string $value)
     {
