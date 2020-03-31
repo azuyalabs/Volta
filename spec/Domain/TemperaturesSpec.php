@@ -20,6 +20,8 @@ use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureExceededAbsoluteMa
 use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureExceededAbsoluteMinimumException;
 use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureExceededAbsoluteMaximumException;
 use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureExceededAbsoluteMinimumException;
+use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureExceededAbsoluteMaximumException;
+use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureExceededAbsoluteMinimumException;
 use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureExceededAbsoluteMaximumException;
 use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureExceededAbsoluteMinimumException;
 use Volta\Domain\Temperatures;
@@ -33,7 +35,8 @@ class TemperaturesSpec extends ObjectBehavior
         $this->beConstructedWith(
             new Temperature(190.0, self::TEMPERATURE_UNIT),
             new Temperature(215.0, self::TEMPERATURE_UNIT),
-            new Temperature(77.0, self::TEMPERATURE_UNIT),
+            new Temperature(55.0, self::TEMPERATURE_UNIT),
+            new Temperature(80.0, self::TEMPERATURE_UNIT),
         );
     }
 
@@ -96,7 +99,7 @@ class TemperaturesSpec extends ObjectBehavior
     public function it_has_maximum_bed_temperature(): void
     {
         $this->getMaximumBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
-        $this->getMaximumBedTemperature()->toUnit(self::TEMPERATURE_UNIT)->shouldBe(77.0);
+        $this->getMaximumBedTemperature()->toUnit(self::TEMPERATURE_UNIT)->shouldBe(80.0);
     }
 
     public function it_has_default_value_when_maximum_bed_temperature_is_not_provided(): void
@@ -109,15 +112,43 @@ class TemperaturesSpec extends ObjectBehavior
 
     public function it_throws_exception_when_max_bed_temperature_exceeds_absolute_max(): void
     {
-        $this->beConstructedWith(null, null, new Temperature(209, self::TEMPERATURE_UNIT));
+        $this->beConstructedWith(null, null, null, new Temperature(209, self::TEMPERATURE_UNIT));
 
         $this->shouldThrow(MaximumBedTemperatureExceededAbsoluteMaximumException::class)->duringInstantiation();
     }
 
     public function it_throws_exception_when_max_bed_temperature_exceeds_absolute_min(): void
     {
-        $this->beConstructedWith(null, null, new Temperature(-5, self::TEMPERATURE_UNIT));
+        $this->beConstructedWith(null, null, null, new Temperature(-5, self::TEMPERATURE_UNIT));
 
         $this->shouldThrow(MaximumBedTemperatureExceededAbsoluteMinimumException::class)->duringInstantiation();
+    }
+
+    public function it_has_minimum_bed_temperature(): void
+    {
+        $this->getMinimumBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getMinimumBedTemperature()->toUnit(self::TEMPERATURE_UNIT)->shouldBe(55.0);
+    }
+
+    public function it_has_default_value_when_minimum_bed_temperature_is_not_provided(): void
+    {
+        $this->beConstructedWith();
+
+        $this->getMinimumBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getMinimumBedTemperature()->toUnit(self::TEMPERATURE_UNIT)->shouldBe(Temperatures::DEFAULT_MIN_BED_TEMP);
+    }
+
+    public function it_throws_exception_when_min_bed_temperature_exceeds_absolute_max(): void
+    {
+        $this->beConstructedWith(null, null, new Temperature(203, self::TEMPERATURE_UNIT));
+
+        $this->shouldThrow(MinimumBedTemperatureExceededAbsoluteMaximumException::class)->duringInstantiation();
+    }
+
+    public function it_throws_exception_when_min_bed_temperature_exceeds_absolute_min(): void
+    {
+        $this->beConstructedWith(null, null, new Temperature(-12, self::TEMPERATURE_UNIT));
+
+        $this->shouldThrow(MinimumBedTemperatureExceededAbsoluteMinimumException::class)->duringInstantiation();
     }
 }
