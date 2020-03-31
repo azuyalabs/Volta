@@ -17,8 +17,7 @@ namespace Volta\Domain;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureExceededAbsoluteMaximumException;
 use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureExceededAbsoluteMinimumException;
-use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureExceededAbsoluteMaximumException;
-use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureExceededAbsoluteMinimumException;
+use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureOutOfBoundsException;
 use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureExceededAbsoluteMaximumException;
 use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureExceededAbsoluteMinimumException;
 use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureExceededAbsoluteMaximumException;
@@ -34,13 +33,13 @@ use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureExceededAbsolute
  */
 class Temperatures
 {
-    private const UPPER_BOUND_PRINT_TEMP = 500.0;
-
     private const LOWER_BOUND_PRINT_TEMP = 150.0;
 
-    private const UPPER_BOUND_BED_TEMP = 150.0;
+    private const UPPER_BOUND_PRINT_TEMP = 500.0;
 
     private const LOWER_BOUND_BED_TEMP = 0.0;
+
+    private const UPPER_BOUND_BED_TEMP = 150.0;
 
     private const TEMPERATURE_UNIT = 'celsius';
 
@@ -66,24 +65,35 @@ class Temperatures
         ?Temperature $min_bed_temperature = null,
         ?Temperature $max_bed_temperature = null
     ) {
-        $this->min_print_temperature = $min_print_temperature ?? new Temperature(self::DEFAULT_MIN_PRINT_TEMP, self::TEMPERATURE_UNIT);
-        $this->max_print_temperature = $max_print_temperature ?? new Temperature(self::DEFAULT_MAX_PRINT_TEMP, self::TEMPERATURE_UNIT);
+        $this->min_print_temperature = $min_print_temperature ?? new Temperature(
+            self::DEFAULT_MIN_PRINT_TEMP,
+            self::TEMPERATURE_UNIT
+        );
+        $this->max_print_temperature = $max_print_temperature ?? new Temperature(
+            self::DEFAULT_MAX_PRINT_TEMP,
+            self::TEMPERATURE_UNIT
+        );
 
-        $this->min_bed_temperature = $min_bed_temperature ?? new Temperature(self::DEFAULT_MIN_BED_TEMP, self::TEMPERATURE_UNIT);
-        $this->max_bed_temperature = $max_bed_temperature ?? new Temperature(self::DEFAULT_MAX_BED_TEMP, self::TEMPERATURE_UNIT);
+        $this->min_bed_temperature = $min_bed_temperature ?? new Temperature(
+            self::DEFAULT_MIN_BED_TEMP,
+            self::TEMPERATURE_UNIT
+        );
+        $this->max_bed_temperature = $max_bed_temperature ?? new Temperature(
+            self::DEFAULT_MAX_BED_TEMP,
+            self::TEMPERATURE_UNIT
+        );
 
         $this->validate();
     }
 
     private function validate(): void
     {
-        // Maximum Print Temperature
-        if (self::UPPER_BOUND_PRINT_TEMP < $this->max_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
-            throw new MaximumPrintTemperatureExceededAbsoluteMaximumException();
-        }
-
-        if (self::LOWER_BOUND_PRINT_TEMP > $this->max_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
-            throw new MaximumPrintTemperatureExceededAbsoluteMinimumException();
+        if ($this->isOutOfBounds(
+            $this->max_print_temperature->toUnit(self::TEMPERATURE_UNIT),
+            self::LOWER_BOUND_PRINT_TEMP,
+            self::UPPER_BOUND_PRINT_TEMP
+        )) {
+            throw new MaximumPrintTemperatureOutOfBoundsException();
         }
 
         // Minimum Print Temperature
@@ -112,6 +122,11 @@ class Temperatures
         if (self::LOWER_BOUND_BED_TEMP > $this->min_bed_temperature->toUnit(self::TEMPERATURE_UNIT)) {
             throw new MinimumBedTemperatureExceededAbsoluteMinimumException();
         }
+    }
+
+    private function isOutOfBounds($value, $lowerLimit, $upperLimit): bool
+    {
+        return ($value < $lowerLimit || $value > $upperLimit);
     }
 
     public function getMaximumPrintTemperature(): Temperature
