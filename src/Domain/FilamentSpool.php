@@ -56,6 +56,7 @@ class FilamentSpool
     private Color $color;
     private ?Color $alternativeColor = null;
     private Temperatures $temperatures;
+    private float $density = 0.0;
 
     public function __construct(
         FilamentSpoolId $id,
@@ -275,4 +276,20 @@ class FilamentSpool
 
         return $pr->multiply(1 / $weight);
     }
+
+    public function getDensity(): float
+    {
+        return $this->density;
+    }
+
+    public function setDensity(float $density): FilamentSpool
+    {
+        if (abs($density - 0) < PHP_FLOAT_EPSILON) {
+            throw new ZeroDensityException();
+        }
+
+        $this->density = $density;
+
+        return $this;
+}
 }

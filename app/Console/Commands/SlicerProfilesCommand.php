@@ -372,10 +372,10 @@ class SlicerProfilesCommand extends Command
 
         if (!Cache::has($CACHE_KEY)) {
             Cache::put($CACHE_KEY, json_decode($this->filamentsDirectory->get(
-                self::FILAMENTS_DIRECTORY .
-                DIRECTORY_SEPARATOR .
-                $filamentFile['name']
-            ), true));
+                self::FILAMENTS_DIRECTORY.
+                    DIRECTORY_SEPARATOR.
+                    $filamentFile['name']
+            ), true, 512, JSON_THROW_ON_ERROR));
         }
         return Cache::get($CACHE_KEY);
     }

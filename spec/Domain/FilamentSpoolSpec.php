@@ -291,4 +291,23 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius')->shouldBe(167.0);
         $this->getTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')->shouldBe(235.0);
     }
+
+    public function it_has_a_density(): void
+    {
+        $this->getDensity()->shouldBeDouble();
+    }
+
+    public function it_can_update_density(): void
+    {
+        $density = 1.27;
+
+        $this->setDensity($density);
+        $this->getDensity()->shouldBe($density);
+    }
+
+    public function it_throws_exception_setting_density_to_zero(): void
+    {
+        $this->shouldThrow(ZeroDensityException::class)
+                ->duringSetDensity(0.0);
+    }
 }
