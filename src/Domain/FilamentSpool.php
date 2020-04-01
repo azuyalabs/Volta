@@ -33,17 +33,17 @@ use Volta\Domain\ValueObject\FilamentSpoolId;
 class FilamentSpool
 {
     protected array $min_fan_speed_definition = [
-        MaterialType::MATERIALTYPE_PLA  => 100,
-        'Woodfill'                      => 100,
-        MaterialType::MATERIALTYPE_ABS  => 15,
-        MaterialType::MATERIALTYPE_PETG => 30
+            MaterialType::MATERIALTYPE_PLA  => 100,
+            'Woodfill'                      => 100,
+            MaterialType::MATERIALTYPE_ABS  => 15,
+            MaterialType::MATERIALTYPE_PETG => 30,
     ];
 
     protected array $max_fan_speed_definition = [
-        MaterialType::MATERIALTYPE_PLA  => 100,
-        'Woodfill'                      => 100,
-        MaterialType::MATERIALTYPE_ABS  => 30,
-        MaterialType::MATERIALTYPE_PETG => 50
+            MaterialType::MATERIALTYPE_PLA  => 100,
+            'Woodfill'                      => 100,
+            MaterialType::MATERIALTYPE_ABS  => 30,
+            MaterialType::MATERIALTYPE_PETG => 50,
     ];
 
     private FilamentSpoolId $id;
@@ -111,14 +111,14 @@ class FilamentSpool
 
         return new DisplayName(
             implode(
-                ' ',
-                [
-                        $this->getManufacturer()->getName()->getValue(),
-                        $this->getMaterialType()->getValue(),
-                        $colorName,
-                        $this->getDiameter()->toUnit('millimeter').'mm',
-                    ]
-            )
+                    ' ',
+                    [
+                                $this->getManufacturer()->getName()->getValue(),
+                                $this->getMaterialType()->getValue(),
+                                $colorName,
+                                $this->getDiameter()->toUnit('millimeter').'mm',
+                        ]
+                )
         );
     }
 
@@ -184,6 +184,11 @@ class FilamentSpool
         $this->diameter = $diameter;
 
         return $this;
+    }
+
+    private function isZero(float $value): bool
+    {
+        return abs($value - 0) < PHP_FLOAT_EPSILON;
     }
 
     public function getDiameterTolerance(): Length
@@ -288,10 +293,5 @@ class FilamentSpool
         $this->density = $density;
 
         return $this;
-    }
-
-    private function isZero(float $value): bool
-    {
-        return abs($value - 0) < PHP_FLOAT_EPSILON;
     }
 }

@@ -34,7 +34,7 @@ abstract class Id
     }
 
     /**
-     * @param string $id
+     * @param  string  $id
      *
      * @return Id
      * @throws \Exception

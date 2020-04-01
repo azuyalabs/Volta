@@ -35,11 +35,11 @@ class MaterialType
     private function validate(): void
     {
         $types = [
-            self::MATERIALTYPE_ABS,
-            self::MATERIALTYPE_PLA,
-            self::MATERIALTYPE_PETG,
-            self::MATERIALTYPE_PP,
-            self::MATERIALTYPE_WOODFILL
+                self::MATERIALTYPE_ABS,
+                self::MATERIALTYPE_PLA,
+                self::MATERIALTYPE_PETG,
+                self::MATERIALTYPE_PP,
+                self::MATERIALTYPE_WOODFILL,
         ];
         if (false === \in_array($this->value, $types, true)) {
             throw new InvalidMaterialTypeException();
