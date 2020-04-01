@@ -15,8 +15,7 @@ declare(strict_types=1);
 namespace Volta\Domain;
 
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
-use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureExceededAbsoluteMaximumException;
-use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureExceededAbsoluteMinimumException;
+use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureOutOfBoundsException;
 use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureOutOfBoundsException;
 use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureExceededAbsoluteMaximumException;
 use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureExceededAbsoluteMinimumException;
@@ -103,13 +102,12 @@ class Temperatures
             throw new MinimumPrintTemperatureOutOfBoundsException();
         }
 
-        // Maximum Bed Temperature
-        if (self::UPPER_BOUND_BED_TEMP < $this->max_bed_temperature->toUnit(self::TEMPERATURE_UNIT)) {
-            throw new MaximumBedTemperatureExceededAbsoluteMaximumException();
-        }
-
-        if (self::LOWER_BOUND_BED_TEMP > $this->max_bed_temperature->toUnit(self::TEMPERATURE_UNIT)) {
-            throw new MaximumBedTemperatureExceededAbsoluteMinimumException();
+        if ($this->isOutOfBounds(
+            $this->max_bed_temperature->toUnit(self::TEMPERATURE_UNIT),
+            self::LOWER_BOUND_BED_TEMP,
+            self::UPPER_BOUND_BED_TEMP
+        )) {
+            throw new MaximumBedTemperatureOutOfBoundsException();
         }
 
         // Minimum Bed Temperature

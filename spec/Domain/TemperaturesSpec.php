@@ -16,8 +16,7 @@ namespace spec\Volta\Domain;
 
 use PhpSpec\ObjectBehavior;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
-use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureExceededAbsoluteMaximumException;
-use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureExceededAbsoluteMinimumException;
+use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureOutOfBoundsException;
 use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureOutOfBoundsException;
 use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureExceededAbsoluteMaximumException;
 use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureExceededAbsoluteMinimumException;
@@ -112,14 +111,14 @@ class TemperaturesSpec extends ObjectBehavior
     {
         $this->beConstructedWith(null, null, null, new Temperature(209, self::TEMPERATURE_UNIT));
 
-        $this->shouldThrow(MaximumBedTemperatureExceededAbsoluteMaximumException::class)->duringInstantiation();
+        $this->shouldThrow(MaximumBedTemperatureOutOfBoundsException::class)->duringInstantiation();
     }
 
     public function it_throws_exception_when_max_bed_temperature_exceeds_absolute_min(): void
     {
         $this->beConstructedWith(null, null, null, new Temperature(-5, self::TEMPERATURE_UNIT));
 
-        $this->shouldThrow(MaximumBedTemperatureExceededAbsoluteMinimumException::class)->duringInstantiation();
+        $this->shouldThrow(MaximumBedTemperatureOutOfBoundsException::class)->duringInstantiation();
     }
 
     public function it_has_minimum_bed_temperature(): void

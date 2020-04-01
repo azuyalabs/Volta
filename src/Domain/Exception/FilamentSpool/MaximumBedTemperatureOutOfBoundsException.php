@@ -4,10 +4,10 @@ namespace Volta\Domain\Exception\FilamentSpool;
 
 use Volta\Domain\Exception\Exception;
 
-class MaximumBedTemperatureExceededAbsoluteMaximumException extends \RangeException implements Exception
+class MaximumBedTemperatureOutOfBoundsException extends \RangeException implements Exception
 {
     public function __construct(
-        string $message = 'maximum bed temperature can not exceed absolute maximum',
+        string $message = 'maximum bed temperature is out of range',
         int $code = 0,
         \Throwable $previous = null
     ) {
