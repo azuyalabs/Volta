@@ -21,6 +21,7 @@ use PhpSpec\ObjectBehavior;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
+use Volta\Domain\Exception\ZeroDensityException;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\FilamentSpool;
@@ -226,7 +227,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_display_name(): void
     {
         $this->getDisplayName()->shouldReturnAnInstanceOf(DisplayName::class);
-        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics PLA Red 0mm');
+        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics PLA Red 1.75mm');
     }
 
     public function it_has_alternative_color_in_display_name_if_alternative_color_is_set(): void
@@ -234,7 +235,7 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->setAlternativeColor(new Color(new ColorName('Himalaya'), new Hex('#665D1E')));
 
         $this->getDisplayName()->shouldReturnAnInstanceOf(DisplayName::class);
-        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics PLA Himalaya 0mm');
+        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics PLA Himalaya 1.75mm');
     }
 
     public function it_has_a_minimum_fan_speed(): void
@@ -295,6 +296,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_density(): void
     {
         $this->getDensity()->shouldBeDouble();
+        $this->getDensity()->shouldBe(1.0);
     }
 
     public function it_can_update_density(): void

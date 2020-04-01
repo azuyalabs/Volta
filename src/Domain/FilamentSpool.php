@@ -19,6 +19,7 @@ use Money\Money;
 use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use Volta\Domain\Exception\ZeroDensityException;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
@@ -56,7 +57,7 @@ class FilamentSpool
     private Color $color;
     private ?Color $alternativeColor = null;
     private Temperatures $temperatures;
-    private float $density = 0.0;
+    private float $density = 1.0;
 
     public function __construct(
         FilamentSpoolId $id,
@@ -68,8 +69,8 @@ class FilamentSpool
         $this->manufacturer = $manufacturer;
 
         $this->purchasePrice      = new Money(0, new Currency('USD'));
-        $this->weight             = new Mass(0, 'kilogram');
-        $this->diameter           = new Length(0, 'millimeter');
+        $this->weight             = new Mass(1, 'kilogram');
+        $this->diameter           = new Length(1.75, 'millimeter');
         $this->diameter_tolerance = new Length(0.05, 'millimeter');
         $this->material_type      = new MaterialType(MaterialType::MATERIALTYPE_PLA);
         $this->color              = new Color(new ColorName('Red'), new Hex('#ff0000'));
@@ -291,5 +292,5 @@ class FilamentSpool
         $this->density = $density;
 
         return $this;
-}
+    }
 }
