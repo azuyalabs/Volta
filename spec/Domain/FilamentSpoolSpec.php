@@ -102,10 +102,18 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getWeight()->shouldReturnAnInstanceOf(Mass::class);
     }
 
-    public function it_can_update_weight(Mass $weight): void
+    public function it_can_update_weight(): void
     {
+        $weight = new Mass(50.5, 'grams');
+
         $this->setWeight($weight);
         $this->getWeight()->shouldBe($weight);
+    }
+
+    public function it_throws_exception_setting_weight_to_zero(): void
+    {
+        $this->shouldThrow(ZeroWeightException::class)
+                ->duringSetWeight(new Mass(0, 'grams'));
     }
 
     public function it_has_a_price_per_weight(): void
@@ -122,14 +130,6 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getPricePerWeight()->getCurrency()->getCode()->shouldBe($currency);
     }
 
-    public function it_throws_exception_price_per_weight_on_weight_is_zero(): void
-    {
-        $weight = new Mass(0, 'gram');
-
-        $this->setWeight($weight);
-        $this->shouldThrow(ZeroWeightException::class)->duringGetPricePerWeight();
-    }
-
     public function it_has_a_price_per_kilogram(): void
     {
         static $currency = 'USD';
@@ -142,14 +142,6 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getPricePerWeight()->shouldBeAnInstanceOf(Money::class);
         $this->getPricePerWeight()->getAmount()->shouldBeLike(3733);
         $this->getPricePerWeight()->getCurrency()->getCode()->shouldBe($currency);
-    }
-
-    public function it_throws_exception_price_per_kilogram_on_weight_is_zero(): void
-    {
-        $weight = new Mass(0, 'gram');
-
-        $this->setWeight($weight);
-        $this->shouldThrow(ZeroWeightException::class)->duringGetPricePerKilogram();
     }
 
     public function it_has_a_diameter(): void

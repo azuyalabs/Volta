@@ -177,7 +177,7 @@ class FilamentSpool
 
     public function setDiameter(Length $diameter): FilamentSpool
     {
-        if (abs($diameter->toNativeUnit() - 0) < PHP_FLOAT_EPSILON) {
+        if ($this->isZero($diameter->toNativeUnit())) {
             throw new ZeroDiameterException();
         }
 
@@ -205,6 +205,10 @@ class FilamentSpool
 
     public function setWeight(Mass $weight): FilamentSpool
     {
+        if ($this->isZero($weight->toNativeUnit())) {
+            throw new ZeroWeightException();
+        }
+
         $this->weight = $weight;
 
         return $this;
@@ -236,10 +240,6 @@ class FilamentSpool
     {
         $weight = $this->weight->toNativeUnit();
 
-        if (abs($weight - 0) < PHP_FLOAT_EPSILON) {
-            throw new ZeroWeightException();
-        }
-
         $pr = clone $this->getPurchasePrice();
 
         return $pr->divide($weight);
@@ -269,10 +269,6 @@ class FilamentSpool
     {
         $weight = $this->weight->toNativeUnit();
 
-        if (abs($weight - 0) < PHP_FLOAT_EPSILON) {
-            throw new ZeroWeightException();
-        }
-
         $pr = clone $this->getPurchasePrice();
 
         return $pr->multiply(1 / $weight);
@@ -285,12 +281,17 @@ class FilamentSpool
 
     public function setDensity(float $density): FilamentSpool
     {
-        if (abs($density - 0) < PHP_FLOAT_EPSILON) {
+        if ($this->isZero($density)) {
             throw new ZeroDensityException();
         }
 
         $this->density = $density;
 
         return $this;
+    }
+
+    private function isZero(float $value): bool
+    {
+        return abs($value - 0) < PHP_FLOAT_EPSILON;
     }
 }
