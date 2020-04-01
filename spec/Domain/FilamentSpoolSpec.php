@@ -44,9 +44,9 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->beConstructedWith(
             new FilamentSpoolId(),
             new Manufacturer(
-                new ManufacturerId(),
-                new ManufacturerName('ABC Plastics')
-            ),
+                    new ManufacturerId(),
+                    new ManufacturerName('ABC Plastics')
+                ),
             'Midnight Blue'
         );
     }
@@ -160,7 +160,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_throws_exception_setting_diameter_to_zero(): void
     {
         $this->shouldThrow(ZeroDiameterException::class)
-            ->duringSetDiameter(new Length(0, 'meters'));
+                ->duringSetDiameter(new Length(0, 'meters'));
     }
 
     public function it_has_a_diameter_tolerance(): void
@@ -277,9 +277,9 @@ class FilamentSpoolSpec extends ObjectBehavior
     {
         $this->setTemperatures(
             new Temperatures(
-                new Temperature(167, 'celsius'),
-                new Temperature(235, 'celsius')
-            )
+                    new Temperature(167, 'celsius'),
+                    new Temperature(235, 'celsius')
+                )
         );
         $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius')->shouldBe(167.0);
         $this->getTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')->shouldBe(235.0);

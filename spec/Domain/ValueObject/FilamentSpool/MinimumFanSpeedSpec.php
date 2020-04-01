@@ -35,7 +35,7 @@ class MinimumFanSpeedSpec extends ObjectBehavior
     {
         $this->beConstructedWith(115);
         $this->shouldThrow(MaximumValueMinimumFanSpeedException::class)
-            ->duringInstantiation();
+                ->duringInstantiation();
     }
 
     public function it_compares_equality(): void

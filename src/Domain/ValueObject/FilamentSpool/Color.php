@@ -30,8 +30,8 @@ class Color
 
     public function isEqual(Color $other): bool
     {
-        return $this->name === $other->getColorName()
-            && $this->code === $other->getColorCode();
+        return $this->name     === $other->getColorName()
+                && $this->code === $other->getColorCode();
     }
 
     public function getColorName(): ColorName
