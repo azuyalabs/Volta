@@ -118,7 +118,7 @@ class Temperatures
         }
     }
 
-    private function isOutOfBounds($value, $lowerLimit, $upperLimit): bool
+    private function isOutOfBounds(float $value, float $lowerLimit, float $upperLimit): bool
     {
         return ($value < $lowerLimit || $value > $upperLimit);
     }

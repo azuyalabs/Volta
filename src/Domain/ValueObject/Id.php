@@ -23,7 +23,7 @@ abstract class Id
     /**
      * @var UuidInterface
      */
-    private $value;
+    private UuidInterface $value;
 
     /**
      * @throws \Exception
