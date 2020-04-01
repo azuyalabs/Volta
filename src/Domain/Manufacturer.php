@@ -43,6 +43,7 @@ class Manufacturer
     public function setIsEquipmentSupplier(bool $equipmentSupplier): Manufacturer
     {
         $this->equipmentSupplier = $equipmentSupplier;
+
         return $this;
     }
 
@@ -54,6 +55,7 @@ class Manufacturer
     public function setIsFilamentSupplier(bool $filamentSupplier): Manufacturer
     {
         $this->filamentSupplier = $filamentSupplier;
+
         return $this;
     }
 
@@ -65,6 +67,7 @@ class Manufacturer
     public function setId(ManufacturerId $id): Manufacturer
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -81,6 +84,7 @@ class Manufacturer
     public function setName(ManufacturerName $name): Manufacturer
     {
         $this->name = $name;
+
         return $this;
     }
 }

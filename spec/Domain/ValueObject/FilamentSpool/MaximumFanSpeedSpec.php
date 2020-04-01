@@ -34,8 +34,7 @@ class MaximumFanSpeedSpec extends ObjectBehavior
     public function it_throws_an_exception_when_value_exceeds_maximum(): void
     {
         $this->beConstructedWith(123);
-        $this
-            ->shouldThrow(MaximumValueMaximumFanSpeedException::class)
+        $this->shouldThrow(MaximumValueMaximumFanSpeedException::class)
             ->duringInstantiation();
     }
 

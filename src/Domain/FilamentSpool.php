@@ -54,6 +54,7 @@ class FilamentSpool
     private Length $diameter_tolerance;
     private MaterialType $material_type;
     private Color $color;
+    private ?Color $alternativeColor = null;
     private Temperatures $temperatures;
 
     public function __construct(
@@ -102,38 +103,32 @@ class FilamentSpool
 
     public function getDisplayName(): DisplayName
     {
+        $colorName = $this->getAlternativeColor() instanceof Color ?
+                $this->getAlternativeColor()->getColorName()->getValue() :
+                $this->getColor()->getColorName()->getValue();
+
         return new DisplayName(
             implode(
                 ' ',
                 [
-                    $this->getManufacturer()->getName()->getValue(),
-                    $this->getMaterialType()->getValue(),
-                    $this->getColor()->getColorName()->getValue(),
-                    $this->getDiameter()->toUnit('millimeter') . 'mm'
-                ]
+                        $this->getManufacturer()->getName()->getValue(),
+                        $this->getMaterialType()->getValue(),
+                        $colorName,
+                        $this->getDiameter()->toUnit('millimeter').'mm',
+                    ]
             )
         );
     }
 
-    public function getManufacturer(): Manufacturer
+    public function getAlternativeColor(): ?Color
     {
-        return $this->manufacturer;
+        return $this->alternativeColor;
     }
 
-    public function setManufacturer(Manufacturer $manufacturer): FilamentSpool
+    public function setAlternativeColor(Color $color): FilamentSpool
     {
-        $this->manufacturer = $manufacturer;
-        return $this;
-    }
+        $this->alternativeColor = $color;
 
-    public function getMaterialType(): MaterialType
-    {
-        return $this->material_type;
-    }
-
-    public function setMaterialType(MaterialType $material_type): FilamentSpool
-    {
-        $this->material_type = $material_type;
         return $this;
     }
 
@@ -145,6 +140,31 @@ class FilamentSpool
     public function setColor(Color $color): FilamentSpool
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getManufacturer(): Manufacturer
+    {
+        return $this->manufacturer;
+    }
+
+    public function setManufacturer(Manufacturer $manufacturer): FilamentSpool
+    {
+        $this->manufacturer = $manufacturer;
+
+        return $this;
+    }
+
+    public function getMaterialType(): MaterialType
+    {
+        return $this->material_type;
+    }
+
+    public function setMaterialType(MaterialType $material_type): FilamentSpool
+    {
+        $this->material_type = $material_type;
+
         return $this;
     }
 
@@ -160,6 +180,7 @@ class FilamentSpool
         }
 
         $this->diameter = $diameter;
+
         return $this;
     }
 
@@ -183,6 +204,7 @@ class FilamentSpool
     public function setWeight(Mass $weight): FilamentSpool
     {
         $this->weight = $weight;
+
         return $this;
     }
 
@@ -194,6 +216,7 @@ class FilamentSpool
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -228,6 +251,7 @@ class FilamentSpool
     public function setPurchasePrice(Money $purchasePrice): self
     {
         $this->purchasePrice = $purchasePrice;
+
         return $this;
     }
 

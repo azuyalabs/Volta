@@ -35,8 +35,7 @@ class DisplayNameSpec extends ObjectBehavior
     {
         $this->beConstructedWith('');
 
-        $this
-            ->shouldThrow(BlankDisplayNameException::class)
+        $this->shouldThrow(BlankDisplayNameException::class)
             ->duringInstantiation();
     }
 
