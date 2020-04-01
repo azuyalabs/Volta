@@ -20,8 +20,7 @@ use Volta\Domain\Exception\FilamentSpool\MaximumBedTemperatureExceededAbsoluteMi
 use Volta\Domain\Exception\FilamentSpool\MaximumPrintTemperatureOutOfBoundsException;
 use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureExceededAbsoluteMaximumException;
 use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureExceededAbsoluteMinimumException;
-use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureExceededAbsoluteMaximumException;
-use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureExceededAbsoluteMinimumException;
+use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureOutOfBoundsException;
 
 /**
  * Class Temperatures
@@ -96,13 +95,12 @@ class Temperatures
             throw new MaximumPrintTemperatureOutOfBoundsException();
         }
 
-        // Minimum Print Temperature
-        if (self::UPPER_BOUND_PRINT_TEMP < $this->min_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
-            throw new MinimumPrintTemperatureExceededAbsoluteMaximumException();
-        }
-
-        if (self::LOWER_BOUND_PRINT_TEMP > $this->min_print_temperature->toUnit(self::TEMPERATURE_UNIT)) {
-            throw new MinimumPrintTemperatureExceededAbsoluteMinimumException();
+        if ($this->isOutOfBounds(
+            $this->min_print_temperature->toUnit(self::TEMPERATURE_UNIT),
+            self::LOWER_BOUND_PRINT_TEMP,
+            self::UPPER_BOUND_PRINT_TEMP
+        )) {
+            throw new MinimumPrintTemperatureOutOfBoundsException();
         }
 
         // Maximum Bed Temperature

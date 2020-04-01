@@ -4,10 +4,10 @@ namespace Volta\Domain\Exception\FilamentSpool;
 
 use Volta\Domain\Exception\Exception;
 
-class MinimumPrintTemperatureExceededAbsoluteMaximumException extends \RangeException implements Exception
+class MinimumPrintTemperatureOutOfBoundsException extends \RangeException implements Exception
 {
     public function __construct(
-        string $message = 'minimum print temperature can not exceed absolute maximum',
+        string $message = 'minimum print temperature is out of range',
         int $code = 0,
         \Throwable $previous = null
     ) {
