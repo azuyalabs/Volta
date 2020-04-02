@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39f7b0c162db7f48ae6e4f090ec74255",
+    "content-hash": "84bacf9434cfb486cf8901380dd6fa3e",
     "packages": [
         {
             "name": "azuyalabs/yasumi",
@@ -8060,16 +8060,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "2.6.1",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "184c591e5b31c1f98426ed8e147a61864bd0cc96"
+                "reference": "c1694f08654e0cd534d1ecda10f242c77a44f235"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/184c591e5b31c1f98426ed8e147a61864bd0cc96",
-                "reference": "184c591e5b31c1f98426ed8e147a61864bd0cc96",
+                "url": "https://api.github.com/repos/phan/phan/zipball/c1694f08654e0cd534d1ecda10f242c77a44f235",
+                "reference": "c1694f08654e0cd534d1ecda10f242c77a44f235",
                 "shasum": ""
             },
             "require": {
@@ -8084,7 +8084,8 @@
                 "php": "^7.1.0",
                 "sabre/event": "^5.0",
                 "symfony/console": "^2.3|^3.0|^4.0|^5.0",
-                "symfony/polyfill-mbstring": "^1.11.0"
+                "symfony/polyfill-mbstring": "^1.11.0",
+                "symfony/polyfill-php72": "^1.15"
             },
             "require-dev": {
                 "brianium/paratest": "^4.0.0",
@@ -8129,7 +8130,7 @@
                 "php",
                 "static"
             ],
-            "time": "2020-03-13T21:34:53+00:00"
+            "time": "2020-04-01T14:15:47+00:00"
         },
         {
             "name": "phar-io/manifest",

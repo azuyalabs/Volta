@@ -158,7 +158,7 @@ class SlicerProfilesCommand extends Command
             $f = $this->getFilamentSpoolData($filamentFile);
 
             // TODO: Implement Application exception
-            if (null === $f || !isset($f['product'])) {
+            if (!isset($f['product'], $f['id']) || null === $f) {
                 // echo 'Invalid Definition (Empty or Old version?)'.PHP_EOL;
                 continue;
             }
@@ -166,12 +166,6 @@ class SlicerProfilesCommand extends Command
 //            $color                  = $f['color']['name'] ?? $this->color2Name($f['color']['code']);
 //            $f['color']['rgba_int'] = hexdec(ltrim($f['color']['code'], '#') . '00');
 
-
-            // TODO: Update original filament definition
-            //if (!isset($f['id'])) {
-            //    $f = ['id' => Uuid::uuid4()] + $f;
-            //    \file_put_contents($filamentFile, \json_encode($f, JSON_PRETTY_PRINT));
-            // }
 
             $spool = new FilamentSpool(
                 new FilamentSpoolId(),
