@@ -53,8 +53,8 @@
     "nunomaduro/collision": "^4.1",
     "nunomaduro/larastan": "^0.5",
     "phan/phan": "^2.2",
-    "phpunit/phpunit": "^8.5",
-    "phpspec/phpspec": "^6.0"
+    "phpunit/phpunit": "^9.0",
+    "phpspec/phpspec": "^6.1"
   },
   "autoload": {
     "classmap": [
