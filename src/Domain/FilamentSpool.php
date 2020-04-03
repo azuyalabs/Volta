@@ -28,6 +28,7 @@ use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpool\MaximumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
+use Volta\Domain\ValueObject\FilamentSpool\MinimumPrintSpeed;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool
@@ -44,6 +45,13 @@ class FilamentSpool
             'Woodfill'                      => 100,
             MaterialType::MATERIALTYPE_ABS  => 30,
             MaterialType::MATERIALTYPE_PETG => 50,
+    ];
+
+    protected array $min_print_speed_definition = [
+            MaterialType::MATERIALTYPE_PLA  => 15,
+            'Woodfill'                      => 15,
+            MaterialType::MATERIALTYPE_ABS  => 5,
+            MaterialType::MATERIALTYPE_PETG => 15,
     ];
 
     private FilamentSpoolId $id;
@@ -103,6 +111,13 @@ class FilamentSpool
         return new MaximumFanSpeed($value);
     }
 
+    public function getMinimumPrintSpeed(): MinimumPrintSpeed
+    {
+        $value = $this->min_print_speed_definition[$this->material_type->getValue()];
+
+        return new MinimumPrintSpeed($value);
+    }
+
     public function getDisplayName(): DisplayName
     {
         $colorName = $this->getAlternativeColor() instanceof Color ?
@@ -111,14 +126,14 @@ class FilamentSpool
 
         return new DisplayName(
             implode(
-                    ' ',
-                    [
-                                $this->getManufacturer()->getName()->getValue(),
-                                $this->getMaterialType()->getValue(),
-                                $colorName,
-                                $this->getDiameter()->toUnit('millimeter').'mm',
-                        ]
-                )
+                ' ',
+                [
+                    $this->getManufacturer()->getName()->getValue(),
+                    $this->getMaterialType()->getValue(),
+                    $colorName,
+                    $this->getDiameter()->toUnit('millimeter').'mm',
+                ]
+            )
         );
     }
 

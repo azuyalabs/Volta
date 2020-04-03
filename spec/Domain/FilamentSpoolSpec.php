@@ -33,6 +33,7 @@ use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpool\MaximumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
+use Volta\Domain\ValueObject\FilamentSpool\MinimumPrintSpeed;
 use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
@@ -44,9 +45,9 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->beConstructedWith(
             new FilamentSpoolId(),
             new Manufacturer(
-                    new ManufacturerId(),
-                    new ManufacturerName('ABC Plastics')
-                ),
+                new ManufacturerId(),
+                new ManufacturerName('ABC Plastics')
+            ),
             'Midnight Blue'
         );
     }
@@ -266,6 +267,15 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getMaximumFanSpeed()->getValue()->shouldBe(100);
     }
 
+    public function it_has_a_minimum_print_speed(): void
+    {
+        $this->getMinimumPrintSpeed()->shouldReturnAnInstanceOf(MinimumPrintSpeed::class);
+        $this->getMinimumPrintSpeed()->getValue()->shouldBe(15.0);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
+        $this->getMinimumPrintSpeed()->getValue()->shouldBe(5.0);
+    }
+
     public function it_has_temperatures(): void
     {
         $this->getTemperatures()->shouldReturnAnInstanceOf(Temperatures::class);
@@ -277,9 +287,9 @@ class FilamentSpoolSpec extends ObjectBehavior
     {
         $this->setTemperatures(
             new Temperatures(
-                    new Temperature(167, 'celsius'),
-                    new Temperature(235, 'celsius')
-                )
+                new Temperature(167, 'celsius'),
+                new Temperature(235, 'celsius')
+            )
         );
         $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius')->shouldBe(167.0);
         $this->getTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')->shouldBe(235.0);
