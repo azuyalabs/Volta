@@ -15,6 +15,7 @@ namespace App\Console\Commands;
 use DateTime;
 use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use League\Fractal\Serializer\ArraySerializer;
@@ -65,12 +66,7 @@ class SlicerProfilesCommand extends Command
      */
     private const PROFILES_DIR = 'filaments/profiles';
 
-    /**
-     * List of supported slicers
-     *
-     * @var array
-     */
-    protected $slicers = [
+    protected array $slicers = [
         'slic3rpe'    => 'Slic3rPE',
         'cura'        => 'Ultimaker Cura',
         'slic3r'      => 'Slic3r',
@@ -80,38 +76,27 @@ class SlicerProfilesCommand extends Command
 
     /**
      * Common settings for 'Bridge Speed Fan' (by filament type)
-     *
-     * @var array
      */
-    protected $bridge_fan_speeds = ['PLA' => 100, 'Woodfill' => 100, 'ABS' => 30, 'PET' => 50];
+    protected array $bridge_fan_speeds = ['PLA' => 100, 'Woodfill' => 100, 'ABS' => 30, 'PET' => 50];
 
     /**
      * Common settings for 'Disable Fan First Layers' (by filament type)
-     *
-     * @var array
      */
-    protected $disable_fan_first_layers = ['PLA' => 1, 'Woodfill' => 1, 'ABS' => 0, 'PET' => 3];
+    protected array $disable_fan_first_layers = ['PLA' => 1, 'Woodfill' => 1, 'ABS' => 0, 'PET' => 3];
 
     /**
      * Mapping for the parent filament
-     *
-     * @var array
      */
-    protected $inherits = ['PLA' => 'PLA', 'Woodfill' => 'PLA', 'ABS' => 'ABS', 'PET' => 'PET'];
+    protected array $inherits = ['PLA' => 'PLA', 'Woodfill' => 'PLA', 'ABS' => 'ABS', 'PET' => 'PET'];
 
     /**
      * Common settings for 'Fan Below Layer Time' (by filament type)
-     *
-     * @var array
      */
-    protected $fan_below_layer_time = ['PLA' => 100, 'Woodfill' => 100, 'ABS' => 20, 'PET' => 20];
 
     /**
      * Common settings for 'Filament Max Volumetric Speed' (by filament type)
-     *
-     * @var array
      */
-    protected $filament_max_volumetric_speed = ['PLA' => 15, 'Woodfill' => 15, 'ABS' => 11, 'PET' => 8];
+    protected array $filament_max_volumetric_speed = ['PLA' => 15, 'Woodfill' => 15, 'ABS' => 11, 'PET' => 8];
 
     /**
      * @var string The console command name
@@ -123,14 +108,9 @@ class SlicerProfilesCommand extends Command
      */
     protected $description = 'Generate slicer profiles';
 
-    /**
-     * Handle to Template Engine
-     *
-     * @var Engine
-     */
-    protected $plates;
+    protected Engine $plates;
 
-    protected $filamentsDirectory;
+    protected Filesystem $filamentsDirectory;
 
     /**
      * SlicerProfilesCommand constructor.
