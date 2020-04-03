@@ -193,7 +193,6 @@ class SlicerProfilesCommand extends Command
                     $spool->getTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')
                 )
             );
-            $this->warn('Price per kg            : ' .$spool->getPricePerKilogram()->getAmount());
 
 //            continue;
 //            $filamentName = implode(' ', [$f['manufacturer'], $f['material'], $color, $f['diameter'] . 'mm']);
