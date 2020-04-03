@@ -215,107 +215,102 @@ class SlicerProfilesCommand extends Command
             );
             $this->warn('Price per kg            : ' .$spool->getPricePerKilogram()->getAmount());
 
-            continue;
-            $filamentName = implode(' ', [$f['manufacturer'], $f['material'], $color, $f['diameter'] . 'mm']);
-
-
-
-            // Set defaults
-            $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['material']];
-            $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['material']];
-            $f['extrusion_multiplier']          = 1;
-            $f['cooling']                       = $f['material'] === 'ABS' ? 0 : 1;
-            $f['fan_always_on']                 = $f['material'] === 'ABS' ? 0 : 1;
-            $f['k_value']                       = ($f['material'] === 'PET') ? 45 : 30;
-            $f['filament_notes']                = sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
-            $f['filament_colour']               = $color;
-            $f['min_print_speed']               = ($f['material'] === 'ABS') ? 5 : 15;
-            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];
-            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['material']];
-            $f['inherits']                      = $this->inherits[$f['material']];
-
-            if (!isset($f['first_layer_bed_temperature'])) {
-                $f['first_layer_bed_temperature'] = 60;
-            }
-
-            if (!isset($f['first_layer_temperature'])) {
-                $f['first_layer_temperature'] = 205;
-            }
-
-            if (!isset($f['next_layer_bed_temperature'])) {
-                $f['next_layer_bed_temperature'] = $f['first_layer_bed_temperature'];
-            }
-
-            if (!isset($f['next_layer_temperature'])) {
-                $f['next_layer_temperature'] = $f['first_layer_temperature'];
-            }
-
-            if (!isset($f['keep_warm_temperature'])) {
-                $f['keep_warm_temperature'] = ceil($f['next_layer_temperature'] * 0.65);
-            }
-
-            $f['price_per_cm3'] = ($f['price'] * $f['density']) / $f['weight'];
-
-            // Store Cura Material Settings
-            $cura_material_settings[(string)$f['id']] = ['spool_weight' => $f['weight'], 'spool_cost' => $f['purchase_price']['value']];
-
-
-
-            # Info
-            $f['instructions_url'] = $f['info']['instructions_url']          ?? '';
-            $f['msds_url']         = $f['info']['msds_url']                  ?? '';
-            $f['tds_url']          = $f['info']['tds_url']                   ?? '';
-
-            # Retrieve Linear Advance Calibration data
-            if (isset($f['k_value_calibrations'])) {
-                $kValueCalibration = $f['k_value_calibrations'][0];
-                $kvalue            = $kValueCalibration['value'];
-                if (isset($kvalue)) {
-                    $f['k_value'] = $kvalue;
-                    $f['filament_notes'] .= sprintf('K Value last calibrated on %s\\n', $kValueCalibration['date']);
-                }
-            } else {
-                $this->warn('>> Linear Advance Calibration not performed yet.');
-            }
-
-            # Retrieve Diameter Calibration data
-            if (isset($f['diameter_calibrations'])) {
-                $dm     = collect($f['diameter_calibrations']);
-                $avg    = $dm->pluck('measurements')->flatten()->average();
-                $margin = $avg - $f['product']['diameter']['value'];
-
-                if (isset($avg)) {
-                    $this->info(sprintf('Filament Diameter    : %.3fmm [%.3fmm (%.2f%%)]', $avg, $margin, ($margin / $f['product']['diameter']['value'] * 100)));
-                    $f['product']['diameter']['value'] = sprintf('%.3f', $avg);
-                    $f['filament_notes'] .= sprintf('Filament diameter last calibrated on %s\\n', $dm->pluck('date')->max());
-                }
-            } else {
-                $this->warn('>> Filament Diameter Calibration not performed yet.');
-            }
-
-            # Retrieve Extrusion Multiplier Calibration data
-            if (isset($f['extrusion_calibrations'])) {
-                $em = collect($f['extrusion_calibrations']);
-
-                $newMultiplier = $em->map(static function ($item) {
-                    return ($item['extrusion_width'] / collect($item['measurements'])->average()) * $item['multiplier'];
-                })->average();
-
-                $avg_extrusion_width = $em->pluck('extrusion_width')->flatten()->average();
-
-                $average = $em->pluck('measurements')->flatten()->average();
-                $margin  = $average - $avg_extrusion_width;
-
-                if (isset($newMultiplier)) {
-                    $this->info(sprintf('Extrusion Width      : %.3fmm [%.3fmm (%.2f%%)]', $average, $margin, ($margin / $avg_extrusion_width * 100)));
-                    $this->info(sprintf('Extrusion Multiplier : %.3f', $newMultiplier));
-
-                    $f['extrusion_multiplier'] = sprintf('%.3f', $newMultiplier);
-                    $f['filament_notes'] .= sprintf('Extrusion Multiplier last calibrated on %s\\n', $em->pluck('date')->max());
-                }
-            } else {
-                $this->warn('>> Extrusion Multiplier Calibration not performed yet.');
-            }
+//            continue;
+//            $filamentName = implode(' ', [$f['manufacturer'], $f['material'], $color, $f['diameter'] . 'mm']);
+//
+//            // Set defaults
+//            $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['material']];
+//            $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['material']];
+//            $f['extrusion_multiplier']          = 1;
+//            $f['cooling']                       = $f['material'] === 'ABS' ? 0 : 1;
+//            $f['fan_always_on']                 = $f['material'] === 'ABS' ? 0 : 1;
+//            $f['k_value']                       = ($f['material'] === 'PET') ? 45 : 30;
+//            $f['filament_notes']                = sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
+//            $f['filament_colour']               = $color;
+//            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];
+//            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['material']];
+//            $f['inherits']                      = $this->inherits[$f['material']];
+//
+//            if (!isset($f['first_layer_bed_temperature'])) {
+//                $f['first_layer_bed_temperature'] = 60;
+//            }
+//
+//            if (!isset($f['first_layer_temperature'])) {
+//                $f['first_layer_temperature'] = 205;
+//            }
+//
+//            if (!isset($f['next_layer_bed_temperature'])) {
+//                $f['next_layer_bed_temperature'] = $f['first_layer_bed_temperature'];
+//            }
+//
+//            if (!isset($f['next_layer_temperature'])) {
+//                $f['next_layer_temperature'] = $f['first_layer_temperature'];
+//            }
+//
+//            if (!isset($f['keep_warm_temperature'])) {
+//                $f['keep_warm_temperature'] = ceil($f['next_layer_temperature'] * 0.65);
+//            }
+//
+//            $f['price_per_cm3'] = ($f['price'] * $f['density']) / $f['weight'];
+//
+//            // Store Cura Material Settings
+//            $cura_material_settings[(string)$f['id']] = ['spool_weight' => $f['weight'], 'spool_cost' => $f['purchase_price']['value']];
+//
+//            # Info
+//            $f['instructions_url'] = $f['info']['instructions_url']          ?? '';
+//            $f['msds_url']         = $f['info']['msds_url']                  ?? '';
+//            $f['tds_url']          = $f['info']['tds_url']                   ?? '';
+//
+//            # Retrieve Linear Advance Calibration data
+//            if (isset($f['k_value_calibrations'])) {
+//                $kValueCalibration = $f['k_value_calibrations'][0];
+//                $kvalue            = $kValueCalibration['value'];
+//                if (isset($kvalue)) {
+//                    $f['k_value'] = $kvalue;
+//                    $f['filament_notes'] .= sprintf('K Value last calibrated on %s\\n', $kValueCalibration['date']);
+//                }
+//            } else {
+//                $this->warn('>> Linear Advance Calibration not performed yet.');
+//            }
+//
+//            # Retrieve Diameter Calibration data
+//            if (isset($f['diameter_calibrations'])) {
+//                $dm     = collect($f['diameter_calibrations']);
+//                $avg    = $dm->pluck('measurements')->flatten()->average();
+//                $margin = $avg - $f['product']['diameter']['value'];
+//
+//                if (isset($avg)) {
+//                    $this->info(sprintf('Filament Diameter    : %.3fmm [%.3fmm (%.2f%%)]', $avg, $margin, ($margin / $f['product']['diameter']['value'] * 100)));
+//                    $f['product']['diameter']['value'] = sprintf('%.3f', $avg);
+//                    $f['filament_notes'] .= sprintf('Filament diameter last calibrated on %s\\n', $dm->pluck('date')->max());
+//                }
+//            } else {
+//                $this->warn('>> Filament Diameter Calibration not performed yet.');
+//            }
+//
+//            # Retrieve Extrusion Multiplier Calibration data
+//            if (isset($f['extrusion_calibrations'])) {
+//                $em = collect($f['extrusion_calibrations']);
+//
+//                $newMultiplier = $em->map(static function ($item) {
+//                    return ($item['extrusion_width'] / collect($item['measurements'])->average()) * $item['multiplier'];
+//                })->average();
+//
+//                $avg_extrusion_width = $em->pluck('extrusion_width')->flatten()->average();
+//
+//                $average = $em->pluck('measurements')->flatten()->average();
+//                $margin  = $average - $avg_extrusion_width;
+//
+//                if (isset($newMultiplier)) {
+//                    $this->info(sprintf('Extrusion Width      : %.3fmm [%.3fmm (%.2f%%)]', $average, $margin, ($margin / $avg_extrusion_width * 100)));
+//                    $this->info(sprintf('Extrusion Multiplier : %.3f', $newMultiplier));
+//
+//                    $f['extrusion_multiplier'] = sprintf('%.3f', $newMultiplier);
+//                    $f['filament_notes'] .= sprintf('Extrusion Multiplier last calibrated on %s\\n', $em->pluck('date')->max());
+//                }
+//            } else {
+//                $this->warn('>> Extrusion Multiplier Calibration not performed yet.');
+//            }
 
             // Export profiles for each supported slicer
             foreach ($this->slicers as $slicer_id => $slicer_name) {
@@ -326,10 +321,10 @@ class SlicerProfilesCommand extends Command
                     throw new RuntimeException(sprintf('Directory "%s" could not be created', $outputDirectory));
                 }
 
-                $profileFilename = $filamentName . '.ini';
+                $profileFilename = $spool->getDisplayName()->getValue() . '.ini';
 
                 if ('cura' === $slicer_id) {
-                    $profileFilename = str_replace(' ', '_', $filamentName) . '.xml.fdm_material';
+                    $profileFilename = str_replace(' ', '_', $spool->getDisplayName()->getValue()) . '.xml.fdm_material';
 
                     // Output Cura Material Settings (replace this in your cura.cfg file)
                     file_put_contents($outputDirectory . DIRECTORY_SEPARATOR . 'cura_material_settings.txt', 'material_settings = ' . json_encode($cura_material_settings));

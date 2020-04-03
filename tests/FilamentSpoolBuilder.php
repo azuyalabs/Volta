@@ -17,19 +17,21 @@ use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
 class FilamentSpoolBuilder
 {
-    private $id;
+    private FilamentSpoolId $id;
 
-    private $diameter;
+    private Length $diameter;
 
-    private $manufacturer;
+    private Manufacturer $manufacturer;
 
-    private $weight;
+    private Mass $weight;
 
-    private $name;
+    private string $name;
 
-    private $material;
+    private MaterialType $material;
 
-    private $color;
+    private Color $color;
+
+    private float $density;
 
     public function __construct()
     {
@@ -40,6 +42,7 @@ class FilamentSpoolBuilder
         $this->weight       = new Mass(0.0, 'grams');
         $this->material     = new MaterialType(MaterialType::MATERIALTYPE_PETG);
         $this->color        = new Color(new ColorName('Green'), new Hex('#00ff00'));
+        $this->density      = 1;
     }
 
     public function withWeight(Mass $weight): void
@@ -77,6 +80,11 @@ class FilamentSpoolBuilder
         $this->color = $color;
     }
 
+    public function withDensity(float $density): void
+    {
+        $this->density = $density;
+    }
+
     public function build(): FilamentSpool
     {
         $spool = new FilamentSpool(
@@ -88,6 +96,7 @@ class FilamentSpoolBuilder
         $spool->setWeight($this->weight);
         $spool->setMaterialType($this->material);
         $spool->setColor($this->color);
+        $spool->setDensity($this->density);
 
         return $spool;
     }

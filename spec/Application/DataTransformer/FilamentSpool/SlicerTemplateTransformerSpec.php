@@ -29,6 +29,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
         $builder->withDiameter(new Length(1.75, 'millimeter'));
         $builder->withWeight(new Mass(900, 'grams'));
         $builder->withMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $builder->withDensity(1.22);
         $builder->withColor(new Color(new ColorName('Red'), new Hex('#ff0000')));
         $spool = $builder->build();
 
@@ -39,8 +40,9 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'manufacturer'    => 'ABC Plastics',
                 'diameter'        => 1.75,
                 'weight'          => 900,
-                'price'           => 0,
                 'material'        => 'PETG',
+                'density'         => 1.22,
+                'price'           => 0,
                 'color'           => 'Red',
                 'color_code'      => '#ff0000',
                 'display_name'    => 'ABC Plastics PETG Red 1.75mm',
