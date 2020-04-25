@@ -48,7 +48,7 @@ class FilamentSpoolSpec extends ObjectBehavior
                 new ManufacturerId(),
                 new ManufacturerName('ABC Plastics')
             ),
-            'Midnight Blue'
+            'Super PLA'
         );
     }
 
@@ -64,7 +64,7 @@ class FilamentSpoolSpec extends ObjectBehavior
 
     public function it_has_a_name(): void
     {
-        $this->getName()->shouldBe('Midnight Blue');
+        $this->getName()->shouldBe('Super PLA');
     }
 
     public function it_can_update_the_name(): void
@@ -207,7 +207,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_display_name(): void
     {
         $this->getDisplayName()->shouldReturnAnInstanceOf(DisplayName::class);
-        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics PLA Red 1.75mm');
+        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics Super PLA Red 1.75mm');
     }
 
     public function it_has_a_minimum_fan_speed(): void

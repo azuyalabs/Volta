@@ -126,7 +126,7 @@ class FilamentSpool
                 ' ',
                 [
                     $this->getManufacturer()->getName()->getValue(),
-                    $this->getMaterialType()->getValue(),
+                    $this->getName(),
                     $this->getColor()->getColorName()->getValue(),
                     $this->getDiameter()->toUnit('millimeter').'mm',
                 ]

@@ -36,7 +36,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
         $this->transform($spool)->shouldIterateLike(
             [
                 'id'              => $spool->getId()->getValue(),
-                'name'            => 'Glowy Pink',
+                'name'            => 'PETG Plus',
                 'manufacturer'    => 'ABC Plastics',
                 'diameter'        => 1.75,
                 'weight'          => 900,
@@ -45,7 +45,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'price'           => 0,
                 'color'           => 'Red',
                 'color_code'      => '#ff0000',
-                'display_name'    => 'ABC Plastics PETG Red 1.75mm',
+                'display_name'    => 'ABC Plastics PETG Plus Red 1.75mm',
                 'min_fan_speed'   => 30,
                 'max_fan_speed'   => 50,
                 'min_print_speed' => 15,

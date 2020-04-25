@@ -37,7 +37,7 @@ class FilamentSpoolBuilder
     {
         $this->id           = new FilamentSpoolId();
         $this->manufacturer = new Manufacturer(new ManufacturerId(), new ManufacturerName('XYZ Filaments'));
-        $this->name         = 'Glowy Pink';
+        $this->name         = 'PETG Plus';
         $this->diameter     = new Length(0.0, 'millimeters');
         $this->weight       = new Mass(0.0, 'grams');
         $this->material     = new MaterialType(MaterialType::MATERIALTYPE_PETG);
