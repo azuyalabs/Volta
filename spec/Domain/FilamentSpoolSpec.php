@@ -204,31 +204,10 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getColor()->shouldBe($color);
     }
 
-    public function it_has_not_an_alternative_color_by_default(): void
-    {
-        $this->getAlternativeColor()->shouldBeNull();
-    }
-
-    public function it_can_update_alternative_color(): void
-    {
-        $color = new Color(new ColorName('Ruby Red'), new Hex('#9b111e'));
-
-        $this->setAlternativeColor($color);
-        $this->getAlternativeColor()->shouldBe($color);
-    }
-
     public function it_has_a_display_name(): void
     {
         $this->getDisplayName()->shouldReturnAnInstanceOf(DisplayName::class);
         $this->getDisplayName()->getValue()->shouldBe('ABC Plastics PLA Red 1.75mm');
-    }
-
-    public function it_has_alternative_color_in_display_name_if_alternative_color_is_set(): void
-    {
-        $this->setAlternativeColor(new Color(new ColorName('Himalaya'), new Hex('#665D1E')));
-
-        $this->getDisplayName()->shouldReturnAnInstanceOf(DisplayName::class);
-        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics PLA Himalaya 1.75mm');
     }
 
     public function it_has_a_minimum_fan_speed(): void

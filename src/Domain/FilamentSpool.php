@@ -63,7 +63,6 @@ class FilamentSpool
     private Length $diameter_tolerance;
     private MaterialType $material_type;
     private Color $color;
-    private ?Color $alternativeColor = null;
     private Temperatures $temperatures;
     private float $density = 1.0;
 
@@ -120,33 +119,17 @@ class FilamentSpool
 
     public function getDisplayName(): DisplayName
     {
-        $colorName = $this->getAlternativeColor() instanceof Color ?
-                $this->getAlternativeColor()->getColorName()->getValue() :
-                $this->getColor()->getColorName()->getValue();
-
         return new DisplayName(
             implode(
                 ' ',
                 [
                     $this->getManufacturer()->getName()->getValue(),
                     $this->getMaterialType()->getValue(),
-                    $colorName,
+                    $this->getColor()->getColorName()->getValue(),
                     $this->getDiameter()->toUnit('millimeter').'mm',
                 ]
             )
         );
-    }
-
-    public function getAlternativeColor(): ?Color
-    {
-        return $this->alternativeColor;
-    }
-
-    public function setAlternativeColor(Color $color): FilamentSpool
-    {
-        $this->alternativeColor = $color;
-
-        return $this;
     }
 
     public function getColor(): Color

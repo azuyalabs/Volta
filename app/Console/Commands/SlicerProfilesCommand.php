@@ -347,24 +347,4 @@ class SlicerProfilesCommand extends Command
         }
         return Cache::get($CACHE_KEY);
     }
-
-    /**
-     * Get the name of a colour based on its hexadecimal code
-     *
-     * @param string $color the colour hexadecimal code
-     * @return string the name of the colour
-     */
-    protected function color2Name(string $color): string
-    {
-        // Strip any preceding hash character
-        $needle = '#';
-        if (strpos($color, $needle) >= 0) {
-            $color = substr($color, strlen($needle));
-        }
-
-        $response  = file_get_contents('http://www.thecolorapi.com/id?hex=' . $color);
-        $color_api = json_decode($response, true);
-
-        return $color_api['name']['value'] ?? $color;
-    }
 }
