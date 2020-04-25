@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Volta\Domain\ValueObject\FilamentSpool;
 
 use Volta\Domain\Exception\FilamentSpool\MaximumValueMinimumFanSpeedException;
+use Volta\Domain\Exception\NegativeValueException;
 
 /**
  * Class representing the Minimum Fan Speed
@@ -28,6 +29,10 @@ class MinimumFanSpeed
     {
         if (100 < $this->value) {
             throw new MaximumValueMinimumFanSpeedException();
+        }
+
+        if (0 > $this->value) {
+            throw new NegativeValueException('minimum fan speed');
         }
     }
 

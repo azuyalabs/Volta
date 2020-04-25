@@ -16,6 +16,7 @@ namespace spec\Volta\Domain\ValueObject\FilamentSpool;
 
 use PhpSpec\ObjectBehavior;
 use Volta\Domain\Exception\FilamentSpool\MaximumValueMinimumFanSpeedException;
+use Volta\Domain\Exception\NegativeValueException;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
 
 class MinimumFanSpeedSpec extends ObjectBehavior
@@ -35,6 +36,13 @@ class MinimumFanSpeedSpec extends ObjectBehavior
     {
         $this->beConstructedWith(115);
         $this->shouldThrow(MaximumValueMinimumFanSpeedException::class)
+                ->duringInstantiation();
+    }
+
+    public function it_throws_an_exception_when_value_is_negative(): void
+    {
+        $this->beConstructedWith(-10);
+        $this->shouldThrow(NegativeValueException::class)
                 ->duringInstantiation();
     }
 
