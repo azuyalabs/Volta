@@ -61,6 +61,7 @@ class FilamentSpool
     private Mass $weight;
     private Length $diameter;
     private Length $diameter_tolerance;
+    private Length $ovality_tolerance;
     private MaterialType $material_type;
     private Color $color;
     private Temperatures $temperatures;
@@ -79,6 +80,7 @@ class FilamentSpool
         $this->weight             = new Mass(1, 'kilogram');
         $this->diameter           = new Length(1.75, 'millimeter');
         $this->diameter_tolerance = new Length(0.05, 'millimeter');
+        $this->ovality_tolerance  = new Length(0.05, 'millimeter');
         $this->material_type      = new MaterialType(MaterialType::MATERIALTYPE_PLA);
         $this->color              = new Color(new ColorName('Red'), new Hex('#ff0000'));
         $this->temperatures       = new Temperatures();
@@ -289,6 +291,18 @@ class FilamentSpool
         }
 
         $this->density = $density;
+
+        return $this;
+    }
+
+    public function getOvalityTolerance(): Length
+    {
+        return $this->ovality_tolerance;
+    }
+
+    public function setOvalityTolerance(Length $diameter): FilamentSpool
+    {
+        $this->ovality_tolerance = $diameter;
 
         return $this;
     }

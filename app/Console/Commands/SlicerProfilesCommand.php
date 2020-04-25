@@ -67,11 +67,11 @@ class SlicerProfilesCommand extends Command
     private const PROFILES_DIR = 'filaments/profiles';
 
     protected array $slicers = [
-        'slic3rpe'    => 'Slic3rPE',
-        'cura'        => 'Ultimaker Cura',
-        'slic3r'      => 'Slic3r',
-        'prusaslicer' => 'Prusa Slicer',
-        'kisslicer'   => 'KISSlicer'
+            'slic3rpe'    => 'Slic3rPE',
+            'cura'        => 'Ultimaker Cura',
+            'slic3r'      => 'Slic3r',
+            'prusaslicer' => 'Prusa Slicer',
+            'kisslicer'   => 'KISSlicer',
     ];
 
     /**
@@ -117,7 +117,7 @@ class SlicerProfilesCommand extends Command
      */
     public function __construct()
     {
-        $this->plates             = new Engine(storage_path('app/' . self::TEMPLATES_DIR), 'ini');
+        $this->plates             = new Engine(storage_path('app/'.self::TEMPLATES_DIR), 'ini');
         $this->filamentsDirectory = Storage::disk(self::FILAMENTS_DISK);
 
         parent::__construct();
@@ -143,10 +143,6 @@ class SlicerProfilesCommand extends Command
                 continue;
             }
 
-//            $color                  = $f['color']['name'] ?? $this->color2Name($f['color']['code']);
-//            $f['color']['rgba_int'] = hexdec(ltrim($f['color']['code'], '#') . '00');
-
-
             $spool = new FilamentSpool(
                 new FilamentSpoolId(),
                 new Manufacturer(
@@ -155,16 +151,26 @@ class SlicerProfilesCommand extends Command
                 ),
                 $f['product']['name']
             );
-            $spool->setPurchasePrice(new Money($f['purchase_price']['value'], new Currency($f['purchase_price']['currency'])))
-                ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
-                ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
-                ->setMaterialType(new MaterialType($f['product']['type']))
-                ->setColor(new Color(new ColorName($f['product']['color']['name']), new Hex($f['product']['color']['code'])));
+            $spool->setPurchasePrice(new Money(
+                $f['purchase_price']['value'],
+                new Currency($f['purchase_price']['currency'])
+            ))
+                    ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
+                    ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
+                    ->setMaterialType(new MaterialType($f['product']['type']))
+                    ->setColor(new Color(
+                        new ColorName($f['product']['color']['name']),
+                        new Hex($f['product']['color']['code'])
+                    ));
 
             if (isset($f['product']['diameter']['tolerance'])) {
                 $spool->setDiameterTolerance(new Length($f['product']['diameter']['tolerance'], 'millimeters'));
             }
 
+            if (isset($f['product']['ovality']['tolerance'])) {
+                $spool->setOvalityTolerance(new Length($f['product']['ovality']['tolerance'], 'millimeters'));
+            }
+            
             if (isset($f['product']['temperatures']['print'])) {
                 $spool->setTemperatures(
                     new Temperatures(
@@ -174,18 +180,19 @@ class SlicerProfilesCommand extends Command
                 );
             }
 
-            $this->info($spool->getDisplayName()->getValue() . ' (' . $filamentFile['basename'] . ')');
+            $this->info($spool->getDisplayName()->getValue().' ('.$filamentFile['basename'].')');
 
             // Transform into a flat array structure
             $f = Fractal::create()
-                ->item($spool, new SlicerTemplateTransformer)
-                ->serializeWith(new ArraySerializer())
-                ->toArray();
+                    ->item($spool, new SlicerTemplateTransformer)
+                    ->serializeWith(new ArraySerializer())
+                    ->toArray();
 
             print_r($f);
             $this->info('Other information:');
-            $this->warn('Diameter Tolerance      : ' .$spool->getDiameterTolerance());
-            $this->warn('Price per kg            : ' .$spool->getPricePerKilogram()->getAmount());
+            $this->warn('Diameter Tolerance      : '.$spool->getDiameterTolerance());
+            $this->warn('Ovality Tolerance       : '.$spool->getOvalityTolerance());
+            $this->warn('Price per kg            : '.$spool->getPricePerKilogram()->getAmount());
             $this->warn(
                 sprintf(
                     'Print Temperature Range : %0.0f - %0.0f',
@@ -205,7 +212,6 @@ class SlicerProfilesCommand extends Command
 //            $f['fan_always_on']                 = $f['material'] === 'ABS' ? 0 : 1;
 //            $f['k_value']                       = ($f['material'] === 'PET') ? 45 : 30;
 //            $f['filament_notes']                = sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
-//            $f['filament_colour']               = $color;
 //            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];
 //            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['material']];
 //            $f['inherits']                      = $this->inherits[$f['material']];
@@ -293,35 +299,42 @@ class SlicerProfilesCommand extends Command
 
             // Export profiles for each supported slicer
             foreach ($this->slicers as $slicer_id => $slicer_name) {
-                $outputDirectory = storage_path('app/' . self::PROFILES_DIR . DIRECTORY_SEPARATOR . $slicer_id);
+                $outputDirectory = storage_path('app/'.self::PROFILES_DIR.DIRECTORY_SEPARATOR.$slicer_id);
 
                 // Create slicer profile directory if not exists
-                if (!file_exists($outputDirectory) && !mkdir($outputDirectory, 0777, true) && !is_dir($outputDirectory)) {
+                if (!file_exists($outputDirectory) && !mkdir(
+                    $outputDirectory,
+                    0777,
+                    true
+                ) && !is_dir($outputDirectory)) {
                     throw new RuntimeException(sprintf('Directory "%s" could not be created', $outputDirectory));
                 }
 
-                $profileFilename = $spool->getDisplayName()->getValue() . '.ini';
+                $profileFilename = $spool->getDisplayName()->getValue().'.ini';
 
                 if ('cura' === $slicer_id) {
-                    $profileFilename = str_replace(' ', '_', $spool->getDisplayName()->getValue()) . '.xml.fdm_material';
+                    $profileFilename = str_replace(' ', '_', $spool->getDisplayName()->getValue()).'.xml.fdm_material';
 
                     // Output Cura Material Settings (replace this in your cura.cfg file)
-                    file_put_contents($outputDirectory . DIRECTORY_SEPARATOR . 'cura_material_settings.txt', 'material_settings = ' . json_encode($cura_material_settings));
+                    file_put_contents(
+                        $outputDirectory.DIRECTORY_SEPARATOR.'cura_material_settings.txt',
+                        'material_settings = '.json_encode($cura_material_settings)
+                    );
                 }
 
                 // Save output
                 file_put_contents(
-                    $outputDirectory . DIRECTORY_SEPARATOR . $profileFilename,
+                    $outputDirectory.DIRECTORY_SEPARATOR.$profileFilename,
                     $this->plates->render($slicer_id, [
-                        'generated_on' => (new DateTime())->format(DATE_ATOM),
-                        'profile'      => $f
-                    ])
+                                'generated_on' => (new DateTime())->format(DATE_ATOM),
+                                'profile'      => $f,
+                        ])
                 );
             }
             $this->line('');
         }
 
-        $this->info('Profiles successfully generated for ' . implode(', ', $this->slicers));
+        $this->info('Profiles successfully generated for '.implode(', ', $this->slicers));
     }
 
     private function getFilamentFiles(): array
@@ -331,12 +344,13 @@ class SlicerProfilesCommand extends Command
         if (!Cache::has($CACHE_KEY)) {
             Cache::put($CACHE_KEY, $this->filamentsDirectory->listContents(self::FILAMENTS_DIRECTORY));
         }
+
         return Cache::get($CACHE_KEY);
     }
 
     private function getFilamentSpoolData($filamentFile): array
     {
-        $CACHE_KEY = 'filament_spool_' . $filamentFile['id'];
+        $CACHE_KEY = 'filament_spool_'.$filamentFile['id'];
 
         if (!Cache::has($CACHE_KEY)) {
             Cache::put($CACHE_KEY, json_decode($this->filamentsDirectory->get(
@@ -345,6 +359,7 @@ class SlicerProfilesCommand extends Command
                     $filamentFile['name']
             ), true, 512, JSON_THROW_ON_ERROR));
         }
+
         return Cache::get($CACHE_KEY);
     }
 }

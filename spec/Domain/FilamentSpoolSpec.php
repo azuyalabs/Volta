@@ -293,4 +293,17 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->shouldThrow(ZeroDensityException::class)
                 ->duringSetDensity(0.0);
     }
+
+    public function it_has_an_ovality_tolerance(): void
+    {
+        $this->getOvalityTolerance()->shouldReturnAnInstanceOf(Length::class);
+    }
+
+    public function it_can_update_ovality_tolerance(): void
+    {
+        $diameter = new Length(0.03, 'millimeters');
+
+        $this->setOvalityTolerance($diameter);
+        $this->getOvalityTolerance()->shouldBe($diameter);
+    }
 }
