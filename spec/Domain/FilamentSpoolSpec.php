@@ -173,10 +173,10 @@ class FilamentSpoolSpec extends ObjectBehavior
 
     public function it_can_update_diameter_tolerance(): void
     {
-        $diameter = new Length(0.03, 'millimeters');
+        $tolerance = new Length(0.03, 'millimeters');
 
-        $this->setDiameterTolerance($diameter);
-        $this->getDiameterTolerance()->shouldBe($diameter);
+        $this->setDiameterTolerance($tolerance);
+        $this->getDiameterTolerance()->shouldBe($tolerance);
     }
 
     public function it_has_a_materialtype(): void
@@ -303,10 +303,10 @@ class FilamentSpoolSpec extends ObjectBehavior
 
     public function it_can_update_ovality_tolerance(): void
     {
-        $diameter = new Length(0.03, 'millimeters');
+        $tolerance = new Length(0.03, 'millimeters');
 
-        $this->setOvalityTolerance($diameter);
-        $this->getOvalityTolerance()->shouldBe($diameter);
+        $this->setOvalityTolerance($tolerance);
+        $this->getOvalityTolerance()->shouldBe($tolerance);
     }
 
     public function it_can_add_a_calibration(): void

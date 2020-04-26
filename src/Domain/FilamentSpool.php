@@ -329,12 +329,12 @@ class FilamentSpool
      */
     public function getFirstLayerPrintTemperature(): Temperature
     {
+        // Default to the manufacturer's recommended minimum temperature
+        $temp = $this->getTemperatures()->getMinimumPrintTemperature();
+
         $r = array_filter($this->calibrations, static function ($v) {
             return $v->getName()->getValue() === 'first_layer_print_temperature';
         });
-
-        // Default to the manufacturer's recommended minimum temperature
-        $temp = $this->getTemperatures()->getMinimumPrintTemperature();
 
         if (0 < count($r)) {
             $sum  = array_reduce($r, static function ($carry, $item) {
@@ -359,12 +359,12 @@ class FilamentSpool
      */
     public function getNextLayerPrintTemperature(): Temperature
     {
+        // Default to the manufacturer's recommended minimum temperature
+        $temp = $this->getTemperatures()->getMinimumPrintTemperature();
+
         $r = array_filter($this->calibrations, static function ($v) {
             return $v->getName()->getValue() === 'next_layer_print_temperature';
         });
-
-        // Default to the manufacturer's recommended minimum temperature
-        $temp = $this->getTemperatures()->getMinimumPrintTemperature();
 
         if (0 < count($r)) {
             $sum  = array_reduce($r, static function ($carry, $item) {
