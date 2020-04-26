@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests;
@@ -6,6 +7,7 @@ namespace Tests;
 use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use Volta\Domain\Calibration;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
@@ -33,10 +35,15 @@ class FilamentSpoolBuilder
 
     private float $density;
 
+    private array $calibrations;
+
     public function __construct()
     {
         $this->id           = new FilamentSpoolId();
-        $this->manufacturer = new Manufacturer(new ManufacturerId(), new ManufacturerName('XYZ Filaments'));
+        $this->manufacturer = new Manufacturer(
+            new ManufacturerId(),
+            new ManufacturerName('XYZ Filaments')
+        );
         $this->name         = 'PETG Plus';
         $this->diameter     = new Length(0.0, 'millimeters');
         $this->weight       = new Mass(0.0, 'grams');
@@ -85,6 +92,11 @@ class FilamentSpoolBuilder
         $this->density = $density;
     }
 
+    public function withCalibration(Calibration $calibration): void
+    {
+        $this->calibrations[] = $calibration;
+    }
+
     public function build(): FilamentSpool
     {
         $spool = new FilamentSpool(
@@ -97,6 +109,9 @@ class FilamentSpoolBuilder
         $spool->setMaterialType($this->material);
         $spool->setColor($this->color);
         $spool->setDensity($this->density);
+        foreach ($this->calibrations as $calibration) {
+            $spool->addCalibration($calibration);
+        }
 
         return $spool;
     }

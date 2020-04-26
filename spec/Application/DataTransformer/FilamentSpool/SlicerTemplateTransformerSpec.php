@@ -8,7 +8,9 @@ use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use Tests\FilamentSpoolBuilder;
 use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateTransformer;
+use Volta\Domain\Calibration;
 use Volta\Domain\Manufacturer;
+use Volta\Domain\ValueObject\CalibrationName;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
@@ -31,24 +33,40 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
         $builder->withMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
         $builder->withDensity(1.22);
         $builder->withColor(new Color(new ColorName('Red'), new Hex('#ff0000')));
+        $builder->withCalibration(
+            new Calibration(
+                new CalibrationName('first_layer_print_temperature'),
+                new \DateTimeImmutable('2020-05-01'),
+                [200, 205, 207]
+            )
+        );
+        $builder->withCalibration(
+            new Calibration(
+                new CalibrationName('next_layer_print_temperature'),
+                new \DateTimeImmutable('2020-05-01'),
+                [210, 212]
+            )
+        );
         $spool = $builder->build();
 
         $this->transform($spool)->shouldIterateLike(
             [
-                'id'              => $spool->getId()->getValue(),
-                'name'            => 'PETG Plus',
-                'manufacturer'    => 'ABC Plastics',
-                'diameter'        => 1.75,
-                'weight'          => 900,
-                'material'        => 'PETG',
-                'density'         => 1.22,
-                'price'           => 0,
-                'color'           => 'Red',
-                'color_code'      => '#ff0000',
-                'display_name'    => 'ABC Plastics PETG Plus Red 1.75mm',
-                'min_fan_speed'   => 30,
-                'max_fan_speed'   => 50,
-                'min_print_speed' => 15,
+                'id'                            => $spool->getId()->getValue(),
+                'name'                          => 'PETG Plus',
+                'manufacturer'                  => 'ABC Plastics',
+                'diameter'                      => 1.75,
+                'weight'                        => 900,
+                'material'                      => 'PETG',
+                'density'                       => 1.22,
+                'price'                         => 0,
+                'color'                         => 'Red',
+                'color_code'                    => '#ff0000',
+                'display_name'                  => 'ABC Plastics PETG Plus Red 1.75mm',
+                'min_fan_speed'                 => 30,
+                'max_fan_speed'                 => 50,
+                'min_print_speed'               => 15,
+                'first_layer_print_temperature' => 204,
+                'next_layer_print_temperature'  => 211,
             ]
         );
     }
