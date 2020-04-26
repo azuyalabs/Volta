@@ -147,23 +147,40 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getPricePerWeight()->getCurrency()->getCode()->shouldBe($currency);
     }
 
-    public function it_has_a_diameter(): void
+    public function it_has_a_nominal_diameter(): void
     {
-        $this->getDiameter()->shouldReturnAnInstanceOf(Length::class);
+        $this->getNominalDiameter()->shouldReturnAnInstanceOf(Length::class);
     }
 
-    public function it_can_update_diameter(): void
+    public function it_can_update_the_nominal_diameter(): void
     {
         $diameter = new Length(0.1, 'meters');
 
-        $this->setDiameter($diameter);
-        $this->getDiameter()->shouldBe($diameter);
+        $this->setNominalDiameter($diameter);
+        $this->getNominalDiameter()->shouldBe($diameter);
     }
 
-    public function it_throws_exception_setting_diameter_to_zero(): void
+    public function it_throws_exception_setting_nominal_diameter_to_zero(): void
     {
         $this->shouldThrow(ZeroDiameterException::class)
-            ->duringSetDiameter(new Length(0, 'meters'));
+            ->duringSetNominalDiameter(new Length(0, 'meters'));
+    }
+
+    public function it_has_a_diameter(): void
+    {
+        $this->addCalibration(new Calibration(
+            new CalibrationName('diameter'),
+            new \DateTimeImmutable('2020-03-08'),
+            [1.74, 1.72, 1.74, 1.76, 1.77]
+        ));
+        $this->getDiameter()->shouldBeAnInstanceOf(Length::class);
+        $this->getDiameter()->toUnit('millimeter')->shouldBe(1.746);
+    }
+
+    public function it_has_a_diameter_when_no_calibrations(): void
+    {
+        $this->getDiameter()->shouldBeAnInstanceOf(Length::class);
+        $this->getDiameter()->toUnit('millimeter')->shouldBe(1.75);
     }
 
     public function it_has_a_diameter_tolerance(): void

@@ -47,6 +47,13 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 [210, 212]
             )
         );
+        $builder->withCalibration(
+            new Calibration(
+                new CalibrationName('diameter'),
+                new \DateTimeImmutable('2020-05-01'),
+                [1.77, 1.78, 1.74]
+            )
+        );
         $spool = $builder->build();
 
         $this->transform($spool)->shouldIterateLike(
@@ -54,7 +61,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'id'                            => $spool->getId()->getValue(),
                 'name'                          => 'PETG Plus',
                 'manufacturer'                  => 'ABC Plastics',
-                'diameter'                      => 1.75,
+                'diameter'                      => 1.763,
                 'weight'                        => 900,
                 'material'                      => 'PETG',
                 'density'                       => 1.22,

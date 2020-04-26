@@ -104,7 +104,7 @@ class FilamentSpoolBuilder
             $this->manufacturer,
             $this->name
         );
-        $spool->setDiameter($this->diameter);
+        $spool->setNominalDiameter($this->diameter);
         $spool->setWeight($this->weight);
         $spool->setMaterialType($this->material);
         $spool->setColor($this->color);

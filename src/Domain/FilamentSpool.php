@@ -130,7 +130,7 @@ class FilamentSpool
                     $this->getManufacturer()->getName()->getValue(),
                     $this->getName(),
                     $this->getColor()->getColorName()->getValue(),
-                    $this->getDiameter()->toUnit('millimeter').'mm',
+                    $this->getNominalDiameter()->toUnit('millimeter').'mm',
                 ]
             )
         );
@@ -172,12 +172,12 @@ class FilamentSpool
         return $this;
     }
 
-    public function getDiameter(): Length
+    public function getNominalDiameter(): Length
     {
         return $this->diameter;
     }
 
-    public function setDiameter(Length $diameter): FilamentSpool
+    public function setNominalDiameter(Length $diameter): FilamentSpool
     {
         if ($this->isZero($diameter->toNativeUnit())) {
             throw new ZeroDiameterException();
@@ -186,6 +186,27 @@ class FilamentSpool
         $this->diameter = $diameter;
 
         return $this;
+    }
+
+    public function getDiameter(): Length
+    {
+        $diameter = $this->getNominalDiameter();
+
+        $c = array_filter($this->calibrations, static function ($v) {
+            return 'diameter' === $v->getName()->getValue();
+        });
+
+        if (0 < count($c)) {
+            $result   = array_reduce($c, static function ($carry, $item) {
+                $count  = (is_array($carry)) ? $carry[0] : 0;
+                $values = (is_array($carry)) ? $carry[1] : 0;
+
+                return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
+            });
+            $diameter = new Length(round($result[1] / $result[0], 3), 'millimeter');
+        }
+
+        return $diameter;
     }
 
     private function isZero(float $value): bool

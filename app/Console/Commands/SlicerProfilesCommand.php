@@ -153,7 +153,7 @@ class SlicerProfilesCommand extends Command
                 new Currency($f['purchase_price']['currency'])
             ))
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
-                ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
+                ->setNominalDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
                 ->setMaterialType(new MaterialType($f['product']['type']))
                 ->setColor(new Color(
                     new ColorName($f['product']['color']['name']),
