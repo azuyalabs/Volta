@@ -29,9 +29,11 @@ use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use RuntimeException;
 use Spatie\Fractalistic\Fractal;
 use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateTransformer;
+use Volta\Domain\Calibration;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\Temperatures;
+use Volta\Domain\ValueObject\CalibrationName;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
@@ -144,9 +146,6 @@ class SlicerProfilesCommand extends Command
                 continue;
             }
 
-            print_r($f);
-
-
             $spool = new FilamentSpool(
                 new FilamentSpoolId(),
                 new Manufacturer(
@@ -183,6 +182,25 @@ class SlicerProfilesCommand extends Command
                     )
                 );
             }
+
+            if (isset($f['calibrations'])) {
+                foreach ($f['calibrations'] as $name => $cals) {
+                    echo $name.PHP_EOL;
+
+                    foreach ($cals as $cal) {
+                        if (!isset($cal['measurements'])) {
+                            continue;
+                        }
+
+                        $t = new Calibration(new CalibrationName($name), new \DateTimeImmutable($cal['date']), $cal['measurements']);
+
+                        print_r($t);
+                    }
+                }
+            }
+
+
+            //$c = new Calibration()
 
             $this->info($spool->getDisplayName()->getValue().' ('.$filamentFile['basename'].')');
 

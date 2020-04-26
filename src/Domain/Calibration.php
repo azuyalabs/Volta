@@ -29,23 +29,9 @@ class Calibration
         $this->measurements = $measurements;
     }
 
-    public function setTimestamp(\DateTimeImmutable $timestamp): Calibration
-    {
-        $this->timestamp = $timestamp;
-
-        return $this;
-    }
-
     public function getTimestamp(): \DateTimeImmutable
     {
         return $this->timestamp;
-    }
-
-    public function setName(CalibrationName $name): Calibration
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getName(): CalibrationName
@@ -53,16 +39,28 @@ class Calibration
         return $this->name;
     }
 
-
-    public function setMeasurements(array $measurements): Calibration
-    {
-        $this->measurements = $measurements;
-
-        return $this;
-    }
-
     public function getMeasurements(): array
     {
         return $this->measurements;
+    }
+
+    public function getMaximum(): float
+    {
+        return max($this->measurements);
+    }
+
+    public function getMinimum():float
+    {
+        return min($this->measurements);
+    }
+
+    public function getAverage():float
+    {
+        return (array_sum($this->measurements)/count($this->measurements));
+    }
+
+    public function setName($argument1)
+    {
+        // TODO: write logic here
     }
 }
