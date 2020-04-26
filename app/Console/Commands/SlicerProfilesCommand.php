@@ -192,15 +192,14 @@ class SlicerProfilesCommand extends Command
                             continue;
                         }
 
-                        $t = new Calibration(new CalibrationName($name), new \DateTimeImmutable($cal['date']), $cal['measurements']);
+                        $c = new Calibration(new CalibrationName($name), new \DateTimeImmutable($cal['date']), $cal['measurements']);
 
-                        print_r($t);
+                        $spool->addCalibration($c);
                     }
                 }
             }
 
-
-            //$c = new Calibration()
+            print_r($spool->getCalibrations());
 
             $this->info($spool->getDisplayName()->getValue().' ('.$filamentFile['basename'].')');
 

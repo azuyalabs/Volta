@@ -21,12 +21,14 @@ use PhpSpec\ObjectBehavior;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
+use Volta\Domain\Calibration;
 use Volta\Domain\Exception\ZeroDensityException;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\Temperatures;
+use Volta\Domain\ValueObject\CalibrationName;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
@@ -114,7 +116,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_throws_exception_setting_weight_to_zero(): void
     {
         $this->shouldThrow(ZeroWeightException::class)
-                ->duringSetWeight(new Mass(0, 'grams'));
+            ->duringSetWeight(new Mass(0, 'grams'));
     }
 
     public function it_has_a_price_per_weight(): void
@@ -161,7 +163,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_throws_exception_setting_diameter_to_zero(): void
     {
         $this->shouldThrow(ZeroDiameterException::class)
-                ->duringSetDiameter(new Length(0, 'meters'));
+            ->duringSetDiameter(new Length(0, 'meters'));
     }
 
     public function it_has_a_diameter_tolerance(): void
@@ -291,7 +293,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_throws_exception_setting_density_to_zero(): void
     {
         $this->shouldThrow(ZeroDensityException::class)
-                ->duringSetDensity(0.0);
+            ->duringSetDensity(0.0);
     }
 
     public function it_has_an_ovality_tolerance(): void
@@ -305,5 +307,109 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setOvalityTolerance($diameter);
         $this->getOvalityTolerance()->shouldBe($diameter);
+    }
+
+    public function it_can_add_a_calibration(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName('volume'),
+            new \DateTimeImmutable('2020-04-05'),
+            [10, 20]
+        );
+        $this->addCalibration($calibration);
+        $this->getCalibrations()->shouldBeArray();
+        $this->getCalibrations()->shouldReturn([$calibration]);
+    }
+
+    public function it_has_a_first_layer_print_temperature(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName('first_layer_print_temperature'),
+            new \DateTimeImmutable('2020-04-05'),
+            [210, 215]
+        );
+        $this->addCalibration($calibration);
+
+        $this->getFirstLayerPrintTemperature()->shouldBeNumeric();
+        $this->getFirstLayerPrintTemperature()->shouldBe(213.0);
+    }
+
+    public function it_has_a_first_layer_print_temperature_when_multiple_calibrations(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName('first_layer_print_temperature'),
+            new \DateTimeImmutable('2020-04-05'),
+            [212, 213]
+        );
+        $this->addCalibration($calibration);
+
+        $this->addCalibration(
+            new Calibration(
+                new CalibrationName('first_layer_print_temperature'),
+                new \DateTimeImmutable('2020-04-06'),
+                [211, 223]
+            )
+        );
+
+        $this->getFirstLayerPrintTemperature()->shouldBeNumeric();
+        $this->getFirstLayerPrintTemperature()->shouldBe(215.0);
+    }
+
+    public function it_has_a_first_layer_print_temperature_when_no_calibrations(): void
+    {
+        $this->setTemperatures(
+            new Temperatures(
+                new Temperature(220, 'celsius'),
+                new Temperature(250, 'celsius')
+            )
+        );
+        $this->getFirstLayerPrintTemperature()->shouldBeNumeric();
+        $this->getFirstLayerPrintTemperature()->shouldBe(220.0);
+    }
+
+    public function it_has_a_next_layer_print_temperature(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName('next_layer_print_temperature'),
+            new \DateTimeImmutable('2020-04-05'),
+            [190, 205]
+        );
+        $this->addCalibration($calibration);
+
+        $this->getNextLayerPrintTemperature()->shouldBeNumeric();
+        $this->getNextLayerPrintTemperature()->shouldBe(198.0);
+    }
+
+    public function it_has_a_next_layer_print_temperature_when_multiple_calibrations(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName('next_layer_print_temperature'),
+            new \DateTimeImmutable('2020-04-05'),
+            [198, 200]
+        );
+        $this->addCalibration($calibration);
+
+        $this->addCalibration(
+            new Calibration(
+                new CalibrationName('next_layer_print_temperature'),
+                new \DateTimeImmutable('2020-04-06'),
+                [204, 205]
+            )
+        );
+
+        $this->getNextLayerPrintTemperature()->shouldBeNumeric();
+        $this->getNextLayerPrintTemperature()->shouldBe(202.0);
+    }
+
+    public function it_has_a_next_layer_print_temperature_when_no_calibrations(): void
+    {
+        $this->setTemperatures(
+            new Temperatures(
+                new Temperature(200, 'celsius'),
+                new Temperature(210, 'celsius')
+            )
+        );
+        $this->getNextLayerPrintTemperature()->shouldBeNumeric();
+        $this->getNextLayerPrintTemperature()->shouldBe(200.0);
     }
 }

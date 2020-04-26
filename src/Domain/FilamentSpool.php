@@ -65,7 +65,8 @@ class FilamentSpool
     private MaterialType $material_type;
     private Color $color;
     private Temperatures $temperatures;
-    private float $density = 1.0;
+    private float $density      = 1.0;
+    private array $calibrations = [];
 
     public function __construct(
         FilamentSpoolId $id,
@@ -125,11 +126,11 @@ class FilamentSpool
             implode(
                 ' ',
                 [
-                    $this->getManufacturer()->getName()->getValue(),
-                    $this->getName(),
-                    $this->getColor()->getColorName()->getValue(),
-                    $this->getDiameter()->toUnit('millimeter').'mm',
-                ]
+                                $this->getManufacturer()->getName()->getValue(),
+                                $this->getName(),
+                                $this->getColor()->getColorName()->getValue(),
+                                $this->getDiameter()->toUnit('millimeter').'mm',
+                        ]
             )
         );
     }
@@ -305,5 +306,75 @@ class FilamentSpool
         $this->ovality_tolerance = $diameter;
 
         return $this;
+    }
+
+    public function addCalibration(Calibration $calibration): void
+    {
+        $this->calibrations[] = $calibration;
+    }
+
+    public function getCalibrations(): array
+    {
+        return $this->calibrations;
+    }
+
+    /**
+     * Get the print temperature for the first layer.
+     *
+     * The print temperature for the first layer is based on any recorded calibrations. If no calibrations
+     * are present, the manufacturer's recommended minimum print temperature is used alternatively.
+     * Should there be no manufacturer's recommended temperatures, then the de facto standard for the
+     * material is used.
+     */
+    public function getFirstLayerPrintTemperature()
+    {
+        $r = array_filter($this->calibrations, static function ($v) {
+            return $v->getName()->getValue() === 'first_layer_print_temperature';
+        });
+
+        // Default to the manufacturer's recommended minimum temperature
+        $temp = $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius');
+
+        if (0 < count($r)) {
+            $sum = array_reduce($r, static function ($carry, $item) {
+                $count  = (is_array($carry)) ? $carry[0] : 0;
+                $values = (is_array($carry)) ? $carry[1] : 0;
+
+                return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
+            });
+            $temp = round($sum[1] / $sum[0]);
+        }
+
+        return $temp;
+    }
+
+    /**
+     * Get the print temperature for the next layer.
+     *
+     * The print temperature for the next layer is based on any recorded calibrations. If no calibrations
+     * are present, the manufacturer's recommended minimum print temperature is used alternatively.
+     * Should there be no manufacturer's recommended temperatures, then the de facto standard for the
+     * material is used.
+     */
+    public function getNextLayerPrintTemperature()
+    {
+        $r = array_filter($this->calibrations, static function ($v) {
+            return $v->getName()->getValue() === 'next_layer_print_temperature';
+        });
+
+        // Default to the manufacturer's recommended minimum temperature
+        $temp = $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius');
+
+        if (0 < count($r)) {
+            $sum = array_reduce($r, static function ($carry, $item) {
+                $count  = (is_array($carry)) ? $carry[0] : 0;
+                $values = (is_array($carry)) ? $carry[1] : 0;
+
+                return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
+            });
+            $temp = round($sum[1] / $sum[0]);
+        }
+
+        return $temp;
     }
 }
