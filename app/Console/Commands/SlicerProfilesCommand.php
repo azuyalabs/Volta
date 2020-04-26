@@ -69,11 +69,11 @@ class SlicerProfilesCommand extends Command
     private const PROFILES_DIR = 'filaments/profiles';
 
     protected array $slicers = [
-            'slic3rpe'    => 'Slic3rPE',
-            'cura'        => 'Ultimaker Cura',
-            'slic3r'      => 'Slic3r',
-            'prusaslicer' => 'Prusa Slicer',
-            'kisslicer'   => 'KISSlicer',
+        'slic3rpe'    => 'Slic3rPE',
+        'cura'        => 'Ultimaker Cura',
+        'slic3r'      => 'Slic3r',
+        'prusaslicer' => 'Prusa Slicer',
+        'kisslicer'   => 'KISSlicer',
     ];
 
     /**
@@ -158,13 +158,13 @@ class SlicerProfilesCommand extends Command
                 $f['purchase_price']['value'],
                 new Currency($f['purchase_price']['currency'])
             ))
-                    ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
-                    ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
-                    ->setMaterialType(new MaterialType($f['product']['type']))
-                    ->setColor(new Color(
-                        new ColorName($f['product']['color']['name']),
-                        new Hex($f['product']['color']['code'])
-                    ));
+                ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
+                ->setDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
+                ->setMaterialType(new MaterialType($f['product']['type']))
+                ->setColor(new Color(
+                    new ColorName($f['product']['color']['name']),
+                    new Hex($f['product']['color']['code'])
+                ));
 
             if (isset($f['product']['diameter']['tolerance'])) {
                 $spool->setDiameterTolerance(new Length($f['product']['diameter']['tolerance'], 'millimeters'));
@@ -173,7 +173,7 @@ class SlicerProfilesCommand extends Command
             if (isset($f['product']['ovality']['tolerance'])) {
                 $spool->setOvalityTolerance(new Length($f['product']['ovality']['tolerance'], 'millimeters'));
             }
-            
+
             if (isset($f['product']['temperatures']['print'])) {
                 $spool->setTemperatures(
                     new Temperatures(
@@ -188,12 +188,11 @@ class SlicerProfilesCommand extends Command
                     echo $name.PHP_EOL;
 
                     foreach ($cals as $cal) {
-                        if (!isset($cal['measurements'])) {
-                            continue;
-                        }
-
-                        $c = new Calibration(new CalibrationName($name), new \DateTimeImmutable($cal['date']), $cal['measurements']);
-
+                        $c = new Calibration(
+                            new CalibrationName($name),
+                            new \DateTimeImmutable($cal['date']),
+                            $cal['measurements'] ?? []
+                        );
                         $spool->addCalibration($c);
                     }
                 }
@@ -203,9 +202,9 @@ class SlicerProfilesCommand extends Command
 
             // Transform into a flat array structure
             $f = Fractal::create()
-                    ->item($spool, new SlicerTemplateTransformer)
-                    ->serializeWith(new ArraySerializer())
-                    ->toArray();
+                ->item($spool, new SlicerTemplateTransformer)
+                ->serializeWith(new ArraySerializer())
+                ->toArray();
 
             print_r($f);
             $this->info('Other information:');
@@ -239,16 +238,8 @@ class SlicerProfilesCommand extends Command
 //                $f['first_layer_bed_temperature'] = 60;
 //            }
 //
-//            if (!isset($f['first_layer_temperature'])) {
-//                $f['first_layer_temperature'] = 205;
-//            }
-//
 //            if (!isset($f['next_layer_bed_temperature'])) {
 //                $f['next_layer_bed_temperature'] = $f['first_layer_bed_temperature'];
-//            }
-//
-//            if (!isset($f['next_layer_temperature'])) {
-//                $f['next_layer_temperature'] = $f['first_layer_temperature'];
 //            }
 //
 //            if (!isset($f['keep_warm_temperature'])) {
@@ -337,7 +328,7 @@ class SlicerProfilesCommand extends Command
                     // Output Cura Material Settings (replace this in your cura.cfg file)
                     file_put_contents(
                         $outputDirectory.DIRECTORY_SEPARATOR.'cura_material_settings.txt',
-                        'material_settings = '.json_encode($cura_material_settings)
+                        'material_settings = '.json_encode($cura_material_settings, JSON_THROW_ON_ERROR, 512)
                     );
                 }
 
@@ -345,9 +336,9 @@ class SlicerProfilesCommand extends Command
                 file_put_contents(
                     $outputDirectory.DIRECTORY_SEPARATOR.$profileFilename,
                     $this->plates->render($slicer_id, [
-                                'generated_on' => (new DateTime())->format(DATE_ATOM),
-                                'profile'      => $f,
-                        ])
+                        'generated_on' => (new DateTime())->format(DATE_ATOM),
+                        'profile'      => $f,
+                    ])
                 );
             }
             $this->line('');
@@ -374,8 +365,8 @@ class SlicerProfilesCommand extends Command
         if (!Cache::has($CACHE_KEY)) {
             Cache::put($CACHE_KEY, json_decode($this->filamentsDirectory->get(
                 self::FILAMENTS_DIRECTORY.
-                    DIRECTORY_SEPARATOR.
-                    $filamentFile['name']
+                DIRECTORY_SEPARATOR.
+                $filamentFile['name']
             ), true, 512, JSON_THROW_ON_ERROR));
         }
 
