@@ -58,9 +58,4 @@ class Calibration
     {
         return (array_sum($this->measurements)/count($this->measurements));
     }
-
-    public function setName($argument1)
-    {
-        // TODO: write logic here
-    }
 }

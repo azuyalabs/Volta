@@ -199,8 +199,6 @@ class SlicerProfilesCommand extends Command
                 }
             }
 
-            print_r($spool->getCalibrations());
-
             $this->info($spool->getDisplayName()->getValue().' ('.$filamentFile['basename'].')');
 
             // Transform into a flat array structure

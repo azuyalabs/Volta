@@ -27,8 +27,8 @@ class SlicerTemplateTransformer extends TransformerAbstract
             'min_fan_speed'                 => $spool->getMinimumFanSpeed()->getValue(),
             'max_fan_speed'                 => $spool->getMaximumFanSpeed()->getValue(),
             'min_print_speed'               => $spool->getMinimumPrintSpeed()->getValue(),
-            'first_layer_print_temperature' => $spool->getFirstLayerPrintTemperature(),
-            'next_layer_print_temperature'  => $spool->getNextLayerPrintTemperature(),
+            'first_layer_print_temperature' => $spool->getFirstLayerPrintTemperature()->toUnit('celsius'),
+            'next_layer_print_temperature'  => $spool->getNextLayerPrintTemperature()->toUnit('celsius'),
         ];
     }
 }

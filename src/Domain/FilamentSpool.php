@@ -19,6 +19,7 @@ use Money\Money;
 use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use Volta\Domain\Exception\ZeroDensityException;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
@@ -34,24 +35,24 @@ use Volta\Domain\ValueObject\FilamentSpoolId;
 class FilamentSpool
 {
     protected array $min_fan_speed_definition = [
-            MaterialType::MATERIALTYPE_PLA  => 100,
-            'Woodfill'                      => 100,
-            MaterialType::MATERIALTYPE_ABS  => 15,
-            MaterialType::MATERIALTYPE_PETG => 30,
+        MaterialType::MATERIALTYPE_PLA  => 100,
+        'Woodfill'                      => 100,
+        MaterialType::MATERIALTYPE_ABS  => 15,
+        MaterialType::MATERIALTYPE_PETG => 30,
     ];
 
     protected array $max_fan_speed_definition = [
-            MaterialType::MATERIALTYPE_PLA  => 100,
-            'Woodfill'                      => 100,
-            MaterialType::MATERIALTYPE_ABS  => 30,
-            MaterialType::MATERIALTYPE_PETG => 50,
+        MaterialType::MATERIALTYPE_PLA  => 100,
+        'Woodfill'                      => 100,
+        MaterialType::MATERIALTYPE_ABS  => 30,
+        MaterialType::MATERIALTYPE_PETG => 50,
     ];
 
     protected array $min_print_speed_definition = [
-            MaterialType::MATERIALTYPE_PLA  => 15,
-            'Woodfill'                      => 15,
-            MaterialType::MATERIALTYPE_ABS  => 5,
-            MaterialType::MATERIALTYPE_PETG => 15,
+        MaterialType::MATERIALTYPE_PLA  => 15,
+        'Woodfill'                      => 15,
+        MaterialType::MATERIALTYPE_ABS  => 5,
+        MaterialType::MATERIALTYPE_PETG => 15,
     ];
 
     private FilamentSpoolId $id;
@@ -126,11 +127,11 @@ class FilamentSpool
             implode(
                 ' ',
                 [
-                                $this->getManufacturer()->getName()->getValue(),
-                                $this->getName(),
-                                $this->getColor()->getColorName()->getValue(),
-                                $this->getDiameter()->toUnit('millimeter').'mm',
-                        ]
+                    $this->getManufacturer()->getName()->getValue(),
+                    $this->getName(),
+                    $this->getColor()->getColorName()->getValue(),
+                    $this->getDiameter()->toUnit('millimeter').'mm',
+                ]
             )
         );
     }
@@ -326,23 +327,23 @@ class FilamentSpool
      * Should there be no manufacturer's recommended temperatures, then the de facto standard for the
      * material is used.
      */
-    public function getFirstLayerPrintTemperature()
+    public function getFirstLayerPrintTemperature(): Temperature
     {
         $r = array_filter($this->calibrations, static function ($v) {
             return $v->getName()->getValue() === 'first_layer_print_temperature';
         });
 
         // Default to the manufacturer's recommended minimum temperature
-        $temp = $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius');
+        $temp = $this->getTemperatures()->getMinimumPrintTemperature();
 
         if (0 < count($r)) {
-            $sum = array_reduce($r, static function ($carry, $item) {
+            $sum  = array_reduce($r, static function ($carry, $item) {
                 $count  = (is_array($carry)) ? $carry[0] : 0;
                 $values = (is_array($carry)) ? $carry[1] : 0;
 
                 return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
             });
-            $temp = round($sum[1] / $sum[0]);
+            $temp = new Temperature(round($sum[1] / $sum[0]), 'celsius');
         }
 
         return $temp;
@@ -356,23 +357,23 @@ class FilamentSpool
      * Should there be no manufacturer's recommended temperatures, then the de facto standard for the
      * material is used.
      */
-    public function getNextLayerPrintTemperature()
+    public function getNextLayerPrintTemperature(): Temperature
     {
         $r = array_filter($this->calibrations, static function ($v) {
             return $v->getName()->getValue() === 'next_layer_print_temperature';
         });
 
         // Default to the manufacturer's recommended minimum temperature
-        $temp = $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius');
+        $temp = $this->getTemperatures()->getMinimumPrintTemperature();
 
         if (0 < count($r)) {
-            $sum = array_reduce($r, static function ($carry, $item) {
+            $sum  = array_reduce($r, static function ($carry, $item) {
                 $count  = (is_array($carry)) ? $carry[0] : 0;
                 $values = (is_array($carry)) ? $carry[1] : 0;
 
                 return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
             });
-            $temp = round($sum[1] / $sum[0]);
+            $temp = new Temperature(round($sum[1] / $sum[0]), 'celsius');
         }
 
         return $temp;

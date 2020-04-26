@@ -330,8 +330,8 @@ class FilamentSpoolSpec extends ObjectBehavior
         );
         $this->addCalibration($calibration);
 
-        $this->getFirstLayerPrintTemperature()->shouldBeNumeric();
-        $this->getFirstLayerPrintTemperature()->shouldBe(213.0);
+        $this->getFirstLayerPrintTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getFirstLayerPrintTemperature()->toUnit('celsius')->shouldBe(213.0);
     }
 
     public function it_has_a_first_layer_print_temperature_when_multiple_calibrations(): void
@@ -351,8 +351,8 @@ class FilamentSpoolSpec extends ObjectBehavior
             )
         );
 
-        $this->getFirstLayerPrintTemperature()->shouldBeNumeric();
-        $this->getFirstLayerPrintTemperature()->shouldBe(215.0);
+        $this->getFirstLayerPrintTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getFirstLayerPrintTemperature()->toUnit('celsius')->shouldBe(215.0);
     }
 
     public function it_has_a_first_layer_print_temperature_when_no_calibrations(): void
@@ -363,8 +363,8 @@ class FilamentSpoolSpec extends ObjectBehavior
                 new Temperature(250, 'celsius')
             )
         );
-        $this->getFirstLayerPrintTemperature()->shouldBeNumeric();
-        $this->getFirstLayerPrintTemperature()->shouldBe(220.0);
+        $this->getFirstLayerPrintTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getFirstLayerPrintTemperature()->toUnit('celsius')->shouldBe(220.0);
     }
 
     public function it_has_a_next_layer_print_temperature(): void
@@ -376,8 +376,8 @@ class FilamentSpoolSpec extends ObjectBehavior
         );
         $this->addCalibration($calibration);
 
-        $this->getNextLayerPrintTemperature()->shouldBeNumeric();
-        $this->getNextLayerPrintTemperature()->shouldBe(198.0);
+        $this->getNextLayerPrintTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getNextLayerPrintTemperature()->toUnit('celsius')->shouldBe(198.0);
     }
 
     public function it_has_a_next_layer_print_temperature_when_multiple_calibrations(): void
@@ -397,8 +397,8 @@ class FilamentSpoolSpec extends ObjectBehavior
             )
         );
 
-        $this->getNextLayerPrintTemperature()->shouldBeNumeric();
-        $this->getNextLayerPrintTemperature()->shouldBe(202.0);
+        $this->getNextLayerPrintTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getNextLayerPrintTemperature()->toUnit('celsius')->shouldBe(202.0);
     }
 
     public function it_has_a_next_layer_print_temperature_when_no_calibrations(): void
@@ -409,7 +409,7 @@ class FilamentSpoolSpec extends ObjectBehavior
                 new Temperature(210, 'celsius')
             )
         );
-        $this->getNextLayerPrintTemperature()->shouldBeNumeric();
-        $this->getNextLayerPrintTemperature()->shouldBe(200.0);
+        $this->getNextLayerPrintTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getNextLayerPrintTemperature()->toUnit('celsius')->shouldBe(200.0);
     }
 }
