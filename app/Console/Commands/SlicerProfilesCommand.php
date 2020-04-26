@@ -137,11 +137,15 @@ class SlicerProfilesCommand extends Command
         foreach ($filamentFiles as $filamentFile) {
             $f = $this->getFilamentSpoolData($filamentFile);
 
+
             // TODO: Implement Application exception
             if (!isset($f['product'], $f['id']) || null === $f) {
                 // echo 'Invalid Definition (Empty or Old version?)'.PHP_EOL;
                 continue;
             }
+
+            print_r($f);
+
 
             $spool = new FilamentSpool(
                 new FilamentSpoolId(),
