@@ -100,14 +100,8 @@ class SlicerProfilesCommand extends Command
      */
     protected array $filament_max_volumetric_speed = ['PLA' => 15, 'Woodfill' => 15, 'ABS' => 11, 'PET' => 8];
 
-    /**
-     * @var string The console command name
-     */
     protected $signature = 'volta:profiles';
 
-    /**
-     * @var string The console command description
-     */
     protected $description = 'Generate slicer profiles';
 
     protected Engine $plates;
