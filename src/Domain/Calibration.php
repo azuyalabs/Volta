@@ -27,6 +27,8 @@ class Calibration
         $this->name         = $name;
         $this->timestamp    = $timestamp;
         $this->measurements = $measurements;
+
+        // TODO Validate if measurements is empty.
     }
 
     public function getTimestamp(): \DateTimeImmutable
