@@ -49,6 +49,13 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
         );
         $builder->withCalibration(
             new Calibration(
+                new CalibrationName('next_layer_bed_temperature'),
+                new \DateTimeImmutable('2020-05-01'),
+                [72, 80]
+            )
+        );
+        $builder->withCalibration(
+            new Calibration(
                 new CalibrationName('diameter'),
                 new \DateTimeImmutable('2020-05-01'),
                 [1.77, 1.78, 1.74]
@@ -75,7 +82,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'first_layer_print_temperature' => 204,
                 'next_layer_print_temperature'  => 211,
                 'first_layer_bed_temperature'   => 75,
-                //'next_layer_bed_temperature'    => 50,
+                'next_layer_bed_temperature'    => 76,
             ]
         );
     }

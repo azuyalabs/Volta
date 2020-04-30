@@ -177,10 +177,17 @@ class SlicerProfilesCommand extends Command
                 );
             }
 
+            if (isset($f['product']['temperatures']['bed'])) {
+                $spool->setPrintTemperatures(
+                    new Temperatures(
+                        new Temperature($f['product']['temperatures']['bed']['min'], 'celsius'),
+                        new Temperature($f['product']['temperatures']['bed']['max'], 'celsius')
+                    )
+                );
+            }
+
             if (isset($f['calibrations'])) {
                 foreach ($f['calibrations'] as $name => $cals) {
-                    echo $name.PHP_EOL;
-
                     foreach ($cals as $cal) {
                         $c = new Calibration(
                             new CalibrationName($name),

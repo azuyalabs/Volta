@@ -484,4 +484,44 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getFirstLayerBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
         $this->getFirstLayerBedTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MIN_BED_TEMP);
     }
+
+    public function it_has_a_next_layer_bed_temperature(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName('next_layer_bed_temperature'),
+            new \DateTimeImmutable('2020-04-29'),
+            [76, 80, 98]
+        );
+        $this->addCalibration($calibration);
+
+        $this->getNextLayerBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getNextLayerBedTemperature()->toUnit('celsius')->shouldBe(85.0);
+    }
+
+    public function it_has_a_next_layer_bed_temperature_when_multiple_calibrations(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName('next_layer_bed_temperature'),
+            new \DateTimeImmutable('2020-05-11'),
+            [76, 88, 99]
+        );
+        $this->addCalibration($calibration);
+
+        $this->addCalibration(
+            new Calibration(
+                new CalibrationName('next_layer_bed_temperature'),
+                new \DateTimeImmutable('2020-05-12'),
+                [45, 67, 47]
+            )
+        );
+
+        $this->getNextLayerBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getNextLayerBedTemperature()->toUnit('celsius')->shouldBe(70.0);
+    }
+
+    public function it_has_a_next_layer_bed_temperature_when_no_calibrations(): void
+    {
+        $this->getNextLayerBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getNextLayerBedTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MIN_BED_TEMP);
+    }
 }

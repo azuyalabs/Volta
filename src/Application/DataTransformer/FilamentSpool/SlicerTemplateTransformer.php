@@ -30,7 +30,7 @@ class SlicerTemplateTransformer extends TransformerAbstract
             'first_layer_print_temperature' => $spool->getFirstLayerPrintTemperature()->toUnit('celsius'),
             'next_layer_print_temperature'  => $spool->getNextLayerPrintTemperature()->toUnit('celsius'),
             'first_layer_bed_temperature'   => $spool->getFirstLayerBedTemperature()->toUnit('celsius'),
-            //'next_layer_bed_temperature'    => $spool->getNextLayerBedTemperature()->toUnit('celsius'),
+            'next_layer_bed_temperature'    => $spool->getNextLayerBedTemperature()->toUnit('celsius'),
         ];
     }
 }

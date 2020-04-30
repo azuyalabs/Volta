@@ -443,4 +443,34 @@ class FilamentSpool
 
         return $temp;
     }
+
+    /**
+     * Get the bed temperature for the next layers.
+     *
+     * The bed temperature for the next layers is based on any recorded calibrations. If no calibrations
+     * are present, the manufacturer's recommended minimum bed temperature is used instead.
+     * Should there be no manufacturer's recommended temperatures, then the de facto standard for the
+     * material is used.
+     */
+    public function getNextLayerBedTemperature(): Temperature
+    {
+        // Default to the manufacturer's recommended minimum temperature
+        $temp = $this->getBedTemperatures()->getMinimumBedTemperature();
+
+        $r = array_filter($this->calibrations, static function ($v) {
+            return $v->getName()->getValue() === 'next_layer_bed_temperature';
+        });
+
+        if (0 < count($r)) {
+            $sum  = array_reduce($r, static function ($carry, $item) {
+                $count  = (is_array($carry)) ? $carry[0] : 0;
+                $values = (is_array($carry)) ? $carry[1] : 0;
+
+                return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
+            });
+            $temp = new Temperature(round($sum[1] / $sum[0]), 'celsius');
+        }
+
+        return $temp;
+    }
 }
