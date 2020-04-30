@@ -74,6 +74,8 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'min_print_speed'               => 15,
                 'first_layer_print_temperature' => 204,
                 'next_layer_print_temperature'  => 211,
+                'first_layer_bed_temperature'   => 75,
+                //'next_layer_bed_temperature'    => 50,
             ]
         );
     }

@@ -169,7 +169,7 @@ class SlicerProfilesCommand extends Command
             }
 
             if (isset($f['product']['temperatures']['print'])) {
-                $spool->setTemperatures(
+                $spool->setPrintTemperatures(
                     new Temperatures(
                         new Temperature($f['product']['temperatures']['print']['min'], 'celsius'),
                         new Temperature($f['product']['temperatures']['print']['max'], 'celsius')
@@ -208,8 +208,8 @@ class SlicerProfilesCommand extends Command
             $this->warn(
                 sprintf(
                     'Print Temperature Range : %0.0f - %0.0f',
-                    $spool->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius'),
-                    $spool->getTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')
+                    $spool->getPrintTemperatures()->getMinimumPrintTemperature()->toUnit('celsius'),
+                    $spool->getPrintTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')
                 )
             );
 

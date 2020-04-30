@@ -274,23 +274,44 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getMinimumPrintSpeed()->getValue()->shouldBe(5.0);
     }
 
-    public function it_has_temperatures(): void
+    public function it_has_print_temperatures(): void
     {
-        $this->getTemperatures()->shouldReturnAnInstanceOf(Temperatures::class);
-        $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MIN_PRINT_TEMP);
-        $this->getTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MAX_PRINT_TEMP);
+        $this->getPrintTemperatures()->shouldReturnAnInstanceOf(Temperatures::class);
+        $this->getPrintTemperatures()->getMinimumPrintTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MIN_PRINT_TEMP);
+        $this->getPrintTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MAX_PRINT_TEMP);
     }
 
-    public function it_can_update_temperatures(): void
+    public function it_can_update_print_temperatures(): void
     {
-        $this->setTemperatures(
+        $this->setPrintTemperatures(
             new Temperatures(
                 new Temperature(167, 'celsius'),
                 new Temperature(235, 'celsius')
             )
         );
-        $this->getTemperatures()->getMinimumPrintTemperature()->toUnit('celsius')->shouldBe(167.0);
-        $this->getTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')->shouldBe(235.0);
+        $this->getPrintTemperatures()->getMinimumPrintTemperature()->toUnit('celsius')->shouldBe(167.0);
+        $this->getPrintTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')->shouldBe(235.0);
+    }
+
+    public function it_has_bed_temperatures(): void
+    {
+        $this->getBedTemperatures()->shouldReturnAnInstanceOf(Temperatures::class);
+        $this->getBedTemperatures()->getMinimumBedTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MIN_BED_TEMP);
+        $this->getBedTemperatures()->getMaximumBedTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MAX_BED_TEMP);
+    }
+
+    public function it_can_update_bed_temperatures(): void
+    {
+        $this->setBedTemperatures(
+            new Temperatures(
+                null,
+                null,
+                new Temperature(63, 'celsius'),
+                new Temperature(82, 'celsius')
+            )
+        );
+        $this->getBedTemperatures()->getMinimumBedTemperature()->toUnit('celsius')->shouldBe(63.0);
+        $this->getBedTemperatures()->getMaximumBedTemperature()->toUnit('celsius')->shouldBe(82.0);
     }
 
     public function it_has_a_density(): void
@@ -374,7 +395,7 @@ class FilamentSpoolSpec extends ObjectBehavior
 
     public function it_has_a_first_layer_print_temperature_when_no_calibrations(): void
     {
-        $this->setTemperatures(
+        $this->setPrintTemperatures(
             new Temperatures(
                 new Temperature(220, 'celsius'),
                 new Temperature(250, 'celsius')
@@ -420,13 +441,47 @@ class FilamentSpoolSpec extends ObjectBehavior
 
     public function it_has_a_next_layer_print_temperature_when_no_calibrations(): void
     {
-        $this->setTemperatures(
-            new Temperatures(
-                new Temperature(200, 'celsius'),
-                new Temperature(210, 'celsius')
+        $this->getNextLayerPrintTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getNextLayerPrintTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MIN_PRINT_TEMP);
+    }
+
+    public function it_has_a_first_layer_bed_temperature(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName('first_layer_bed_temperature'),
+            new \DateTimeImmutable('2020-04-29'),
+            [55, 57]
+        );
+        $this->addCalibration($calibration);
+
+        $this->getFirstLayerBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getFirstLayerBedTemperature()->toUnit('celsius')->shouldBe(56.0);
+    }
+
+    public function it_has_a_first_layer_bed_temperature_when_multiple_calibrations(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName('first_layer_bed_temperature'),
+            new \DateTimeImmutable('2020-05-11'),
+            [50, 52]
+        );
+        $this->addCalibration($calibration);
+
+        $this->addCalibration(
+            new Calibration(
+                new CalibrationName('first_layer_bed_temperature'),
+                new \DateTimeImmutable('2020-05-12'),
+                [55, 60]
             )
         );
-        $this->getNextLayerPrintTemperature()->shouldBeAnInstanceOf(Temperature::class);
-        $this->getNextLayerPrintTemperature()->toUnit('celsius')->shouldBe(200.0);
+
+        $this->getFirstLayerBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getFirstLayerBedTemperature()->toUnit('celsius')->shouldBe(54.0);
+    }
+
+    public function it_has_a_first_layer_bed_temperature_when_no_calibrations(): void
+    {
+        $this->getFirstLayerBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
+        $this->getFirstLayerBedTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MIN_BED_TEMP);
     }
 }

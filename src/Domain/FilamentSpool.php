@@ -65,7 +65,8 @@ class FilamentSpool
     private Length $ovality_tolerance;
     private MaterialType $material_type;
     private Color $color;
-    private Temperatures $temperatures;
+    private Temperatures $print_temperatures;
+    private Temperatures $bed_temperatures;
     private float $density      = 1.0;
     private array $calibrations = [];
 
@@ -85,17 +86,30 @@ class FilamentSpool
         $this->ovality_tolerance  = new Length(0.05, 'millimeter');
         $this->material_type      = new MaterialType(MaterialType::MATERIALTYPE_PLA);
         $this->color              = new Color(new ColorName('Red'), new Hex('#ff0000'));
-        $this->temperatures       = new Temperatures();
+        $this->print_temperatures = new Temperatures();
+        $this->bed_temperatures   = new Temperatures();
     }
 
-    public function getTemperatures(): Temperatures
+    public function getPrintTemperatures(): Temperatures
     {
-        return $this->temperatures;
+        return $this->print_temperatures;
     }
 
-    public function setTemperatures(Temperatures $temperatures): FilamentSpool
+    public function setPrintTemperatures(Temperatures $print_temperatures): FilamentSpool
     {
-        $this->temperatures = $temperatures;
+        $this->print_temperatures = $print_temperatures;
+
+        return $this;
+    }
+
+    public function getBedTemperatures(): Temperatures
+    {
+        return $this->bed_temperatures;
+    }
+
+    public function setBedTemperatures(Temperatures $bed_temperatures): FilamentSpool
+    {
+        $this->bed_temperatures = $bed_temperatures;
 
         return $this;
     }
@@ -351,7 +365,7 @@ class FilamentSpool
     public function getFirstLayerPrintTemperature(): Temperature
     {
         // Default to the manufacturer's recommended minimum temperature
-        $temp = $this->getTemperatures()->getMinimumPrintTemperature();
+        $temp = $this->getPrintTemperatures()->getMinimumPrintTemperature();
 
         $r = array_filter($this->calibrations, static function ($v) {
             return $v->getName()->getValue() === 'first_layer_print_temperature';
@@ -381,10 +395,40 @@ class FilamentSpool
     public function getNextLayerPrintTemperature(): Temperature
     {
         // Default to the manufacturer's recommended minimum temperature
-        $temp = $this->getTemperatures()->getMinimumPrintTemperature();
+        $temp = $this->getPrintTemperatures()->getMinimumPrintTemperature();
 
         $r = array_filter($this->calibrations, static function ($v) {
             return $v->getName()->getValue() === 'next_layer_print_temperature';
+        });
+
+        if (0 < count($r)) {
+            $sum  = array_reduce($r, static function ($carry, $item) {
+                $count  = (is_array($carry)) ? $carry[0] : 0;
+                $values = (is_array($carry)) ? $carry[1] : 0;
+
+                return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
+            });
+            $temp = new Temperature(round($sum[1] / $sum[0]), 'celsius');
+        }
+
+        return $temp;
+    }
+
+    /**
+     * Get the bed temperature for the first layer.
+     *
+     * The bed temperature for the first layer is based on any recorded calibrations. If no calibrations
+     * are present, the manufacturer's recommended minimum bed temperature is used alternatively.
+     * Should there be no manufacturer's recommended temperatures, then the de facto standard for the
+     * material is used.
+     */
+    public function getFirstLayerBedTemperature(): Temperature
+    {
+        // Default to the manufacturer's recommended minimum temperature
+        $temp = $this->getBedTemperatures()->getMinimumBedTemperature();
+
+        $r = array_filter($this->calibrations, static function ($v) {
+            return $v->getName()->getValue() === 'first_layer_bed_temperature';
         });
 
         if (0 < count($r)) {

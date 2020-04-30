@@ -7,9 +7,11 @@ namespace Tests;
 use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use Volta\Domain\Calibration;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
+use Volta\Domain\Temperatures;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
@@ -44,12 +46,14 @@ class FilamentSpoolBuilder
             new ManufacturerId(),
             new ManufacturerName('XYZ Filaments')
         );
-        $this->name         = 'PETG Plus';
-        $this->diameter     = new Length(0.0, 'millimeters');
-        $this->weight       = new Mass(0.0, 'grams');
-        $this->material     = new MaterialType(MaterialType::MATERIALTYPE_PETG);
-        $this->color        = new Color(new ColorName('Green'), new Hex('#00ff00'));
-        $this->density      = 1;
+        $this->name               = 'PETG Plus';
+        $this->diameter           = new Length(0.0, 'millimeters');
+        $this->weight             = new Mass(0.0, 'grams');
+        $this->material           = new MaterialType(MaterialType::MATERIALTYPE_PETG);
+        $this->color              = new Color(new ColorName('Green'), new Hex('#00ff00'));
+        $this->density            = 1;
+        $this->print_temperatures = new Temperatures(new Temperature(210, 'celsius'), new Temperature(250, 'celsius'));
+        $this->bed_temperatures   = new Temperatures(null, null, new Temperature(75, 'celsius'), new Temperature(90, 'celsius'));
     }
 
     public function withWeight(Mass $weight): void
@@ -112,6 +116,8 @@ class FilamentSpoolBuilder
         foreach ($this->calibrations as $calibration) {
             $spool->addCalibration($calibration);
         }
+        $spool->setPrintTemperatures($this->print_temperatures);
+        $spool->setBedTemperatures($this->bed_temperatures);
 
         return $spool;
     }
