@@ -20,6 +20,7 @@ use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
+use Volta\Domain\Exception\NoCalibrationsException;
 use Volta\Domain\Exception\ZeroDensityException;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
@@ -68,7 +69,7 @@ class FilamentSpool
     private Temperatures $print_temperatures;
     private Temperatures $bed_temperatures;
     private float $density      = 1.0;
-    private array $calibrations = [];
+    private CalibrationCollection $calibrations;
 
     public function __construct(
         FilamentSpoolId $id,
@@ -88,6 +89,7 @@ class FilamentSpool
         $this->color              = new Color(new ColorName('Red'), new Hex('#ff0000'));
         $this->print_temperatures = new Temperatures();
         $this->bed_temperatures   = new Temperatures();
+        $this->calibrations       = new CalibrationCollection();
     }
 
     public function getPrintTemperatures(): Temperatures
@@ -204,20 +206,13 @@ class FilamentSpool
 
     public function getDiameter(): Length
     {
-        $diameter = $this->getNominalDiameter();
-
-        $c = array_filter($this->calibrations, static function ($v) {
-            return 'diameter' === $v->getName()->getValue();
-        });
-
-        if (0 < count($c)) {
-            $result   = array_reduce($c, static function ($carry, $item) {
-                $count  = (is_array($carry)) ? $carry[0] : 0;
-                $values = (is_array($carry)) ? $carry[1] : 0;
-
-                return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
-            });
-            $diameter = new Length(round($result[1] / $result[0], 3), 'millimeter');
+        try {
+            $diameter = new Length(
+                round($this->calibrations->getAverage('diameter'), 3),
+                'millimeter'
+            );
+        } catch (NoCalibrationsException $e) {
+            $diameter = $this->getNominalDiameter();
         }
 
         return $diameter;
@@ -346,10 +341,10 @@ class FilamentSpool
 
     public function addCalibration(Calibration $calibration): void
     {
-        $this->calibrations[] = $calibration;
+        $this->calibrations->add($calibration);
     }
 
-    public function getCalibrations(): array
+    public function getCalibrations(): CalibrationCollection
     {
         return $this->calibrations;
     }
@@ -364,21 +359,13 @@ class FilamentSpool
      */
     public function getFirstLayerPrintTemperature(): Temperature
     {
-        // Default to the manufacturer's recommended minimum temperature
-        $temp = $this->getPrintTemperatures()->getMinimumPrintTemperature();
-
-        $r = array_filter($this->calibrations, static function ($v) {
-            return $v->getName()->getValue() === 'first_layer_print_temperature';
-        });
-
-        if (0 < count($r)) {
-            $sum  = array_reduce($r, static function ($carry, $item) {
-                $count  = (is_array($carry)) ? $carry[0] : 0;
-                $values = (is_array($carry)) ? $carry[1] : 0;
-
-                return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
-            });
-            $temp = new Temperature(round($sum[1] / $sum[0]), 'celsius');
+        try {
+            $temp = new Temperature(
+                round($this->calibrations->getAverage('first_layer_print_temperature')),
+                'celsius'
+            );
+        } catch (NoCalibrationsException $e) {
+            $temp = $this->getPrintTemperatures()->getMinimumPrintTemperature();
         }
 
         return $temp;
@@ -394,21 +381,13 @@ class FilamentSpool
      */
     public function getNextLayerPrintTemperature(): Temperature
     {
-        // Default to the manufacturer's recommended minimum temperature
-        $temp = $this->getPrintTemperatures()->getMinimumPrintTemperature();
-
-        $r = array_filter($this->calibrations, static function ($v) {
-            return $v->getName()->getValue() === 'next_layer_print_temperature';
-        });
-
-        if (0 < count($r)) {
-            $sum  = array_reduce($r, static function ($carry, $item) {
-                $count  = (is_array($carry)) ? $carry[0] : 0;
-                $values = (is_array($carry)) ? $carry[1] : 0;
-
-                return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
-            });
-            $temp = new Temperature(round($sum[1] / $sum[0]), 'celsius');
+        try {
+            $temp = new Temperature(
+                round($this->calibrations->getAverage('next_layer_print_temperature')),
+                'celsius'
+            );
+        } catch (NoCalibrationsException $e) {
+            $temp = $this->getPrintTemperatures()->getMinimumPrintTemperature();
         }
 
         return $temp;
@@ -424,21 +403,13 @@ class FilamentSpool
      */
     public function getFirstLayerBedTemperature(): Temperature
     {
-        // Default to the manufacturer's recommended minimum temperature
-        $temp = $this->getBedTemperatures()->getMinimumBedTemperature();
-
-        $r = array_filter($this->calibrations, static function ($v) {
-            return $v->getName()->getValue() === 'first_layer_bed_temperature';
-        });
-
-        if (0 < count($r)) {
-            $sum  = array_reduce($r, static function ($carry, $item) {
-                $count  = (is_array($carry)) ? $carry[0] : 0;
-                $values = (is_array($carry)) ? $carry[1] : 0;
-
-                return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
-            });
-            $temp = new Temperature(round($sum[1] / $sum[0]), 'celsius');
+        try {
+            $temp = new Temperature(
+                round($this->calibrations->getAverage('first_layer_bed_temperature')),
+                'celsius'
+            );
+        } catch (NoCalibrationsException $e) {
+            $temp = $this->getBedTemperatures()->getMinimumBedTemperature();
         }
 
         return $temp;
@@ -454,21 +425,13 @@ class FilamentSpool
      */
     public function getNextLayerBedTemperature(): Temperature
     {
-        // Default to the manufacturer's recommended minimum temperature
-        $temp = $this->getBedTemperatures()->getMinimumBedTemperature();
-
-        $r = array_filter($this->calibrations, static function ($v) {
-            return $v->getName()->getValue() === 'next_layer_bed_temperature';
-        });
-
-        if (0 < count($r)) {
-            $sum  = array_reduce($r, static function ($carry, $item) {
-                $count  = (is_array($carry)) ? $carry[0] : 0;
-                $values = (is_array($carry)) ? $carry[1] : 0;
-
-                return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
-            });
-            $temp = new Temperature(round($sum[1] / $sum[0]), 'celsius');
+        try {
+            $temp = new Temperature(
+                round($this->calibrations->getAverage('next_layer_bed_temperature')),
+                'celsius'
+            );
+        } catch (NoCalibrationsException $e) {
+            $temp = $this->getBedTemperatures()->getMinimumBedTemperature();
         }
 
         return $temp;

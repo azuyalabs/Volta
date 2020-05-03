@@ -22,6 +22,7 @@ use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use Volta\Domain\Calibration;
+use Volta\Domain\CalibrationCollection;
 use Volta\Domain\Exception\ZeroDensityException;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
@@ -355,8 +356,8 @@ class FilamentSpoolSpec extends ObjectBehavior
             [10, 20]
         );
         $this->addCalibration($calibration);
-        $this->getCalibrations()->shouldBeArray();
-        $this->getCalibrations()->shouldReturn([$calibration]);
+        $this->getCalibrations()->shouldReturnAnInstanceOf(CalibrationCollection::class);
+        $this->getCalibrations()->getCalibrations('volume')->shouldReturn([$calibration]);
     }
 
     public function it_has_a_first_layer_print_temperature(): void
