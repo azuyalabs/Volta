@@ -363,7 +363,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_first_layer_print_temperature(): void
     {
         $calibration = new Calibration(
-            new CalibrationName('first_layer_print_temperature'),
+            new CalibrationName(CalibrationCollection::FIRST_LAYER_PRINT_TEMP),
             new \DateTimeImmutable('2020-04-05'),
             [210, 215]
         );
@@ -376,7 +376,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_first_layer_print_temperature_when_multiple_calibrations(): void
     {
         $calibration = new Calibration(
-            new CalibrationName('first_layer_print_temperature'),
+            new CalibrationName(CalibrationCollection::FIRST_LAYER_PRINT_TEMP),
             new \DateTimeImmutable('2020-04-05'),
             [212, 213]
         );
@@ -384,7 +384,7 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->addCalibration(
             new Calibration(
-                new CalibrationName('first_layer_print_temperature'),
+                new CalibrationName(CalibrationCollection::FIRST_LAYER_PRINT_TEMP),
                 new \DateTimeImmutable('2020-04-06'),
                 [211, 223]
             )
@@ -409,7 +409,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_next_layer_print_temperature(): void
     {
         $calibration = new Calibration(
-            new CalibrationName('next_layer_print_temperature'),
+            new CalibrationName(CalibrationCollection::NEXT_LAYER_PRINT_TEMP),
             new \DateTimeImmutable('2020-04-05'),
             [190, 205]
         );
@@ -422,7 +422,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_next_layer_print_temperature_when_multiple_calibrations(): void
     {
         $calibration = new Calibration(
-            new CalibrationName('next_layer_print_temperature'),
+            new CalibrationName(CalibrationCollection::NEXT_LAYER_PRINT_TEMP),
             new \DateTimeImmutable('2020-04-05'),
             [198, 200]
         );
@@ -430,7 +430,7 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->addCalibration(
             new Calibration(
-                new CalibrationName('next_layer_print_temperature'),
+                new CalibrationName(CalibrationCollection::NEXT_LAYER_PRINT_TEMP),
                 new \DateTimeImmutable('2020-04-06'),
                 [204, 205]
             )
@@ -449,7 +449,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_first_layer_bed_temperature(): void
     {
         $calibration = new Calibration(
-            new CalibrationName('first_layer_bed_temperature'),
+            new CalibrationName(CalibrationCollection::FIRST_LAYER_BED_TEMP),
             new \DateTimeImmutable('2020-04-29'),
             [55, 57]
         );
@@ -462,7 +462,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_first_layer_bed_temperature_when_multiple_calibrations(): void
     {
         $calibration = new Calibration(
-            new CalibrationName('first_layer_bed_temperature'),
+            new CalibrationName(CalibrationCollection::FIRST_LAYER_BED_TEMP),
             new \DateTimeImmutable('2020-05-11'),
             [50, 52]
         );
@@ -470,7 +470,7 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->addCalibration(
             new Calibration(
-                new CalibrationName('first_layer_bed_temperature'),
+                new CalibrationName(CalibrationCollection::FIRST_LAYER_BED_TEMP),
                 new \DateTimeImmutable('2020-05-12'),
                 [55, 60]
             )
@@ -489,7 +489,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_next_layer_bed_temperature(): void
     {
         $calibration = new Calibration(
-            new CalibrationName('next_layer_bed_temperature'),
+            new CalibrationName(CalibrationCollection::NEXT_LAYER_BED_TEMP),
             new \DateTimeImmutable('2020-04-29'),
             [76, 80, 98]
         );
@@ -502,7 +502,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_next_layer_bed_temperature_when_multiple_calibrations(): void
     {
         $calibration = new Calibration(
-            new CalibrationName('next_layer_bed_temperature'),
+            new CalibrationName(CalibrationCollection::NEXT_LAYER_BED_TEMP),
             new \DateTimeImmutable('2020-05-11'),
             [76, 88, 99]
         );
@@ -510,7 +510,7 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->addCalibration(
             new Calibration(
-                new CalibrationName('next_layer_bed_temperature'),
+                new CalibrationName(CalibrationCollection::NEXT_LAYER_BED_TEMP),
                 new \DateTimeImmutable('2020-05-12'),
                 [45, 67, 47]
             )

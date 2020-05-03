@@ -363,7 +363,7 @@ class FilamentSpool
     {
         try {
             $temp = new Temperature(
-                round($this->calibrations->getAverage('first_layer_print_temperature')),
+                round($this->calibrations->getAverage(CalibrationCollection::FIRST_LAYER_PRINT_TEMP)),
                 'celsius'
             );
         } catch (NoCalibrationsException $e) {
@@ -385,7 +385,7 @@ class FilamentSpool
     {
         try {
             $temp = new Temperature(
-                round($this->calibrations->getAverage('next_layer_print_temperature')),
+                round($this->calibrations->getAverage(CalibrationCollection::NEXT_LAYER_PRINT_TEMP)),
                 'celsius'
             );
         } catch (NoCalibrationsException $e) {
@@ -407,7 +407,7 @@ class FilamentSpool
     {
         try {
             $temp = new Temperature(
-                round($this->calibrations->getAverage('first_layer_bed_temperature')),
+                round($this->calibrations->getAverage(CalibrationCollection::FIRST_LAYER_BED_TEMP)),
                 'celsius'
             );
         } catch (NoCalibrationsException $e) {
@@ -429,7 +429,7 @@ class FilamentSpool
     {
         try {
             $temp = new Temperature(
-                round($this->calibrations->getAverage('next_layer_bed_temperature')),
+                round($this->calibrations->getAverage(CalibrationCollection::NEXT_LAYER_BED_TEMP)),
                 'celsius'
             );
         } catch (NoCalibrationsException $e) {

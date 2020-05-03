@@ -6,6 +6,11 @@ use Volta\Domain\Exception\NoCalibrationsException;
 
 class CalibrationCollection
 {
+    public const FIRST_LAYER_PRINT_TEMP = 'first_layer_print_temperature';
+    public const NEXT_LAYER_PRINT_TEMP  = 'next_layer_print_temperature';
+    public const FIRST_LAYER_BED_TEMP   = 'first_layer_bed_temperature';
+    public const NEXT_LAYER_BED_TEMP    = 'next_layer_bed_temperature';
+
     private array $calibrations = [];
 
     public function add(Calibration $calibration): void

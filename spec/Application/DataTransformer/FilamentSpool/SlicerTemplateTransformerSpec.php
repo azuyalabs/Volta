@@ -9,6 +9,7 @@ use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use Tests\FilamentSpoolBuilder;
 use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateTransformer;
 use Volta\Domain\Calibration;
+use Volta\Domain\CalibrationCollection;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\ValueObject\CalibrationName;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
@@ -35,21 +36,21 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
         $builder->withColor(new Color(new ColorName('Red'), new Hex('#ff0000')));
         $builder->withCalibration(
             new Calibration(
-                new CalibrationName('first_layer_print_temperature'),
+                new CalibrationName(CalibrationCollection::FIRST_LAYER_PRINT_TEMP),
                 new \DateTimeImmutable('2020-05-01'),
                 [200, 205, 207]
             )
         );
         $builder->withCalibration(
             new Calibration(
-                new CalibrationName('next_layer_print_temperature'),
+                new CalibrationName(CalibrationCollection::NEXT_LAYER_PRINT_TEMP),
                 new \DateTimeImmutable('2020-05-01'),
                 [210, 212]
             )
         );
         $builder->withCalibration(
             new Calibration(
-                new CalibrationName('next_layer_bed_temperature'),
+                new CalibrationName(CalibrationCollection::NEXT_LAYER_BED_TEMP),
                 new \DateTimeImmutable('2020-05-01'),
                 [72, 80]
             )
