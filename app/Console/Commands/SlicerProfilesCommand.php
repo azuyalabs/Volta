@@ -133,10 +133,8 @@ class SlicerProfilesCommand extends Command
         foreach ($filamentFiles as $filamentFile) {
             $f = $this->getFilamentSpoolData($filamentFile);
 
-
-            // TODO: Implement Application exception
             if (!isset($f['product'], $f['id']) || null === $f) {
-                // echo 'Invalid Definition (Empty or Old version?)'.PHP_EOL;
+                $this->warn(sprintf('! `%s` is invalid (Perhaps empty or an older version?)', $filamentFile['basename']));
                 continue;
             }
 
@@ -356,11 +354,17 @@ class SlicerProfilesCommand extends Command
         $CACHE_KEY = 'filament_spool_'.$filamentFile['id'];
 
         if (!Cache::has($CACHE_KEY)) {
-            Cache::put($CACHE_KEY, json_decode($this->filamentsDirectory->get(
-                self::FILAMENTS_DIRECTORY.
-                DIRECTORY_SEPARATOR.
-                $filamentFile['name']
-            ), true, 512, JSON_THROW_ON_ERROR));
+            Cache::put(
+                $CACHE_KEY,
+                json_decode(
+                    $this->filamentsDirectory->get(
+                        self::FILAMENTS_DIRECTORY.DIRECTORY_SEPARATOR.$filamentFile['name']
+                    ),
+                    true,
+                    512,
+                    JSON_THROW_ON_ERROR
+                )
+            );
         }
 
         return Cache::get($CACHE_KEY);
