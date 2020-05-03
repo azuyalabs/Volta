@@ -124,7 +124,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     {
         static $currency = 'JPY';
         $price           = new Money(5700, new Currency($currency));
-        $weight          = new Mass(850, 'gram');
+        $weight          = new Mass(850, 'grams');
 
         $this->setWeight($weight);
         $this->setPurchasePrice($price);
@@ -138,7 +138,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     {
         static $currency = 'USD';
         $price           = new Money(2800, new Currency($currency));
-        $weight          = new Mass(750, 'gram');
+        $weight          = new Mass(750, 'grams');
 
         $this->setWeight($weight);
         $this->setPurchasePrice($price);
