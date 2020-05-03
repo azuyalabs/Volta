@@ -71,4 +71,17 @@ class CalibrationCollection
             return (!is_null($carry) && $carry < $m) ? $carry : $m;
         });
     }
+
+    public function getLatestCalibrationDate(string $name)  : \DateTimeImmutable
+    {
+        if (!isset($this->calibrations[$name])) {
+            throw new NoCalibrationsException();
+        }
+
+        return array_reduce($this->calibrations[$name], static function ($carry, $item) {
+            $d = $item->getTimestamp();
+
+            return (!is_null($carry) && $carry > $d) ? $carry : $d;
+        });
+    }
 }

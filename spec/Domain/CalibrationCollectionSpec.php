@@ -146,4 +146,16 @@ class CalibrationCollectionSpec extends ObjectBehavior
         $this->shouldThrow(NoCalibrationsException::class)
             ->duringGetMinimum('zutons');
     }
+
+    public function it_can_get_latest_calibration_date(): void
+    {
+        $this->add(new Calibration(
+            new CalibrationName('length'),
+            new \DateTimeImmutable('2021-12-13'),
+            [33, 109]
+        ));
+
+        $this->getLatestCalibrationDate('length')->shouldBeAnInstanceOf(\DateTimeInterface::class);
+        $this->getLatestCalibrationDate('length')->shouldBeLike(new \DateTimeImmutable('2021-12-13'));
+    }
 }
