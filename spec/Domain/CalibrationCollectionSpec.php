@@ -93,7 +93,7 @@ class CalibrationCollectionSpec extends ObjectBehavior
         $this->getAverage('speed')->shouldBe(310.5);
     }
 
-    public function it_throws_an_exception_when_for_average_calibration_does_not_exist(): void
+    public function it_throws_an_exception_when_for_average_no_calibrations_exist(): void
     {
         $this->shouldThrow(NoCalibrationsException::class)
             ->duringGetAverage('zutons');
@@ -117,9 +117,33 @@ class CalibrationCollectionSpec extends ObjectBehavior
         $this->getMaximum('length')->shouldBe(117.0);
     }
 
-    public function it_throws_an_exception_when_for_maximum_calibration_does_not_exist(): void
+    public function it_throws_an_exception_when_for_maximum_no_calibrations_exist(): void
     {
         $this->shouldThrow(NoCalibrationsException::class)
             ->duringGetMaximum('zutons');
+    }
+
+    public function it_can_get_the_minimum_with_a_single_calibration(): void
+    {
+        $this->getMinimum('length')->shouldBeDouble();
+        $this->getMinimum('length')->shouldBe(113.0);
+    }
+
+    public function it_can_get_the_minimum_with_multiple_calibration(): void
+    {
+        $this->add(new Calibration(
+            new CalibrationName('length'),
+            new \DateTimeImmutable('2019-03-13'),
+            [66, 33, 109]
+        ));
+
+        $this->getMinimum('length')->shouldBeDouble();
+        $this->getMinimum('length')->shouldBe(33.0);
+    }
+
+    public function it_throws_an_exception_when_for_minimum_no_calibrations_exist(): void
+    {
+        $this->shouldThrow(NoCalibrationsException::class)
+            ->duringGetMinimum('zutons');
     }
 }

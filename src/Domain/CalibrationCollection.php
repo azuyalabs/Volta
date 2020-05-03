@@ -50,7 +50,20 @@ class CalibrationCollection
         return array_reduce($this->calibrations[$name], static function ($carry, $item) {
             $m = max($item->getMeasurements());
 
-            return $carry > $m ? $carry : $m;
+            return (!is_null($carry) && $carry > $m) ? $carry : $m;
+        });
+    }
+
+    public function getMinimum(string $name): float
+    {
+        if (!isset($this->calibrations[$name])) {
+            throw new NoCalibrationsException();
+        }
+
+        return array_reduce($this->calibrations[$name], static function ($carry, $item) {
+            $m = min($item->getMeasurements());
+
+            return (!is_null($carry) && $carry < $m) ? $carry : $m;
         });
     }
 }

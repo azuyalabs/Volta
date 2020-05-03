@@ -235,14 +235,6 @@ class SlicerProfilesCommand extends Command
 //            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['material']];
 //            $f['inherits']                      = $this->inherits[$f['material']];
 //
-//            if (!isset($f['first_layer_bed_temperature'])) {
-//                $f['first_layer_bed_temperature'] = 60;
-//            }
-//
-//            if (!isset($f['next_layer_bed_temperature'])) {
-//                $f['next_layer_bed_temperature'] = $f['first_layer_bed_temperature'];
-//            }
-//
 //            if (!isset($f['keep_warm_temperature'])) {
 //                $f['keep_warm_temperature'] = ceil($f['next_layer_temperature'] * 0.65);
 //            }
