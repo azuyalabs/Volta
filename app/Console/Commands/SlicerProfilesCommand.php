@@ -219,8 +219,6 @@ class SlicerProfilesCommand extends Command
             );
 
 //            continue;
-//            $filamentName = implode(' ', [$f['manufacturer'], $f['material'], $color, $f['diameter'] . 'mm']);
-//
 //            // Set defaults
 //            $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['material']];
 //            $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['material']];
@@ -228,7 +226,6 @@ class SlicerProfilesCommand extends Command
 //            $f['cooling']                       = $f['material'] === 'ABS' ? 0 : 1;
 //            $f['fan_always_on']                 = $f['material'] === 'ABS' ? 0 : 1;
 //            $f['k_value']                       = ($f['material'] === 'PET') ? 45 : 30;
-//            $f['filament_notes']                = sprintf('Calibrated settings for %s.\\n\\n', $filamentName);
 //            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];
 //            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['material']];
 //            $f['inherits']                      = $this->inherits[$f['material']];

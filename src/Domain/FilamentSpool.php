@@ -70,6 +70,7 @@ class FilamentSpool
     private Temperatures $bed_temperatures;
     private float $density      = 1.0;
     private CalibrationCollection $calibrations;
+    private string $note;
 
     public function __construct(
         FilamentSpoolId $id,
@@ -90,6 +91,7 @@ class FilamentSpool
         $this->print_temperatures = new Temperatures();
         $this->bed_temperatures   = new Temperatures();
         $this->calibrations       = new CalibrationCollection();
+        $this->note               = sprintf('Calibrated settings for %s.\\n\\n', $this->getDisplayName()->getValue());
     }
 
     public function getPrintTemperatures(): Temperatures
@@ -435,5 +437,10 @@ class FilamentSpool
         }
 
         return $temp;
+    }
+
+    public function getNote(): string
+    {
+        return $this->note;
     }
 }

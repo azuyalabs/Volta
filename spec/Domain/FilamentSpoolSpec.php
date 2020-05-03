@@ -525,4 +525,10 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getNextLayerBedTemperature()->shouldBeAnInstanceOf(Temperature::class);
         $this->getNextLayerBedTemperature()->toUnit('celsius')->shouldBe(Temperatures::DEFAULT_MIN_BED_TEMP);
     }
+
+    public function it_has_a_note(): void
+    {
+        $this->getNote()->shouldBeString();
+        $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Red 1.75mm.\\n\\n');
+    }
 }

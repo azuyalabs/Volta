@@ -83,6 +83,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'next_layer_print_temperature'  => 211.0,
                 'first_layer_bed_temperature'   => 75.0,
                 'next_layer_bed_temperature'    => 76.0,
+                'note'                          => 'Calibrated settings for ABC Plastics PETG Plus Red 1.75mm.\n\n',
             ]
         );
     }
