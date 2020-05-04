@@ -30,6 +30,7 @@ use RuntimeException;
 use Spatie\Fractalistic\Fractal;
 use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateTransformer;
 use Volta\Domain\Calibration;
+use Volta\Domain\CalibrationCollection;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\Temperatures;
@@ -195,6 +196,15 @@ class SlicerProfilesCommand extends Command
                         $spool->addCalibration($c);
                     }
                 }
+
+                $missed = array_diff([
+                    CalibrationCollection::EXTRUSION_MULTIPLIER,
+                    CalibrationCollection::FILAMENT_DIAMETER,
+                    CalibrationCollection::K_VALUE,
+                ], array_keys($f['calibrations']));
+                foreach ($missed as $miss) {
+                    $this->warn(sprintf('>> %s Calibration not performed yet.', ucfirst($miss)));
+                }
             }
 
             $this->info($spool->getDisplayName()->getValue().' ('.$filamentFile['basename'].')');
@@ -206,17 +216,6 @@ class SlicerProfilesCommand extends Command
                 ->toArray();
 
             print_r($f);
-            $this->info('Other information:');
-            $this->warn('Diameter Tolerance      : '.$spool->getDiameterTolerance());
-            $this->warn('Ovality Tolerance       : '.$spool->getOvalityTolerance());
-            $this->warn('Price per kg            : '.$spool->getPricePerKilogram()->getAmount());
-            $this->warn(
-                sprintf(
-                    'Print Temperature Range : %0.0f - %0.0f',
-                    $spool->getPrintTemperatures()->getMinimumPrintTemperature()->toUnit('celsius'),
-                    $spool->getPrintTemperatures()->getMaximumPrintTemperature()->toUnit('celsius')
-                )
-            );
 
 //            continue;
 //            // Set defaults
