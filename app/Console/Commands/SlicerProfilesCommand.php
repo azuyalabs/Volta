@@ -149,6 +149,8 @@ class SlicerProfilesCommand extends Command
                 new Color(new ColorName($f['product']['color']['name']), new Hex($f['product']['color']['code'])),
                 new Length($f['product']['diameter']['value'], 'millimeters')
             );
+            $this->info($spool->getDisplayName()->getValue().' ('.$filamentFile['basename'].')');
+
             $spool->setPurchasePrice(new Money(
                 $f['purchase_price']['value'],
                 new Currency($f['purchase_price']['currency'])
@@ -203,8 +205,6 @@ class SlicerProfilesCommand extends Command
                     $this->warn(sprintf('>> %s Calibration not performed yet.', ucfirst($miss)));
                 }
             }
-
-            $this->info($spool->getDisplayName()->getValue().' ('.$filamentFile['basename'].')');
 
             // Transform into a flat array structure
             $f = Fractal::create()
