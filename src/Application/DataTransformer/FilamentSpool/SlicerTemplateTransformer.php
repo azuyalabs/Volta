@@ -10,6 +10,8 @@ use Volta\Domain\FilamentSpool;
 
 class SlicerTemplateTransformer extends TransformerAbstract
 {
+    private const KEEP_WARM_RATIO = 0.65;
+
     public function transform(FilamentSpool $spool): array
     {
         return [
@@ -31,6 +33,7 @@ class SlicerTemplateTransformer extends TransformerAbstract
             'next_layer_print_temperature'  => $spool->getNextLayerPrintTemperature()->toUnit('celsius'),
             'first_layer_bed_temperature'   => $spool->getFirstLayerBedTemperature()->toUnit('celsius'),
             'next_layer_bed_temperature'    => $spool->getNextLayerBedTemperature()->toUnit('celsius'),
+            'keep_warm_temperature'         => round($spool->getNextLayerPrintTemperature()->toUnit('celsius') * self::KEEP_WARM_RATIO, 0),
             'note'                          => $spool->getNote(),
         ];
     }

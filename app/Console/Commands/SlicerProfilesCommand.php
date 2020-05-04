@@ -149,7 +149,7 @@ class SlicerProfilesCommand extends Command
                 new Color(new ColorName($f['product']['color']['name']), new Hex($f['product']['color']['code'])),
                 new Length($f['product']['diameter']['value'], 'millimeters')
             );
-            $this->info($spool->getDisplayName()->getValue().' ('.$filamentFile['basename'].')');
+            $this->info($spool->getDisplayName()->getValue().' ('.$spool->getId().')');
 
             $spool->setPurchasePrice(new Money(
                 $f['purchase_price']['value'],
@@ -225,10 +225,6 @@ class SlicerProfilesCommand extends Command
 //            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];
 //            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['material']];
 //            $f['inherits']                      = $this->inherits[$f['material']];
-//
-//            if (!isset($f['keep_warm_temperature'])) {
-//                $f['keep_warm_temperature'] = ceil($f['next_layer_temperature'] * 0.65);
-//            }
 //
 //            $f['price_per_cm3'] = ($f['price'] * $f['density']) / $f['weight'];
 //
