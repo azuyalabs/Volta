@@ -74,16 +74,17 @@ class FilamentSpool
         FilamentSpoolId $id,
         Manufacturer $manufacturer,
         string $name,
-        Color $color
+        Color $color,
+        Length $diameter
     ) {
         $this->id           = $id;
         $this->name         = $name;
         $this->manufacturer = $manufacturer;
         $this->color        = $color;
+        $this->diameter     = $diameter;
 
         $this->purchasePrice      = new Money(0, new Currency('USD'));
         $this->weight             = new Mass(1, 'kilogram');
-        $this->diameter           = new Length(1.75, 'millimeter');
         $this->diameter_tolerance = new Length(0.05, 'millimeter');
         $this->ovality_tolerance  = new Length(0.05, 'millimeter');
         $this->material_type      = new MaterialType(MaterialType::MATERIALTYPE_PLA);

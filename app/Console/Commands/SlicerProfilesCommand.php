@@ -146,14 +146,14 @@ class SlicerProfilesCommand extends Command
                     new ManufacturerName($f['product']['manufacturer']),
                 ),
                 $f['product']['name'],
-                new Color(new ColorName($f['product']['color']['name']), new Hex($f['product']['color']['code']))
+                new Color(new ColorName($f['product']['color']['name']), new Hex($f['product']['color']['code'])),
+                new Length($f['product']['diameter']['value'], 'millimeters')
             );
             $spool->setPurchasePrice(new Money(
                 $f['purchase_price']['value'],
                 new Currency($f['purchase_price']['currency'])
             ))
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
-                ->setNominalDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
                 ->setMaterialType(new MaterialType($f['product']['type']));
 
             if (isset($f['product']['diameter']['tolerance'])) {

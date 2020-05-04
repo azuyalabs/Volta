@@ -24,7 +24,6 @@ use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use Volta\Domain\Calibration;
 use Volta\Domain\CalibrationCollection;
 use Volta\Domain\Exception\ZeroDensityException;
-use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
@@ -52,7 +51,8 @@ class FilamentSpoolSpec extends ObjectBehavior
                 new ManufacturerName('ABC Plastics')
             ),
             'Super PLA',
-            new Color(new ColorName('Blue'), new Hex('#0000ff'))
+            new Color(new ColorName('Blue'), new Hex('#0000ff')),
+            new Length('2.85', 'millimeters')
         );
     }
 
@@ -152,20 +152,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_nominal_diameter(): void
     {
         $this->getNominalDiameter()->shouldReturnAnInstanceOf(Length::class);
-    }
-
-    public function it_can_update_the_nominal_diameter(): void
-    {
-        $diameter = new Length(0.1, 'meters');
-
-        $this->setNominalDiameter($diameter);
-        $this->getNominalDiameter()->shouldBe($diameter);
-    }
-
-    public function it_throws_exception_setting_nominal_diameter_to_zero(): void
-    {
-        $this->shouldThrow(ZeroDiameterException::class)
-            ->duringSetNominalDiameter(new Length(0, 'meters'));
+        $this->getNominalDiameter()->toUnit('millimeters')->shouldBe(2.85);
     }
 
     public function it_has_a_diameter(): void
@@ -182,7 +169,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_diameter_when_no_calibrations(): void
     {
         $this->getDiameter()->shouldBeAnInstanceOf(Length::class);
-        $this->getDiameter()->toUnit('millimeter')->shouldBe(1.75);
+        $this->getDiameter()->toUnit('millimeter')->shouldBe(2.85);
     }
 
     public function it_has_a_diameter_tolerance(): void
@@ -220,7 +207,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_display_name(): void
     {
         $this->getDisplayName()->shouldReturnAnInstanceOf(DisplayName::class);
-        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics Super PLA Blue 1.75mm');
+        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics Super PLA Blue 2.85mm');
     }
 
     public function it_has_a_minimum_fan_speed(): void
@@ -522,7 +509,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_note(): void
     {
         $this->getNote()->shouldBeString();
-        $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Blue 1.75mm.\\n\\n');
+        $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Blue 2.85mm.\\n\\n');
     }
 
     public function it_has_a_note_with_calibration_information(): void
@@ -543,6 +530,6 @@ class FilamentSpoolSpec extends ObjectBehavior
         );
 
         $this->getNote()->shouldBeString();
-        $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Blue 1.75mm.\\n\\n`Diameter` last calibrated on 2020-05-12');
+        $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Blue 2.85mm.\\n\\n`Diameter` last calibrated on 2020-05-12');
     }
 }
