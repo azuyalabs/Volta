@@ -51,7 +51,8 @@ class FilamentSpoolSpec extends ObjectBehavior
                 new ManufacturerId(),
                 new ManufacturerName('ABC Plastics')
             ),
-            'Super PLA'
+            'Super PLA',
+            new Color(new ColorName('Blue'), new Hex('#0000ff'))
         );
     }
 
@@ -213,21 +214,13 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_color(): void
     {
         $this->getColor()->shouldReturnAnInstanceOf(Color::class);
-        $this->getColor()->getColorName()->getValue()->shouldBe('Red');
-    }
-
-    public function it_can_update_color(): void
-    {
-        $color = new Color(new ColorName('Blue'), new Hex('#0000ff'));
-
-        $this->setColor($color);
-        $this->getColor()->shouldBe($color);
+        $this->getColor()->getColorName()->getValue()->shouldBe('Blue');
     }
 
     public function it_has_a_display_name(): void
     {
         $this->getDisplayName()->shouldReturnAnInstanceOf(DisplayName::class);
-        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics Super PLA Red 1.75mm');
+        $this->getDisplayName()->getValue()->shouldBe('ABC Plastics Super PLA Blue 1.75mm');
     }
 
     public function it_has_a_minimum_fan_speed(): void
@@ -529,7 +522,7 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_note(): void
     {
         $this->getNote()->shouldBeString();
-        $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Red 1.75mm.\\n\\n');
+        $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Blue 1.75mm.\\n\\n');
     }
 
     public function it_has_a_note_with_calibration_information(): void
@@ -550,6 +543,6 @@ class FilamentSpoolSpec extends ObjectBehavior
         );
 
         $this->getNote()->shouldBeString();
-        $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Red 1.75mm.\\n\\n`Diameter` last calibrated on 2020-05-12');
+        $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Blue 1.75mm.\\n\\n`Diameter` last calibrated on 2020-05-12');
     }
 }

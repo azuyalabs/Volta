@@ -143,9 +143,10 @@ class SlicerProfilesCommand extends Command
                 new FilamentSpoolId(),
                 new Manufacturer(
                     new ManufacturerId(),
-                    new ManufacturerName($f['product']['manufacturer'])
+                    new ManufacturerName($f['product']['manufacturer']),
                 ),
-                $f['product']['name']
+                $f['product']['name'],
+                new Color(new ColorName($f['product']['color']['name']), new Hex($f['product']['color']['code']))
             );
             $spool->setPurchasePrice(new Money(
                 $f['purchase_price']['value'],
@@ -153,11 +154,7 @@ class SlicerProfilesCommand extends Command
             ))
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
                 ->setNominalDiameter(new Length($f['product']['diameter']['value'], 'millimeters'))
-                ->setMaterialType(new MaterialType($f['product']['type']))
-                ->setColor(new Color(
-                    new ColorName($f['product']['color']['name']),
-                    new Hex($f['product']['color']['code'])
-                ));
+                ->setMaterialType(new MaterialType($f['product']['type']));
 
             if (isset($f['product']['diameter']['tolerance'])) {
                 $spool->setDiameterTolerance(new Length($f['product']['diameter']['tolerance'], 'millimeters'));

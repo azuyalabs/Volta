@@ -16,7 +16,6 @@ namespace Volta\Domain;
 
 use Money\Currency;
 use Money\Money;
-use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
@@ -25,7 +24,6 @@ use Volta\Domain\Exception\ZeroDensityException;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
-use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpool\MaximumFanSpeed;
@@ -75,11 +73,13 @@ class FilamentSpool
     public function __construct(
         FilamentSpoolId $id,
         Manufacturer $manufacturer,
-        string $name
+        string $name,
+        Color $color
     ) {
         $this->id           = $id;
         $this->name         = $name;
         $this->manufacturer = $manufacturer;
+        $this->color        = $color;
 
         $this->purchasePrice      = new Money(0, new Currency('USD'));
         $this->weight             = new Mass(1, 'kilogram');
@@ -87,7 +87,6 @@ class FilamentSpool
         $this->diameter_tolerance = new Length(0.05, 'millimeter');
         $this->ovality_tolerance  = new Length(0.05, 'millimeter');
         $this->material_type      = new MaterialType(MaterialType::MATERIALTYPE_PLA);
-        $this->color              = new Color(new ColorName('Red'), new Hex('#ff0000'));
         $this->print_temperatures = new Temperatures();
         $this->bed_temperatures   = new Temperatures();
         $this->calibrations       = new CalibrationCollection();
@@ -157,13 +156,6 @@ class FilamentSpool
     public function getColor(): Color
     {
         return $this->color;
-    }
-
-    public function setColor(Color $color): FilamentSpool
-    {
-        $this->color = $color;
-
-        return $this;
     }
 
     public function getManufacturer(): Manufacturer

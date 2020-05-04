@@ -106,12 +106,12 @@ class FilamentSpoolBuilder
         $spool = new FilamentSpool(
             $this->id,
             $this->manufacturer,
-            $this->name
+            $this->name,
+            $this->color,
         );
         $spool->setNominalDiameter($this->diameter);
         $spool->setWeight($this->weight);
         $spool->setMaterialType($this->material);
-        $spool->setColor($this->color);
         $spool->setDensity($this->density);
         foreach ($this->calibrations as $calibration) {
             $spool->addCalibration($calibration);
