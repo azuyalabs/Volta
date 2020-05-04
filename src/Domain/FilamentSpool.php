@@ -23,6 +23,7 @@ use Volta\Domain\Exception\NoCalibrationsException;
 use Volta\Domain\Exception\ZeroDensityException;
 use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
+use Volta\Domain\ValueObject\FilamentSpool\BridgingFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
@@ -52,6 +53,13 @@ class FilamentSpool
         'Woodfill'                      => 15,
         MaterialType::MATERIALTYPE_ABS  => 5,
         MaterialType::MATERIALTYPE_PETG => 15,
+    ];
+
+    protected array $bridging_fan_speeds = [
+        MaterialType::MATERIALTYPE_PLA    => 100,
+        'Woodfill'                        => 100,
+        MaterialType::MATERIALTYPE_ABS    => 30,
+        MaterialType::MATERIALTYPE_PETG   => 50
     ];
 
     private FilamentSpoolId $id;
@@ -448,5 +456,12 @@ class FilamentSpool
         $note .= implode('\\n', $cal_notes);
 
         return $note;
+    }
+
+    public function getBridgingFanSpeed(): BridgingFanSpeed
+    {
+        $value = $this->bridging_fan_speeds[$this->material_type->getValue()];
+
+        return new BridgingFanSpeed($value);
     }
 }

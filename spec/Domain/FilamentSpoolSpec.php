@@ -29,6 +29,7 @@ use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\Temperatures;
 use Volta\Domain\ValueObject\CalibrationName;
+use Volta\Domain\ValueObject\FilamentSpool\BridgingFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
@@ -531,5 +532,23 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->getNote()->shouldBeString();
         $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Blue 2.85mm.\\n\\n`Diameter` last calibrated on 2020-05-12');
+    }
+
+    public function it_has_a_bridging_fan_speed(): void
+    {
+        $this->getBridgingFanSpeed()->shouldReturnAnInstanceOf(BridgingFanSpeed::class);
+        $this->getBridgingFanSpeed()->getValue()->shouldBe(100);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
+        $this->getBridgingFanSpeed()->getValue()->shouldBe(30);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
+        $this->getBridgingFanSpeed()->getValue()->shouldBe(100);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->getBridgingFanSpeed()->getValue()->shouldBe(50);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
+        $this->getBridgingFanSpeed()->getValue()->shouldBe(100);
     }
 }

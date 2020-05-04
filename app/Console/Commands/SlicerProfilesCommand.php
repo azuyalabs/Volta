@@ -78,11 +78,6 @@ class SlicerProfilesCommand extends Command
     ];
 
     /**
-     * Common settings for 'Bridge Speed Fan' (by filament type)
-     */
-    protected array $bridge_fan_speeds = ['PLA' => 100, 'Woodfill' => 100, 'ABS' => 30, 'PET' => 50];
-
-    /**
      * Common settings for 'Disable Fan First Layers' (by filament type)
      */
     protected array $disable_fan_first_layers = ['PLA' => 1, 'Woodfill' => 1, 'ABS' => 0, 'PET' => 3];

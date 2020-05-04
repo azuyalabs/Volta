@@ -79,6 +79,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'display_name'                  => 'ABC Plastics PETG Plus Red 1.75mm',
                 'min_fan_speed'                 => 30,
                 'max_fan_speed'                 => 50,
+                'bridging_fan_speed'            => 50,
                 'min_print_speed'               => 15,
                 'first_layer_print_temperature' => 204.0,
                 'next_layer_print_temperature'  => 211.0,
