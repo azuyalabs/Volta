@@ -196,13 +196,17 @@ class SlicerProfilesCommand extends Command
                     }
                 }
 
+                // Notify if some calibrations are not performed yet
                 $missed = array_diff([
                     CalibrationCollection::EXTRUSION_MULTIPLIER,
                     CalibrationCollection::FILAMENT_DIAMETER,
                     CalibrationCollection::K_VALUE,
                 ], array_keys($f['calibrations']));
                 foreach ($missed as $miss) {
-                    $this->warn(sprintf('>> %s Calibration not performed yet.', ucfirst($miss)));
+                    $this->warn(sprintf(
+                        '>> `%s` Calibration not performed yet.',
+                        ucwords(str_replace('_', ' ', $miss))
+                    ));
                 }
             }
 
@@ -248,20 +252,6 @@ class SlicerProfilesCommand extends Command
 //                $this->warn('>> Linear Advance Calibration not performed yet.');
 //            }
 //
-//            # Retrieve Diameter Calibration data
-//            if (isset($f['diameter_calibrations'])) {
-//                $dm     = collect($f['diameter_calibrations']);
-//                $avg    = $dm->pluck('measurements')->flatten()->average();
-//                $margin = $avg - $f['product']['diameter']['value'];
-//
-//                if (isset($avg)) {
-//                    $this->info(sprintf('Filament Diameter    : %.3fmm [%.3fmm (%.2f%%)]', $avg, $margin, ($margin / $f['product']['diameter']['value'] * 100)));
-//                    $f['product']['diameter']['value'] = sprintf('%.3f', $avg);
-//                    $f['filament_notes'] .= sprintf('Filament diameter last calibrated on %s\\n', $dm->pluck('date')->max());
-//                }
-//            } else {
-//                $this->warn('>> Filament Diameter Calibration not performed yet.');
-//            }
 //
 //            # Retrieve Extrusion Multiplier Calibration data
 //            if (isset($f['extrusion_calibrations'])) {
