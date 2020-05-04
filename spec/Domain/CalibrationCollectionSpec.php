@@ -158,4 +158,16 @@ class CalibrationCollectionSpec extends ObjectBehavior
         $this->getLatestCalibrationDate('length')->shouldBeAnInstanceOf(\DateTimeInterface::class);
         $this->getLatestCalibrationDate('length')->shouldBeLike(new \DateTimeImmutable('2021-12-13'));
     }
+
+    public function it_can_get_calibration_names(): void
+    {
+        $this->add(new Calibration(
+            new CalibrationName('volume'),
+            new \DateTimeImmutable('2021-12-13'),
+            [190, 2010]
+        ));
+
+        $this->getCalibrationNames()->shouldBeArray();
+        $this->getCalibrationNames()->shouldBe(['length', 'volume']);
+    }
 }

@@ -444,14 +444,12 @@ class FilamentSpool
         $note = $this->note;
 
         $cal_notes = [];
-        foreach ($this->getCalibrations()->getCalibrations() as $calibrations) {
-            foreach ($calibrations as $calibration) {
-                $cal_notes[] = sprintf(
-                    '`%s` last calibrated on %s',
-                    ucfirst($calibration->getName()->getValue()),
-                    $this->getCalibrations()->getLatestCalibrationDate($calibration->getName()->getValue())->format('Y-m-d')
-                );
-            }
+        foreach ($this->getCalibrations()->getCalibrationNames() as $name) {
+            $cal_notes[] = sprintf(
+                '`%s` last calibrated on %s',
+                ucfirst($name),
+                $this->getCalibrations()->getLatestCalibrationDate($name)->format('Y-m-d')
+            );
         }
 
         $note .= implode('\\n', $cal_notes);

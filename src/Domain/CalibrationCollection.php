@@ -87,4 +87,9 @@ class CalibrationCollection
             return (!is_null($carry) && $carry > $d) ? $carry : $d;
         });
     }
+
+    public function getCalibrationNames(): array
+    {
+        return array_keys($this->calibrations);
+    }
 }

@@ -531,4 +531,25 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->getNote()->shouldBeString();
         $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Red 1.75mm.\\n\\n');
     }
+
+    public function it_has_a_note_with_calibration_information(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName(CalibrationCollection::FILAMENT_DIAMETER),
+            new \DateTimeImmutable('2020-05-11'),
+            [1.77, 1.90]
+        );
+        $this->addCalibration($calibration);
+
+        $this->addCalibration(
+            new Calibration(
+                new CalibrationName(CalibrationCollection::FILAMENT_DIAMETER),
+                new \DateTimeImmutable('2020-05-12'),
+                [1.67, 1.50, 1.88]
+            )
+        );
+
+        $this->getNote()->shouldBeString();
+        $this->getNote()->shouldBe('Calibrated settings for ABC Plastics Super PLA Red 1.75mm.\\n\\n`Diameter` last calibrated on 2020-05-12');
+    }
 }
