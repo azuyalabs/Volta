@@ -7,7 +7,7 @@ namespace Volta\Application\DataTransformer\FilamentSpool;
 
 use League\Fractal\TransformerAbstract;
 use Volta\Domain\FilamentSpool;
-use Volta\Domain\ValueObject\FilamentSpool\MaximumVolumetricSpeed;
+use Volta\Domain\ValueObject\FilamentSpool\MaximumVolumetricFlowRate;
 
 class SlicerTemplateTransformer extends TransformerAbstract
 {
@@ -36,7 +36,7 @@ class SlicerTemplateTransformer extends TransformerAbstract
             'first_layer_bed_temperature'        => $spool->getFirstLayerBedTemperature()->toUnit('celsius'),
             'next_layer_bed_temperature'         => $spool->getNextLayerBedTemperature()->toUnit('celsius'),
             'keep_warm_temperature'              => round($spool->getNextLayerPrintTemperature()->toUnit('celsius') * self::KEEP_WARM_RATIO, 0),
-            'maximum_volumetric_speed'           => $spool->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND),
+            'maximum_volumetric_speed'           => $spool->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND),
             'note'                               => $spool->getNote(),
         ];
     }

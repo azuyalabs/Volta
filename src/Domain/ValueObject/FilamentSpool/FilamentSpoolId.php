@@ -12,7 +12,9 @@
 
 declare(strict_types=1);
 
-namespace Volta\Domain\ValueObject;
+namespace Volta\Domain\ValueObject\FilamentSpool;
+
+use Volta\Domain\ValueObject\Id;
 
 class FilamentSpoolId extends Id
 {

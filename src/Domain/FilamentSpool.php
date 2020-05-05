@@ -26,12 +26,12 @@ use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\ValueObject\FilamentSpool\BridgingFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
+use Volta\Domain\ValueObject\FilamentSpool\FilamentSpoolId;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpool\MaximumFanSpeed;
-use Volta\Domain\ValueObject\FilamentSpool\MaximumVolumetricSpeed;
+use Volta\Domain\ValueObject\FilamentSpool\MaximumVolumetricFlowRate;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumPrintSpeed;
-use Volta\Domain\ValueObject\FilamentSpoolId;
 
 class FilamentSpool
 {
@@ -63,13 +63,12 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_PETG   => 50
     ];
 
-    protected array $max_volumetric_speed = [
-        MaterialType::MATERIALTYPE_PLA      => 15,
-        'Woodfill'                          => 15,
-        MaterialType::MATERIALTYPE_ABS      => 11,
-        MaterialType::MATERIALTYPE_PETG     => 8,
+    protected array $max_volumetric_flow_rate = [
+        MaterialType::MATERIALTYPE_PLA      => 15.0,
+        'Woodfill'                          => 15.0,
+        MaterialType::MATERIALTYPE_ABS      => 11.0,
+        MaterialType::MATERIALTYPE_PETG     => 8.0,
     ];
-
 
     private FilamentSpoolId $id;
     private string $name;
@@ -474,10 +473,10 @@ class FilamentSpool
         return new BridgingFanSpeed($value);
     }
 
-    public function getMaximumVolumetricSpeed(): MaximumVolumetricSpeed
+    public function getMaximumVolumetricFlowRate(): MaximumVolumetricFlowRate
     {
-        $value = $this->max_volumetric_speed[$this->material_type->getValue()];
+        $value = $this->max_volumetric_flow_rate[$this->material_type->getValue()];
 
-        return new MaximumVolumetricSpeed(new Velocity($value, MaximumVolumetricSpeed::MILLIMETER_PER_SECOND));
+        return new MaximumVolumetricFlowRate(new VolumetricFlowRate($value, MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND));
     }
 }

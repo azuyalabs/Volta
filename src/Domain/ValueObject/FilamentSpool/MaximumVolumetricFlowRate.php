@@ -4,21 +4,21 @@ namespace Volta\Domain\ValueObject\FilamentSpool;
 
 use Volta\Domain\Exception\NegativeValueException;
 use Volta\Domain\Exception\ZeroValueException;
-use Volta\Domain\Velocity;
+use Volta\Domain\VolumetricFlowRate;
 
-class MaximumVolumetricSpeed
+class MaximumVolumetricFlowRate
 {
-    public const MILLIMETER_PER_SECOND = 'millimeter per second';
+    public const CUBIC_MILLIMETER_PER_SECOND = 'mm^3/s';
 
-    private Velocity $value;
+    private VolumetricFlowRate $value;
 
-    public function __construct(Velocity $value)
+    public function __construct(VolumetricFlowRate $value)
     {
         $this->value = $value;
         $this->validate();
     }
 
-    public function getValue(): Velocity
+    public function getValue(): VolumetricFlowRate
     {
         return $this->value;
     }
@@ -34,7 +34,7 @@ class MaximumVolumetricSpeed
         }
     }
 
-    public function isEqual(Velocity $other): bool
+    public function isEqual(VolumetricFlowRate $other): bool
     {
         return $this->value === $other;
     }

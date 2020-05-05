@@ -33,12 +33,12 @@ use Volta\Domain\ValueObject\FilamentSpool\BridgingFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
+use Volta\Domain\ValueObject\FilamentSpool\FilamentSpoolId;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpool\MaximumFanSpeed;
-use Volta\Domain\ValueObject\FilamentSpool\MaximumVolumetricSpeed;
+use Volta\Domain\ValueObject\FilamentSpool\MaximumVolumetricFlowRate;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumPrintSpeed;
-use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
@@ -555,19 +555,21 @@ class FilamentSpoolSpec extends ObjectBehavior
 
     public function it_has_a_maximum_volumetric_speed(): void
     {
-        $this->getMaximumVolumetricSpeed()->shouldReturnAnInstanceOf(MaximumVolumetricSpeed::class);
-        $this->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(15.0);
+        $this->getMaximumVolumetricFlowRate()->shouldReturnAnInstanceOf(MaximumVolumetricFlowRate::class);
+
+
+        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(15, 1);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
-        $this->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(11.0);
+        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(11, 1);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
-        $this->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(15.0);
+        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(15, 1);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
-        $this->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(8.0);
+        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(8, 1);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
-        $this->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(15.0);
+        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(15, 1);
     }
 }
