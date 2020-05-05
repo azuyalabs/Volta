@@ -448,7 +448,7 @@ class FilamentSpool
         foreach ($this->getCalibrations()->getCalibrationNames() as $name) {
             $cal_notes[] = sprintf(
                 '`%s` last calibrated on %s',
-                ucfirst($name),
+                ucwords(str_replace('_', ' ', $name)),
                 $this->getCalibrations()->getLatestCalibrationDate($name)->format('Y-m-d')
             );
         }

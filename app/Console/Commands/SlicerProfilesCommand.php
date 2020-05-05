@@ -215,7 +215,6 @@ class SlicerProfilesCommand extends Command
 
 //            continue;
 //            // Set defaults
-//            $f['bridge_fan_speed']              = $this->bridge_fan_speeds[$f['material']];
 //            $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['material']];
 //            $f['extrusion_multiplier']          = 1;
 //            $f['cooling']                       = $f['material'] === 'ABS' ? 0 : 1;
