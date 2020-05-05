@@ -37,8 +37,8 @@ use Volta\Domain\Temperatures;
 use Volta\Domain\ValueObject\CalibrationName;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
+use Volta\Domain\ValueObject\FilamentSpool\FilamentSpoolId;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
-use Volta\Domain\ValueObject\FilamentSpoolId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerId;
 use Volta\Domain\ValueObject\Manufacturer\ManufacturerName;
 
