@@ -37,6 +37,7 @@ class SlicerTemplateTransformer extends TransformerAbstract
             'next_layer_bed_temperature'         => $spool->getNextLayerBedTemperature()->toUnit('celsius'),
             'keep_warm_temperature'              => round($spool->getNextLayerPrintTemperature()->toUnit('celsius') * self::KEEP_WARM_RATIO, 0),
             'maximum_volumetric_speed'           => $spool->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND),
+            'auto_cooling'                       => $spool->hasAutoCooling() ? 1 : 0,
             'note'                               => $spool->getNote(),
         ];
     }

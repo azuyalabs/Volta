@@ -479,4 +479,14 @@ class FilamentSpool
 
         return new MaximumVolumetricFlowRate(new VolumetricFlowRate($value, MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND));
     }
+
+    public function hasAutoCooling(): bool
+    {
+        $auto_cooling = true;
+
+        if (MaterialType::MATERIALTYPE_ABS === $this->material_type->getValue()) {
+            $auto_cooling = false;
+        }
+        return $auto_cooling;
+    }
 }

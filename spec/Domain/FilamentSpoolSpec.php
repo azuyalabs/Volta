@@ -556,8 +556,6 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_maximum_volumetric_speed(): void
     {
         $this->getMaximumVolumetricFlowRate()->shouldReturnAnInstanceOf(MaximumVolumetricFlowRate::class);
-
-
         $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(15, 1);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
@@ -571,5 +569,22 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
         $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(15, 1);
+    }
+
+    public function it_tells_if_it_has_auto_cooling(): void
+    {
+        $this->hasAutoCooling()->shouldBe(true);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
+        $this->hasAutoCooling()->shouldBe(false);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
+        $this->hasAutoCooling()->shouldBe(true);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->hasAutoCooling()->shouldBe(true);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
+        $this->hasAutoCooling()->shouldBe(true);
     }
 }
