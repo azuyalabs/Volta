@@ -24,7 +24,7 @@ class MaximumVolumetricSpeedSpec extends ObjectBehavior
 {
     public function let(): void
     {
-        $this->beConstructedWith(new Velocity(15.5, 'millimeter per second'));
+        $this->beConstructedWith(new Velocity(15.5, MaximumVolumetricSpeed::MILLIMETER_PER_SECOND));
     }
 
     public function it_is_initializable(): void
@@ -35,12 +35,12 @@ class MaximumVolumetricSpeedSpec extends ObjectBehavior
     public function it_has_value(): void
     {
         $this->getValue()->shouldBeAnInstanceOf(Velocity::class);
-        $this->getValue()->toUnit('millimeter per second')->shouldBe(15.5);
+        $this->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(15.5);
     }
 
     public function it_compares_equality(): void
     {
-        $other = new MaximumVolumetricSpeed(new Velocity(78.33, 'millimeter per second'));
+        $other = new MaximumVolumetricSpeed(new Velocity(78.33, MaximumVolumetricSpeed::MILLIMETER_PER_SECOND));
         $this->shouldNotBeEqual($other->getValue());
 
         $this->shouldBeEqual($this->getValue());
@@ -51,14 +51,14 @@ class MaximumVolumetricSpeedSpec extends ObjectBehavior
 
     public function it_throws_an_exception_when_value_is_negative(): void
     {
-        $this->beConstructedWith(new Velocity(-10.56, 'millimeter per second'));
+        $this->beConstructedWith(new Velocity(-10.56, MaximumVolumetricSpeed::MILLIMETER_PER_SECOND));
         $this->shouldThrow(NegativeValueException::class)
             ->duringInstantiation();
     }
 
     public function it_throws_an_exception_when_value_is_zero(): void
     {
-        $this->beConstructedWith(new Velocity(0, 'millimeter per second'));
+        $this->beConstructedWith(new Velocity(0, MaximumVolumetricSpeed::MILLIMETER_PER_SECOND));
         $this->shouldThrow(ZeroValueException::class)
             ->duringInstantiation();
     }

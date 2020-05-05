@@ -8,6 +8,8 @@ use Volta\Domain\Velocity;
 
 class MaximumVolumetricSpeed
 {
+    public const MILLIMETER_PER_SECOND = 'millimeter per second';
+
     private Velocity $value;
 
     public function __construct(Velocity $value)

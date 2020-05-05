@@ -91,11 +91,6 @@ class SlicerProfilesCommand extends Command
      * Common settings for 'Fan Below Layer Time' (by filament type)
      */
 
-    /**
-     * Common settings for 'Filament Max Volumetric Speed' (by filament type)
-     */
-    protected array $filament_max_volumetric_speed = ['PLA' => 15, 'Woodfill' => 15, 'ABS' => 11, 'PET' => 8];
-
     protected $signature = 'volta:profiles';
 
     protected $description = 'Generate slicer profiles';

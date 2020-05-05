@@ -35,6 +35,7 @@ use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpool\MaximumFanSpeed;
+use Volta\Domain\ValueObject\FilamentSpool\MaximumVolumetricSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\MinimumPrintSpeed;
 use Volta\Domain\ValueObject\FilamentSpoolId;
@@ -550,5 +551,23 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
         $this->getBridgingFanSpeed()->getValue()->shouldBe(100);
+    }
+
+    public function it_has_a_maximum_volumetric_speed(): void
+    {
+        $this->getMaximumVolumetricSpeed()->shouldReturnAnInstanceOf(MaximumVolumetricSpeed::class);
+        $this->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(15.0);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
+        $this->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(11.0);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
+        $this->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(15.0);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(8.0);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
+        $this->getMaximumVolumetricSpeed()->getValue()->toUnit(MaximumVolumetricSpeed::MILLIMETER_PER_SECOND)->shouldBe(15.0);
     }
 }

@@ -39,6 +39,10 @@ class FilamentSpoolBuilder
 
     private array $calibrations;
 
+    private Temperatures $print_temperatures;
+
+    private Temperatures $bed_temperatures;
+
     public function __construct()
     {
         $this->id           = new FilamentSpoolId();
@@ -46,14 +50,14 @@ class FilamentSpoolBuilder
             new ManufacturerId(),
             new ManufacturerName('XYZ Filaments')
         );
-        $this->name               = 'PETG Plus';
-        $this->diameter           = new Length(0.0, 'millimeters');
-        $this->weight             = new Mass(0.0, 'grams');
-        $this->material           = new MaterialType(MaterialType::MATERIALTYPE_PETG);
-        $this->color              = new Color(new ColorName('Green'), new Hex('#00ff00'));
-        $this->density            = 1;
-        $this->print_temperatures = new Temperatures(new Temperature(210, 'celsius'), new Temperature(250, 'celsius'));
-        $this->bed_temperatures   = new Temperatures(null, null, new Temperature(75, 'celsius'), new Temperature(90, 'celsius'));
+        $this->name                 = 'PETG Plus';
+        $this->diameter             = new Length(0.0, 'millimeters');
+        $this->weight               = new Mass(0.0, 'grams');
+        $this->material             = new MaterialType(MaterialType::MATERIALTYPE_PETG);
+        $this->color                = new Color(new ColorName('Green'), new Hex('#00ff00'));
+        $this->density              = 1;
+        $this->print_temperatures   = new Temperatures(new Temperature(210, 'celsius'), new Temperature(250, 'celsius'));
+        $this->bed_temperatures     = new Temperatures(null, null, new Temperature(75, 'celsius'), new Temperature(90, 'celsius'));
     }
 
     public function withWeight(Mass $weight): void
