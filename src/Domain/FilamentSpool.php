@@ -110,28 +110,53 @@ class FilamentSpool
         $this->note               = sprintf('Calibrated settings for %s.\\n\\n', $this->getDisplayName()->getValue());
     }
 
-    public function getPrintTemperatures(): Temperatures
+    public function getDisplayName(): DisplayName
     {
-        return $this->print_temperatures;
+        return new DisplayName(
+            implode(
+                ' ',
+                [
+                    $this->getManufacturer()->getName()->getValue(),
+                    $this->getName(),
+                    $this->getColor()->getColorName()->getValue(),
+                    $this->getNominalDiameter()->toUnit('millimeter').'mm',
+                ]
+            )
+        );
     }
 
-    public function setPrintTemperatures(Temperatures $print_temperatures): FilamentSpool
+    public function getManufacturer(): Manufacturer
     {
-        $this->print_temperatures = $print_temperatures;
+        return $this->manufacturer;
+    }
+
+    public function setManufacturer(Manufacturer $manufacturer): FilamentSpool
+    {
+        $this->manufacturer = $manufacturer;
 
         return $this;
     }
 
-    public function getBedTemperatures(): Temperatures
+    public function getName(): string
     {
-        return $this->bed_temperatures;
+        return $this->name;
     }
 
-    public function setBedTemperatures(Temperatures $bed_temperatures): FilamentSpool
+    public function setName(string $name): self
     {
-        $this->bed_temperatures = $bed_temperatures;
+        $this->name = $name;
 
         return $this;
+    }
+
+    public function getColor(): Color
+    {
+        return $this->color;
+    }
+
+    public function getNominalDiameter(): Length
+    {
+        return $this->diameter;
     }
 
     public function getMinimumFanSpeed(): MinimumFanSpeed
@@ -155,38 +180,6 @@ class FilamentSpool
         return new MinimumPrintSpeed($value);
     }
 
-    public function getDisplayName(): DisplayName
-    {
-        return new DisplayName(
-            implode(
-                ' ',
-                [
-                    $this->getManufacturer()->getName()->getValue(),
-                    $this->getName(),
-                    $this->getColor()->getColorName()->getValue(),
-                    $this->getNominalDiameter()->toUnit('millimeter').'mm',
-                ]
-            )
-        );
-    }
-
-    public function getColor(): Color
-    {
-        return $this->color;
-    }
-
-    public function getManufacturer(): Manufacturer
-    {
-        return $this->manufacturer;
-    }
-
-    public function setManufacturer(Manufacturer $manufacturer): FilamentSpool
-    {
-        $this->manufacturer = $manufacturer;
-
-        return $this;
-    }
-
     public function getMaterialType(): MaterialType
     {
         return $this->material_type;
@@ -199,11 +192,6 @@ class FilamentSpool
         return $this;
     }
 
-    public function getNominalDiameter(): Length
-    {
-        return $this->diameter;
-    }
-
     public function setNominalDiameter(Length $diameter): FilamentSpool
     {
         if ($this->isZero($diameter->toNativeUnit())) {
@@ -213,6 +201,11 @@ class FilamentSpool
         $this->diameter = $diameter;
 
         return $this;
+    }
+
+    private function isZero(float $value): bool
+    {
+        return abs($value - 0) < PHP_FLOAT_EPSILON;
     }
 
     public function getDiameter(): Length
@@ -227,11 +220,6 @@ class FilamentSpool
         }
 
         return $diameter;
-    }
-
-    private function isZero(float $value): bool
-    {
-        return abs($value - 0) < PHP_FLOAT_EPSILON;
     }
 
     public function getDiameterTolerance(): Length
@@ -258,18 +246,6 @@ class FilamentSpool
         }
 
         $this->weight = $weight;
-
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
 
         return $this;
     }
@@ -355,11 +331,6 @@ class FilamentSpool
         $this->calibrations->add($calibration);
     }
 
-    public function getCalibrations(): CalibrationCollection
-    {
-        return $this->calibrations;
-    }
-
     /**
      * Get the print temperature for the first layer.
      *
@@ -380,6 +351,18 @@ class FilamentSpool
         }
 
         return $temp;
+    }
+
+    public function getPrintTemperatures(): Temperatures
+    {
+        return $this->print_temperatures;
+    }
+
+    public function setPrintTemperatures(Temperatures $print_temperatures): FilamentSpool
+    {
+        $this->print_temperatures = $print_temperatures;
+
+        return $this;
     }
 
     /**
@@ -426,6 +409,18 @@ class FilamentSpool
         return $temp;
     }
 
+    public function getBedTemperatures(): Temperatures
+    {
+        return $this->bed_temperatures;
+    }
+
+    public function setBedTemperatures(Temperatures $bed_temperatures): FilamentSpool
+    {
+        $this->bed_temperatures = $bed_temperatures;
+
+        return $this;
+    }
+
     /**
      * Get the bed temperature for the next layers.
      *
@@ -464,6 +459,11 @@ class FilamentSpool
         $note .= implode('\\n', $cal_notes);
 
         return $note;
+    }
+
+    public function getCalibrations(): CalibrationCollection
+    {
+        return $this->calibrations;
     }
 
     public function getBridgingFanSpeed(): BridgingFanSpeed

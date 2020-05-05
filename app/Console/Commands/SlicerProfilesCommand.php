@@ -216,7 +216,6 @@ class SlicerProfilesCommand extends Command
 //            $f['fan_always_on']                 = $f['material'] === 'ABS' ? 0 : 1;
 //            $f['k_value']                       = ($f['material'] === 'PET') ? 45 : 30;
 //            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];
-//            $f['filament_max_volumetric_speed'] = $this->filament_max_volumetric_speed[$f['material']];
 //            $f['inherits']                      = $this->inherits[$f['material']];
 //
 //            $f['price_per_cm3'] = ($f['price'] * $f['density']) / $f['weight'];
