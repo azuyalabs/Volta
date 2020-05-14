@@ -75,6 +75,7 @@ class SlicerProfilesCommand extends Command
         'slic3r'      => 'Slic3r',
         'prusaslicer' => 'Prusa Slicer',
         'kisslicer'   => 'KISSlicer',
+        'slic3r++'    => 'Slic3r++'
     ];
 
     /**
@@ -104,7 +105,7 @@ class SlicerProfilesCommand extends Command
      */
     public function __construct()
     {
-        $this->plates             = new Engine(storage_path('app/'.self::TEMPLATES_DIR), 'ini');
+        $this->plates             = new Engine(storage_path('app/' . self::TEMPLATES_DIR), 'ini');
         $this->filamentsDirectory = Storage::disk(self::FILAMENTS_DISK);
 
         parent::__construct();
@@ -139,7 +140,7 @@ class SlicerProfilesCommand extends Command
                 new Color(new ColorName($f['product']['color']['name']), new Hex($f['product']['color']['code'])),
                 new Length($f['product']['diameter']['value'], 'millimeters')
             );
-            $this->info($spool->getDisplayName()->getValue().' ('.$spool->getId().')');
+            $this->info($spool->getDisplayName()->getValue() . ' (' . $spool->getId() . ')');
 
             $spool->setPurchasePrice(new Money(
                 $f['purchase_price']['value'],
@@ -267,7 +268,7 @@ class SlicerProfilesCommand extends Command
 
             // Export profiles for each supported slicer
             foreach ($this->slicers as $slicer_id => $slicer_name) {
-                $outputDirectory = storage_path('app/'.self::PROFILES_DIR.DIRECTORY_SEPARATOR.$slicer_id);
+                $outputDirectory = storage_path('app/' . self::PROFILES_DIR . DIRECTORY_SEPARATOR . $slicer_id);
 
                 // Create slicer profile directory if not exists
                 if (!file_exists($outputDirectory) && !mkdir(
@@ -278,21 +279,21 @@ class SlicerProfilesCommand extends Command
                     throw new RuntimeException(sprintf('Directory "%s" could not be created', $outputDirectory));
                 }
 
-                $profileFilename = $spool->getDisplayName()->getValue().'.ini';
+                $profileFilename = $spool->getDisplayName()->getValue() . '.ini';
 
                 if ('cura' === $slicer_id) {
-                    $profileFilename = str_replace(' ', '_', $spool->getDisplayName()->getValue()).'.xml.fdm_material';
+                    $profileFilename = str_replace(' ', '_', $spool->getDisplayName()->getValue()) . '.xml.fdm_material';
 
                     // Output Cura Material Settings (replace this in your cura.cfg file)
                     file_put_contents(
-                        $outputDirectory.DIRECTORY_SEPARATOR.'cura_material_settings.txt',
-                        'material_settings = '.json_encode($cura_material_settings, JSON_THROW_ON_ERROR, 512)
+                        $outputDirectory . DIRECTORY_SEPARATOR . 'cura_material_settings.txt',
+                        'material_settings = ' . json_encode($cura_material_settings, JSON_THROW_ON_ERROR, 512)
                     );
                 }
 
                 // Save output
                 file_put_contents(
-                    $outputDirectory.DIRECTORY_SEPARATOR.$profileFilename,
+                    $outputDirectory . DIRECTORY_SEPARATOR . $profileFilename,
                     $this->plates->render($slicer_id, [
                         'generated_on' => (new DateTime())->format(DATE_ATOM),
                         'profile'      => $f,
@@ -302,7 +303,7 @@ class SlicerProfilesCommand extends Command
             $this->line('');
         }
 
-        $this->info('Profiles successfully generated for '.implode(', ', $this->slicers));
+        $this->info('Profiles successfully generated for ' . implode(', ', $this->slicers));
     }
 
     private function getFilamentFiles(): array
@@ -318,14 +319,14 @@ class SlicerProfilesCommand extends Command
 
     private function getFilamentSpoolData($filamentFile): array
     {
-        $CACHE_KEY = 'filament_spool_'.$filamentFile['id'];
+        $CACHE_KEY = 'filament_spool_' . $filamentFile['id'];
 
         if (!Cache::has($CACHE_KEY)) {
             Cache::put(
                 $CACHE_KEY,
                 json_decode(
                     $this->filamentsDirectory->get(
-                        self::FILAMENTS_DIRECTORY.DIRECTORY_SEPARATOR.$filamentFile['name']
+                        self::FILAMENTS_DIRECTORY . DIRECTORY_SEPARATOR . $filamentFile['name']
                     ),
                     true,
                     512,
