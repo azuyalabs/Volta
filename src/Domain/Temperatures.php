@@ -45,7 +45,7 @@ class Temperatures
     public const DEFAULT_MAX_PRINT_TEMP = 220.0;
 
     // Ideally this should be set per material type
-    public const DEFAULT_MIN_BED_TEMP = 45.0;
+    public const DEFAULT_MIN_BED_TEMP = 0.0;
     public const DEFAULT_MAX_BED_TEMP = 100.0;
 
     private Temperature $max_print_temperature;
