@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use Money\Currency;
+use Money\Money;
 use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
@@ -29,6 +31,8 @@ class FilamentSpoolBuilder
 
     private Mass $weight;
 
+    private Money $purchase_price;
+
     private string $name;
 
     private MaterialType $material;
@@ -50,19 +54,25 @@ class FilamentSpoolBuilder
             new ManufacturerId(),
             new ManufacturerName('XYZ Filaments')
         );
-        $this->name                 = 'PETG Plus';
-        $this->diameter             = new Length(0.0, 'millimeters');
-        $this->weight               = new Mass(0.0, 'grams');
-        $this->material             = new MaterialType(MaterialType::MATERIALTYPE_PETG);
-        $this->color                = new Color(new ColorName('Green'), new Hex('#00ff00'));
-        $this->density              = 1;
-        $this->print_temperatures   = new Temperatures(new Temperature(210, 'celsius'), new Temperature(250, 'celsius'));
-        $this->bed_temperatures     = new Temperatures(null, null, new Temperature(75, 'celsius'), new Temperature(90, 'celsius'));
+        $this->name               = 'PETG Plus';
+        $this->diameter           = new Length(0.0, 'millimeters');
+        $this->weight             = new Mass(0.0, 'grams');
+        $this->purchase_price     = new Money(0, new Currency('USD'));
+        $this->material           = new MaterialType(MaterialType::MATERIALTYPE_PETG);
+        $this->color              = new Color(new ColorName('Green'), new Hex('#00ff00'));
+        $this->density            = 1;
+        $this->print_temperatures = new Temperatures(new Temperature(210, 'celsius'), new Temperature(250, 'celsius'));
+        $this->bed_temperatures   = new Temperatures(null, null, new Temperature(75, 'celsius'), new Temperature(90, 'celsius'));
     }
 
     public function withWeight(Mass $weight): void
     {
         $this->weight = $weight;
+    }
+
+    public function withPurchasePrice(Money $price): void
+    {
+        $this->purchase_price = $price;
     }
 
     public function withManufacturer(Manufacturer $manufacturer): void
@@ -115,6 +125,7 @@ class FilamentSpoolBuilder
             $this->diameter
         );
         $spool->setWeight($this->weight);
+        $spool->setPurchasePrice($this->purchase_price);
         $spool->setMaterialType($this->material);
         $spool->setDensity($this->density);
         foreach ($this->calibrations as $calibration) {

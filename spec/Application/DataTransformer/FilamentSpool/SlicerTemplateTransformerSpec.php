@@ -2,6 +2,8 @@
 
 namespace spec\Volta\Application\DataTransformer\FilamentSpool;
 
+use Money\Currency;
+use Money\Money;
 use OzdemirBurak\Iris\Color\Hex;
 use PhpSpec\ObjectBehavior;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
@@ -31,6 +33,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
         $builder->withManufacturer(new Manufacturer(new ManufacturerId(), new ManufacturerName('ABC Plastics')));
         $builder->withDiameter(new Length(1.75, 'millimeter'));
         $builder->withWeight(new Mass(900, 'grams'));
+        $builder->withPurchasePrice(new Money(28, new Currency('USD')));
         $builder->withMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
         $builder->withDensity(1.22);
         $builder->withColor(new Color(new ColorName('Red'), new Hex('#ff0000')));
@@ -73,7 +76,8 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'weight'                        => 900,
                 'material'                      => 'PETG',
                 'density'                       => 1.22,
-                'price'                         => 0,
+                'purchase_price'                => 28.0,
+                'price_per_kg'                  => 31,
                 'color'                         => 'Red',
                 'color_code'                    => '#ff0000',
                 'display_name'                  => 'ABC Plastics PETG Plus Red 1.75mm',

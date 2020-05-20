@@ -293,9 +293,7 @@ class FilamentSpool
     {
         $weight = $this->weight->toNativeUnit();
 
-        $pr = clone $this->getPurchasePrice();
-
-        return $pr->multiply(1 / $weight);
+        return $this->getPurchasePrice()->multiply(1 / $weight);
     }
 
     public function getDensity(): float
