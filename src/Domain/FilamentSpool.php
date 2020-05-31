@@ -36,38 +36,43 @@ use Volta\Domain\ValueObject\FilamentSpool\MinimumPrintSpeed;
 class FilamentSpool
 {
     protected array $min_fan_speed_definition = [
-        MaterialType::MATERIALTYPE_PLA  => 100,
-        'Woodfill'                      => 100,
-        MaterialType::MATERIALTYPE_ABS  => 15,
-        MaterialType::MATERIALTYPE_PETG => 30,
+        MaterialType::MATERIALTYPE_PLA      => 100,
+        MaterialType::MATERIALTYPE_WOODFILL => 100,
+        MaterialType::MATERIALTYPE_ABS      => 15,
+        MaterialType::MATERIALTYPE_PETG     => 30,
+        MaterialType::MATERIALTYPE_FLEX     => 70,
     ];
 
     protected array $max_fan_speed_definition = [
-        MaterialType::MATERIALTYPE_PLA  => 100,
-        'Woodfill'                      => 100,
-        MaterialType::MATERIALTYPE_ABS  => 30,
-        MaterialType::MATERIALTYPE_PETG => 50,
+        MaterialType::MATERIALTYPE_PLA      => 100,
+        MaterialType::MATERIALTYPE_WOODFILL => 100,
+        MaterialType::MATERIALTYPE_ABS      => 30,
+        MaterialType::MATERIALTYPE_PETG     => 50,
+        MaterialType::MATERIALTYPE_FLEX     => 90,
     ];
 
     protected array $min_print_speed_definition = [
-        MaterialType::MATERIALTYPE_PLA  => 15,
-        'Woodfill'                      => 15,
-        MaterialType::MATERIALTYPE_ABS  => 5,
-        MaterialType::MATERIALTYPE_PETG => 15,
+        MaterialType::MATERIALTYPE_PLA      => 15,
+        MaterialType::MATERIALTYPE_WOODFILL => 15,
+        MaterialType::MATERIALTYPE_ABS      => 5,
+        MaterialType::MATERIALTYPE_PETG     => 15,
+        MaterialType::MATERIALTYPE_FLEX     => 15,
     ];
 
     protected array $bridging_fan_speeds = [
-        MaterialType::MATERIALTYPE_PLA    => 100,
-        'Woodfill'                        => 100,
-        MaterialType::MATERIALTYPE_ABS    => 30,
-        MaterialType::MATERIALTYPE_PETG   => 50
+        MaterialType::MATERIALTYPE_PLA      => 100,
+        MaterialType::MATERIALTYPE_WOODFILL => 100,
+        MaterialType::MATERIALTYPE_ABS      => 30,
+        MaterialType::MATERIALTYPE_PETG     => 50,
+        MaterialType::MATERIALTYPE_FLEX     => 80,
     ];
 
     protected array $max_volumetric_flow_rate = [
         MaterialType::MATERIALTYPE_PLA      => 15.0,
-        'Woodfill'                          => 15.0,
+        MaterialType::MATERIALTYPE_WOODFILL => 15.0,
         MaterialType::MATERIALTYPE_ABS      => 11.0,
         MaterialType::MATERIALTYPE_PETG     => 8.0,
+        MaterialType::MATERIALTYPE_FLEX     => 1.2,
     ];
 
     private FilamentSpoolId $id;
@@ -82,7 +87,7 @@ class FilamentSpool
     private Color $color;
     private Temperatures $print_temperatures;
     private Temperatures $bed_temperatures;
-    private float $density      = 1.0;
+    private float $density = 1.0;
     private CalibrationCollection $calibrations;
     private string $note;
 
@@ -475,7 +480,8 @@ class FilamentSpool
     {
         $value = $this->max_volumetric_flow_rate[$this->material_type->getValue()];
 
-        return new MaximumVolumetricFlowRate(new VolumetricFlowRate($value, MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND));
+        return new MaximumVolumetricFlowRate(new VolumetricFlowRate($value,
+            MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND));
     }
 
     public function hasAutoCooling(): bool
@@ -485,6 +491,7 @@ class FilamentSpool
         if (MaterialType::MATERIALTYPE_ABS === $this->material_type->getValue()) {
             $auto_cooling = false;
         }
+
         return $auto_cooling;
     }
 }

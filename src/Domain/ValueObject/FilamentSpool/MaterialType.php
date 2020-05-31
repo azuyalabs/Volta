@@ -23,6 +23,7 @@ class MaterialType
     public const MATERIALTYPE_PETG     = 'PETG';
     public const MATERIALTYPE_PP       = 'PP';
     public const MATERIALTYPE_WOODFILL = 'Woodfill';
+    public const MATERIALTYPE_FLEX     = 'FLEX';
 
     private string $value;
 
@@ -35,11 +36,12 @@ class MaterialType
     private function validate(): void
     {
         $types = [
-                self::MATERIALTYPE_ABS,
-                self::MATERIALTYPE_PLA,
-                self::MATERIALTYPE_PETG,
-                self::MATERIALTYPE_PP,
-                self::MATERIALTYPE_WOODFILL,
+            self::MATERIALTYPE_ABS,
+            self::MATERIALTYPE_PLA,
+            self::MATERIALTYPE_PETG,
+            self::MATERIALTYPE_PP,
+            self::MATERIALTYPE_WOODFILL,
+            self::MATERIALTYPE_FLEX,
         ];
         if (false === \in_array($this->value, $types, true)) {
             throw new InvalidMaterialTypeException();
