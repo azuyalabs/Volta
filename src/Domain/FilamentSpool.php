@@ -480,8 +480,10 @@ class FilamentSpool
     {
         $value = $this->max_volumetric_flow_rate[$this->material_type->getValue()];
 
-        return new MaximumVolumetricFlowRate(new VolumetricFlowRate($value,
-            MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND));
+        return new MaximumVolumetricFlowRate(new VolumetricFlowRate(
+            $value,
+            MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND
+        ));
     }
 
     public function hasAutoCooling(): bool

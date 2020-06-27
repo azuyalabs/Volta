@@ -70,11 +70,11 @@ class SlicerProfilesCommand extends Command
     private const PROFILES_DIR = 'filaments/profiles';
 
     protected array $slicers = [
-        'slic3rpe'    => 'Slic3rPE',
-        'cura'        => 'Ultimaker Cura',
-        'slic3r'      => 'Slic3r',
-        'prusaslicer' => 'Prusa Slicer',
-        'kisslicer'   => 'KISSlicer',
+        'slic3rpe'       => 'Slic3rPE',
+        'cura'           => 'Ultimaker Cura',
+        'slic3r'         => 'Slic3r',
+        'prusaslicer'    => 'Prusa Slicer',
+        'kisslicer'      => 'KISSlicer',
         'superslicer'    => 'SuperSlicer'
     ];
 
