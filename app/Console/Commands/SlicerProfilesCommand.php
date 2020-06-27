@@ -75,7 +75,7 @@ class SlicerProfilesCommand extends Command
         'slic3r'      => 'Slic3r',
         'prusaslicer' => 'Prusa Slicer',
         'kisslicer'   => 'KISSlicer',
-        'slic3r++'    => 'Slic3r++'
+        'superslicer'    => 'SuperSlicer'
     ];
 
     /**
