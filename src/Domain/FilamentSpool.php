@@ -25,6 +25,7 @@ use Volta\Domain\Exception\ZeroDiameterException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\ValueObject\FilamentSpool\BridgingFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
+use Volta\Domain\ValueObject\FilamentSpool\DisableFanFirstLayers;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\FilamentSpoolId;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
@@ -73,6 +74,14 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_ABS      => 11.0,
         MaterialType::MATERIALTYPE_PETG     => 8.0,
         MaterialType::MATERIALTYPE_FLEX     => 1.2,
+    ];
+
+    protected array $disable_fan_first_layers = [
+        MaterialType::MATERIALTYPE_PLA      => 1,
+        MaterialType::MATERIALTYPE_WOODFILL => 1,
+        MaterialType::MATERIALTYPE_ABS      => 0,
+        MaterialType::MATERIALTYPE_PETG     => 3,
+        MaterialType::MATERIALTYPE_FLEX     => 1,
     ];
 
     private FilamentSpoolId $id;
@@ -495,5 +504,12 @@ class FilamentSpool
         }
 
         return $auto_cooling;
+    }
+
+    public function getDisableFanFirstLayers(): DisableFanFirstLayers
+    {
+        $value = $this->disable_fan_first_layers[$this->material_type->getValue()];
+
+        return new DisableFanFirstLayers($value);
     }
 }

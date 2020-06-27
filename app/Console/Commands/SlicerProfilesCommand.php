@@ -84,11 +84,6 @@ class SlicerProfilesCommand extends Command
     protected array $disable_fan_first_layers = ['PLA' => 1, 'Woodfill' => 1, 'ABS' => 0, 'PET' => 3];
 
     /**
-     * Mapping for the parent filament
-     */
-    protected array $inherits = ['PLA' => 'PLA', 'Woodfill' => 'PLA', 'ABS' => 'ABS', 'PET' => 'PET'];
-
-    /**
      * Common settings for 'Fan Below Layer Time' (by filament type)
      */
 
@@ -217,7 +212,6 @@ class SlicerProfilesCommand extends Command
 //            $f['fan_always_on']                 = $f['material'] === 'ABS' ? 0 : 1;
 //            $f['k_value']                       = ($f['material'] === 'PET') ? 45 : 30;
 //            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];
-//            $f['inherits']                      = $this->inherits[$f['material']];
 //
 //            $f['price_per_cm3'] = ($f['price'] * $f['density']) / $f['weight'];
 //

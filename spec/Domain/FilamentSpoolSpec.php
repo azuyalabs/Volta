@@ -32,6 +32,7 @@ use Volta\Domain\ValueObject\CalibrationName;
 use Volta\Domain\ValueObject\FilamentSpool\BridgingFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
+use Volta\Domain\ValueObject\FilamentSpool\DisableFanFirstLayers;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
 use Volta\Domain\ValueObject\FilamentSpool\FilamentSpoolId;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
@@ -586,5 +587,26 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
         $this->hasAutoCooling()->shouldBe(true);
+    }
+
+    public function it_has_a_disable_fan_first_layers(): void
+    {
+        $this->getDisableFanFirstLayers()->shouldReturnAnInstanceOf(DisableFanFirstLayers::class);
+        $this->getDisableFanFirstLayers()->getValue()->shouldBe(1);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
+        $this->getDisableFanFirstLayers()->getValue()->shouldBe(0);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
+        $this->getDisableFanFirstLayers()->getValue()->shouldBe(1);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->getDisableFanFirstLayers()->getValue()->shouldBe(3);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
+        $this->getDisableFanFirstLayers()->getValue()->shouldBe(1);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_FLEX));
+        $this->getDisableFanFirstLayers()->getValue()->shouldBe(1);
     }
 }
