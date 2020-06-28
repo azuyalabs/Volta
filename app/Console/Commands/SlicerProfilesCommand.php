@@ -77,12 +77,6 @@ class SlicerProfilesCommand extends Command
         'kisslicer'      => 'KISSlicer',
         'superslicer'    => 'SuperSlicer'
     ];
-
-    /**
-     * Common settings for 'Disable Fan First Layers' (by filament type)
-     */
-    protected array $disable_fan_first_layers = ['PLA' => 1, 'Woodfill' => 1, 'ABS' => 0, 'PET' => 3];
-
     /**
      * Common settings for 'Fan Below Layer Time' (by filament type)
      */
@@ -206,7 +200,6 @@ class SlicerProfilesCommand extends Command
 
 //            continue;
 //            // Set defaults
-//            $f['disable_fan_first_layers']      = $this->disable_fan_first_layers[$f['material']];
 //            $f['extrusion_multiplier']          = 1;
 //            $f['cooling']                       = $f['material'] === 'ABS' ? 0 : 1;
 //            $f['fan_always_on']                 = $f['material'] === 'ABS' ? 0 : 1;
