@@ -70,12 +70,12 @@ class SlicerProfilesCommand extends Command
     private const PROFILES_DIR = 'filaments/profiles';
 
     protected array $slicers = [
-        'slic3rpe'       => 'Slic3rPE',
-        'cura'           => 'Ultimaker Cura',
-        'slic3r'         => 'Slic3r',
-        'prusaslicer'    => 'Prusa Slicer',
-        'kisslicer'      => 'KISSlicer',
-        'superslicer'    => 'SuperSlicer'
+        'slic3rpe'    => 'Slic3rPE',
+        'cura'        => 'Ultimaker Cura',
+        'slic3r'      => 'Slic3r',
+        'prusaslicer' => 'Prusa Slicer',
+        'kisslicer'   => 'KISSlicer',
+        'superslicer' => 'SuperSlicer'
     ];
     /**
      * Common settings for 'Fan Below Layer Time' (by filament type)
@@ -112,6 +112,9 @@ class SlicerProfilesCommand extends Command
         $cura_material_settings = [];
 
         foreach ($filamentFiles as $filamentFile) {
+            if ('file' !== $filamentFile['type']) {
+                continue;
+            }
             $f = $this->getFilamentSpoolData($filamentFile);
 
             if (!isset($f['product'], $f['id']) || null === $f) {
@@ -137,6 +140,10 @@ class SlicerProfilesCommand extends Command
             ))
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
                 ->setMaterialType(new MaterialType($f['product']['type']));
+
+            if (isset($f['product']['density'])) {
+                $spool->setDensity($f['product']['density']);
+            }
 
             if (isset($f['product']['diameter']['tolerance'])) {
                 $spool->setDiameterTolerance(new Length($f['product']['diameter']['tolerance'], 'millimeters'));

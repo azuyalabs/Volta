@@ -20,7 +20,7 @@ class MaterialType
 {
     public const MATERIALTYPE_PLA      = 'PLA';
     public const MATERIALTYPE_ABS      = 'ABS';
-    public const MATERIALTYPE_PETG     = 'PETG';
+    public const MATERIALTYPE_PET      = 'PET';
     public const MATERIALTYPE_PP       = 'PP';
     public const MATERIALTYPE_WOODFILL = 'Woodfill';
     public const MATERIALTYPE_FLEX     = 'FLEX';
@@ -38,7 +38,7 @@ class MaterialType
         $types = [
             self::MATERIALTYPE_ABS,
             self::MATERIALTYPE_PLA,
-            self::MATERIALTYPE_PETG,
+            self::MATERIALTYPE_PET,
             self::MATERIALTYPE_PP,
             self::MATERIALTYPE_WOODFILL,
             self::MATERIALTYPE_FLEX,

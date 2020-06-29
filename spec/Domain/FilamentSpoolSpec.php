@@ -224,7 +224,7 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
         $this->getMinimumFanSpeed()->getValue()->shouldBe(100);
 
-        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PET));
         $this->getMinimumFanSpeed()->getValue()->shouldBe(30);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
@@ -242,7 +242,7 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
         $this->getMaximumFanSpeed()->getValue()->shouldBe(100);
 
-        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PET));
         $this->getMaximumFanSpeed()->getValue()->shouldBe(50);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
@@ -547,7 +547,7 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
         $this->getBridgingFanSpeed()->getValue()->shouldBe(100);
 
-        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PET));
         $this->getBridgingFanSpeed()->getValue()->shouldBe(50);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
@@ -565,7 +565,7 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
         $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(15, 1);
 
-        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PET));
         $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(8, 1);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
@@ -582,7 +582,7 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
         $this->hasAutoCooling()->shouldBe(true);
 
-        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PET));
         $this->hasAutoCooling()->shouldBe(true);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
@@ -600,7 +600,7 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
         $this->getDisableFanFirstLayers()->getValue()->shouldBe(1);
 
-        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PET));
         $this->getDisableFanFirstLayers()->getValue()->shouldBe(3);
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));

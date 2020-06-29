@@ -34,7 +34,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
         $builder->withDiameter(new Length(1.75, 'millimeter'));
         $builder->withWeight(new Mass(900, 'grams'));
         $builder->withPurchasePrice(new Money(28, new Currency('USD')));
-        $builder->withMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PETG));
+        $builder->withMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PET));
         $builder->withDensity(1.22);
         $builder->withColor(new Color(new ColorName('Red'), new Hex('#ff0000')));
         $builder->withCalibration(
@@ -70,17 +70,17 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
         $this->transform($spool)->shouldIterateLike(
             [
                 'id'                              => $spool->getId()->getValue(),
-                'name'                            => 'PETG Plus',
+                'name'                            => 'PET Plus',
                 'manufacturer'                    => 'ABC Plastics',
                 'diameter'                        => 1.763,
                 'weight'                          => 900,
-                'material'                        => 'PETG',
+                'material'                        => 'PET',
                 'density'                         => 1.22,
                 'purchase_price'                  => 28.0,
                 'price_per_kg'                    => 31,
                 'color'                           => 'Red',
                 'color_code'                      => '#ff0000',
-                'display_name'                    => 'ABC Plastics PETG Plus Red 1.75mm',
+                'display_name'                    => 'ABC Plastics PET Plus Red 1.75mm',
                 'min_fan_speed'                   => 30,
                 'max_fan_speed'                   => 50,
                 'bridging_fan_speed'              => 50,
@@ -92,7 +92,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'keep_warm_temperature'           => 137.0,
                 'maximum_volumetric_speed'        => 8.0,
                 'auto_cooling'                    => 1,
-                'note'                            => 'Calibrated settings for ABC Plastics PETG Plus Red 1.75mm.\n\n`First Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Bed Temperature` last calibrated on 2020-05-01\n`Diameter` last calibrated on 2020-05-01',
+                'note'                            => 'Calibrated settings for ABC Plastics PET Plus Red 1.75mm.\n\n`First Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Bed Temperature` last calibrated on 2020-05-01\n`Diameter` last calibrated on 2020-05-01',
                 'disable_fan_first_layers'        => 3,
             ]
         );

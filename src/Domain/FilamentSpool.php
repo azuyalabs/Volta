@@ -40,7 +40,7 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_PLA      => 100,
         MaterialType::MATERIALTYPE_WOODFILL => 100,
         MaterialType::MATERIALTYPE_ABS      => 15,
-        MaterialType::MATERIALTYPE_PETG     => 30,
+        MaterialType::MATERIALTYPE_PET      => 30,
         MaterialType::MATERIALTYPE_FLEX     => 70,
     ];
 
@@ -48,7 +48,7 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_PLA      => 100,
         MaterialType::MATERIALTYPE_WOODFILL => 100,
         MaterialType::MATERIALTYPE_ABS      => 30,
-        MaterialType::MATERIALTYPE_PETG     => 50,
+        MaterialType::MATERIALTYPE_PET      => 50,
         MaterialType::MATERIALTYPE_FLEX     => 90,
     ];
 
@@ -56,7 +56,7 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_PLA      => 15,
         MaterialType::MATERIALTYPE_WOODFILL => 15,
         MaterialType::MATERIALTYPE_ABS      => 5,
-        MaterialType::MATERIALTYPE_PETG     => 15,
+        MaterialType::MATERIALTYPE_PET      => 15,
         MaterialType::MATERIALTYPE_FLEX     => 15,
     ];
 
@@ -64,7 +64,7 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_PLA      => 100,
         MaterialType::MATERIALTYPE_WOODFILL => 100,
         MaterialType::MATERIALTYPE_ABS      => 30,
-        MaterialType::MATERIALTYPE_PETG     => 50,
+        MaterialType::MATERIALTYPE_PET      => 50,
         MaterialType::MATERIALTYPE_FLEX     => 80,
     ];
 
@@ -72,7 +72,7 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_PLA      => 15.0,
         MaterialType::MATERIALTYPE_WOODFILL => 15.0,
         MaterialType::MATERIALTYPE_ABS      => 11.0,
-        MaterialType::MATERIALTYPE_PETG     => 8.0,
+        MaterialType::MATERIALTYPE_PET      => 8.0,
         MaterialType::MATERIALTYPE_FLEX     => 1.2,
     ];
 
@@ -80,7 +80,7 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_PLA      => 1,
         MaterialType::MATERIALTYPE_WOODFILL => 1,
         MaterialType::MATERIALTYPE_ABS      => 0,
-        MaterialType::MATERIALTYPE_PETG     => 3,
+        MaterialType::MATERIALTYPE_PET      => 3,
         MaterialType::MATERIALTYPE_FLEX     => 1,
     ];
 
