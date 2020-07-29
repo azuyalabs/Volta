@@ -43,7 +43,9 @@ class CalibrationCollection
                 return [$count + count($item->getMeasurements()), $values + array_sum($item->getMeasurements())];
             });
 
-            $result = $sum[1] / $sum[0];
+            if (0 < $sum[0]) {
+                $result = $sum[1] / $sum[0];
+            }
         }
 
         return $result;

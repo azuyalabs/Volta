@@ -609,4 +609,44 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_FLEX));
         $this->getDisableFanFirstLayers()->getValue()->shouldBe(1);
     }
+
+    public function it_has_a_k_value(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName(CalibrationCollection::K_VALUE),
+            new \DateTimeImmutable('2020-08-01'),
+            [0.22, 0.67]
+        );
+        $this->addCalibration($calibration);
+
+        $this->getKValue()->shouldBeFloat();
+        $this->getKValue()->shouldBe(0.445);
+    }
+
+    public function it_has_a_k_value_when_multiple_calibrations(): void
+    {
+        $calibration = new Calibration(
+            new CalibrationName(CalibrationCollection::K_VALUE),
+            new \DateTimeImmutable('2020-05-11'),
+            [0.45, 0.67, 0.34]
+        );
+        $this->addCalibration($calibration);
+
+        $this->addCalibration(
+            new Calibration(
+                new CalibrationName(CalibrationCollection::K_VALUE),
+                new \DateTimeImmutable('2020-05-12'),
+                [0.02, 1.34, 1.99]
+            )
+        );
+
+        $this->getKValue()->shouldBeFloat();
+        $this->getKValue()->shouldBe(0.802);
+    }
+
+    public function it_has_a_k_value_when_no_calibrations(): void
+    {
+        $this->getKValue()->shouldBeFloat();
+        $this->getKValue()->shouldBe(0.0);
+    }
 }

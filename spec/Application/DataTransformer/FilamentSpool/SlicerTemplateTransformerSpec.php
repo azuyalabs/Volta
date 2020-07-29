@@ -65,6 +65,15 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 [1.77, 1.78, 1.74]
             )
         );
+
+        $builder->withCalibration(
+            new Calibration(
+                new CalibrationName(CalibrationCollection::K_VALUE),
+                new \DateTimeImmutable('2020-06-12'),
+                [1.77, 0.63, 0.46]
+            )
+        );
+
         $spool = $builder->build();
 
         $this->transform($spool)->shouldIterateLike(
@@ -92,8 +101,9 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'keep_warm_temperature'           => 137.0,
                 'maximum_volumetric_speed'        => 8.0,
                 'auto_cooling'                    => 1,
-                'note'                            => 'Calibrated settings for ABC Plastics PET Plus Red 1.75mm.\n\n`First Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Bed Temperature` last calibrated on 2020-05-01\n`Diameter` last calibrated on 2020-05-01',
+                'note'                            => 'Calibrated settings for ABC Plastics PET Plus Red 1.75mm.\n\n`First Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Bed Temperature` last calibrated on 2020-05-01\n`Diameter` last calibrated on 2020-05-01\n`K Value` last calibrated on 2020-06-12',
                 'disable_fan_first_layers'        => 3,
+                'k_value'                         => 0.953,
             ]
         );
     }

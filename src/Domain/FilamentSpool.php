@@ -512,4 +512,23 @@ class FilamentSpool
 
         return new DisableFanFirstLayers($value);
     }
+
+    /**
+     * Get the bed temperature for the next layers.
+     *
+     * The bed temperature for the next layers is based on any recorded calibrations. If no calibrations
+     * are present, the manufacturer's recommended minimum bed temperature is used instead.
+     * Should there be no manufacturer's recommended temperatures, then the de facto standard for the
+     * material is used.
+     */
+    public function getKValue(): float
+    {
+        try {
+            $value = round($this->calibrations->getAverage(CalibrationCollection::K_VALUE), 3);
+        } catch (NoCalibrationsException $e) {
+            $value =  0.0;
+        }
+
+        return $value;
+    }
 }

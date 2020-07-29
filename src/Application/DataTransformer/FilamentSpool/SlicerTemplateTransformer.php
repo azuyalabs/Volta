@@ -40,7 +40,8 @@ class SlicerTemplateTransformer extends TransformerAbstract
             'maximum_volumetric_speed'           => $spool->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND),
             'auto_cooling'                       => $spool->hasAutoCooling() ? 1 : 0,
             'note'                               => $spool->getNote(),
-            'disable_fan_first_layers'           => $spool->getDisableFanFirstLayers()->getValue()
+            'disable_fan_first_layers'           => $spool->getDisableFanFirstLayers()->getValue(),
+            'k_value'                            => $spool->getKValue()
         ];
     }
 }
