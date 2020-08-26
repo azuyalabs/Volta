@@ -531,4 +531,15 @@ class FilamentSpool
 
         return $value;
     }
+
+    public function isFanAlwaysOn(): bool
+    {
+        $is_always_on = true;
+
+        if (MaterialType::MATERIALTYPE_ABS === $this->material_type->getValue()) {
+            $is_always_on = false;
+        }
+
+        return $is_always_on;
+    }
 }

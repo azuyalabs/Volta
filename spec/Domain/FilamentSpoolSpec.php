@@ -587,6 +587,12 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
         $this->hasAutoCooling()->shouldBe(true);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PP));
+        $this->hasAutoCooling()->shouldBe(true);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_FLEX));
+        $this->hasAutoCooling()->shouldBe(true);
     }
 
     public function it_has_a_disable_fan_first_layers(): void
@@ -648,5 +654,28 @@ class FilamentSpoolSpec extends ObjectBehavior
     {
         $this->getKValue()->shouldBeFloat();
         $this->getKValue()->shouldBe(0.0);
+    }
+
+    public function it_tells_if_fan_is_always_on(): void
+    {
+        $this->isFanAlwaysOn()->shouldBe(true);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
+        $this->isFanAlwaysOn()->shouldBe(false);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
+        $this->isFanAlwaysOn()->shouldBe(true);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PET));
+        $this->isFanAlwaysOn()->shouldBe(true);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
+        $this->isFanAlwaysOn()->shouldBe(true);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PP));
+        $this->isFanAlwaysOn()->shouldBe(true);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_FLEX));
+        $this->isFanAlwaysOn()->shouldBe(true);
     }
 }

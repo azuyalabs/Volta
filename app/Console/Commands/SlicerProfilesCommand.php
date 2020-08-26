@@ -208,8 +208,6 @@ class SlicerProfilesCommand extends Command
 //            continue;
 //            // Set defaults
 //            $f['extrusion_multiplier']          = 1;
-//            $f['cooling']                       = $f['material'] === 'ABS' ? 0 : 1;
-//            $f['fan_always_on']                 = $f['material'] === 'ABS' ? 0 : 1;
 //            $f['fan_below_layer_time']          = $this->fan_below_layer_time[$f['material']];
 //
 //            $f['price_per_cm3'] = ($f['price'] * $f['density']) / $f['weight'];
