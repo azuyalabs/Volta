@@ -220,19 +220,6 @@ class SlicerProfilesCommand extends Command
 //            $f['msds_url']         = $f['info']['msds_url']                  ?? '';
 //            $f['tds_url']          = $f['info']['tds_url']                   ?? '';
 //
-//            # Retrieve Linear Advance Calibration data
-//            if (isset($f['k_value_calibrations'])) {
-//                $kValueCalibration = $f['k_value_calibrations'][0];
-//                $kvalue            = $kValueCalibration['value'];
-//                if (isset($kvalue)) {
-//                    $f['k_value'] = $kvalue;
-//                    $f['filament_notes'] .= sprintf('K Value last calibrated on %s\\n', $kValueCalibration['date']);
-//                }
-//            } else {
-//                $this->warn('>> Linear Advance Calibration not performed yet.');
-//            }
-//
-//
 //            # Retrieve Extrusion Multiplier Calibration data
 //            if (isset($f['extrusion_calibrations'])) {
 //                $em = collect($f['extrusion_calibrations']);

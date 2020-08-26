@@ -27,6 +27,7 @@ use Volta\Domain\ValueObject\FilamentSpool\BridgingFanSpeed;
 use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\DisableFanFirstLayers;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
+use Volta\Domain\ValueObject\FilamentSpool\FanBelowLayerTime;
 use Volta\Domain\ValueObject\FilamentSpool\FilamentSpoolId;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpool\MaximumFanSpeed;
@@ -82,6 +83,15 @@ class FilamentSpool
         MaterialType::MATERIALTYPE_ABS      => 0,
         MaterialType::MATERIALTYPE_PET      => 3,
         MaterialType::MATERIALTYPE_FLEX     => 1,
+    ];
+
+    protected array $fan_below_layer_time = [
+        MaterialType::MATERIALTYPE_PLA      => 100,
+        MaterialType::MATERIALTYPE_WOODFILL => 100,
+        MaterialType::MATERIALTYPE_ABS      => 30,
+        MaterialType::MATERIALTYPE_PET      => 20,
+        MaterialType::MATERIALTYPE_FLEX     => 100,
+        MaterialType::MATERIALTYPE_PP       => 100,
     ];
 
     private FilamentSpoolId $id;
@@ -513,14 +523,7 @@ class FilamentSpool
         return new DisableFanFirstLayers($value);
     }
 
-    /**
-     * Get the bed temperature for the next layers.
-     *
-     * The bed temperature for the next layers is based on any recorded calibrations. If no calibrations
-     * are present, the manufacturer's recommended minimum bed temperature is used instead.
-     * Should there be no manufacturer's recommended temperatures, then the de facto standard for the
-     * material is used.
-     */
+    // TODO: Should this be a value object?
     public function getKValue(): float
     {
         try {
@@ -541,5 +544,16 @@ class FilamentSpool
         }
 
         return $is_always_on;
+    }
+
+    public function getFanBelowLayerTime(): ?FanBelowLayerTime
+    {
+        $value = $this->fan_below_layer_time[$this->material_type->getValue()];
+
+        if (MaterialType::MATERIALTYPE_ABS === $this->material_type->getValue()) {
+            return null;
+        }
+
+        return new FanBelowLayerTime($value);
     }
 }

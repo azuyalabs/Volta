@@ -34,6 +34,7 @@ use Volta\Domain\ValueObject\FilamentSpool\Color;
 use Volta\Domain\ValueObject\FilamentSpool\ColorName;
 use Volta\Domain\ValueObject\FilamentSpool\DisableFanFirstLayers;
 use Volta\Domain\ValueObject\FilamentSpool\DisplayName;
+use Volta\Domain\ValueObject\FilamentSpool\FanBelowLayerTime;
 use Volta\Domain\ValueObject\FilamentSpool\FilamentSpoolId;
 use Volta\Domain\ValueObject\FilamentSpool\MaterialType;
 use Volta\Domain\ValueObject\FilamentSpool\MaximumFanSpeed;
@@ -677,5 +678,32 @@ class FilamentSpoolSpec extends ObjectBehavior
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_FLEX));
         $this->isFanAlwaysOn()->shouldBe(true);
+    }
+
+    public function it_has_a_fan_below_layer_time(): void
+    {
+        $this->getFanBelowLayerTime()->shouldReturnAnInstanceOf(FanBelowLayerTime::class);
+        $this->getFanBelowLayerTime()->getValue()->shouldBe(100);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
+        $this->getFanBelowLayerTime()->getValue()->shouldBe(100);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PET));
+        $this->getFanBelowLayerTime()->getValue()->shouldBe(20);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
+        $this->getFanBelowLayerTime()->getValue()->shouldBe(100);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_FLEX));
+        $this->getFanBelowLayerTime()->getValue()->shouldBe(100);
+
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PP));
+        $this->getFanBelowLayerTime()->getValue()->shouldBe(100);
+    }
+
+    public function it_has_no_fan_below_layer_time_when_cooling_is_disabled(): void
+    {
+        $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
+        $this->getFanBelowLayerTime()->shouldBeNull();
     }
 }
