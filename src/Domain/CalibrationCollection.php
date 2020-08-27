@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Volta\Domain;
 
 use Volta\Domain\Exception\NoCalibrationsException;
@@ -93,5 +95,27 @@ class CalibrationCollection
     public function getCalibrationNames(): array
     {
         return array_keys($this->calibrations);
+    }
+
+    public function getLatestCalibration(string $name): Calibration
+    {
+        if (!isset($this->calibrations[$name])) {
+            throw new NoCalibrationsException();
+        }
+
+        return array_reduce($this->calibrations[$name], static function ($carry, $item) {
+            return (!is_null($carry) && $carry->getTimestamp() > $item->getTimestamp()) ? $carry : $item;
+        });
+    }
+
+    public function getEarliestCalibration(string $name): Calibration
+    {
+        if (!isset($this->calibrations[$name])) {
+            throw new NoCalibrationsException();
+        }
+
+        return array_reduce($this->calibrations[$name], static function ($carry, $item) {
+            return (!is_null($carry) && $carry->getTimestamp() < $item->getTimestamp()) ? $carry : $item;
+        });
     }
 }

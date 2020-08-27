@@ -170,4 +170,70 @@ class CalibrationCollectionSpec extends ObjectBehavior
         $this->getCalibrationNames()->shouldBeArray();
         $this->getCalibrationNames()->shouldBe(['length', 'volume']);
     }
+
+    public function it_can_get_latest_calibration(): void
+    {
+        $firstDate = new \DateTimeImmutable('2021-12-13');
+        $this->add(new Calibration(
+            new CalibrationName('length'),
+            $firstDate,
+            [33, 109]
+        ));
+
+        $secondDate = new \DateTimeImmutable('2020-12-14');
+        $this->add(new Calibration(
+            new CalibrationName('length'),
+            $secondDate,
+            [66, 29, 89]
+        ));
+
+        $thirdDate = new \DateTimeImmutable('2019-03-12');
+        $this->add(new Calibration(
+            new CalibrationName('length'),
+            $thirdDate,
+            [6, 9, 113]
+        ));
+
+        $this->getLatestCalibration('length')->shouldBeAnInstanceOf(Calibration::class);
+        $this->getLatestCalibration('length')->getTimestamp()->shouldBe($firstDate);
+    }
+
+    public function it_throws_an_exception_when_for_latest_calibration_no_calibrations_exist(): void
+    {
+        $this->shouldThrow(NoCalibrationsException::class)
+            ->duringGetLatestCalibration('crutons');
+    }
+
+    public function it_can_get_first_calibration(): void
+    {
+        $firstDate = new \DateTimeImmutable('2022-07-23');
+        $this->add(new Calibration(
+            new CalibrationName('speed'),
+            $firstDate,
+            [123, 126]
+        ));
+
+        $secondDate = new \DateTimeImmutable('2020-09-14');
+        $this->add(new Calibration(
+            new CalibrationName('speed'),
+            $secondDate,
+            [89, 43, 89]
+        ));
+
+        $thirdDate = new \DateTimeImmutable('2018-03-19');
+        $this->add(new Calibration(
+            new CalibrationName('speed'),
+            $thirdDate,
+            [15, 449, 113]
+        ));
+
+        $this->getEarliestCalibration('speed')->shouldBeAnInstanceOf(Calibration::class);
+        $this->getEarliestCalibration('speed')->getTimestamp()->shouldBe($thirdDate);
+    }
+
+    public function it_throws_an_exception_when_for_earliest_calibration_no_calibrations_exist(): void
+    {
+        $this->shouldThrow(NoCalibrationsException::class)
+            ->duringGetEarliestCalibration('daltons');
+    }
 }

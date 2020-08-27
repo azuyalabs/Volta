@@ -236,7 +236,7 @@ class FilamentSpool
     {
         try {
             $diameter = new Length(
-                round($this->calibrations->getAverage('diameter'), 3),
+                round($this->calibrations->getAverage(CalibrationCollection::FILAMENT_DIAMETER), 3),
                 'millimeter'
             );
         } catch (NoCalibrationsException $e) {
@@ -555,5 +555,24 @@ class FilamentSpool
         }
 
         return new FanBelowLayerTime($value);
+    }
+
+    /**
+     * In case there are multiple calibrations, we assume the latest one is the
+     * one to use.
+     *
+     * @return Length
+     */
+    public function getExtrusionMultiplier(): Length
+    {
+        try {
+            $latestCalibration = $this->calibrations->getLatestCalibration(CalibrationCollection::EXTRUSION_MULTIPLIER);
+
+            $ratio = $latestCalibration->getAverage() / 0.45 * 1;
+        } catch (NoCalibrationsException $e) {
+            $ratio = 1;
+        }
+
+        return new Length(round($ratio, 3), 'millimeter');
     }
 }

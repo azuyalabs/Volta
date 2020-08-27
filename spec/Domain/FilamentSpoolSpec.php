@@ -706,4 +706,39 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
         $this->getFanBelowLayerTime()->shouldBeNull();
     }
+
+    public function it_has_an_extrusion_multiplier(): void
+    {
+        $this->addCalibration(new Calibration(
+            new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
+            new \DateTimeImmutable('2020-08-22'),
+            [0.47, 0.48,0.48,0.46,0.44,0.44,0.45,0.48, 0.47,0.47,0.44,0.43]
+        ));
+
+        $this->getExtrusionMultiplier()->shouldBeAnInstanceOf(Length::class);
+        $this->getExtrusionMultiplier()->toUnit('millimeter')->shouldBe(1.02);
+    }
+
+    public function it_has_an_extrusion_multiplier_when_multiple_calibrations(): void
+    {
+        $this->addCalibration(new Calibration(
+            new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
+            new \DateTimeImmutable('2020-08-22'),
+            [0.47, 0.48,0.48,0.46,0.44,0.44,0.45,0.48, 0.47,0.47,0.44,0.43]
+        ));
+
+        $this->addCalibration(new Calibration(
+            new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
+            new \DateTimeImmutable('2020-08-23'),
+            [0.42,0.43,0.44,0.43,0.47]
+        ));
+
+        $this->getExtrusionMultiplier()->shouldBeAnInstanceOf(Length::class);
+        $this->getExtrusionMultiplier()->toUnit('millimeter')->shouldBe(0.973);
+    }
+
+    public function it_has_an_extrusion_multiplier_when_no_calibrations(): void
+    {
+        $this->getExtrusionMultiplier()->toUnit('millimeter')->shouldBe(1.0);
+    }
 }
