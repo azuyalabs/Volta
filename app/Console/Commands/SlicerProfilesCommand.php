@@ -10,6 +10,8 @@
  * @author Sacha Telgenhof <me@sachatelgenhof.com>
  */
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use DateTime;

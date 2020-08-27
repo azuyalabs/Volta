@@ -105,6 +105,7 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'disable_fan_first_layers'        => 3,
                 'k_value'                         => 0.953,
                 'fan_always_on'                   => 1,
+                'fan_below_layer_time'            => 20,
             ]
         );
     }
