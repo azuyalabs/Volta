@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "apexcharts": "^3.8",
-    "axios": "^0.19",
+    "axios": "^0.20",
     "bootstrap": "^4.3",
     "bootstrap-vue": "2.0.0-rc.27",
     "dinero.js": "^1.6",

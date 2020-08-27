@@ -50,9 +50,9 @@
     "friendsofphp/php-cs-fixer": "^2.15",
     "fzaninotto/faker": "~1.8",
     "mockery/mockery": "~1.2",
-    "nunomaduro/collision": "^4.1",
-    "nunomaduro/larastan": "^0.5",
-    "phan/phan": "^2.2",
+    "nunomaduro/collision": "^5.0",
+    "nunomaduro/larastan": "^0.6",
+    "phan/phan": "^3.2",
     "phpunit/phpunit": "^8.5",
     "phpspec/phpspec": "^6.1"
   },
