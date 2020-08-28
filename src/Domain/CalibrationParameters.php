@@ -15,16 +15,25 @@ class CalibrationParameters
         $this->add($parameters);
     }
 
-    public function add(array $parameters): void
+    public function add(array $parameters): self
     {
         foreach ($parameters as $key => $value) {
             $this->set($key, $value);
         }
+
+        return $this;
     }
 
-    public function set(string $name, $value): void
+    /**
+     * @param mixed $value
+     *
+     * @return $this
+     */
+    public function set(string $name, $value): self
     {
         $this->parameters[$name] = $value;
+
+        return $this;
     }
 
     public function all(): array
@@ -42,11 +51,16 @@ class CalibrationParameters
         unset($this->parameters[$name]);
     }
 
-    public function clear(): void
+    public function clear(): self
     {
         $this->parameters = [];
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function get(string $name)
     {
         if (!\array_key_exists($name, $this->parameters) && !$name) {

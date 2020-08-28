@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace spec\Volta\Domain;
 
 use Volta\Domain\CalibrationParameters;
+use Volta\Domain\Exception\CalibrationParameterNotFoundException;
 
 class CalibrationParametersSpec
 {
@@ -34,6 +35,7 @@ class CalibrationParametersSpec
 
         $this->all()->shouldBeArray();
         $this->all()->shouldHaveCount(2);
+        $this->get('ratio')->shouldBe(2);
     }
 
     public function it_can_set_a_parameter(): void
@@ -42,6 +44,7 @@ class CalibrationParametersSpec
 
         $this->all()->shouldBeArray();
         $this->all()->shouldHaveCount(2);
+        $this->get('pie')->shouldBe(3.14);
     }
 
     public function it_can_check_if_parameter_exists(): void
@@ -55,6 +58,7 @@ class CalibrationParametersSpec
 
         $this->all()->shouldBeArray();
         $this->all()->shouldHaveCount(2);
+        $this->get('pie')->shouldBe(3.14);
 
         $this->remove('parameter');
 
@@ -72,5 +76,12 @@ class CalibrationParametersSpec
     public function it_can_get_a_parameter(): void
     {
         $this->get('parameter')->shouldBe('value');
+    }
+
+    public function it_throws_exception(): void
+    {
+        $this->shouldThrow(CalibrationParameterNotFoundException::class)
+            ->duringGet('something')
+        ;
     }
 }
