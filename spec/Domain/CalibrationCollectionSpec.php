@@ -96,7 +96,8 @@ class CalibrationCollectionSpec extends ObjectBehavior
     public function it_throws_an_exception_when_for_average_no_calibrations_exist(): void
     {
         $this->shouldThrow(NoCalibrationsException::class)
-            ->duringGetAverage('zutons');
+            ->duringGetAverage('zutons')
+        ;
     }
 
     public function it_can_get_the_maximum_with_a_single_calibration(): void
@@ -120,7 +121,8 @@ class CalibrationCollectionSpec extends ObjectBehavior
     public function it_throws_an_exception_when_for_maximum_no_calibrations_exist(): void
     {
         $this->shouldThrow(NoCalibrationsException::class)
-            ->duringGetMaximum('zutons');
+            ->duringGetMaximum('zutons')
+        ;
     }
 
     public function it_can_get_the_minimum_with_a_single_calibration(): void
@@ -144,7 +146,8 @@ class CalibrationCollectionSpec extends ObjectBehavior
     public function it_throws_an_exception_when_for_minimum_no_calibrations_exist(): void
     {
         $this->shouldThrow(NoCalibrationsException::class)
-            ->duringGetMinimum('zutons');
+            ->duringGetMinimum('zutons')
+        ;
     }
 
     public function it_can_get_latest_calibration_date(): void
@@ -201,7 +204,8 @@ class CalibrationCollectionSpec extends ObjectBehavior
     public function it_throws_an_exception_when_for_latest_calibration_no_calibrations_exist(): void
     {
         $this->shouldThrow(NoCalibrationsException::class)
-            ->duringGetLatestCalibration('crutons');
+            ->duringGetLatestCalibration('crutons')
+        ;
     }
 
     public function it_can_get_first_calibration(): void
@@ -234,6 +238,7 @@ class CalibrationCollectionSpec extends ObjectBehavior
     public function it_throws_an_exception_when_for_earliest_calibration_no_calibrations_exist(): void
     {
         $this->shouldThrow(NoCalibrationsException::class)
-            ->duringGetEarliestCalibration('daltons');
+            ->duringGetEarliestCalibration('daltons')
+        ;
     }
 }

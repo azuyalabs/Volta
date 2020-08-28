@@ -21,11 +21,14 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Machine Controller.
+ *
+ * @internal
+ * @coversNothing
  */
 class MachineControllerTest extends TestCase
 {
     /** @test */
-    public function it_can_display_a_list_of_machines(): void
+    public function itCanDisplayAListOfMachines(): void
     {
         $user     = factory(User::class)->create();
         factory(Machine::class, 10)->create(['user_id' => $user->id]);
@@ -38,7 +41,7 @@ class MachineControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_display_the_edit_screen(): void
+    public function itCanDisplayTheEditScreen(): void
     {
         $user = factory(User::class)->create();
         $user->profile()->save(factory(UserProfile::class)->make());

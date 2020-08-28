@@ -22,11 +22,14 @@ use Tests\TestCase;
  * Class containing cases for testing the 3D Printer Job Resource Collection class.
  *
  * //TODO: Incomplete tests!
+ *
+ * @internal
+ * @coversNothing
  */
 class ThreeDPrinterJobCollectionResourceTest extends TestCase
 {
     /** @test */
-    public function it_can_return_a_correct_response(): void
+    public function itCanReturnACorrectResponse(): void
     {
         $resource = (new ThreeDPrinterJobCollectionResource($jos = factory(MachineJob::class, 2)->create()))->jsonSerialize();
 

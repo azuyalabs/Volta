@@ -31,6 +31,16 @@ abstract class Id
     }
 
     /**
+     * Doctrine requires to have __toString on identifiers.
+     *
+     * @see getValue
+     */
+    public function __toString(): string
+    {
+        return $this->getValue();
+    }
+
+    /**
      * @throws \Exception
      */
     public static function fromString(string $id): Id
@@ -57,15 +67,5 @@ abstract class Id
     public function getValue(): string
     {
         return $this->value->toString();
-    }
-
-    /**
-     * Doctrine requires to have __toString on identifiers.
-     *
-     * @see getValue
-     */
-    public function __toString(): string
-    {
-        return $this->getValue();
     }
 }

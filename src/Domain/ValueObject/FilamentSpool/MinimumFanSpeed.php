@@ -23,6 +23,16 @@ class MinimumFanSpeed
         $this->validate();
     }
 
+    public function getValue(): int
+    {
+        return $this->value;
+    }
+
+    public function isEqual(int $other): bool
+    {
+        return $this->value === $other;
+    }
+
     private function validate(): void
     {
         if (100 < $this->value) {
@@ -32,15 +42,5 @@ class MinimumFanSpeed
         if (0 > $this->value) {
             throw new NegativeValueException('minimum fan speed');
         }
-    }
-
-    public function getValue(): int
-    {
-        return $this->value;
-    }
-
-    public function isEqual(int $other): bool
-    {
-        return $this->value === $other;
     }
 }

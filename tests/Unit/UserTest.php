@@ -19,11 +19,14 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the User class.
+ *
+ * @internal
+ * @coversNothing
  */
 class UserTest extends TestCase
 {
     /** @test */
-    public function it_can_generate_an_api_token(): void
+    public function itCanGenerateAnApiToken(): void
     {
         $user = factory(User::class)->create(['api_token' => null]);
 

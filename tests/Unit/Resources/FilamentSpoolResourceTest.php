@@ -22,6 +22,9 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Filament Spool Resource class.
+ *
+ * @internal
+ * @coversNothing
  */
 class FilamentSpoolResourceTest extends TestCase
 {
@@ -31,7 +34,7 @@ class FilamentSpoolResourceTest extends TestCase
      *
      * @throws \Exception
      */
-    public function it_can_return_a_correct_response(): void
+    public function itCanReturnACorrectResponse(): void
     {
         $user     = factory(User::class)->create();
         $resource = (new FilamentSpoolResource($spool = factory(FilamentSpool::class)->create(['user_id' => $user->id])))->jsonSerialize();

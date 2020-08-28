@@ -26,17 +26,6 @@ use Ramsey\Uuid\Uuid;
  */
 trait HasBinaryUuid
 {
-    protected static function bootHasBinaryUuid()
-    {
-        static::creating(static function (Model $model) {
-            if ($model->{$model->getKeyName()}) {
-                return;
-            }
-
-            $model->{$model->getKeyName()} = static::encodeUuid(static::generateUuid());
-        });
-    }
-
     public static function scopeWithUuid(Builder $builder, $uuid, $field = null): Builder
     {
         if ($field) {
@@ -146,24 +135,6 @@ trait HasBinaryUuid
         return parent::setAttribute($key, $value);
     }
 
-    protected function getUuidSuffix()
-    {
-        return property_exists($this, 'uuidSuffix') ? $this->uuidSuffix : '_text';
-    }
-
-    protected function uuidTextAttribute($key)
-    {
-        $uuidAttributes = $this->getUuidAttributes();
-        $suffix         = $this->getUuidSuffix();
-        $offset         = -strlen($suffix);
-
-        if (substr($key, $offset) === $suffix && in_array($uuidKey = substr($key, 0, $offset), $uuidAttributes)) {
-            return $uuidKey;
-        }
-
-        return false;
-    }
-
     public function getUuidAttributes()
     {
         $uuidAttributes = [];
@@ -175,9 +146,7 @@ trait HasBinaryUuid
         // non composite primary keys will return a string so casting required
         $key = (array) $this->getKeyName();
 
-        $uuidAttributes = array_unique(array_merge($uuidAttributes, $key));
-
-        return $uuidAttributes;
+        return array_unique(array_merge($uuidAttributes, $key));
     }
 
     public function getUuidTextAttribute(): ?string
@@ -237,5 +206,34 @@ trait HasBinaryUuid
     public function resolveRouteBinding($value)
     {
         return $this->withUuid($value)->first();
+    }
+
+    protected static function bootHasBinaryUuid()
+    {
+        static::creating(static function (Model $model) {
+            if ($model->{$model->getKeyName()}) {
+                return;
+            }
+
+            $model->{$model->getKeyName()} = static::encodeUuid(static::generateUuid());
+        });
+    }
+
+    protected function getUuidSuffix()
+    {
+        return property_exists($this, 'uuidSuffix') ? $this->uuidSuffix : '_text';
+    }
+
+    protected function uuidTextAttribute($key)
+    {
+        $uuidAttributes = $this->getUuidAttributes();
+        $suffix         = $this->getUuidSuffix();
+        $offset         = -strlen($suffix);
+
+        if (substr($key, $offset) === $suffix && in_array($uuidKey = substr($key, 0, $offset), $uuidAttributes)) {
+            return $uuidKey;
+        }
+
+        return false;
     }
 }

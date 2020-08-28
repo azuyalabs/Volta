@@ -58,7 +58,8 @@ class VerifyEmail extends Notification
                 Lang::getFromJson('Verify Email Address'),
                 $this->verificationUrl($notifiable)
             )
-            ->line(Lang::getFromJson('If you did not create an account, no further action is required.'));
+            ->line(Lang::getFromJson('If you did not create an account, no further action is required.'))
+        ;
     }
 
     /**

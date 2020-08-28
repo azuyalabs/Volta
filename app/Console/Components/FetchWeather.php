@@ -42,7 +42,7 @@ class FetchWeather extends Command
     {
         // Get all unique cities from the registered user base
         $cityList = UserProfile::all()->unique('city')->filter(static function ($value) {
-            return !is_null($value->city);
+            return null !== $value->city;
         })->pluck('city')->toArray();
 
         foreach ($cityList as $city) {

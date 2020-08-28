@@ -28,6 +28,13 @@ use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureOutOfBoundsExcep
  */
 class Temperatures
 {
+    // Ideally this should be set per material type
+    public const DEFAULT_MIN_PRINT_TEMP = 190.0;
+    public const DEFAULT_MAX_PRINT_TEMP = 220.0;
+
+    // Ideally this should be set per material type
+    public const DEFAULT_MIN_BED_TEMP    = 0.0;
+    public const DEFAULT_MAX_BED_TEMP    = 100.0;
     private const LOWER_BOUND_PRINT_TEMP = 150.0;
 
     private const UPPER_BOUND_PRINT_TEMP = 500.0;
@@ -37,14 +44,6 @@ class Temperatures
     private const UPPER_BOUND_BED_TEMP = 150.0;
 
     private const TEMPERATURE_UNIT = 'celsius';
-
-    // Ideally this should be set per material type
-    public const DEFAULT_MIN_PRINT_TEMP = 190.0;
-    public const DEFAULT_MAX_PRINT_TEMP = 220.0;
-
-    // Ideally this should be set per material type
-    public const DEFAULT_MIN_BED_TEMP = 0.0;
-    public const DEFAULT_MAX_BED_TEMP = 100.0;
 
     private Temperature $max_print_temperature;
 
@@ -79,6 +78,26 @@ class Temperatures
         );
 
         $this->validate();
+    }
+
+    public function getMaximumPrintTemperature(): Temperature
+    {
+        return $this->max_print_temperature;
+    }
+
+    public function getMinimumPrintTemperature(): Temperature
+    {
+        return $this->min_print_temperature;
+    }
+
+    public function getMaximumBedTemperature(): Temperature
+    {
+        return $this->max_bed_temperature;
+    }
+
+    public function getMinimumBedTemperature(): Temperature
+    {
+        return $this->min_bed_temperature;
     }
 
     private function validate(): void
@@ -119,25 +138,5 @@ class Temperatures
     private function isOutOfBounds(float $value, float $lowerLimit, float $upperLimit): bool
     {
         return $value < $lowerLimit || $value > $upperLimit;
-    }
-
-    public function getMaximumPrintTemperature(): Temperature
-    {
-        return $this->max_print_temperature;
-    }
-
-    public function getMinimumPrintTemperature(): Temperature
-    {
-        return $this->min_print_temperature;
-    }
-
-    public function getMaximumBedTemperature(): Temperature
-    {
-        return $this->max_bed_temperature;
-    }
-
-    public function getMinimumBedTemperature(): Temperature
-    {
-        return $this->min_bed_temperature;
     }
 }

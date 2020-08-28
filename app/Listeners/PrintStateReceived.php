@@ -29,8 +29,6 @@ class PrintStateReceived
 {
     /**
      * Create the event listener.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -38,8 +36,6 @@ class PrintStateReceived
 
     /**
      * Handle the event.
-     *
-     * @return void
      */
     public function handle(PrinterStatusFetched $event)
     {
@@ -59,6 +55,7 @@ class PrintStateReceived
             // Create a new machine job entry
             if (isset($event->status['printjob'])) {
                 DB::beginTransaction();
+
                 try {
                     $job = MachineJob::firstOrCreate(
                         [

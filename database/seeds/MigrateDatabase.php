@@ -22,14 +22,13 @@ use Illuminate\Support\Facades\DB;
  */
 class MigrateDatabase extends Seeder
 {
+    protected const SOURCE_DATABASE = 'sqlite';
     /**
      * Connection handle to the source database.
      *
      * @var \Illuminate\Database\ConnectionInterface
      */
     protected $source_database;
-
-    protected const SOURCE_DATABASE = 'sqlite';
 
     /**
      * Constructor.

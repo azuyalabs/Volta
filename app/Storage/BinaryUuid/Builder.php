@@ -27,7 +27,7 @@ class Builder extends EloquentBuilder
      * @param mixed $id
      * @param array $columns
      *
-     * @return Model|Collection|static[]|static|null
+     * @return null|Collection|Model|static|static[]
      */
     public function find($id, $columns = ['*'])
     {
@@ -41,7 +41,7 @@ class Builder extends EloquentBuilder
     /**
      * Find multiple models by their primary keys.
      *
-     * @param Arrayable|array $ids
+     * @param array|Arrayable $ids
      * @param array           $columns
      *
      * @return Collection

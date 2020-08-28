@@ -13,8 +13,6 @@ class CreatePermissionTables extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -45,7 +43,8 @@ class CreatePermissionTables extends Migration
             $table->foreign('permission_id')
                 ->references('id')
                 ->on($tableNames['permissions'])
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+            ;
 
             $table->primary(
                 ['permission_id', $columnNames['model_morph_key'], 'model_type'],
@@ -63,7 +62,8 @@ class CreatePermissionTables extends Migration
             $table->foreign('role_id')
                 ->references('id')
                 ->on($tableNames['roles'])
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+            ;
 
             $table->primary(
                 ['role_id', $columnNames['model_morph_key'], 'model_type'],
@@ -78,25 +78,26 @@ class CreatePermissionTables extends Migration
             $table->foreign('permission_id')
                 ->references('id')
                 ->on($tableNames['permissions'])
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+            ;
 
             $table->foreign('role_id')
                 ->references('id')
                 ->on($tableNames['roles'])
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+            ;
 
             $table->primary(['permission_id', 'role_id']);
 
             app('cache')
                 ->store('default' != config('permission.cache.store') ? config('permission.cache.store') : null)
-                ->forget(config('permission.cache.key'));
+                ->forget(config('permission.cache.key'))
+            ;
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

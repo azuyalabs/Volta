@@ -26,13 +26,6 @@ class Website
         $this->validate();
     }
 
-    private function validate(): void
-    {
-        if (false === \filter_var($this->value, \FILTER_VALIDATE_URL)) {
-            throw new InvalidWebsiteException('inval');
-        }
-    }
-
     public function getValue(): string
     {
         return $this->value;
@@ -45,5 +38,12 @@ class Website
         }
 
         return $website->value === $this->value;
+    }
+
+    private function validate(): void
+    {
+        if (false === \filter_var($this->value, \FILTER_VALIDATE_URL)) {
+            throw new InvalidWebsiteException('inval');
+        }
     }
 }

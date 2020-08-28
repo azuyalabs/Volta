@@ -20,11 +20,14 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the User class.
+ *
+ * @internal
+ * @coversNothing
  */
 class UserProfileTest extends TestCase
 {
     /** @test */
-    public function it_can_get_preferences_of_a_user(): void
+    public function itCanGetPreferencesOfAUser(): void
     {
         $user = User::find(1);
 

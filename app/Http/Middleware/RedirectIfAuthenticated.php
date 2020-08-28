@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
      * Handle an incoming request.
      *
      * @param Request     $request
-     * @param string|null $guard
+     * @param null|string $guard
      *
      * @return mixed
      */

@@ -39,41 +39,6 @@ class VoltaServiceProvider extends ServiceProvider
         $this->registerServices();
     }
 
-    /**
-     * Register the Volta services.
-     */
-    protected function registerServices(): void
-    {
-        $services = [
-            'Contracts\Repositories\WeatherRepository'       => 'Repositories\OpenWeatherMapRepository',
-            'Contracts\Repositories\FilamentSpoolRepository' => 'Repositories\FilamentSpoolRepository',
-            'Contracts\Repositories\MachineJobRepository'    => 'Repositories\MachineJobRepository',
-            'Contracts\Repositories\ManufacturerRepository'  => 'Repositories\ManufacturerRepository',
-        ];
-
-        foreach ($services as $key => $value) {
-            $this->app->singleton('App\\'.$key, 'App\\'.$value);
-        }
-    }
-
-    /**
-     * Register custom Blade directives.
-     */
-    protected function registerBladeDirectives(): void
-    {
-        Blade::directive('moneyFormat', static function ($value) {
-            return "<?php echo money($value, auth()->user()->profile->currency ?? 'USD'); ?>";
-        });
-
-        Blade::directive('CurrencySymbol', static function ($code) {
-            return "<?php echo Punic\Currency::getSymbol({$code}); ?>";
-        });
-
-        Blade::directive('CurrencySymbol', static function ($code) {
-            return "<?php echo Punic\Currency::getSymbol({$code}); ?>";
-        });
-    }
-
     public function boot(): void
     {
         $this->registerBladeDirectives();
@@ -98,7 +63,7 @@ class VoltaServiceProvider extends ServiceProvider
         });
 
         // Allow database/models for Binary UUID
-        /* @var Connection $connection */
+        // @var Connection $connection
         try {
             $connection = app('db')->connection();
             $connection->setSchemaGrammar($this->createGrammarFromConnection($connection));
@@ -106,6 +71,41 @@ class VoltaServiceProvider extends ServiceProvider
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
+    }
+
+    /**
+     * Register the Volta services.
+     */
+    protected function registerServices(): void
+    {
+        $services = [
+            'Contracts\Repositories\WeatherRepository'       => 'Repositories\OpenWeatherMapRepository',
+            'Contracts\Repositories\FilamentSpoolRepository' => 'Repositories\FilamentSpoolRepository',
+            'Contracts\Repositories\MachineJobRepository'    => 'Repositories\MachineJobRepository',
+            'Contracts\Repositories\ManufacturerRepository'  => 'Repositories\ManufacturerRepository',
+        ];
+
+        foreach ($services as $key => $value) {
+            $this->app->singleton('App\\'.$key, 'App\\'.$value);
+        }
+    }
+
+    /**
+     * Register custom Blade directives.
+     */
+    protected function registerBladeDirectives(): void
+    {
+        Blade::directive('moneyFormat', static function ($value) {
+            return "<?php echo money({$value}, auth()->user()->profile->currency ?? 'USD'); ?>";
+        });
+
+        Blade::directive('CurrencySymbol', static function ($code) {
+            return "<?php echo Punic\\Currency::getSymbol({$code}); ?>";
+        });
+
+        Blade::directive('CurrencySymbol', static function ($code) {
+            return "<?php echo Punic\\Currency::getSymbol({$code}); ?>";
+        });
     }
 
     /**
@@ -124,9 +124,9 @@ class VoltaServiceProvider extends ServiceProvider
      *
      * @param Connection $connection Database connection instance
      *
-     * @return SQLiteGrammar|MySqlGrammar
-     *
      * @throws Exception
+     *
+     * @return MySqlGrammar|SQLiteGrammar
      */
     protected function createGrammarFromConnection(Connection $connection): Grammar
     {
@@ -136,7 +136,7 @@ class VoltaServiceProvider extends ServiceProvider
             IlluminateMySqlGrammar::class,
             IlluminateSQLiteGrammar::class,
         ], true)) {
-            throw new RuntimeException("There current grammar `$queryGrammarClass` doesn't support binary uuids. Only  MySql and SQLite connections are supported.");
+            throw new RuntimeException("There current grammar `{$queryGrammarClass}` doesn't support binary uuids. Only  MySql and SQLite connections are supported.");
         }
         if ($queryGrammar instanceof IlluminateSQLiteGrammar) {
             $grammar = new SQLiteGrammar();

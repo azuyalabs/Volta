@@ -27,8 +27,6 @@ class UserController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -51,9 +49,9 @@ class UserController extends Controller
     /**
      * Show the user profile.
      *
-     * @return View
-     *
      * @throws ModelNotFoundException
+     *
+     * @return View
      */
     public function profile()
     {
@@ -65,9 +63,9 @@ class UserController extends Controller
     /**
      * Update the user's profile.
      *
-     * @return RedirectResponse
-     *
      * @throws ValidationException
+     *
+     * @return RedirectResponse
      */
     public function update(Request $request, User $user)
     {
@@ -121,6 +119,37 @@ class UserController extends Controller
     }
 
     /**
+     * Update the user's preferences.
+     *
+     * @throws ValidationException
+     *
+     * @return RedirectResponse
+     */
+    public function updatePreferences(Request $request, string $setting)
+    {
+        // Show a 404 if the given setting doesn't match the format
+        if (!$this->isValidSettingName($setting)) {
+            return abort(404);
+        }
+
+        [$component, $part] = explode('.', $setting);
+
+        $className = '\App\Http\Requests\\'.ucfirst($component).ucfirst($part).'Preferences';
+
+        $validatedData = $this->validate($request, (new $className())->rules());
+
+        $preferences = auth()->user()->profile->preferences;
+
+        foreach ($validatedData as $key => $value) {
+            $preferences[$component][$part][$key] = $value;
+        }
+
+        auth()->user()->profile()->update(['preferences' => json_encode($preferences)]);
+
+        return redirect()->back()->with('success', 'Preferences successfully updated!');
+    }
+
+    /**
      * Validate the given setting string.
      *
      * @return bool
@@ -165,36 +194,5 @@ class UserController extends Controller
                 ],
             ],
         ];
-    }
-
-    /**
-     * Update the user's preferences.
-     *
-     * @return RedirectResponse
-     *
-     * @throws ValidationException
-     */
-    public function updatePreferences(Request $request, string $setting)
-    {
-        // Show a 404 if the given setting doesn't match the format
-        if (!$this->isValidSettingName($setting)) {
-            return abort(404);
-        }
-
-        [$component, $part] = explode('.', $setting);
-
-        $className = '\App\Http\Requests\\'.ucfirst($component).ucfirst($part).'Preferences';
-
-        $validatedData = $this->validate($request, (new $className())->rules());
-
-        $preferences = auth()->user()->profile->preferences;
-
-        foreach ($validatedData as $key => $value) {
-            $preferences[$component][$part][$key] = $value;
-        }
-
-        auth()->user()->profile()->update(['preferences' => json_encode($preferences)]);
-
-        return redirect()->back()->with('success', 'Preferences successfully updated!');
     }
 }

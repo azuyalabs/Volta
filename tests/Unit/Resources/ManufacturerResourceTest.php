@@ -20,6 +20,10 @@ use App\Repositories\CountryRepository;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ManufacturerResourceTest extends TestCase
 {
     use ArraySubsetAsserts;

@@ -23,6 +23,16 @@ class FanBelowLayerTime
         $this->validate();
     }
 
+    public function getValue(): int
+    {
+        return $this->value;
+    }
+
+    public function isEqual(int $other): bool
+    {
+        return $this->value === $other;
+    }
+
     private function validate(): void
     {
         if (0 > $this->value) {
@@ -32,15 +42,5 @@ class FanBelowLayerTime
         if (0 === $this->value) {
             throw new ZeroValueException(self::VALUE_OBJECT_NAME);
         }
-    }
-
-    public function getValue(): int
-    {
-        return $this->value;
-    }
-
-    public function isEqual(int $other): bool
-    {
-        return $this->value === $other;
     }
 }

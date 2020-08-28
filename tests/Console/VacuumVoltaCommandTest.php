@@ -18,6 +18,9 @@ use Tests\TestCase;
 
 /**
  * Class for testing the volta:vacuum console command.
+ *
+ * @internal
+ * @coversNothing
  */
 class VacuumVoltaCommandTest extends TestCase
 {
@@ -27,7 +30,7 @@ class VacuumVoltaCommandTest extends TestCase
     private const CONSOLE_COMMAND = 'volta:vacuum';
 
     /** @test */
-    public function it_can_prune_stale_statuses(): void
+    public function itCanPruneStaleStatuses(): void
     {
         $this->artisan(self::CONSOLE_COMMAND)->expectsOutput('Database vacuumed.');
     }

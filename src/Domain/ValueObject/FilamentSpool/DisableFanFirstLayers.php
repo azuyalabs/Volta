@@ -19,13 +19,6 @@ class DisableFanFirstLayers
         $this->validate();
     }
 
-    private function validate(): void
-    {
-        if (0 > $this->value) {
-            throw new NegativeValueException();
-        }
-    }
-
     public function getValue(): int
     {
         return $this->value;
@@ -34,5 +27,12 @@ class DisableFanFirstLayers
     public function isEqual(int $other): bool
     {
         return $this->value === $other;
+    }
+
+    private function validate(): void
+    {
+        if (0 > $this->value) {
+            throw new NegativeValueException();
+        }
     }
 }

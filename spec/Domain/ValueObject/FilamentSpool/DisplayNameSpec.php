@@ -36,7 +36,8 @@ class DisplayNameSpec extends ObjectBehavior
         $this->beConstructedWith('');
 
         $this->shouldThrow(BlankDisplayNameException::class)
-                ->duringInstantiation();
+            ->duringInstantiation()
+        ;
     }
 
     public function it_compares_equality(): void

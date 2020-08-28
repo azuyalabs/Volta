@@ -12,9 +12,7 @@ return [
 
         'source' => [
             'files' => [
-                /*
-                 * The list of directories and files that will be included in the backup.
-                 */
+                // The list of directories and files that will be included in the backup.
                 'include' => [
                     base_path(),
                 ],
@@ -29,9 +27,7 @@ return [
                     base_path('node_modules'),
                 ],
 
-                /*
-                 * Determines if symlinks should be followed.
-                 */
+                // Determines if symlinks should be followed.
                 'followLinks' => false,
             ],
 
@@ -44,20 +40,14 @@ return [
             ],
         ],
 
-        /*
-         * The database dump can be gzipped to decrease diskspace usage.
-         */
+        // The database dump can be gzipped to decrease diskspace usage.
         'gzip_database_dump' => false,
 
         'destination' => [
-            /*
-             * The filename prefix used for the backup zip file.
-             */
+            // The filename prefix used for the backup zip file.
             'filename_prefix' => '',
 
-            /*
-             * The disk names on which the backups will be stored.
-             */
+            // The disk names on which the backups will be stored.
             'disks' => [
                 'local',
             ],
@@ -94,9 +84,7 @@ return [
         'slack' => [
             'webhook_url' => '',
 
-            /*
-             * If this is set to null the default channel of the webhook will be used.
-             */
+            // If this is set to null the default channel of the webhook will be used.
             'channel' => null,
         ],
     ],
@@ -137,29 +125,19 @@ return [
         'strategy' => \Spatie\Backup\Tasks\Cleanup\Strategies\DefaultStrategy::class,
 
         'defaultStrategy' => [
-            /*
-             * The number of days for which backups must be kept.
-             */
+            // The number of days for which backups must be kept.
             'keepAllBackupsForDays' => 7,
 
-            /*
-             * The number of days for which daily backups must be kept.
-             */
+            // The number of days for which daily backups must be kept.
             'keepDailyBackupsForDays' => 16,
 
-            /*
-             * The number of weeks for which one weekly backup must be kept.
-             */
+            // The number of weeks for which one weekly backup must be kept.
             'keepWeeklyBackupsForWeeks' => 8,
 
-            /*
-             * The number of months for which one monthly backup must be kept.
-             */
+            // The number of months for which one monthly backup must be kept.
             'keepMonthlyBackupsForMonths' => 4,
 
-            /*
-             * The number of years for which one yearly backup must be kept.
-             */
+            // The number of years for which one yearly backup must be kept.
             'keepYearlyBackupsForYears' => 2,
 
             /*

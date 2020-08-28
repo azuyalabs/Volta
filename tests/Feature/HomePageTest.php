@@ -16,10 +16,14 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class HomePageTest extends TestCase
 {
     /** @test */
-    public function homepage_is_accessible(): void
+    public function homepageIsAccessible(): void
     {
         $response = $this->get('/');
         $response->assertStatus(302);

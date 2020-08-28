@@ -17,6 +17,10 @@ namespace Tests\Feature;
 use App\User;
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class FilamentSpoolControllerTestNO extends TestCase
 {
     /**

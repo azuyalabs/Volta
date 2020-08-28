@@ -46,6 +46,7 @@ class ManufacturersTableSeeder extends Seeder
             if ($validator->fails()) {
                 ++$stats['failed'];
                 $this->command->info(sprintf('Failed importing `%s`: %s', $obj['name'], $validator->getMessageBag()->first()));
+
                 continue;
             }
 

@@ -23,6 +23,9 @@ use UnexpectedValueException;
 
 /**
  * Class containing cases for testing the Filament Spool class.
+ *
+ * @internal
+ * @coversNothing
  */
 class FilamentSpoolTest extends TestCase
 {
@@ -62,7 +65,7 @@ class FilamentSpoolTest extends TestCase
      * @param $weight int test sample for weight
      * @param $expected float the expected price per kilogram
      */
-    public function it_calculates_correct_price_per_kilogram($price, $weight, $expected): void
+    public function itCalculatesCorrectPricePerKilogram($price, $weight, $expected): void
     {
         $spool = $this->createSpoolInstance(['purchase_price' => $price, 'weight' => $weight]);
 
@@ -71,7 +74,7 @@ class FilamentSpoolTest extends TestCase
     }
 
     /** @test */
-    public function it_calculates_price_per_kilogram_as_zero_when_price_zero(): void
+    public function itCalculatesPricePerKilogramAsZeroWhenPriceZero(): void
     {
         $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => 0]);
 
@@ -80,7 +83,7 @@ class FilamentSpoolTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_an_exception_for_price_per_kilogram_when_weight_is_zero(): void
+    public function itThrowsAnExceptionForPricePerKilogramWhenWeightIsZero(): void
     {
         $this->expectException(UnexpectedValueException::class);
 
@@ -99,7 +102,7 @@ class FilamentSpoolTest extends TestCase
      * @param $diameter float test sample for diameter
      * @param $expected float the expected length
      */
-    public function it_calculates_correct_spool_length($weight, $density, $diameter, $expected): void
+    public function itCalculatesCorrectSpoolLength($weight, $density, $diameter, $expected): void
     {
         $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'density' => $density, 'diameter' => $diameter, 'weight' => $weight]);
 
@@ -109,7 +112,7 @@ class FilamentSpoolTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_an_exception_for_length_when_density_is_zero(): void
+    public function itThrowsAnExceptionForLengthWhenDensityIsZero(): void
     {
         $this->expectException(UnexpectedValueException::class);
 
@@ -119,7 +122,7 @@ class FilamentSpoolTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_an_exception_for_length_when_diameter_is_zero(): void
+    public function itThrowsAnExceptionForLengthWhenDiameterIsZero(): void
     {
         $this->expectException(UnexpectedValueException::class);
 
@@ -129,7 +132,7 @@ class FilamentSpoolTest extends TestCase
     }
 
     /** @test */
-    public function it_calculates_spool_length_is_zero_when_weight_is_zero(): void
+    public function itCalculatesSpoolLengthIsZeroWhenWeightIsZero(): void
     {
         $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'weight' => 0]);
 
@@ -148,7 +151,7 @@ class FilamentSpoolTest extends TestCase
      * @param $diameter float test sample for diameter
      * @param $expected float the expected price per length
      */
-    public function it_calculates_correct_price_per_length($price, $weight, $density, $diameter, $expected): void
+    public function itCalculatesCorrectPricePerLength($price, $weight, $density, $diameter, $expected): void
     {
         $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => $price, 'density' => $density, 'diameter' => $diameter, 'weight' => $weight]);
 
@@ -157,7 +160,7 @@ class FilamentSpoolTest extends TestCase
     }
 
     /** @test */
-    public function it_calculates_price_per_length_as_zero_when_price_zero(): void
+    public function itCalculatesPricePerLengthAsZeroWhenPriceZero(): void
     {
         $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => 0]);
 
@@ -174,7 +177,7 @@ class FilamentSpoolTest extends TestCase
      * @param $weight int test sample for weight
      * @param $expected float the expected price per length
      */
-    public function it_calculates_correct_price_per_weight($price, $weight, $expected): void
+    public function itCalculatesCorrectPricePerWeight($price, $weight, $expected): void
     {
         $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => $price, 'weight' => $weight]);
 
@@ -183,7 +186,7 @@ class FilamentSpoolTest extends TestCase
     }
 
     /** @test */
-    public function it_calculates_price_per_weight_as_zero_when_price_zero(): void
+    public function itCalculatesPricePerWeightAsZeroWhenPriceZero(): void
     {
         $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => 0]);
 
@@ -201,7 +204,7 @@ class FilamentSpoolTest extends TestCase
      * @param $density float test sample for density
      * @param $expected float the expected price per length
      */
-    public function it_calculates_correct_price_per_volume($price, $weight, $density, $expected): void
+    public function itCalculatesCorrectPricePerVolume($price, $weight, $density, $expected): void
     {
         $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id, 'purchase_price' => $price, 'weight' => $weight, 'density' => $density]);
 
@@ -210,7 +213,7 @@ class FilamentSpoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_mark_spool_as_empty(): void
+    public function itCanMarkSpoolAsEmpty(): void
     {
         $spool = factory(FilamentSpool::class)->create(['user_id' => $this->_user->id]);
 

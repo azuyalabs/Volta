@@ -36,8 +36,9 @@ class ColorNameSpec extends ObjectBehavior
         $this->beConstructedWith('');
 
         $this
-                ->shouldThrow(BlankColorNameException::class)
-                ->duringInstantiation();
+            ->shouldThrow(BlankColorNameException::class)
+            ->duringInstantiation()
+        ;
     }
 
     public function it_compares_equality(): void

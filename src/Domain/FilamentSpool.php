@@ -227,11 +227,6 @@ class FilamentSpool
         return $this;
     }
 
-    private function isZero(float $value): bool
-    {
-        return abs($value - 0) < PHP_FLOAT_EPSILON;
-    }
-
     public function getDiameter(): Length
     {
         try {
@@ -568,5 +563,10 @@ class FilamentSpool
         }
 
         return new Length(round($ratio, 3), 'millimeter');
+    }
+
+    private function isZero(float $value): bool
+    {
+        return abs($value - 0) < PHP_FLOAT_EPSILON;
     }
 }

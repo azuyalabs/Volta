@@ -31,8 +31,6 @@ class CreateMachineJobsTable extends Migration
 
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -66,6 +64,14 @@ class CreateMachineJobsTable extends Migration
     }
 
     /**
+     * Reverse the migrations.
+     */
+    public function down()
+    {
+        Schema::dropIfExists(self::TABLE_NAME);
+    }
+
+    /**
      * Create the 'started_at' column.
      *
      * Needs to be done with a raw DB statement as the default datetime method
@@ -78,15 +84,5 @@ class CreateMachineJobsTable extends Migration
 
         DB::statement(\sprintf('ALTER TABLE %s ADD COLUMN %s timestamp NULL DEFAULT NULL;', self::TABLE_NAME, $startedAtColumnName));
         DB::statement(\sprintf('CREATE UNIQUE INDEX %s on %s(%s, %s, %s);', $startedAtIndexName, self::TABLE_NAME, 'job_id', 'name', $startedAtColumnName));
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists(self::TABLE_NAME);
     }
 }

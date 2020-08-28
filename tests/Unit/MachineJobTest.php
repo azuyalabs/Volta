@@ -19,11 +19,14 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Machine Job class.
+ *
+ * @internal
+ * @coversNothing
  */
 class MachineJobTest extends TestCase
 {
     /** @test */
-    public function it_can_correctly_establish_the_job_id(): void
+    public function itCanCorrectlyEstablishTheJobId(): void
     {
         $job = factory(MachineJob::class)->create();
 

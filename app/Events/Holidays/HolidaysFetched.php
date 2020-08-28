@@ -34,8 +34,6 @@ class HolidaysFetched implements ShouldBroadcast
 
     /**
      * Create a new event instance.
-     *
-     * @return void
      */
     public function __construct(string $provider, array $holidays)
     {
@@ -46,7 +44,7 @@ class HolidaysFetched implements ShouldBroadcast
     /**
      * Get the channel(s) the event should broadcast on.
      *
-     * @return Channel|array
+     * @return array|Channel
      */
     public function broadcastOn()
     {

@@ -21,6 +21,10 @@ use App\Product;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ProductResourceTest extends TestCase
 {
     use ArraySubsetAsserts;

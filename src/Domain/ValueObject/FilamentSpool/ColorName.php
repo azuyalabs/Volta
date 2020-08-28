@@ -16,13 +16,6 @@ class ColorName
         $this->validate();
     }
 
-    private function validate(): void
-    {
-        if (empty($this->value)) {
-            throw new BlankColorNameException();
-        }
-    }
-
     public function getValue(): string
     {
         return $this->value;
@@ -31,5 +24,12 @@ class ColorName
     public function isEqual(ColorName $other): bool
     {
         return $this->value === $other->value;
+    }
+
+    private function validate(): void
+    {
+        if (empty($this->value)) {
+            throw new BlankColorNameException();
+        }
     }
 }

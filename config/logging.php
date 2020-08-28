@@ -76,7 +76,7 @@ return [
         ],
          */
 
-        /* New dashboard logging channel that doesn't store anything. Telescope will do the tracking */
+        // New dashboard logging channel that doesn't store anything. Telescope will do the tracking
         'dashboard' => [
             'driver'  => 'monolog',
             'handler' => Monolog\Handler\NullHandler::class,

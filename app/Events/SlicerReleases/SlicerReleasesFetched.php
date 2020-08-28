@@ -40,7 +40,7 @@ class SlicerReleasesFetched implements ShouldBroadcast
     /**
      * Get the channel(s) the event should broadcast on.
      *
-     * @return Channel|array
+     * @return array|Channel
      */
     public function broadcastOn()
     {

@@ -97,9 +97,7 @@ return [
 
         'expiration_time' => \DateInterval::createFromDateString('24 hours'),
 
-        /*
-         * The key to use when tagging and prefixing entries in the cache.
-         */
+        // The key to use when tagging and prefixing entries in the cache.
 
         'key' => 'spatie.permission.cache',
 

@@ -36,8 +36,9 @@ class ManufacturerNameSpec extends ObjectBehavior
         $this->beConstructedWith('');
 
         $this
-                ->shouldThrow(BlankManufacturerNameException::class)
-                ->duringInstantiation();
+            ->shouldThrow(BlankManufacturerNameException::class)
+            ->duringInstantiation()
+        ;
     }
 
     public function it_compares_equality(): void

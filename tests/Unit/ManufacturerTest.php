@@ -18,6 +18,9 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Manufacturer class.
+ *
+ * @internal
+ * @coversNothing
  */
 class ManufacturerTest extends TestCase
 {

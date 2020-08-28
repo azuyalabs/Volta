@@ -64,18 +64,6 @@ class MachinesController extends Controller
         return view('machines.create')->with('models', $this->getProductModelList());
     }
 
-    protected function getProductModelList(): array
-    {
-        $pm     = Product::with('manufacturer:id,name')->where('class', 'machine')->get()->sortBy('name');
-        $groups = [];
-        foreach ($pm as $model) {
-            $groups[$model->manufacturer->name][$model->id] = $model->name;
-        }
-        ksort($groups);
-
-        return $groups;
-    }
-
     /**
      * Store a newly created machine in storage.
      *
@@ -134,14 +122,26 @@ class MachinesController extends Controller
     /**
      * Remove the specified machine from storage.
      *
-     * @return RedirectResponse
-     *
      * @throws Exception
+     *
+     * @return RedirectResponse
      */
     public function destroy(Machine $machine)
     {
         $machine->delete();
 
         return redirect('machines')->with('flash_message', 'Machine deleted!');
+    }
+
+    protected function getProductModelList(): array
+    {
+        $pm     = Product::with('manufacturer:id,name')->where('class', 'machine')->get()->sortBy('name');
+        $groups = [];
+        foreach ($pm as $model) {
+            $groups[$model->manufacturer->name][$model->id] = $model->name;
+        }
+        ksort($groups);
+
+        return $groups;
     }
 }

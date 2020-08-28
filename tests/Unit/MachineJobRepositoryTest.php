@@ -28,11 +28,14 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Machine Job Repository class.
+ *
+ * @internal
+ * @coversNothing
  */
 class MachineJobRepositoryTest extends TestCase
 {
     /** @test */
-    public function it_can_find_machine_jobs_by_uuid(): void
+    public function itCanFindMachineJobsByUuid(): void
     {
         $job = factory(MachineJob::class)->create(); // Create a Machine Job record
 
@@ -55,7 +58,7 @@ class MachineJobRepositoryTest extends TestCase
      *
      * @throws Exception
      */
-    public function it_can_retrieve_all_machine_jobs_of_a_user(): void
+    public function itCanRetrieveAllMachineJobsOfAUser(): void
     {
         $samples = random_int(2, 50);
         $user_id = random_int(1, 20);
@@ -74,7 +77,7 @@ class MachineJobRepositoryTest extends TestCase
      *
      * @throws Exception
      */
-    public function it_can_delete_a_machine_job_by_uuid(): void
+    public function itCanDeleteAMachineJobByUuid(): void
     {
         $samples = random_int(2, 50);
         $user_id = random_int(1, 20);
@@ -95,7 +98,7 @@ class MachineJobRepositoryTest extends TestCase
     /**
      * @test
      */
-    public function it_can_update_a_machine_job_by_uuid(): void
+    public function itCanUpdateAMachineJobByUuid(): void
     {
         $job = factory(MachineJob::class)->create();
 
@@ -124,7 +127,7 @@ class MachineJobRepositoryTest extends TestCase
     /**
      * @test
      */
-    public function it_can_create_a_machine_job(): void
+    public function itCanCreateAMachineJob(): void
     {
         $job = factory(MachineJob::class)->create(); // Create a Machine Job record
 
@@ -158,7 +161,7 @@ class MachineJobRepositoryTest extends TestCase
      *
      * @throws Exception
      */
-    public function it_can_retrieve_print_activity_of_a_user(): void
+    public function itCanRetrievePrintActivityOfAUser(): void
     {
         $samples = random_int(2, 50);
         $user_id = random_int(1, 20);
@@ -180,7 +183,7 @@ class MachineJobRepositoryTest extends TestCase
      *
      * @throws Exception
      */
-    public function it_can_retrieve_print_job_success_rate_of_a_user(): void
+    public function itCanRetrievePrintJobSuccessRateOfAUser(): void
     {
         $samples = random_int(2, 50);
         $user_id = random_int(1, 20);

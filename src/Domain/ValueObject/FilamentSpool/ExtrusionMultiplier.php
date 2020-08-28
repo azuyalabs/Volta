@@ -27,6 +27,16 @@ class ExtrusionMultiplier
         $this->validate();
     }
 
+    public function getValue(): float
+    {
+        return $this->value;
+    }
+
+    public function isEqual(float $other): bool
+    {
+        return $this->value === $other;
+    }
+
     private function validate(): void
     {
         if (0.0 > $this->value) {
@@ -40,15 +50,5 @@ class ExtrusionMultiplier
         if (self::UPPER_LIMIT <= $this->value) {
             throw new UpperLimitValueException(self::VALUE_OBJECT_NAME, self::UPPER_LIMIT);
         }
-    }
-
-    public function getValue(): float
-    {
-        return $this->value;
-    }
-
-    public function isEqual(float $other): bool
-    {
-        return $this->value === $other;
     }
 }

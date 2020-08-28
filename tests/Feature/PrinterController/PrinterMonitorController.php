@@ -19,6 +19,9 @@ use Tests\TestCase;
 
 /**
  * Base Class containing for testing the Printer Monitor API endpoints.
+ *
+ * @internal
+ * @coversNothing
  */
 class PrinterMonitorController extends TestCase
 {

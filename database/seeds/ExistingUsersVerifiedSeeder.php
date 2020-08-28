@@ -27,6 +27,7 @@ class ExistingUsersVerifiedSeeder extends Seeder
     public function run(): void
     {
         User::where('email_verified_at', null)
-            ->update(['email_verified_at' => Carbon::now()]);
+            ->update(['email_verified_at' => Carbon::now()])
+        ;
     }
 }

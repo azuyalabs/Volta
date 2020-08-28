@@ -16,13 +16,6 @@ class DisplayName
         $this->validate();
     }
 
-    private function validate(): void
-    {
-        if (empty($this->value)) {
-            throw new BlankDisplayNameException();
-        }
-    }
-
     public function getValue(): string
     {
         return $this->value;
@@ -31,5 +24,12 @@ class DisplayName
     public function isEqual(DisplayName $other): bool
     {
         return $this->value === $other->value;
+    }
+
+    private function validate(): void
+    {
+        if (empty($this->value)) {
+            throw new BlankDisplayNameException();
+        }
     }
 }

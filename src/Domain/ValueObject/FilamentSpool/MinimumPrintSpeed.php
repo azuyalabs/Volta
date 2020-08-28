@@ -19,6 +19,16 @@ class MinimumPrintSpeed
         $this->validate();
     }
 
+    public function getValue(): float
+    {
+        return $this->value;
+    }
+
+    public function isEqual(float $other): bool
+    {
+        return $this->value === $other;
+    }
+
     private function validate(): void
     {
         if (0.0 > $this->value) {
@@ -28,15 +38,5 @@ class MinimumPrintSpeed
         if (0.0 === $this->value) {
             throw new ZeroValueException(self::VALUE_OBJECT_NAME);
         }
-    }
-
-    public function getValue(): float
-    {
-        return $this->value;
-    }
-
-    public function isEqual(float $other): bool
-    {
-        return $this->value === $other;
     }
 }

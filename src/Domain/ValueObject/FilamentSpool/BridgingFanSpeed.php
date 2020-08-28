@@ -22,13 +22,6 @@ class BridgingFanSpeed
         $this->validate();
     }
 
-    private function validate(): void
-    {
-        if (100 < $this->value) {
-            throw new MaximumValueBridgingFanSpeedException();
-        }
-    }
-
     public function getValue(): int
     {
         return $this->value;
@@ -37,5 +30,12 @@ class BridgingFanSpeed
     public function isEqual(int $other): bool
     {
         return $this->value === $other;
+    }
+
+    private function validate(): void
+    {
+        if (100 < $this->value) {
+            throw new MaximumValueBridgingFanSpeedException();
+        }
     }
 }

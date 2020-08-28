@@ -80,7 +80,8 @@ class MachineJobRepository implements Contract
             ->whereUserId($user_id)
             ->withQueryOptions($options)
             ->groupBy('date')
-            ->get();
+            ->get()
+        ;
     }
 
     /**
@@ -92,6 +93,7 @@ class MachineJobRepository implements Contract
             ->whereUserId($user_id)
             ->withQueryOptions($options)
             ->groupBy('status')
-            ->get();
+            ->get()
+        ;
     }
 }

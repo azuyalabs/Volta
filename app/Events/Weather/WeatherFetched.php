@@ -34,8 +34,6 @@ class WeatherFetched implements ShouldBroadcast
 
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct(string $city, array $weather)
     {
@@ -46,7 +44,7 @@ class WeatherFetched implements ShouldBroadcast
     /**
      * Get the channel(s) the event should broadcast on.
      *
-     * @return Channel|array
+     * @return array|Channel
      */
     public function broadcastOn()
     {

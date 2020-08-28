@@ -41,13 +41,6 @@ abstract class MachineJobController extends Controller
     }
 
     /**
-     * The machine type for the controller.
-     *
-     * @return string
-     */
-    abstract protected function machineType();
-
-    /**
      * Remove the specified machine job from storage.
      *
      * @param string $id the id of the machine job
@@ -90,9 +83,9 @@ abstract class MachineJobController extends Controller
     /**
      * Retrieves all the print job activity of the given user for the last year.
      *
-     * @return JsonResponse
-     *
      * @throws Exception
+     *
+     * @return JsonResponse
      */
     public function activity(MachineJobRepository $storage)
     {
@@ -115,9 +108,9 @@ abstract class MachineJobController extends Controller
     /**
      * Retrieves the success rate of all print jobs over time of the given user.
      *
-     * @return JsonResponse
-     *
      * @throws Exception
+     *
+     * @return JsonResponse
      */
     public function success_rate(MachineJobRepository $storage)
     {
@@ -136,4 +129,11 @@ abstract class MachineJobController extends Controller
 
         return response()->json($activity);
     }
+
+    /**
+     * The machine type for the controller.
+     *
+     * @return string
+     */
+    abstract protected function machineType();
 }

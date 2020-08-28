@@ -22,11 +22,14 @@ use Tests\TestCase;
  * Class containing cases for testing the Filament Spool Resource Collection class.
  *
  * //TODO: Incomplete tests!
+ *
+ * @internal
+ * @coversNothing
  */
 class FilamentSpoolCollectionResourceTest extends TestCase
 {
     /** @test */
-    public function it_can_return_a_correct_response(): void
+    public function itCanReturnACorrectResponse(): void
     {
         $resource = (new FilamentSpoolCollectionResource($spools = factory(FilamentSpool::class, 2)->create()))->jsonSerialize();
 

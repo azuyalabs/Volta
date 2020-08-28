@@ -141,9 +141,8 @@ class Machine extends Model
         $rate = $this->getLifetimeCostAttribute();
 
         $rate = $rate->divide($this->lifespan); // Division by zero is handled by the Money class
-        $rate = $rate->divide($this->operating_hours); // Division by zero is handled by the Money class
 
-        return $rate;
+        return $rate->divide($this->operating_hours); // Division by zero is handled by the Money class
     }
 
     /**

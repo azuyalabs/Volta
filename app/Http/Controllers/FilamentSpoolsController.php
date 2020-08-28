@@ -178,9 +178,9 @@ class FilamentSpoolsController extends Controller
     /**
      * Exports the specified filament spool as a json file.
      *
-     * @return Response
-     *
      * @throws JsonEncodingException
+     *
+     * @return Response
      */
     public function export(FilamentSpool $spool)
     {

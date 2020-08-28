@@ -36,14 +36,16 @@ class MinimumPrintSpeedSpec extends ObjectBehavior
     {
         $this->beConstructedWith(-5.4);
         $this->shouldThrow(NegativeValueException::class)
-                ->duringInstantiation();
+            ->duringInstantiation()
+        ;
     }
 
     public function it_throws_an_exception_when_value_is_zero(): void
     {
         $this->beConstructedWith(0.0);
         $this->shouldThrow(ZeroValueException::class)
-                ->duringInstantiation();
+            ->duringInstantiation()
+        ;
     }
 
     public function it_compares_equality(): void

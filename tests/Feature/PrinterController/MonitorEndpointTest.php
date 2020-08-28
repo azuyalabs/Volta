@@ -18,13 +18,16 @@ use App\User;
 
 /**
  * Class containing cases for testing the Monitor API Endpoint of the PrinterController.
+ *
+ * @internal
+ * @coversNothing
  */
 class MonitorEndpointTest extends PrinterMonitorController
 {
     private const API_ENDPOINT = '/api/printer/monitor';
 
     /** @test */
-    public function it_returns_405_status_when_unsupported_method_is_used(): void
+    public function itReturns405StatusWhenUnsupportedMethodIsUsed(): void
     {
         $user = factory(User::class)->create();
 
@@ -37,7 +40,7 @@ class MonitorEndpointTest extends PrinterMonitorController
     }
 
     /** @test */
-    public function it_can_submit_monitor_data_correctly(): void
+    public function itCanSubmitMonitorDataCorrectly(): void
     {
         $user    = factory(User::class)->create();
         $printer = 'ender3@192.168.1.10:5000';
@@ -61,28 +64,8 @@ class MonitorEndpointTest extends PrinterMonitorController
         ]);
     }
 
-    /**
-     * Helper function to create a valid encrypted printer ID sample.
-     *
-     * @param $data string the printer address (i.e. ID)
-     * @param $key string the encryption key (the users' API token)
-     *
-     * @return string string the encrypted printer address
-     */
-    private function encryptPrinterID($data, $key): string
-    {
-        // Generate an initialization vector
-        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cfb8'));
-
-        // Encrypt the data using AES 256 encryption in CFB8 mode using our encryption key and initialization vector.
-        $encrypted = openssl_encrypt($data, 'aes-256-cfb8', $key, 1, $iv);
-
-        // The $iv is just as important as the key for decrypting, so save it with our encrypted data using a unique separator (::)
-        return base64_encode($encrypted.'::'.$iv);
-    }
-
     /** @test */
-    public function it_returns_422_status_when_using_invalid_printer_id(): void
+    public function itReturns422StatusWhenUsingInvalidPrinterId(): void
     {
         $user    = factory(User::class)->create();
         $printer = 'mk25@192.168.1.10:5000';
@@ -109,7 +92,7 @@ class MonitorEndpointTest extends PrinterMonitorController
     }
 
     /** @test */
-    public function it_returns_422_status_when_no_data_is_submitted(): void
+    public function itReturns422StatusWhenNoDataIsSubmitted(): void
     {
         $user = factory(User::class)->create();
 
@@ -127,5 +110,25 @@ class MonitorEndpointTest extends PrinterMonitorController
             ],
             'message' => 'The given data was invalid.',
         ]);
+    }
+
+    /**
+     * Helper function to create a valid encrypted printer ID sample.
+     *
+     * @param $data string the printer address (i.e. ID)
+     * @param $key string the encryption key (the users' API token)
+     *
+     * @return string string the encrypted printer address
+     */
+    private function encryptPrinterID($data, $key): string
+    {
+        // Generate an initialization vector
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cfb8'));
+
+        // Encrypt the data using AES 256 encryption in CFB8 mode using our encryption key and initialization vector.
+        $encrypted = openssl_encrypt($data, 'aes-256-cfb8', $key, 1, $iv);
+
+        // The $iv is just as important as the key for decrypting, so save it with our encrypted data using a unique separator (::)
+        return base64_encode($encrypted.'::'.$iv);
     }
 }

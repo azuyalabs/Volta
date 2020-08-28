@@ -35,7 +35,8 @@ class DisableFanFirstLayersSpec extends ObjectBehavior
     {
         $this->beConstructedWith(-6);
         $this->shouldThrow(NegativeValueException::class)
-                ->duringInstantiation();
+            ->duringInstantiation()
+        ;
     }
 
     public function it_compares_equality(): void

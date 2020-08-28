@@ -53,13 +53,15 @@ class MaximumVolumetricFlowRateSpec extends ObjectBehavior
     {
         $this->beConstructedWith(new VolumetricFlowRate(-10.56, MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND));
         $this->shouldThrow(NegativeValueException::class)
-            ->duringInstantiation();
+            ->duringInstantiation()
+        ;
     }
 
     public function it_throws_an_exception_when_value_is_zero(): void
     {
         $this->beConstructedWith(new VolumetricFlowRate(0, MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND));
         $this->shouldThrow(ZeroValueException::class)
-            ->duringInstantiation();
+            ->duringInstantiation()
+        ;
     }
 }

@@ -117,6 +117,7 @@ class SlicerProfilesCommand extends Command
 
             if (!isset($f['product'], $f['id']) || null === $f) {
                 $this->warn(sprintf('! `%s` is invalid (Perhaps empty or an older version?)', $filamentFile['basename']));
+
                 continue;
             }
 
@@ -137,7 +138,8 @@ class SlicerProfilesCommand extends Command
                 new Currency($f['purchase_price']['currency'])
             ))
                 ->setWeight(new Mass($f['product']['spool_weight'], 'gram'))
-                ->setMaterialType(new MaterialType($f['product']['type']));
+                ->setMaterialType(new MaterialType($f['product']['type']))
+            ;
 
             if (isset($f['product']['density'])) {
                 $spool->setDensity($f['product']['density']);
@@ -199,7 +201,8 @@ class SlicerProfilesCommand extends Command
             $f = Fractal::create()
                 ->item($spool, new SlicerTemplateTransformer())
                 ->serializeWith(new ArraySerializer())
-                ->toArray();
+                ->toArray()
+            ;
 
             print_r($f);
 

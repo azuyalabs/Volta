@@ -33,6 +33,16 @@ class MaterialType
         $this->validate();
     }
 
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    public function isEqual(MaterialType $type): bool
+    {
+        return $this->value === $type->value;
+    }
+
     private function validate(): void
     {
         $types = [
@@ -46,15 +56,5 @@ class MaterialType
         if (false === \in_array($this->value, $types, true)) {
             throw new InvalidMaterialTypeException();
         }
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function isEqual(MaterialType $type): bool
-    {
-        return $this->value === $type->value;
     }
 }

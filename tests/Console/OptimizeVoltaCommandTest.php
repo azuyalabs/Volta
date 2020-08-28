@@ -20,6 +20,9 @@ use Tests\TestCase;
 
 /**
  * Class for testing the volta:prune console command.
+ *
+ * @internal
+ * @coversNothing
  */
 class OptimizeVoltaCommandTest extends TestCase
 {
@@ -29,7 +32,7 @@ class OptimizeVoltaCommandTest extends TestCase
     private const OPTIMIZE_COMMAND = 'volta:optimize';
 
     /** @test */
-    public function it_can_prune_stale_statuses(): void
+    public function itCanPruneStaleStatuses(): void
     {
         $samples = 100;
         factory(Status::class, $samples)->create();
@@ -47,7 +50,7 @@ class OptimizeVoltaCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_can_vacuum_the_database(): void
+    public function itCanVacuumTheDatabase(): void
     {
         $this->artisan(self::OPTIMIZE_COMMAND)->expectsOutput('Database vacuumed.');
     }

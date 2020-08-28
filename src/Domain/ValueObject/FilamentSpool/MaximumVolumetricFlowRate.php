@@ -25,6 +25,11 @@ class MaximumVolumetricFlowRate
         return $this->value;
     }
 
+    public function isEqual(VolumetricFlowRate $other): bool
+    {
+        return $this->value === $other;
+    }
+
     private function validate(): void
     {
         if (0 > $this->value->toNativeUnit()) {
@@ -34,10 +39,5 @@ class MaximumVolumetricFlowRate
         if (abs($this->value->toNativeUnit() - 0) < PHP_FLOAT_EPSILON) {
             throw new ZeroValueException();
         }
-    }
-
-    public function isEqual(VolumetricFlowRate $other): bool
-    {
-        return $this->value === $other;
     }
 }

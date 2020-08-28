@@ -35,7 +35,8 @@ class BridgingFanSpeedSpec extends ObjectBehavior
     {
         $this->beConstructedWith(256);
         $this->shouldThrow(MaximumValueBridgingFanSpeedException::class)
-                ->duringInstantiation();
+            ->duringInstantiation()
+        ;
     }
 
     public function it_compares_equality(): void

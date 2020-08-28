@@ -16,13 +16,6 @@ class CalibrationName
         $this->validate();
     }
 
-    private function validate(): void
-    {
-        if (empty($this->value)) {
-            throw new BlankCalibrationNameException();
-        }
-    }
-
     public function getValue(): string
     {
         return $this->value;
@@ -31,5 +24,12 @@ class CalibrationName
     public function isEqual(CalibrationName $other): bool
     {
         return $this->value === $other->value;
+    }
+
+    private function validate(): void
+    {
+        if (empty($this->value)) {
+            throw new BlankCalibrationNameException();
+        }
     }
 }

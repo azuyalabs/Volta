@@ -46,30 +46,6 @@ trait Monetary
     }
 
     /**
-     * Check if the model attribute is set for a Money representation.
-     *
-     * @param string $key the model attribute
-     *
-     * @return bool true if the model attribute is set for a Money representation, false otherwise
-     */
-    private function isMoneyAttribute(string $key): bool
-    {
-        return in_array($key, $this->money_attributes);
-    }
-
-    /**
-     * Get the currency of the authenticated user.
-     *
-     * If no currency can be obtained, the US Dollar currency will serve as fallback.
-     *
-     * @return string the currency (code)
-     */
-    private function getCurrency(): string
-    {
-        return auth()->user()->profile->currency ?? 'USD';
-    }
-
-    /**
      * Sets the value for the given model attribute.
      *
      * @param string $key   the name of the model attribute
@@ -93,5 +69,29 @@ trait Monetary
         }
 
         return parent::setAttribute($key, $numeric_value);
+    }
+
+    /**
+     * Check if the model attribute is set for a Money representation.
+     *
+     * @param string $key the model attribute
+     *
+     * @return bool true if the model attribute is set for a Money representation, false otherwise
+     */
+    private function isMoneyAttribute(string $key): bool
+    {
+        return in_array($key, $this->money_attributes);
+    }
+
+    /**
+     * Get the currency of the authenticated user.
+     *
+     * If no currency can be obtained, the US Dollar currency will serve as fallback.
+     *
+     * @return string the currency (code)
+     */
+    private function getCurrency(): string
+    {
+        return auth()->user()->profile->currency ?? 'USD';
     }
 }

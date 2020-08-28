@@ -122,7 +122,8 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_throws_exception_setting_weight_to_zero(): void
     {
         $this->shouldThrow(ZeroWeightException::class)
-            ->duringSetWeight(new Mass(0, 'grams'));
+            ->duringSetWeight(new Mass(0, 'grams'))
+        ;
     }
 
     public function it_has_a_price_per_weight(): void
@@ -316,7 +317,8 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_throws_exception_setting_density_to_zero(): void
     {
         $this->shouldThrow(ZeroDensityException::class)
-            ->duringSetDensity(0.0);
+            ->duringSetDensity(0.0)
+        ;
     }
 
     public function it_has_an_ovality_tolerance(): void

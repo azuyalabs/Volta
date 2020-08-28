@@ -84,7 +84,8 @@ class MachineJob extends Model
         $this->whereType($query, $options)
             ->whereStatuses($query, $options)
             ->whereMachines($query, $options)
-            ->whereStartDatePeriod($query, $options);
+            ->whereStartDatePeriod($query, $options)
+        ;
 
         return $query;
     }

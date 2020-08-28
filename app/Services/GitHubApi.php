@@ -56,12 +56,12 @@ class GitHubApi
      *
      * @param string        $userName     the Github username
      * @param string        $repoName     the Github repository name belonging to the user
-     * @param string|null   $friendlyName an optional friendly name for the repository
-     * @param callable|null $callback     an optional callback function to process the version number (not all repositories adhere to the semver standard)
-     *
-     * @return array structure containing the latest release version number, the release date and the (friendly) repository name
+     * @param null|string   $friendlyName an optional friendly name for the repository
+     * @param null|callable $callback     an optional callback function to process the version number (not all repositories adhere to the semver standard)
      *
      * @throws Exception
+     *
+     * @return array structure containing the latest release version number, the release date and the (friendly) repository name
      */
     public function fetchLatestRelease(string $userName, string $repoName, string $friendlyName = null, callable $callback = null): array
     {

@@ -25,7 +25,7 @@ class CalibrationCollection
 
     public function getCalibrations(?string $name = null): array
     {
-        return is_null($name) ? $this->calibrations : $this->calibrations[$name];
+        return null === $name ? $this->calibrations : $this->calibrations[$name];
     }
 
     public function getAverage(string $name): float
@@ -62,7 +62,7 @@ class CalibrationCollection
         return array_reduce($this->calibrations[$name], static function ($carry, $item) {
             $m = max($item->getMeasurements());
 
-            return (!is_null($carry) && $carry > $m) ? $carry : $m;
+            return (null !== $carry && $carry > $m) ? $carry : $m;
         });
     }
 
@@ -75,7 +75,7 @@ class CalibrationCollection
         return array_reduce($this->calibrations[$name], static function ($carry, $item) {
             $m = min($item->getMeasurements());
 
-            return (!is_null($carry) && $carry < $m) ? $carry : $m;
+            return (null !== $carry && $carry < $m) ? $carry : $m;
         });
     }
 
@@ -88,7 +88,7 @@ class CalibrationCollection
         return array_reduce($this->calibrations[$name], static function ($carry, $item) {
             $d = $item->getTimestamp();
 
-            return (!is_null($carry) && $carry > $d) ? $carry : $d;
+            return (null !== $carry && $carry > $d) ? $carry : $d;
         });
     }
 
@@ -104,7 +104,7 @@ class CalibrationCollection
         }
 
         return array_reduce($this->calibrations[$name], static function ($carry, $item) {
-            return (!is_null($carry) && $carry->getTimestamp() > $item->getTimestamp()) ? $carry : $item;
+            return (null !== $carry && $carry->getTimestamp() > $item->getTimestamp()) ? $carry : $item;
         });
     }
 
@@ -115,7 +115,7 @@ class CalibrationCollection
         }
 
         return array_reduce($this->calibrations[$name], static function ($carry, $item) {
-            return (!is_null($carry) && $carry->getTimestamp() < $item->getTimestamp()) ? $carry : $item;
+            return (null !== $carry && $carry->getTimestamp() < $item->getTimestamp()) ? $carry : $item;
         });
     }
 }

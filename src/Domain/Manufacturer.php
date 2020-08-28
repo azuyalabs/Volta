@@ -35,6 +35,11 @@ class Manufacturer
         $this->name = $name;
     }
 
+    public function __toString()
+    {
+        return $this->getName()->getValue();
+    }
+
     public function isEquipmentSupplier(): bool
     {
         return $this->equipmentSupplier;
@@ -69,11 +74,6 @@ class Manufacturer
         $this->id = $id;
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->getName()->getValue();
     }
 
     public function getName(): ManufacturerName
