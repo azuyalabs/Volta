@@ -20,9 +20,6 @@ use Volta\Domain\Exception\InvalidIdException;
 
 abstract class Id
 {
-    /**
-     * @var UuidInterface
-     */
     private UuidInterface $value;
 
     /**
@@ -34,9 +31,6 @@ abstract class Id
     }
 
     /**
-     * @param  string  $id
-     *
-     * @return Id
      * @throws \Exception
      */
     public static function fromString(string $id): Id
@@ -66,7 +60,7 @@ abstract class Id
     }
 
     /**
-     * Doctrine requires to have __toString on identifiers
+     * Doctrine requires to have __toString on identifiers.
      *
      * @see getValue
      */

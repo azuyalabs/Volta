@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -15,9 +17,7 @@ namespace App\Console;
 use Illuminate\Console\Command;
 
 /**
- * Class that handles updating the entire dashboard (all components/widgets)
- *
- * @package App\Console
+ * Class that handles updating the entire dashboard (all components/widgets).
  */
 class UpdateDashboard extends Command
 {
@@ -32,7 +32,7 @@ class UpdateDashboard extends Command
     protected $description = 'Update all components/widgets displayed on the dashboards';
 
     /**
-     * Execute the console command
+     * Execute the console command.
      */
     public function handle(): void
     {

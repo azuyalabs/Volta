@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -24,8 +26,6 @@ use Yasumi\Yasumi;
 
 /**
  * Class for handling the fetching of public holidays.
- *
- * @package App\Console\Components
  */
 class FetchHolidays extends Command
 {
@@ -40,7 +40,7 @@ class FetchHolidays extends Command
     protected $description = 'Fetch the upcoming (official) holidays';
 
     /**
-     * Execute the console command
+     * Execute the console command.
      */
     public function handle(): void
     {
@@ -49,15 +49,15 @@ class FetchHolidays extends Command
 
         try {
             foreach ($holidayProviders as $provider) {
-                $holidays = Yasumi::createByISO3166_2($provider, (int)date('Y'), 'en_US');
+                $holidays = Yasumi::createByISO3166_2($provider, (int) date('Y'), 'en_US');
                 $official = new OfficialHolidaysFilter($holidays->getIterator());
 
                 $holidaysList = collect($official)->filter(static function (Holiday $holiday) {
-                    return $holiday >= new DateTime();
+                    return $holiday >= new \DateTimeImmutable();
                 })->map(static function (Holiday $holiday) {
                     return [
                         'name' => $holiday->getName(),
-                        'date' => $holiday->format(DateTime::ATOM)
+                        'date' => $holiday->format(DateTime::ATOM),
                     ];
                 })->slice(0, 5)->sortBy('date')->toArray();
 

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -40,7 +42,7 @@ class FilamentSpool extends FormRequest
             'weight'       => 'required|numeric|min:1',
             'diameter'     => 'required|numeric|min:1|max:5',
             'density'      => 'required|numeric|min:1|max:5',
-            'color'        => 'required|string'
+            'color'        => 'required|string',
         ];
     }
 }

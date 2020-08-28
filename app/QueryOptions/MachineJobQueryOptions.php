@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -15,9 +17,7 @@ namespace App\QueryOptions;
 use DatePeriod;
 
 /**
- * Class representing Query Options for the Machine Jobs Repository
- *
- * @package App\QueryOptions
+ * Class representing Query Options for the Machine Jobs Repository.
  */
 class MachineJobQueryOptions
 {
@@ -52,7 +52,8 @@ class MachineJobQueryOptions
     /**
      * Set the statuses that must be associated to the retrieved machine jobs.
      *
-     * @param  array $statuses
+     * @param array $statuses
+     *
      * @return $this
      */
     public function statuses(?array $statuses)
@@ -65,7 +66,8 @@ class MachineJobQueryOptions
     /**
      * Set the type that must belong to the retrieved machine jobs.
      *
-     * @param  string $type
+     * @param string $type
+     *
      * @return $this
      */
     public function type(?string $type)
@@ -78,7 +80,8 @@ class MachineJobQueryOptions
     /**
      * Set the machines (id's) that must belong to the retrieved machine jobs.
      *
-     * @param  array $machines
+     * @param array $machines
+     *
      * @return $this
      */
     public function machines(?array $machines)
@@ -91,7 +94,7 @@ class MachineJobQueryOptions
     /**
      * Set the date range for the start date that must belong to the retrieved machine jobs.
      *
-     * @param  DatePeriod $start_date_period
+     * @param DatePeriod $start_date_period
      *
      * @return $this
      */

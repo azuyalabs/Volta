@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -15,9 +17,7 @@ namespace App\Contracts\Repositories;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * ProductRepository interface
- *
- * @package App\Contracts\Repositories
+ * ProductRepository interface.
  */
 interface ProductRepository
 {

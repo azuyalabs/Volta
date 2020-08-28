@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -16,16 +18,12 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 /**
- * Controller handling the management of 3D Printer Jobs
- *
- * @package App\Http\Controllers
+ * Controller handling the management of 3D Printer Jobs.
  */
 class ThreeDPrinterJobsController extends Controller
 {
     /**
      * Display a listing of the authenticated user's 3D Printer Jobs.
-     *
-     * @param Request $request
      *
      * @return View
      */

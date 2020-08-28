@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -23,9 +25,6 @@ class ProductPolicy
     /**
      * Determine whether the user can view a Product (class).
      *
-     * @param User $user
-     * @param Product $product
-     *
      * @return mixed
      */
     public function view(User $user, Product $product)
@@ -35,8 +34,6 @@ class ProductPolicy
 
     /**
      * Determine whether the user can create a product.
-     *
-     * @param User $user
      *
      * @return mixed
      */
@@ -48,8 +45,6 @@ class ProductPolicy
     /**
      * Determine whether the user can update a product.
      *
-     * @param User $user
-     *
      * @return mixed
      */
     public function update(User $user)
@@ -59,8 +54,6 @@ class ProductPolicy
 
     /**
      * Determine whether the user can delete a product.
-     *
-     * @param User $user
      *
      * @return mixed
      */

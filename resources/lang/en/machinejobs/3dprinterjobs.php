@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -11,11 +13,10 @@
  */
 
 return [
-
     // Model
     'model_name'  => 'Print Job|Print Jobs',
     'model_count' => '{1} :value print job|[2,*] :value print jobs',
 
     // Titles/sentences
-    'index_3dprinterjob_subtitle' => 'An overview what you have printed over time. What was successful and what was not.'
+    'index_3dprinterjob_subtitle' => 'An overview what you have printed over time. What was successful and what was not.',
 ];

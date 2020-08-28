@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -14,14 +16,12 @@ use App\FilamentSpool;
 use Illuminate\Database\Seeder;
 
 /**
- * Class for seeding the filament spools table
+ * Class for seeding the filament spools table.
  */
 class FilamentSpoolsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {

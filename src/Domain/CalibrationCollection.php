@@ -25,10 +25,10 @@ class CalibrationCollection
 
     public function getCalibrations(?string $name = null): array
     {
-        return is_null($name) ? $this->calibrations: $this->calibrations[$name] ;
+        return is_null($name) ? $this->calibrations : $this->calibrations[$name];
     }
 
-    public function getAverage(string $name):  float
+    public function getAverage(string $name): float
     {
         if (!isset($this->calibrations[$name])) {
             throw new NoCalibrationsException();
@@ -79,7 +79,7 @@ class CalibrationCollection
         });
     }
 
-    public function getLatestCalibrationDate(string $name)  : \DateTimeImmutable
+    public function getLatestCalibrationDate(string $name): \DateTimeImmutable
     {
         if (!isset($this->calibrations[$name])) {
             throw new NoCalibrationsException();

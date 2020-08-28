@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -17,14 +19,12 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * Class for seeding the Manufacturers table
+ * Class for seeding the Manufacturers table.
  */
 class ManufacturersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {
@@ -44,16 +44,16 @@ class ManufacturersTableSeeder extends Seeder
 
             $validator = Validator::make($obj, $rules);
             if ($validator->fails()) {
-                $stats['failed']++;
+                ++$stats['failed'];
                 $this->command->info(sprintf('Failed importing `%s`: %s', $obj['name'], $validator->getMessageBag()->first()));
                 continue;
             }
 
             $model = Manufacturer::firstOrCreate($validator->validated());
             if ($model->wasRecentlyCreated) {
-                $stats['new']++;
+                ++$stats['new'];
             } else {
-                $stats['skipped']++;
+                ++$stats['skipped'];
             }
         }
         $this->command->info(sprintf('Imported %d manufacturer records (%d skipped, %d failed).', $stats['new'], $stats['skipped'], $stats['failed']));

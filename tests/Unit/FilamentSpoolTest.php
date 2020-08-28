@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,29 +23,27 @@ use UnexpectedValueException;
 
 /**
  * Class containing cases for testing the Filament Spool class.
- *
- * @package Tests\Unit
  */
 class FilamentSpoolTest extends TestCase
 {
     /**
-     * Number of iterations generating test samples
+     * Number of iterations generating test samples.
      */
     private const ITERATIONS = 5;
 
     /**
-     * @var User $user user instance to use for creating Spool instances
+     * @var User user instance to use for creating Spool instances
      */
     private $_user;
 
-    /** @inheritDoc */
+    /** {@inheritdoc} */
     public function setUp(): void
     {
         parent::setUp();
         $this->_user = factory(User::class)->create();
     }
 
-    /** @inheritDoc
+    /** {@inheritdoc}
      *
      * @throws \Throwable
      */
@@ -223,88 +223,77 @@ class FilamentSpoolTest extends TestCase
         $this->assertTrue($spool->isEmpty());
     }
 
-    /**
-     * @return array
-     */
     public function PricePerWeightDataProvider(): array
     {
         $otherData = $this->PricePerKilogramDataProvider();
         $data      = [];
         foreach ($otherData as $sample) {
-            $data[] = [$sample[0], $sample[1], (int)round($sample[0] / $sample[1])];
+            $data[] = [$sample[0], $sample[1], (int) round($sample[0] / $sample[1])];
         }
+
         return $data;
     }
 
-    /**
-     * @return array
-     */
     public function PricePerKilogramDataProvider(): array
     {
         $data = [];
-        for ($y = 1; $y <= self::ITERATIONS; $y++) {
+        for ($y = 1; $y <= self::ITERATIONS; ++$y) {
             $purchase_price = Faker::create()->numberBetween(1, 500000);
             $weight         = Faker::create()->numberBetween(400, 5000);
 
-            $data[] = [$purchase_price, $weight, (int)round((1000 / $weight) * $purchase_price)];
+            $data[] = [$purchase_price, $weight, (int) round((1000 / $weight) * $purchase_price)];
         }
+
         return $data;
     }
 
-    /**
-     * @return array
-     */
     public function PricePerVolumeDataProvider(): array
     {
         $otherData = $this->PricePerLengthDataProvider();
         $data      = [];
         foreach ($otherData as $sample) {
-            $data[] = [$sample[0], $sample[1], $sample[2], (int)round($sample[0] / ($sample[1] / $sample[2]))];
+            $data[] = [$sample[0], $sample[1], $sample[2], (int) round($sample[0] / ($sample[1] / $sample[2]))];
         }
+
         return $data;
     }
 
-    /**
-     * @return array
-     */
     public function PricePerLengthDataProvider(): array
     {
         $lengthData = $this->LengthDataProvider();
         $data       = [];
         foreach ($lengthData as $sample) {
             $purchase_price = Faker::create()->numberBetween(1, 500000);
-            $data[]         = [$purchase_price, $sample[0], $sample[1], $sample[2], (int)round($purchase_price / $sample[3])];
+            $data[]         = [$purchase_price, $sample[0], $sample[1], $sample[2], (int) round($purchase_price / $sample[3])];
         }
+
         return $data;
     }
 
-    /**
-     * @return array
-     */
     public function LengthDataProvider(): array
     {
         $data = [];
-        for ($y = 1; $y <= self::ITERATIONS; $y++) {
+        for ($y = 1; $y <= self::ITERATIONS; ++$y) {
             $weight   = Faker::create()->numberBetween(1, 5000);
             $density  = Faker::create()->randomFloat(2, 1, 5);
             $diameter = Faker::create()->randomFloat(2, 1, 5);
 
             $data[] = [$weight, $density, $diameter, ($weight / $density) / (M_PI * (($diameter / 2) ** 2))];
         }
+
         return $data;
     }
 
     /**
-     * Creates a test FilamentSpool instance with the given attribute values
+     * Creates a test FilamentSpool instance with the given attribute values.
      *
      * @param array $modelData model attribute values
-     *
-     * @return FilamentSpool
      */
     private function createSpoolInstance(array $modelData): FilamentSpool
     {
         $data = ['user_id' => $this->_user->id];
         $data = array_merge($data, $modelData);
+
         return factory(FilamentSpool::class)->create($data);
     }
 }

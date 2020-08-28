@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -31,8 +33,6 @@ class VoltaServiceProvider extends ServiceProvider
 {
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -41,8 +41,6 @@ class VoltaServiceProvider extends ServiceProvider
 
     /**
      * Register the Volta services.
-     *
-     * @return void
      */
     protected function registerServices(): void
     {
@@ -50,18 +48,16 @@ class VoltaServiceProvider extends ServiceProvider
             'Contracts\Repositories\WeatherRepository'       => 'Repositories\OpenWeatherMapRepository',
             'Contracts\Repositories\FilamentSpoolRepository' => 'Repositories\FilamentSpoolRepository',
             'Contracts\Repositories\MachineJobRepository'    => 'Repositories\MachineJobRepository',
-            'Contracts\Repositories\ManufacturerRepository'  => 'Repositories\ManufacturerRepository'
+            'Contracts\Repositories\ManufacturerRepository'  => 'Repositories\ManufacturerRepository',
         ];
 
         foreach ($services as $key => $value) {
-            $this->app->singleton('App\\' . $key, 'App\\' . $value);
+            $this->app->singleton('App\\'.$key, 'App\\'.$value);
         }
     }
 
     /**
-     * Register custom Blade directives
-     *
-     * @return void
+     * Register custom Blade directives.
      */
     protected function registerBladeDirectives(): void
     {
@@ -102,7 +98,7 @@ class VoltaServiceProvider extends ServiceProvider
         });
 
         // Allow database/models for Binary UUID
-        /** @var Connection $connection */
+        /* @var Connection $connection */
         try {
             $connection = app('db')->connection();
             $connection->setSchemaGrammar($this->createGrammarFromConnection($connection));
@@ -113,7 +109,7 @@ class VoltaServiceProvider extends ServiceProvider
     }
 
     /**
-     * Set the UUID factory to use optimize UUID's
+     * Set the UUID factory to use optimize UUID's.
      */
     protected function optimizeUuids(): void
     {
@@ -129,6 +125,7 @@ class VoltaServiceProvider extends ServiceProvider
      * @param Connection $connection Database connection instance
      *
      * @return SQLiteGrammar|MySqlGrammar
+     *
      * @throws Exception
      */
     protected function createGrammarFromConnection(Connection $connection): Grammar

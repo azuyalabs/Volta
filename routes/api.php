@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Http\Request;
 
 /*
@@ -38,7 +40,6 @@ Route::prefix('printer')->group(function () {
         Route::post('monitor', 'API\PrinterController@monitor');
     });
 });
-
 
 Route::post('/dashboard/update/{component}', 'API\DashboardController@update');
 

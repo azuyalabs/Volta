@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -16,13 +18,11 @@ use App\User;
 
 /**
  * Class containing cases for testing the Verify API Endpoint of the PrinterController.
- *
- * @package Tests\Feature\PrinterController
  */
 class VerifyEndpointTest extends PrinterMonitorController
 {
     /**
-     * The verification API endpoint name
+     * The verification API endpoint name.
      */
     private const API_ENDPOINT = '/api/printer/verify';
 
@@ -33,7 +33,7 @@ class VerifyEndpointTest extends PrinterMonitorController
 
         $response = $this->withHeaders([
             'Accept'     => self::ACCEPT_HEADER,
-            'User-Agent' => self::USER_AGENT
+            'User-Agent' => self::USER_AGENT,
         ])->actingAs($user, self::GUARD)->get(self::API_ENDPOINT);
 
         $response->assertOk();
@@ -47,7 +47,7 @@ class VerifyEndpointTest extends PrinterMonitorController
 
         $response = $this->withHeaders([
             'Accept'     => self::ACCEPT_HEADER,
-            'User-Agent' => null
+            'User-Agent' => null,
         ])->actingAs($user, self::GUARD)->get(self::API_ENDPOINT);
 
         $response->assertStatus(400);
@@ -61,7 +61,7 @@ class VerifyEndpointTest extends PrinterMonitorController
 
         $response = $this->withHeaders([
             'Accept'     => self::ACCEPT_HEADER,
-            'User-Agent' => 'LuckyLuke/1.0'
+            'User-Agent' => 'LuckyLuke/1.0',
         ])->actingAs($user, self::GUARD)->get(self::API_ENDPOINT);
 
         $this->assertUnauthenticated($response);
@@ -72,7 +72,7 @@ class VerifyEndpointTest extends PrinterMonitorController
     {
         $response = $this->withHeaders([
             'Accept'     => self::ACCEPT_HEADER,
-            'User-Agent' => self::USER_AGENT
+            'User-Agent' => self::USER_AGENT,
         ])->get(self::API_ENDPOINT);
 
         $this->assertUnauthenticated($response);
@@ -85,7 +85,7 @@ class VerifyEndpointTest extends PrinterMonitorController
 
         $response = $this->withHeaders([
             'Accept'     => 'application/xml',
-            'User-Agent' => self::USER_AGENT
+            'User-Agent' => self::USER_AGENT,
         ])->actingAs($user, self::GUARD)->get(self::API_ENDPOINT);
 
         $response->assertStatus(406);

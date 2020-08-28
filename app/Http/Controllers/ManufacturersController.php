@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -22,21 +24,17 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 /**
- * Controller handling the management of manufacturers
- *
- * @package App\Http\Controllers
+ * Controller handling the management of manufacturers.
  */
 class ManufacturersController extends Controller
 {
     /**
-     * @var ManufacturerRepository $spools the Filament Spools Repository
+     * @var ManufacturerRepository the Filament Spools Repository
      */
     private $manufacturers;
 
     /**
      * ManufacturersController constructor.
-     *
-     * @param ManufacturerRepository $manufacturers
      */
     public function __construct(ManufacturerRepository $manufacturers)
     {
@@ -47,8 +45,6 @@ class ManufacturersController extends Controller
 
     /**
      * Display a listing of manufacturers.
-     *
-     * @param Request $request
      *
      * @return View
      */
@@ -61,8 +57,6 @@ class ManufacturersController extends Controller
 
     /**
      * Display a listing of manufacturers.
-     *
-     * @param Manufacturer $manufacturer
      *
      * @return View
      */
@@ -84,8 +78,6 @@ class ManufacturersController extends Controller
     /**
      * Store a newly created manufacturer in storage.
      *
-     * @param ManufacturerRequest $request
-     *
      * @return RedirectResponse
      */
     public function store(ManufacturerRequest $request)
@@ -106,14 +98,13 @@ class ManufacturersController extends Controller
     {
         return view('manufacturers.edit', [
             'manufacturer' => $this->manufacturers->find($id),
-            'countries'    => app(CountryRepository::class)->all()
+            'countries'    => app(CountryRepository::class)->all(),
         ]);
     }
 
     /**
      * Update the specified manufacturer in storage.
      *
-     * @param ManufacturerRequest $request
      * @param string $id the id of the manufacturer
      *
      * @return RedirectResponse

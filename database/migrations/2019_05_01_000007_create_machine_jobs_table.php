@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -23,7 +25,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateMachineJobsTable extends Migration
 {
     /**
-     * Name of the database table
+     * Name of the database table.
      */
     private const TABLE_NAME = 'machine_jobs';
 
@@ -72,7 +74,7 @@ class CreateMachineJobsTable extends Migration
     protected function addStartedAtColumn()
     {
         $startedAtColumnName = 'started_at';
-        $startedAtIndexName  = self::TABLE_NAME . '_job_unique';
+        $startedAtIndexName  = self::TABLE_NAME.'_job_unique';
 
         DB::statement(\sprintf('ALTER TABLE %s ADD COLUMN %s timestamp NULL DEFAULT NULL;', self::TABLE_NAME, $startedAtColumnName));
         DB::statement(\sprintf('CREATE UNIQUE INDEX %s on %s(%s, %s, %s);', $startedAtIndexName, self::TABLE_NAME, 'job_id', 'name', $startedAtColumnName));

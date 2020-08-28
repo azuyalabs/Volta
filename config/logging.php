@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Log Channel
@@ -80,7 +81,6 @@ return [
             'driver'  => 'monolog',
             'handler' => Monolog\Handler\NullHandler::class,
             'level'   => 'debug',
-        ]
+        ],
     ],
-
 ];

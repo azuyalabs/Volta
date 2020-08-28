@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -18,8 +20,6 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the User class.
- *
- * @package Tests\Unit
  */
 class UserProfileTest extends TestCase
 {

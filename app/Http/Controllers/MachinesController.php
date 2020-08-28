@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,7 +23,6 @@ use Illuminate\View\View;
 
 class MachinesController extends Controller
 {
-
     /**
      * MachinesController constructor.
      */
@@ -33,8 +34,6 @@ class MachinesController extends Controller
 
     /**
      * Display a listing of machines.
-     *
-     * @param Request $request
      *
      * @return View
      */
@@ -50,7 +49,7 @@ class MachinesController extends Controller
         $machines = Machine::mine();
 
         $stats['count'] = $machines->count() ?? 0;
-        $stats['value'] = (int)$machines->sum('acquisition_cost');
+        $stats['value'] = (int) $machines->sum('acquisition_cost');
 
         return response()->json($stats, 200);
     }
@@ -80,14 +79,12 @@ class MachinesController extends Controller
     /**
      * Store a newly created machine in storage.
      *
-     * @param Request $request
-     *
      * @return RedirectResponse
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:128'
+            'name' => 'required|max:128',
         ]);
         $requestData = $request->all();
 
@@ -101,8 +98,6 @@ class MachinesController extends Controller
 
     /**
      * Show the form for editing the specified machine.
-     *
-     * @param  Machine $machine
      *
      * @return View
      */
@@ -121,16 +116,13 @@ class MachinesController extends Controller
     /**
      * Update the specified machine in storage.
      *
-     * @param Request $request
-     * @param  Machine $machine
-     *
      * @return RedirectResponse
      */
     public function update(Request $request, Machine $machine)
     {
         $this->validate($request, [
             'name'            => 'required|min:2|max:128',
-            'operating_hours' => 'required'
+            'operating_hours' => 'required',
         ]);
         $requestData = $request->all();
 
@@ -142,9 +134,8 @@ class MachinesController extends Controller
     /**
      * Remove the specified machine from storage.
      *
-     * @param  Machine $machine
-     *
      * @return RedirectResponse
+     *
      * @throws Exception
      */
     public function destroy(Machine $machine)

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -17,9 +19,7 @@ use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**
- * Authorization Policy for Equipment
- *
- * @package App\Policies
+ * Authorization Policy for Equipment.
  */
 class MachinePolicy
 {
@@ -27,8 +27,6 @@ class MachinePolicy
 
     /**
      * Determine whether the user can view the list of machines.
-     *
-     * @param User $user
      *
      * @return mixed
      */
@@ -40,9 +38,6 @@ class MachinePolicy
     /**
      * Determine whether the user can view the machine.
      *
-     * @param User $user
-     * @param Machine $machine
-     *
      * @return mixed
      */
     public function view(User $user, Machine $machine)
@@ -52,8 +47,6 @@ class MachinePolicy
 
     /**
      * Determine whether the user can create machines.
-     *
-     * @param User $user
      *
      * @return mixed
      */
@@ -65,9 +58,6 @@ class MachinePolicy
     /**
      * Determine whether the user can update the machine.
      *
-     * @param User $user
-     * @param Machine $machine
-     *
      * @return mixed
      */
     public function update(User $user, Machine $machine)
@@ -77,9 +67,6 @@ class MachinePolicy
 
     /**
      * Determine whether the user can delete the machine.
-     *
-     * @param User $user
-     * @param Machine $machine
      *
      * @return mixed
      */

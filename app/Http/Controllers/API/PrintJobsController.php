@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,13 +22,8 @@ use Illuminate\Support\Facades\Storage;
 
 class PrintJobsController extends Controller
 {
-
     /**
      * Display the specified print job.
-     *
-     * @param  string $printJob
-     *
-     * @return PrintJobResource
      *
      * @throws AuthorizationException
      */
@@ -41,7 +38,7 @@ class PrintJobsController extends Controller
         return new PrintJobResource($gcode);
     }
 
-    /**
+    /*
      * Display a listing of a user's machines.
      *
      * @return MachineCollectionResource

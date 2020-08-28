@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -24,8 +26,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class representing the model for a Machine Job.
  *
  * @property string $uuid_text
- *
- * @package App
  */
 class MachineJob extends Model
 {
@@ -33,27 +33,27 @@ class MachineJob extends Model
     use SoftDeletes;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $table = 'machine_jobs';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $casts = ['user_id' => 'int', 'machine_id' => 'int', 'status' => 'string', 'duration' => 'int', 'start_at' => 'DateTime', 'job_id' => 'string'];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $hidden = ['user_id', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $fillable = ['name', 'status', 'duration', 'user_id', 'machine_id', 'started_at', 'type', 'job_id', 'details'];
 
     /**
-     * A machine job is owned by a user
+     * A machine job is owned by a user.
      *
      * @return BelongsTo
      */
@@ -63,7 +63,7 @@ class MachineJob extends Model
     }
 
     /**
-     * A machine job is performed by a machine
+     * A machine job is performed by a machine.
      *
      * @return BelongsTo
      */
@@ -75,8 +75,7 @@ class MachineJob extends Model
     /**
      * Scope the query for the given query options.
      *
-     * @param  Builder $query
-     * @param MachineJobQueryOptions $options
+     * @param Builder $query
      *
      * @return Builder
      */
@@ -86,14 +85,14 @@ class MachineJob extends Model
             ->whereStatuses($query, $options)
             ->whereMachines($query, $options)
             ->whereStartDatePeriod($query, $options);
+
         return $query;
     }
 
     /**
      * Scope the query for the given start date period.
      *
-     * @param  Builder $query
-     * @param  MachineJobQueryOptions $options
+     * @param Builder $query
      *
      * @return $this
      */
@@ -109,8 +108,7 @@ class MachineJob extends Model
     /**
      * Scope the query for the given machine(s) (id's).
      *
-     * @param  Builder $query
-     * @param  MachineJobQueryOptions $options
+     * @param Builder $query
      *
      * @return $this
      */
@@ -132,8 +130,7 @@ class MachineJob extends Model
     /**
      * Scope the query for the given type.
      *
-     * @param  Builder $query
-     * @param  MachineJobQueryOptions $options
+     * @param Builder $query
      *
      * @return $this
      */
@@ -155,8 +152,7 @@ class MachineJob extends Model
     /**
      * Scope the query for the given type.
      *
-     * @param  Builder $query
-     * @param  MachineJobQueryOptions $options
+     * @param Builder $query
      *
      * @return $this
      */

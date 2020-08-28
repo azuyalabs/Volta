@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -16,9 +18,7 @@ use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 /**
- * Class handling the broadcasting events of national holidays to the Dashboard
- *
- * @package App\Events\FirmwareReleases
+ * Class handling the broadcasting events of national holidays to the Dashboard.
  */
 class HolidaysFetched implements ShouldBroadcast
 {
@@ -35,9 +35,6 @@ class HolidaysFetched implements ShouldBroadcast
     /**
      * Create a new event instance.
      *
-     * @param string $provider
-     * @param array $holidays
-     *
      * @return void
      */
     public function __construct(string $provider, array $holidays)
@@ -53,6 +50,6 @@ class HolidaysFetched implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('holidays.' . $this->provider);
+        return new Channel('holidays.'.$this->provider);
     }
 }

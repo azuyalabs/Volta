@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -11,9 +13,8 @@
 |
 */
 
-
 Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int)$user->id === (int)$id;
+    return (int) $user->id === (int) $id;
 });
 
 Broadcast::routes();
@@ -24,7 +25,7 @@ Broadcast::channel('printer.{printer}', function ($user, $printer) {
 });
 */
 
-/**
+/*
  * Channel where upcoming holidays are published to.
  *
  * Each provider (i.e. country) will have it's own channel.
@@ -34,11 +35,9 @@ Broadcast::channel('holidays.*', function () {
     return true;
 });
 
-
 Broadcast::channel('dashboard', function (User $user) {
     return true;
 });
-
 
 Broadcast::channel('printer.*', function (User $user) {
     return true;

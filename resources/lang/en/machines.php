@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'section' => 'Equipment',
 
@@ -27,8 +29,6 @@ return [
     'update_machine_subtitle' => 'Update the details of your marvelous <strong>:manufacturer_name :model_name</strong>.',
     'index_machine_subtitle'  => [
         'part1' => 'Your collection of awesome maker equipment. Currently you own ',
-        'part2' => '{1} <strong>:machine_count</strong> machine with a value of |[2,*] <strong>:machine_count</strong> machines with a value of '
+        'part2' => '{1} <strong>:machine_count</strong> machine with a value of |[2,*] <strong>:machine_count</strong> machines with a value of ',
     ],
-
-
 ];

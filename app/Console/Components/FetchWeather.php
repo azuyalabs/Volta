@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,8 +22,6 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * Class for handling the retrieval of weather data.
- *
- * @package App\Console\Components
  */
 class FetchWeather extends Command
 {
@@ -36,7 +36,7 @@ class FetchWeather extends Command
     protected $description = 'Fetch the current weather forecast';
 
     /**
-     * Execute the console command
+     * Execute the console command.
      */
     public function handle(): void
     {

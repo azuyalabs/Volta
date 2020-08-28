@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -17,7 +19,7 @@ use App\MachineJobType;
 class ThreeDPrinterJobsController extends MachineJobController
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function machineType()
     {

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -29,10 +31,6 @@ abstract class MachineJobController extends Controller
 {
     /**
      * List the machine jobs of the given type.
-     *
-     * @param Request $request
-     * @param MachineJobRepository $storage
-     * @return ThreeDPrinterJobCollectionResource
      */
     public function index(Request $request, MachineJobRepository $storage): ThreeDPrinterJobCollectionResource
     {
@@ -53,15 +51,13 @@ abstract class MachineJobController extends Controller
      * Remove the specified machine job from storage.
      *
      * @param string $id the id of the machine job
-     *
-     * @param MachineJobRepository $storage
-     * @return Response
      */
     public function destroy($id, MachineJobRepository $storage): Response
     {
         if ($storage->delete($id, auth()->user()->id)) {
             return response(null, Response::HTTP_NO_CONTENT);
         }
+
         return response(null, Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
@@ -69,24 +65,18 @@ abstract class MachineJobController extends Controller
      * Update the specified machine job in storage.
      *
      * @param string $id the id of the machine job
-     * @param MachineJobRepository $storage
-     * @param MachineJobRequest $request
-     *
-     * @return Response
      */
     public function update($id, MachineJobRepository $storage, MachineJobRequest $request): Response
     {
         if ($storage->update($id, auth()->user()->id, $request)) {
             return response(null, Response::HTTP_NO_CONTENT);
         }
+
         return response(null, Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
-     * Add a new machine job to the storage
-     *
-     * @param MachineJobRequest $request
-     * @param MachineJobRepository $storage
+     * Add a new machine job to the storage.
      *
      * @return JsonResponse
      */
@@ -99,8 +89,6 @@ abstract class MachineJobController extends Controller
 
     /**
      * Retrieves all the print job activity of the given user for the last year.
-     *
-     * @param MachineJobRepository $storage
      *
      * @return JsonResponse
      *
@@ -127,7 +115,6 @@ abstract class MachineJobController extends Controller
     /**
      * Retrieves the success rate of all print jobs over time of the given user.
      *
-     * @param MachineJobRepository $storage
      * @return JsonResponse
      *
      * @throws Exception

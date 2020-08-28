@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -40,7 +42,7 @@ $factory->define(\App\Machine::class, static function (Faker $faker) {
         'user_id'            => $user_id,
         'model_id'           => $product_model_id,
         'reference_id'       => null,
-        'name'               => 'My ' . $product_models[$product_model_id],
+        'name'               => 'My '.$product_models[$product_model_id],
         'acquisition_cost'   => $faker->numberBetween($ratio, 10000 * $ratio),
         'residual_value'     => $faker->numberBetween($ratio, 1000 * $ratio),
         'maintenance_cost'   => $faker->numberBetween($ratio, 4000 * $ratio),

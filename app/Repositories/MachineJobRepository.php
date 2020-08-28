@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,8 +23,6 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * The Machine Job Repository with Eloquent as the data backend.
- *
- * @package App\Repositories
  */
 class MachineJobRepository implements Contract
 {

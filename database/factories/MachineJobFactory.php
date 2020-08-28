@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,11 +23,11 @@ $factory->define(\App\MachineJob::class, function (Faker $faker) {
         'job_id'     => $faker->ean13.'abc',
         'user_id'    => $faker->randomElement(User::all()->pluck('id')->toArray()),
         'machine_id' => $faker->randomElement(Machine::all()->pluck('id')->toArray()),
-        'name'       => $faker->word . '.' . $faker->lexify('???'),
+        'name'       => $faker->word.'.'.$faker->lexify('???'),
         'status'     => $faker->randomElement([MachineJobStatus::SUCCESS, MachineJobStatus::FAILED]),
         'duration'   => $faker->numberBetween(0, 100000),
         'started_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
         'type'       => $faker->randomElement([MachineJobType::THREE_D_PRINTER, MachineJobType::LASER, MachineJobType::ROUTER]),
-        'details'    => \json_encode($faker->shuffleArray([$faker->word, $faker->word, $faker->word]))
+        'details'    => \json_encode($faker->shuffleArray([$faker->word, $faker->word, $faker->word])),
     ];
 });

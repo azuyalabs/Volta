@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace Volta\Application\DataTransformer\FilamentSpool;
 
 use League\Fractal\TransformerAbstract;
@@ -26,7 +25,7 @@ class SlicerTemplateTransformer extends TransformerAbstract
             'purchase_price'                       => $spool->getPurchasePrice()->getAmount(),
             'price_per_kg'                         => $spool->getPricePerKilogram()->getAmount(),
             'color'                                => $spool->getColor()->getColorName()->getValue(),
-            'color_code'                           => (string)$spool->getColor()->getColorCode(),
+            'color_code'                           => (string) $spool->getColor()->getColorCode(),
             'display_name'                         => $spool->getDisplayName()->getValue(),
             'min_fan_speed'                        => $spool->getMinimumFanSpeed()->getValue(),
             'max_fan_speed'                        => $spool->getMaximumFanSpeed()->getValue(),

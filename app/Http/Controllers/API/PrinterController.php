@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,13 +22,10 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 /**
- * Class PrinterController
- *
- * @package App\Http\Controllers\API
+ * Class PrinterController.
  */
 class PrinterController extends Controller
 {
-
     /**
      * PrintJobsController constructor.
      */
@@ -36,7 +35,7 @@ class PrinterController extends Controller
     }
 
     /**
-     * Verifies the OctoPrint Client
+     * Verifies the OctoPrint Client.
      *
      * @return VerificationResource
      */
@@ -50,7 +49,6 @@ class PrinterController extends Controller
     /**
      * Accepts updates to a registered printer via the OctoPrint plugin.
      *
-     * @param Request $request
      * @return JsonResponse
      */
     public function monitor(Request $request)
@@ -77,7 +75,7 @@ class PrinterController extends Controller
                 'printjob.progress'        => 'integer|min:0|max:100',
                 'printjob.filament_length' => 'numeric|min:0',
                 'printjob.started_at'      => 'string',
-                'printjob.status'          => 'string'
+                'printjob.status'          => 'string',
             ]
         );
 
@@ -88,7 +86,7 @@ class PrinterController extends Controller
 
         return response()->json([
             'status'  => 'ok',
-            'message' => sprintf('Data for printer `%s` successfully received.', $validPrinterIdRule->printerId)
+            'message' => sprintf('Data for printer `%s` successfully received.', $validPrinterIdRule->printerId),
         ], 201);
     }
 }

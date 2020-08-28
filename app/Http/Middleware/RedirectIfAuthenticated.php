@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,9 +23,8 @@ class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  Request $request
-     * @param Closure $next
-     * @param  string|null $guard
+     * @param Request     $request
+     * @param string|null $guard
      *
      * @return mixed
      */

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -41,10 +43,10 @@ class ManufacturerResourceTest extends TestCase
                 'website'            => $manufacturer->website,
                 'filament_supplier'  => $manufacturer->filament_supplier,
                 'equipment_supplier' => $manufacturer->equipment_supplier,
-            ]
+            ],
         ], $resource);
 
-        self::assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/manufacturers/' . $manufacturer->slug]], $resource);
+        self::assertArraySubset(['links' => ['self' => getenv('APP_URL').'/api/manufacturers/'.$manufacturer->slug]], $resource);
 
         self::assertArraySubset(['meta' => ['country.name' => app(CountryRepository::class)->getName($manufacturer->country)]], $resource);
     }

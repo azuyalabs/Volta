@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -18,7 +20,6 @@ use Symfony\Component\Console\Exception\CommandNotFoundException;
 
 class DashboardController extends Controller
 {
-
     /**
      * DashboardController constructor.
      */
@@ -30,17 +31,17 @@ class DashboardController extends Controller
     public function update(string $component)
     {
         try {
-            $command = 'dashboard:' . $component;
+            $command = 'dashboard:'.$component;
 
             $exitCode = Artisan::call($command);
-            if ($exitCode === 0) {
+            if (0 === $exitCode) {
                 return response()->json([
                     'status'  => 'ok',
-                    'message' => sprintf('Command `%s` executed successfully.', $command)], 200);
+                    'message' => sprintf('Command `%s` executed successfully.', $command), ], 200);
             }
         } catch (CommandNotFoundException $e) {
             return response()->json([
-                'message' => $e->getMessage()], 404);
+                'message' => $e->getMessage(), ], 404);
         }
     }
 }

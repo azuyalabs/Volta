@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,8 +23,6 @@ use Ramsey\Uuid\Uuid;
  * Replacement (i.e. clone) of the spatie/laravel-binary-uuid package.
  * The spatie/laravel-binary-uuid package has been abandoned, however no matching alternatives
  * were available that supports both SQLite and MySQL.
- *
- * @package App\Storage\BinaryUuid
  */
 trait HasBinaryUuid
 {
@@ -67,7 +67,7 @@ trait HasBinaryUuid
         }, $uuid));
     }
 
-    public static function generateUuid() : string
+    public static function generateUuid(): string
     {
         try {
             return Uuid::uuid1();
@@ -78,11 +78,11 @@ trait HasBinaryUuid
 
     public static function encodeUuid($uuid): string
     {
-        if (! Uuid::isValid($uuid)) {
+        if (!Uuid::isValid($uuid)) {
             return $uuid;
         }
 
-        if (! $uuid instanceof Uuid) {
+        if (!$uuid instanceof Uuid) {
             $uuid = Uuid::fromString($uuid);
         }
 
@@ -104,12 +104,12 @@ trait HasBinaryUuid
 
         $array = parent::toArray();
 
-        if (! $this->exists || ! is_array($uuidAttributes)) {
+        if (!$this->exists || !is_array($uuidAttributes)) {
             return $array;
         }
 
         foreach ($uuidAttributes as $attributeKey) {
-            if (! array_key_exists($attributeKey, $array)) {
+            if (!array_key_exists($attributeKey, $array)) {
                 continue;
             }
             $uuidKey              = $this->getRelatedBinaryKeyName($attributeKey);
@@ -130,7 +130,7 @@ trait HasBinaryUuid
     {
         $uuidKey = $this->uuidTextAttribute($key);
 
-        if ($uuidKey && $this->{$uuidKey} !== null) {
+        if ($uuidKey && null !== $this->{$uuidKey}) {
             return static::decodeUuid($this->{$uuidKey});
         }
 
@@ -184,7 +184,7 @@ trait HasBinaryUuid
     {
         $key = $this->getKeyName();
 
-        if (! $this->exists || is_array($key)) {
+        if (!$this->exists || is_array($key)) {
             return null;
         }
 

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -13,17 +15,14 @@
 namespace App\Contracts\Repositories;
 
 /**
- * WeatherRepository interface
- *
- * @package App\Contracts\Repositories
+ * WeatherRepository interface.
  */
 interface WeatherRepository
 {
     /**
      * Get the current weather details for the given city.
      *
-     * @param  string $city
-     * @return array
+     * @param string $city
      */
     public function currentWeather($city): array;
 }

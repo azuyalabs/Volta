@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -19,8 +21,6 @@ use Illuminate\Routing\Controller;
  * This controller is responsible for handling email verification for any
  * user that recently registered with the application. Emails may also
  * be re-sent if the user didn't receive the original email message.
- *
- * @package App\Http\Controllers\Auth
  */
 class VerificationController extends Controller
 {

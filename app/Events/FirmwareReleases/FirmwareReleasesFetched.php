@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -16,13 +18,10 @@ use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 /**
- * Class handling the broadcasting events of 3D Printer firmware releases to the Dashboard
- *
- * @package App\Events\FirmwareReleases
+ * Class handling the broadcasting events of 3D Printer firmware releases to the Dashboard.
  */
 class FirmwareReleasesFetched implements ShouldBroadcast
 {
-
     /**
      * @var array list containing all 3D Printer firmware release information
      */

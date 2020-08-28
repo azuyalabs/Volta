@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -18,7 +20,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication, DatabaseMigrations, WithFaker;
+    use CreatesApplication;
+    use DatabaseMigrations;
+    use WithFaker;
 
     public function setUp(): void
     {

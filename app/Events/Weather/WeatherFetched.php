@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -16,9 +18,7 @@ use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 /**
- * Class handling the broadcasting events of weather information to the Dashboard
- *
- * @package App\Events\Weather
+ * Class handling the broadcasting events of weather information to the Dashboard.
  */
 class WeatherFetched implements ShouldBroadcast
 {
@@ -35,9 +35,6 @@ class WeatherFetched implements ShouldBroadcast
     /**
      * Constructor.
      *
-     * @param string $city
-     * @param array $weather
-     *
      * @return void
      */
     public function __construct(string $city, array $weather)
@@ -53,6 +50,6 @@ class WeatherFetched implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('weather.' . $this->city);
+        return new Channel('weather.'.$this->city);
     }
 }

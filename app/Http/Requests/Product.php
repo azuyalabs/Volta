@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -36,7 +38,7 @@ class Product extends FormRequest
         return [
             'name'         => 'required|min:2',
             'manufacturer' => 'exists:manufacturers,slug',
-            'class'        => 'in:machine,filament'
+            'class'        => 'in:machine,filament',
         ];
     }
 }

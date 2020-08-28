@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -19,12 +21,9 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Machine Controller.
- *
- * @package Tests\Feature
  */
 class MachineControllerTest extends TestCase
 {
-
     /** @test */
     public function it_can_display_a_list_of_machines(): void
     {
@@ -45,7 +44,7 @@ class MachineControllerTest extends TestCase
         $user->profile()->save(factory(UserProfile::class)->make());
         $machine = factory(Machine::class)->create();
 
-        $response = $this->actingAs($user)->get('/machines/' . $machine->id . '/edit');
+        $response = $this->actingAs($user)->get('/machines/'.$machine->id.'/edit');
 
         $response->assertOk();
         $response->assertSee($machine->name);

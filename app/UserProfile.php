@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -17,18 +19,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class representing the model for a User Profile.
- *
- * @package App
  */
 class UserProfile extends Model
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $table = 'user_profile';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $fillable = ['currency', 'language', 'country', 'city', 'preferences'];
 
@@ -37,8 +37,7 @@ class UserProfile extends Model
      *
      * Note: this accessor method is needed as the JSON extension for SQLite is not installed.
      *
-     * @param  string $value
-     * @return array
+     * @param string $value
      */
     public function getPreferencesAttribute($value): array
     {
@@ -47,8 +46,6 @@ class UserProfile extends Model
 
     /**
      * Get the user that the profile belongs to.
-     *
-     * @return BelongsTo
      */
     public function user(): BelongsTo
     {

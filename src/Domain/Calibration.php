@@ -51,13 +51,13 @@ class Calibration
         return max($this->measurements);
     }
 
-    public function getMinimum():float
+    public function getMinimum(): float
     {
         return min($this->measurements);
     }
 
-    public function getAverage():float
+    public function getAverage(): float
     {
-        return (array_sum($this->measurements)/count($this->measurements));
+        return array_sum($this->measurements)/count($this->measurements);
     }
 }

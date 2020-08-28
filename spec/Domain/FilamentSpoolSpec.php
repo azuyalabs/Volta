@@ -712,7 +712,7 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->addCalibration(new Calibration(
             new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
             new \DateTimeImmutable('2020-08-22'),
-            [0.47, 0.48,0.48,0.46,0.44,0.44,0.45,0.48, 0.47,0.47,0.44,0.43]
+            [0.47, 0.48, 0.48, 0.46, 0.44, 0.44, 0.45, 0.48, 0.47, 0.47, 0.44, 0.43]
         ));
 
         $this->getExtrusionMultiplier()->shouldBeAnInstanceOf(Length::class);
@@ -724,13 +724,13 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->addCalibration(new Calibration(
             new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
             new \DateTimeImmutable('2020-08-22'),
-            [0.47, 0.48,0.48,0.46,0.44,0.44,0.45,0.48, 0.47,0.47,0.44,0.43]
+            [0.47, 0.48, 0.48, 0.46, 0.44, 0.44, 0.45, 0.48, 0.47, 0.47, 0.44, 0.43]
         ));
 
         $this->addCalibration(new Calibration(
             new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
             new \DateTimeImmutable('2020-08-23'),
-            [0.42,0.43,0.44,0.43,0.47]
+            [0.42, 0.43, 0.44, 0.43, 0.47]
         ));
 
         $this->getExtrusionMultiplier()->shouldBeAnInstanceOf(Length::class);

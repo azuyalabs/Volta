@@ -7,12 +7,10 @@ namespace Volta\Domain\ValueObject\FilamentSpool;
 use Volta\Domain\Exception\FilamentSpool\MaximumValueMaximumFanSpeedException;
 
 /**
- * Class representing the Maximum Fan Speed
+ * Class representing the Maximum Fan Speed.
  *
  * Although it is called 'speed', this attribute is usually expressed as a percentage.
  * (e.g. '50' denotes 50% of the fan speed's maximum capacity)
- *
- * @package Volta\Domain\ValueObject\FilamentSpool
  */
 class MaximumFanSpeed
 {

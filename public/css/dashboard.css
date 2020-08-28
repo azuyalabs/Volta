@@ -356,13 +356,10 @@ li {
 }
 
 .tile .content-center {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
   text-align: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  justify-content: center;
   text-transform: uppercase;
 }
 
@@ -390,12 +387,10 @@ li {
 
 .clock-main__timezone {
   color: var(--clock-main_timezone-color, white);
-  display: -webkit-box;
   display: flex;
   height: 5%;
   width: 100%;
-  -webkit-box-pack: end;
-          justify-content: flex-end;
+  justify-content: flex-end;
   padding-right: 1vw;
   padding-top: 0.5vw;
   font-size: var(--clock-main_timezone-fontsize, medium);
@@ -405,12 +400,9 @@ li {
 
 .clock-main__clock {
   height: 95%;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   contain: content;
 }
 
@@ -465,12 +457,9 @@ li {
 .clock-date {
   height: 20%;
   color: var(--clock-date_color, black);
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   font-size: var(--clock-date_fontsize, medium);
   font-weight: var(--clock-date_fontweight, normal);
   text-transform: var(--clock-date_texttransform, uppercase);
@@ -482,12 +471,9 @@ li {
 .firmware__release {
   padding-bottom: 1.2vh;
   border-bottom: none;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .firmware__release-version {
@@ -510,10 +496,8 @@ li {
 
 .holidays__header {
   height: 4.5vh;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
 
 .holidays__header-country {
@@ -525,12 +509,9 @@ li {
 .holidays {
   padding-bottom: 1.5vh;
   border-bottom: none;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .holidays__holiday-name {
@@ -554,12 +535,9 @@ li {
 .slicer__release {
   padding-bottom: 1.2vh;
   border-bottom: none;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .slicer__release-version {

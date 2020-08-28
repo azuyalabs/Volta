@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -26,10 +28,6 @@ class ManufacturersController extends Controller
 {
     /**
      *List all manufacturers.
-     *
-     * @param Request $request
-     * @param ManufacturerRepository $storage
-     * @return ManufacturerCollectionResource
      */
     public function index(Request $request, ManufacturerRepository $storage): ManufacturerCollectionResource
     {
@@ -37,9 +35,8 @@ class ManufacturersController extends Controller
     }
 
     /**
-     * Store a new manufacturer
+     * Store a new manufacturer.
      *
-     * @param ManufacturerRequest $request
      * @return JsonResponse
      */
     public function store(ManufacturerRequest $request)
@@ -50,25 +47,21 @@ class ManufacturersController extends Controller
     }
 
     /**
-     * Remove the specified manufacturer from storage
+     * Remove the specified manufacturer from storage.
      *
      * @param string $id the id of the manufacturer
-     *
-     * @param ManufacturerRepository $storage
-     * @return Response
      */
     public function destroy($id, ManufacturerRepository $storage): Response
     {
         if ($storage->delete($id)) {
             return response(null, Response::HTTP_NO_CONTENT);
         }
+
         return response(null, Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
-     * Get the specified manufacturer
-     *
-     * @param Manufacturer $manufacturer
+     * Get the specified manufacturer.
      *
      * @return ManufacturerResource
      */
@@ -78,10 +71,7 @@ class ManufacturersController extends Controller
     }
 
     /**
-     * Update the specified manufacturer
-     *
-     * @param ManufacturerRequest $request
-     * @param Manufacturer $manufacturer
+     * Update the specified manufacturer.
      *
      * @return JsonResponse
      */

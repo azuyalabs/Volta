@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -24,19 +26,15 @@ use Illuminate\Http\Response;
 
 class ProductsController extends Controller
 {
-
     /**
      * Get a list of all products.
-     *
-     * @param Request $request
-     * @return ProductCollectionResource
      */
     public function index(Request $request): ProductCollectionResource
     {
         $collection = Product::query();
 
         if ($request->has('filter') && null !== $request->query('filter')) {
-            $collection->where('name', 'LIKE', '%' . $request->query('filter') . '%');
+            $collection->where('name', 'LIKE', '%'.$request->query('filter').'%');
         }
 
         if ($request->has('sort') && null !== $request->query('sort')) {
@@ -49,14 +47,13 @@ class ProductsController extends Controller
     }
 
     /**
-     * Store a new product
+     * Store a new product.
      *
-     * @param ProductRequest $request
      * @return JsonResponse
      */
     public function store(ProductRequest $request)
     {
-        $product = new Product;
+        $product = new Product();
         $product->manufacturer()->associate(Manufacturer::findBySlug($request['manufacturer']));
         $product->fill($request->validated())->save();
 
@@ -64,11 +61,8 @@ class ProductsController extends Controller
     }
 
     /**
-     * Remove the specified product
+     * Remove the specified product.
      *
-     * @param  Product $product
-     *
-     * @return Response
      * @throws Exception
      */
     public function destroy(Product $product): Response
@@ -79,9 +73,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * Get the specified product
-     *
-     * @param Product $product
+     * Get the specified product.
      *
      * @return ProductResource
      */
@@ -91,10 +83,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * Update the specified product
-     *
-     * @param ProductRequest $request
-     * @param Product $product
+     * Update the specified product.
      *
      * @return JsonResponse
      */

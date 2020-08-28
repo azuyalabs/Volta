@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -22,8 +24,9 @@ class Builder extends EloquentBuilder
     /**
      * Find a model by its primary key.
      *
-     * @param  mixed  $id
-     * @param  array  $columns
+     * @param mixed $id
+     * @param array $columns
+     *
      * @return Model|Collection|static[]|static|null
      */
     public function find($id, $columns = ['*'])
@@ -38,8 +41,9 @@ class Builder extends EloquentBuilder
     /**
      * Find multiple models by their primary keys.
      *
-     * @param Arrayable|array  $ids
-     * @param  array  $columns
+     * @param Arrayable|array $ids
+     * @param array           $columns
+     *
      * @return Collection
      */
     public function findMany($ids, $columns = ['*'])

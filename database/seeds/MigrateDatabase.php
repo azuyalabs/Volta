@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -14,14 +16,14 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class for migrating data from a SQLite database to MySQL
+ * Class for migrating data from a SQLite database to MySQL.
  *
  * WARNING: Use this class only ONCE in production!
  */
 class MigrateDatabase extends Seeder
 {
     /**
-     * Connection handle to the source database
+     * Connection handle to the source database.
      *
      * @var \Illuminate\Database\ConnectionInterface
      */
@@ -38,7 +40,7 @@ class MigrateDatabase extends Seeder
     {
         $this->source_database = DB::connection(self::SOURCE_DATABASE);
 
-        if (env('DB_CONNECTION') === self::SOURCE_DATABASE) {
+        if (self::SOURCE_DATABASE === env('DB_CONNECTION')) {
             exit('ERROR: The source and target can not be the same. Please check your configuration (.env file)');
         }
     }
@@ -47,8 +49,6 @@ class MigrateDatabase extends Seeder
      * Run the database seeds.
      *
      * Note: telescope_* tables are not copied as this data is only used in development mode
-     *
-     * @return void
      */
     public function run(): void
     {
@@ -90,7 +90,7 @@ class MigrateDatabase extends Seeder
         // Get table data from production
         foreach ($this->source_database->table($table_name)->get() as $data) {
             // Save data to default db connection
-            DB::table($table_name)->insert((array)$data);
+            DB::table($table_name)->insert((array) $data);
         }
     }
 }

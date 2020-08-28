@@ -12,8 +12,6 @@ use Volta\Domain\Exception\ZeroValueException;
  * Class representing the extrusion multiplier. The multiplier can be used to adjust the
  * filament flow. A multiplier less than 1 will reduce the flow, a multiplier higher than 1
  * increases the flow.
- *
- * @package Volta\Domain\ValueObject\FilamentSpool
  */
 class ExtrusionMultiplier
 {

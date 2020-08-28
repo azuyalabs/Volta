@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,15 +22,13 @@ class ThreeDPrinterJobResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  Request $request
-     *
-     * @return array
+     * @param Request $request
      */
     public function toArray($request): array
     {
         return [
             'type' => '3dprinterjobs',
-            'id'   => (string)$this->{$this->getRouteKeyName()},
+            'id'   => (string) $this->{$this->getRouteKeyName()},
 
             'attributes' => [
                 'name'       => $this->name,

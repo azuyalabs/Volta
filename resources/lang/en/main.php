@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'name' => 'Name',
     'home' => 'Home',
@@ -18,5 +20,5 @@ return [
     'edit_model'     => 'Edit :model',
     'delete_model'   => 'Delete :model',
     'export_model'   => 'Export :model',
-    'confirm_delete' => 'Are you sure you want to delete :model?'
+    'confirm_delete' => 'Are you sure you want to delete :model?',
 ];

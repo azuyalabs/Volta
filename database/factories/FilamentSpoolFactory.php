@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -25,7 +27,7 @@ $factory->define(FilamentSpool::class, function (Faker $faker) {
     $density = $faker->randomElement([1.04, 1.05, 1.25, 1.24, 1.30]);
 
     return [
-        'name'           => $faker->randomElement($manufacturers->pluck('name')->all()) . ' ' . $color . ' ' . \strtoupper($material),
+        'name'           => $faker->randomElement($manufacturers->pluck('name')->all()).' '.$color.' '.\strtoupper($material),
         'material'       => $material,
         'purchase_price' => $faker->numberBetween(10000, 70000),
         'weight'         => $weight,

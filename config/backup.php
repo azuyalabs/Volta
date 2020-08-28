@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 return [
-
     'backup' => [
-
         /*
          * The name of this application. You can use this name to monitor
          * the backups.
@@ -11,9 +11,7 @@ return [
         'name' => config('app.name'),
 
         'source' => [
-
             'files' => [
-
                 /*
                  * The list of directories and files that will be included in the backup.
                  */
@@ -52,7 +50,6 @@ return [
         'gzip_database_dump' => false,
 
         'destination' => [
-
             /*
              * The filename prefix used for the backup zip file.
              */
@@ -75,7 +72,6 @@ return [
      * the `Spatie\Backup\Events` classes.
      */
     'notifications' => [
-
         'notifications' => [
             \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class         => ['mail'],
             \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => ['mail'],
@@ -141,7 +137,6 @@ return [
         'strategy' => \Spatie\Backup\Tasks\Cleanup\Strategies\DefaultStrategy::class,
 
         'defaultStrategy' => [
-
             /*
              * The number of days for which backups must be kept.
              */

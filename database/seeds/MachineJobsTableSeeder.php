@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -14,14 +16,12 @@ use App\MachineJob;
 use Illuminate\Database\Seeder;
 
 /**
- * Class for seeding the machine jobs table
+ * Class for seeding the machine jobs table.
  */
 class MachineJobsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {

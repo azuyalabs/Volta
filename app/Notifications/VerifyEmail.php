@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,8 +23,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 
 /**
- * Class VerifyEmail
- * @package App\Notifications
+ * Class VerifyEmail.
  */
 class VerifyEmail extends Notification
 {
@@ -31,7 +32,8 @@ class VerifyEmail extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
+     *
      * @return array|string
      */
     public function via($notifiable)
@@ -42,12 +44,13 @@ class VerifyEmail extends Notification
     /**
      * Build the mail representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
+     *
      * @return MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject(Lang::getFromJson('Please verify your email address'))
             ->greeting('Thanks for joining Volta!')
             ->line(Lang::getFromJson('To complete your Volta registration we need you to confirm your email address so we know that you are reachable at this address.'))
@@ -61,7 +64,8 @@ class VerifyEmail extends Notification
     /**
      * Get the verification URL for the given notifiable.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
+     *
      * @return string
      */
     protected function verificationUrl($notifiable)

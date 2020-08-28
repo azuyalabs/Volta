@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -24,21 +26,17 @@ use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 /**
- * Controller handling the management of filament spools
- *
- * @package App\Http\Controllers
+ * Controller handling the management of filament spools.
  */
 class FilamentSpoolsController extends Controller
 {
     /**
-     * @var FilamentSpoolRepository $spools the Filament Spools Repository
+     * @var FilamentSpoolRepository the Filament Spools Repository
      */
     private $spools;
 
     /**
      * FilamentSpoolsController constructor.
-     *
-     * @param FilamentSpoolRepository $spools
      */
     public function __construct(FilamentSpoolRepository $spools)
     {
@@ -48,8 +46,6 @@ class FilamentSpoolsController extends Controller
 
     /**
      * Display a listing of filament spools.
-     *
-     * @param Request $request
      *
      * @return View
      */
@@ -78,7 +74,7 @@ class FilamentSpoolsController extends Controller
     public function create()
     {
         return view('spools.create', [
-            'spool_manufacturers' => Manufacturer::IsFilamentSupplier()->orderBy('name', 'asc')->get()->pluck('name', 'id')
+            'spool_manufacturers' => Manufacturer::IsFilamentSupplier()->orderBy('name', 'asc')->get()->pluck('name', 'id'),
         ]);
     }
 
@@ -93,14 +89,12 @@ class FilamentSpoolsController extends Controller
     {
         return view('spools.edit', [
             'spool'               => $this->spools->find($id),
-            'spool_manufacturers' => Manufacturer::IsFilamentSupplier()->orderBy('name', 'asc')->get()->pluck('name', 'id')
+            'spool_manufacturers' => Manufacturer::IsFilamentSupplier()->orderBy('name', 'asc')->get()->pluck('name', 'id'),
         ]);
     }
 
     /**
      * Store a newly created spool in storage.
-     *
-     * @param FilamentSpoolRequest $request
      *
      * @return RedirectResponse
      */
@@ -121,13 +115,13 @@ class FilamentSpoolsController extends Controller
     public function show($id)
     {
         $spool = $this->spools->find($id);
+
         return view('spools.show', ['spool' => $this->spools->find($id)]);
     }
 
     /**
      * Update the specified filament spool in storage.
      *
-     * @param FilamentSpoolRequest $request
      * @param string $id the id of the filament spool
      *
      * @return RedirectResponse
@@ -135,7 +129,7 @@ class FilamentSpoolsController extends Controller
     public function update($id, FilamentSpoolRequest $request)
     {
         if ($this->spools->update($id, $request)) {
-            return redirect('spools/' . $id)->with('success', 'The filament spool has been updated successfully');
+            return redirect('spools/'.$id)->with('success', 'The filament spool has been updated successfully');
         }
     }
 
@@ -182,9 +176,7 @@ class FilamentSpoolsController extends Controller
     }
 
     /**
-     * Exports the specified filament spool as a json file
-     *
-     * @param FilamentSpool $spool
+     * Exports the specified filament spool as a json file.
      *
      * @return Response
      *
@@ -197,7 +189,7 @@ class FilamentSpoolsController extends Controller
                 ' ',
                 '',
                 $spool->manufacturer->name
-            ) . '_' . $spool->material . '_' . $spool->color . '.json'
+            ).'_'.$spool->material.'_'.$spool->color.'.json'
         );
 
         return response($spool->toJson(JSON_PRETTY_PRINT))->header(
@@ -205,7 +197,7 @@ class FilamentSpoolsController extends Controller
             'application/json'
         )->header(
             'Content-Disposition',
-            'attachment; filename="' . $filename . '"'
+            'attachment; filename="'.$filename.'"'
         )->header('Pragma', 'no-cache')->header('Expires', '0');
     }
 }

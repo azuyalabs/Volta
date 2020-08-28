@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Volta\Domain\Exception;
 
 class NoCalibrationsException extends \UnexpectedValueException implements Exception

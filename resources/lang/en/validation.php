@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -117,5 +118,4 @@ return [
     */
 
     'attributes' => [],
-
 ];

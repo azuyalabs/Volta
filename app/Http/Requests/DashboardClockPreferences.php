@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -34,7 +36,7 @@ class DashboardClockPreferences extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required|in:analog,digital'
+            'type' => 'required|in:analog,digital',
         ];
     }
 }

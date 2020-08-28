@@ -76,8 +76,6 @@ class UpdateCommand extends Command
 
     /**
      * Determine if the application is already on the latest version.
-     *
-     * @return bool
      */
     protected function onLatestRelease(): bool
     {

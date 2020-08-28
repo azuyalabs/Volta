@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -38,11 +40,11 @@ class ProductResourceTest extends TestCase
             'attributes' => [
                 'id'   => $product->slug,
                 'name' => $product->name,
-            ]
+            ],
         ], $resource);
 
         $this->assertInstanceOf(ManufacturerResource::class, $resource['attributes']['manufacturer']);
 
-        self::assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/products/' . $product->slug]], $resource);
+        self::assertArraySubset(['links' => ['self' => getenv('APP_URL').'/api/products/'.$product->slug]], $resource);
     }
 }

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -17,30 +19,26 @@ use Tests\TestCase;
 
 /**
  * Base Class containing for testing the Printer Monitor API endpoints.
- *
- * @package Tests\Feature\PrinterController
  */
 class PrinterMonitorController extends TestCase
 {
     /**
-     * The middleware guard used when authenticating clients
+     * The middleware guard used when authenticating clients.
      */
     public const GUARD = 'apitoken';
 
     /**
-     * The required User-Agent name
+     * The required User-Agent name.
      */
     public const USER_AGENT = 'OctoPrint-Volta/0.1.1';
 
     /**
-     * The required (supported) Accept type
+     * The required (supported) Accept type.
      */
     public const ACCEPT_HEADER = 'application/json';
 
     /**
-     * Assert that the response is 401: Unauthenticated
-     *
-     * @param TestResponse $response
+     * Assert that the response is 401: Unauthenticated.
      */
     public function assertUnauthenticated(TestResponse $response): void
     {

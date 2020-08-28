@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -17,14 +19,12 @@ use Spatie\ModelStatus\Status;
 use Tests\TestCase;
 
 /**
- * Class for testing the volta:prune console command
- *
- * @package Tests\Console
+ * Class for testing the volta:prune console command.
  */
 class OptimizeVoltaCommandTest extends TestCase
 {
     /**
-     * The name of the optimize command
+     * The name of the optimize command.
      */
     private const OPTIMIZE_COMMAND = 'volta:optimize';
 

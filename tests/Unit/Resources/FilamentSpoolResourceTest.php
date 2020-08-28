@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,8 +22,6 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Filament Spool Resource class.
- *
- * @package Tests\Unit\Resources
  */
 class FilamentSpoolResourceTest extends TestCase
 {
@@ -53,15 +53,15 @@ class FilamentSpoolResourceTest extends TestCase
                     'length'   => $spool->priceperlength,
                     'weight'   => $spool->priceperweight,
                     'volume'   => $spool->pricepervolume,
-                    'kilogram' => $spool->priceperkilogram
+                    'kilogram' => $spool->priceperkilogram,
                 ],
                 'length' => [
                     'capacity' => $spool->length,
                     'usage'    => $spool->usage,
-                ]
-            ]
+                ],
+            ],
         ], $resource);
 
-        self::assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/filamentspools/' . $spool->id]], $resource);
+        self::assertArraySubset(['links' => ['self' => getenv('APP_URL').'/api/filamentspools/'.$spool->id]], $resource);
     }
 }

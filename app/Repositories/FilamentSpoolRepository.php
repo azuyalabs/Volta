@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,8 +22,6 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * The Filament Spool Repository with Eloquent as the data backend.
- *
- * @package App\Repositories
  */
 class FilamentSpoolRepository implements Contract
 {
@@ -78,13 +78,13 @@ class FilamentSpoolRepository implements Contract
                 [
                     DB::raw('COUNT(id) as count'),
                     DB::raw('SUM(weight) as weight_total'),
-                    DB::raw('SUM(purchase_price) as price_total')
+                    DB::raw('SUM(purchase_price) as price_total'),
                 ]
             )->get();
 
         $statistics['count']  = $summary[0]->count ?? 0;
-        $statistics['weight'] = (int)($summary[0]->weight_total ?? 0);
-        $statistics['value']  = (float)($summary[0]->price_total ?? 0);
+        $statistics['weight'] = (int) ($summary[0]->weight_total ?? 0);
+        $statistics['value']  = (float) ($summary[0]->price_total ?? 0);
 
         return $statistics;
     }

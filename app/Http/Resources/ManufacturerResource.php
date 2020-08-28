@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,9 +23,7 @@ class ManufacturerResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  Request $request
-     *
-     * @return array
+     * @param Request $request
      */
     public function toArray($request): array
     {
@@ -31,17 +31,17 @@ class ManufacturerResource extends JsonResource
             'type' => 'manufacturers',
 
             'attributes' => [
-                'id'                 => (string)$this->slug,
+                'id'                 => (string) $this->slug,
                 'name'               => $this->name,
                 'country'            => $this->country,
                 'website'            => $this->website,
                 'filament_supplier'  => $this->filament_supplier,
                 'equipment_supplier' => $this->equipment_supplier,
                 'product_count'      => $this->models->count(),
-                'system'             => $this->system
+                'system'             => $this->system,
             ],
             'links' => [
-                'self' => getenv('APP_URL') . '/api/manufacturers/' . $this->slug,
+                'self' => getenv('APP_URL').'/api/manufacturers/'.$this->slug,
             ],
             'meta' => [
                 'country.name' => app(CountryRepository::class)->getName($this->country),

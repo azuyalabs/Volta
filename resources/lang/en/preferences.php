@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'section'  => 'Preferences',
     'subtitle' => 'There are a variety of settings available to adjust Volta to your liking. Use the navigation on the left to select a specific component.',
@@ -20,9 +22,9 @@ return [
             'description' => 'View your clock as digital or analog',
             'type_values' => [
                 'analog'  => 'Analog',
-                'digital' => 'Digital'
+                'digital' => 'Digital',
             ],
-        ]
+        ],
     ],
 
     'weather' => [
@@ -34,9 +36,8 @@ return [
             'description' => 'Temperature and wind speed will be shown in Celsius and m/s for the Metric system. For the Imperial system Fahrenheit and m/h (miles per hour) are used.',
             'type_values' => [
                 'metric'   => 'Metric',
-                'imperial' => 'Imperial'
+                'imperial' => 'Imperial',
             ],
-        ]
+        ],
     ],
-
 ];

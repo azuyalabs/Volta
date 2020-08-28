@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,8 +23,6 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * Class for getting the latest release version of major 3D printer Slicer applications.
- *
- * @package App\Console\Components
  */
 class FetchSlicerReleases extends Command
 {
@@ -37,7 +37,7 @@ class FetchSlicerReleases extends Command
     protected $description = 'Fetch latest release version of major 3D slicer applications.';
 
     /**
-     * Execute the console command
+     * Execute the console command.
      */
     public function handle(): void
     {
@@ -48,7 +48,8 @@ class FetchSlicerReleases extends Command
 
         $releasesList[] = $client->fetchLatestRelease('prusa3d', 'Slic3r', 'Slic3rPE', static function ($version) {
             $prefix = 'version_';
-            return (strpos($version, $prefix) === 0) ? substr($version, strlen($prefix)) : $version;
+
+            return (0 === strpos($version, $prefix)) ? substr($version, strlen($prefix)) : $version;
         });
         $releasesList[] = $this->getSimplify3DRelease();
 
@@ -63,7 +64,7 @@ class FetchSlicerReleases extends Command
     }
 
     /**
-     * Get the latest release information of Simplify3D
+     * Get the latest release information of Simplify3D.
      *
      * Note: Since Simplify3D is proprietary software, release information returned here is
      * based on public release information.
@@ -75,7 +76,7 @@ class FetchSlicerReleases extends Command
         return [
             'name'         => 'Simplify3D',
             'version'      => '4.1.0',
-            'release_date' => '2018-11-06'
+            'release_date' => '2018-11-06',
         ];
     }
 }

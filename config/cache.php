@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Str;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Cache Store
@@ -31,7 +32,6 @@ return [
     */
 
     'stores' => [
-
         'apc' => [
             'driver' => 'apc',
         ],
@@ -74,7 +74,6 @@ return [
             'driver'     => 'redis',
             'connection' => 'default',
         ],
-
     ],
 
     /*
@@ -90,7 +89,6 @@ return [
 
     'prefix' => env(
         'CACHE_PREFIX',
-        Str::slug('volta', '_') . '_cache'
+        Str::slug('volta', '_').'_cache'
     ),
-
 ];

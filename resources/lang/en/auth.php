@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     'login' => [
         'title'           => 'Login',
         'remember_me'     => 'Remember Me',
@@ -15,19 +16,19 @@ return [
         'title'                 => 'Create account',
         'password_confirmation' => 'Confirm Password',
         'placeholder_name'      => 'Alessandro Volta',
-        'already_account'       => 'Already got an account?'
+        'already_account'       => 'Already got an account?',
     ],
 
     'reset_password' => [
         'title'     => 'Reset Password',
-        'send_link' => 'Send Password Reset Link'
+        'send_link' => 'Send Password Reset Link',
     ],
 
     'verify' => [
         'title'             => 'Verify Your Email Address',
         'link_sent'         => 'A fresh verification link has been sent to your email address.',
         'before_proceeding' => 'Before proceeding, please check your email for a verification link.',
-        'request_another'   => 'If you did not receive the email, <a href=":link">click here to request another</a>.'
+        'request_another'   => 'If you did not receive the email, <a href=":link">click here to request another</a>.',
     ],
 
     'placeholder_email'    => 'alessandro@volta.prof',
@@ -38,5 +39,4 @@ return [
 
     'failed'   => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
 ];

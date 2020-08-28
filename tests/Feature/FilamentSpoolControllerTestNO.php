@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -18,9 +20,7 @@ use Tests\TestCase;
 class FilamentSpoolControllerTestNO extends TestCase
 {
     /**
-     * TBD
-     *
-     * @return void
+     * TBD.
      */
     public function nottestIndexSuccess(): void
     {

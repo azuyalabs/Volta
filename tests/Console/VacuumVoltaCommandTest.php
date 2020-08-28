@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -15,14 +17,12 @@ namespace Tests\Console;
 use Tests\TestCase;
 
 /**
- * Class for testing the volta:vacuum console command
- *
- * @package Tests\Console
+ * Class for testing the volta:vacuum console command.
  */
 class VacuumVoltaCommandTest extends TestCase
 {
     /**
-     * The name of the command
+     * The name of the command.
      */
     private const CONSOLE_COMMAND = 'volta:vacuum';
 

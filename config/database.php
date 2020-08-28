@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Database Connection Name
@@ -32,7 +33,6 @@ return [
     */
 
     'connections' => [
-
         'sqlite' => [
             'driver'   => 'sqlite',
             'database' => database_path(env('DB_DATABASE', 'volta.sqlite')),
@@ -45,7 +45,6 @@ return [
             'database' => ':memory:',
             'prefix'   => '',
         ],
-
     ],
 
     /*
@@ -73,7 +72,6 @@ return [
     */
 
     'redis' => [
-
         'client' => 'predis',
 
         'default' => [
@@ -82,7 +80,5 @@ return [
             'port'     => env('REDIS_PORT', 6379),
             'database' => 0,
         ],
-
     ],
-
 ];

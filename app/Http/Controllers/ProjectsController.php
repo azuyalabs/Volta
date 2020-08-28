@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -18,11 +20,8 @@ use Illuminate\View\View;
 
 class ProjectsController extends Controller
 {
-
     /**
      * Display a listing of projects.
-     *
-     * @param Request $request
      *
      * @return View
      */
@@ -30,9 +29,10 @@ class ProjectsController extends Controller
     {
         $projects = collect(Storage::disk('gcode')->files())->filter(static function ($value, $key) {
             $pathParts = pathinfo($value);
-            return $pathParts['extension'] === 'gcode';
+
+            return 'gcode' === $pathParts['extension'];
         })->reject(static function ($value, $key) {
-            return strpos($value, '._') === 0;
+            return 0 === strpos($value, '._');
         });
 
         return view('projects.index', ['projects' => $projects]);
@@ -40,8 +40,6 @@ class ProjectsController extends Controller
 
     /**
      * Display the specified project.
-     *
-     * @param  string $project
      *
      * @return View
      */

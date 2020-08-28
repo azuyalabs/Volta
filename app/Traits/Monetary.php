@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -16,18 +18,16 @@ use Cknow\Money\Money;
 use Illuminate\Support\Str;
 
 /**
- * A trait to have monetary Eloquent attributes
- *
- * @package App\Traits
+ * A trait to have monetary Eloquent attributes.
  */
 trait Monetary
 {
-
     /**
-     * Get the value of the given model attribute
+     * Get the value of the given model attribute.
      *
      * @param string $key the name of the model attribute
-     * @return Money the value of the model attribute representation as a Money object.
+     *
+     * @return Money the value of the model attribute representation as a Money object
      */
     public function getAttributeValue($key)
     {
@@ -46,9 +46,10 @@ trait Monetary
     }
 
     /**
-     * Check if the model attribute is set for a Money representation
+     * Check if the model attribute is set for a Money representation.
      *
      * @param string $key the model attribute
+     *
      * @return bool true if the model attribute is set for a Money representation, false otherwise
      */
     private function isMoneyAttribute(string $key): bool
@@ -69,10 +70,11 @@ trait Monetary
     }
 
     /**
-     * Sets the value for the given model attribute
+     * Sets the value for the given model attribute.
      *
-     * @param string $key the name of the model attribute
+     * @param string $key   the name of the model attribute
      * @param number $value the (new) value to be set for the model attribute
+     *
      * @return mixed
      */
     public function setAttribute($key, $value)
@@ -82,10 +84,10 @@ trait Monetary
             return parent::setAttribute($key, $value);
         }
 
-        $numeric_value = Money::parseByDecimal((string)$value, $this->getCurrency())->getAmount();
+        $numeric_value = Money::parseByDecimal((string) $value, $this->getCurrency())->getAmount();
 
         if ($this->hasSetMutator($key)) {
-            $method = 'set' . Str::studly($key) . 'Attribute';
+            $method = 'set'.Str::studly($key).'Attribute';
             $this->{$method}($value);
             $numeric_value = $this->attributes[$key];
         }

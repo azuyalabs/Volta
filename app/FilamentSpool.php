@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -19,19 +21,16 @@ use UnexpectedValueException;
 
 /**
  * Class representing the model for a Filament Spool.
- *
- * @package App
  */
 class FilamentSpool extends Model
 {
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $table = 'filament_spools';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $fillable = [
         'name',
@@ -44,23 +43,21 @@ class FilamentSpool extends Model
         'color',
         'color_value',
         'user_id',
-        'manufacturer_id'
+        'manufacturer_id',
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $hidden = ['user_id', 'created_at', 'updated_at'];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $casts = ['user_id' => 'int', 'usage' => 'float'];
 
     /**
-     * A filament spool is owned by a user
-     *
-     * @return BelongsTo
+     * A filament spool is owned by a user.
      */
     public function user(): BelongsTo
     {
@@ -68,9 +65,7 @@ class FilamentSpool extends Model
     }
 
     /**
-     * A filament spool is made by a manufacturer (supplier)
-     *
-     * @return BelongsTo
+     * A filament spool is made by a manufacturer (supplier).
      */
     public function manufacturer(): BelongsTo
     {
@@ -79,8 +74,6 @@ class FilamentSpool extends Model
 
     /**
      * Get the length (in meters) of the filament on this spool.
-     *
-     * @return float
      */
     public function getLengthAttribute(): float
     {
@@ -93,8 +86,6 @@ class FilamentSpool extends Model
 
     /**
      * Get the weight equivalent (gram) price for this spool.
-     *
-     * @return Money
      */
     public function getPricePerWeightAttribute(): Money
     {
@@ -105,8 +96,6 @@ class FilamentSpool extends Model
      * Get the kilogram equivalent price for this spool.
      *
      * Some manufacturers supply filament spools in quantities other than 1000 gram.
-     *
-     * @return Money
      */
     public function getPricePerKilogramAttribute(): Money
     {
@@ -119,8 +108,6 @@ class FilamentSpool extends Model
 
     /**
      * Get the length equivalent (meter) price for this spool.
-     *
-     * @return Money
      */
     public function getPricePerLengthAttribute(): Money
     {
@@ -129,8 +116,6 @@ class FilamentSpool extends Model
 
     /**
      * Get the volume equivalent (cm3) price for this spool.
-     *
-     * @return Money
      */
     public function getPricePerVolumeAttribute(): Money
     {
@@ -138,9 +123,7 @@ class FilamentSpool extends Model
     }
 
     /**
-     * Mark a filament spool as empty (i.e. all filament has been used)
-     *
-     * @return void
+     * Mark a filament spool as empty (i.e. all filament has been used).
      */
     public function markAsEmpty(): void
     {
@@ -149,8 +132,6 @@ class FilamentSpool extends Model
 
     /**
      * Is this filament spool empty?
-     *
-     * @return bool
      */
     public function isEmpty(): bool
     {

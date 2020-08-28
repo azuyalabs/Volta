@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,16 +23,14 @@ use Illuminate\Http\Request;
  * This is not a perfect measure as HTTP headers can be spoofed, however is a good
  * first line of defense. (Note: this may need to be altered if other print hosts will be
  * supported).
- *
- * @package App\Http\Middleware
  */
 class TrustOctoPrintClient
 {
     /**
      * Handle an incoming request.
      *
-     * @param  Request $request
-     * @param Closure $next
+     * @param Request $request
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -42,12 +42,12 @@ class TrustOctoPrintClient
         }
 
         $agent = explode('/', $request->header('User-Agent'));
-        if ($agent[0] !== 'OctoPrint-Volta') {
+        if ('OctoPrint-Volta' !== $agent[0]) {
             return response()->json(['message' => 'Unauthenticated.'], 401);
         }
 
         $accept_header = $request->header('Accept');
-        if ($accept_header !== 'application/json') {
+        if ('application/json' !== $accept_header) {
             return response()->json('', 406);
         }
 

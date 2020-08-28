@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -34,7 +36,7 @@ class DashboardWeatherPreferences extends FormRequest
     public function rules()
     {
         return [
-            'system_of_measure' => 'required|in:metric,imperial'
+            'system_of_measure' => 'required|in:metric,imperial',
         ];
     }
 }

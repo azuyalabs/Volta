@@ -21,12 +21,10 @@ use Volta\Domain\Exception\FilamentSpool\MinimumBedTemperatureOutOfBoundsExcepti
 use Volta\Domain\Exception\FilamentSpool\MinimumPrintTemperatureOutOfBoundsException;
 
 /**
- * Class Temperatures
+ * Class Temperatures.
  *
  * The Temperatures class holds the manufacturer recommended temperature ranges considered ideal for the filament.
  * In case these are unknown, the temperatures are defaulted to a defacto standard.
- *
- * @package Volta\Domain
  */
 class Temperatures
 {
@@ -120,7 +118,7 @@ class Temperatures
 
     private function isOutOfBounds(float $value, float $lowerLimit, float $upperLimit): bool
     {
-        return ($value < $lowerLimit || $value > $upperLimit);
+        return $value < $lowerLimit || $value > $upperLimit;
     }
 
     public function getMaximumPrintTemperature(): Temperature

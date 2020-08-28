@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,9 +23,7 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class PrintStateReceived
- *
- * @package App\Listeners
+ * Class PrintStateReceived.
  */
 class PrintStateReceived
 {
@@ -39,7 +39,6 @@ class PrintStateReceived
     /**
      * Handle the event.
      *
-     * @param PrinterStatusFetched $event
      * @return void
      */
     public function handle(PrinterStatusFetched $event)
@@ -52,7 +51,6 @@ class PrintStateReceived
         );
 
         if (null !== $machine->reference_id) {
-
             // Update the operational state of this machine
             if ($machine->status !== $event->status['state']) {
                 $machine->setStatus($event->status['state']);
@@ -64,7 +62,7 @@ class PrintStateReceived
                 try {
                     $job = MachineJob::firstOrCreate(
                         [
-                            'job_id' => hash('fnv1a64', $event->status['id'] . $event->status['printjob']['filename'] . $event->status['printjob']['started_at'])
+                            'job_id' => hash('fnv1a64', $event->status['id'].$event->status['printjob']['filename'].$event->status['printjob']['started_at']),
                         ],
                         [
                             'user_id'    => auth()->user()->id,
@@ -77,7 +75,7 @@ class PrintStateReceived
                     );
 
                     $job->status   = $event->status['printjob']['status'];
-                    $job->duration = (int)$event->status['printjob']['time_elapsed'];
+                    $job->duration = (int) $event->status['printjob']['time_elapsed'];
 
                     // Save details
                     $details = json_decode($job->details, true);

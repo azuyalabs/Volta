@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,23 +23,20 @@ use App\Repositories\MachineJobRepository;
 use App\User;
 use DateInterval;
 use DatePeriod;
-use DateTime;
 use Exception;
 use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Machine Job Query Option class.
- *
- * @package Tests\Unit
  */
 class MachineJobQueryOptionTest extends TestCase
 {
     /**
-     * @var User $user user instance to use for creating Spool instances
+     * @var User user instance to use for creating Spool instances
      */
     private $_user;
 
-    /** @inheritDoc */
+    /** {@inheritdoc} */
     public function setUp(): void
     {
         parent::setUp();
@@ -45,7 +44,7 @@ class MachineJobQueryOptionTest extends TestCase
         factory(Machine::class, 50)->create(['user_id' => $this->_user->id]);
     }
 
-    /** @inheritDoc
+    /** {@inheritdoc}
      *
      * @throws \Throwable
      */
@@ -255,14 +254,14 @@ class MachineJobQueryOptionTest extends TestCase
 
         // Assert filtered value is picked up and other types not
         $this->assertGreaterThan($startDate, $startedAtDate);
-        $this->assertLessThan(new DateTime(), $startedAtDate);
+        $this->assertLessThan(new \DateTimeImmutable(), $startedAtDate);
     }
 
     /**
-     * Creates test MachineJob instances with the given attribute values and given quantity
+     * Creates test MachineJob instances with the given attribute values and given quantity.
      *
      * @param array $modelData model attribute values
-     * @param int $amount number of instances to generate
+     * @param int   $amount    number of instances to generate
      */
     private function generateMachineJobs(array $modelData = [], int $amount = 5)
     {

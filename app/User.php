@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,16 +23,16 @@ use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * Class User
- *
- * @package App
+ * Class User.
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable, HasRoles;
+    use HasApiTokens;
+    use Notifiable;
+    use HasRoles;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $fillable = [
         'name',
@@ -39,7 +41,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $hidden = [
         'password',
@@ -48,8 +50,6 @@ class User extends Authenticatable
 
     /**
      * Get the profile record associated with the user.
-     *
-     * @return HasOne
      */
     public function profile(): HasOne
     {
@@ -57,9 +57,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Generates an API Token for the user to be used for REST API authentication
-     *
-     * @return void
+     * Generates an API Token for the user to be used for REST API authentication.
      */
     public function generateAPIToken(): void
     {
@@ -67,7 +65,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function sendEmailVerificationNotification()
     {

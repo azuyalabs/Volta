@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -25,10 +27,6 @@ class MachinesController extends Controller
     /**
      * Display the specified machine.
      *
-     * @param Machine $machine
-     *
-     * @return MachineResource
-     *
      * @throws AuthorizationException
      */
     public function show(Machine $machine): MachineResource
@@ -42,8 +40,6 @@ class MachinesController extends Controller
 
     /**
      * Display a listing of a user's machines.
-     *
-     * @return MachineCollectionResource
      */
     public function index(): MachineCollectionResource
     {
@@ -53,9 +49,6 @@ class MachinesController extends Controller
     /**
      * Remove the specified machine from storage.
      *
-     * @param  Machine $machine
-     *
-     * @return Response
      * @throws Exception
      */
     public function destroy(Machine $machine): Response

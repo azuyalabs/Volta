@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -19,17 +21,17 @@ $factory->define(\App\SpoolCalibration::class, function (Faker $faker) {
     $mType = $faker->randomElement($type);
 
     $measurements = '{}';
-    if ($mType === 'linear_advance') {
-        $measurements = '{"date": "' . $faker->dateTimeThisMonth()->format(DATE_ATOM) . '", "value": ' . $faker->numberBetween(
+    if ('linear_advance' === $mType) {
+        $measurements = '{"date": "'.$faker->dateTimeThisMonth()->format(DATE_ATOM).'", "value": '.$faker->numberBetween(
             10,
             80
-        ) . '}';
+        ).'}';
     }
 
     return [
         'spool_id'      => $faker->randomElement(Spool::all()->pluck('id')->all()),
         'calibrated_at' => '',
         'type'          => $mType,
-        'measurements'  => $measurements
+        'measurements'  => $measurements,
     ];
 });

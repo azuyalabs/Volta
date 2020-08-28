@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -38,6 +40,6 @@ class VersionCommand extends Command
      */
     public function handle()
     {
-        $this->line('<info>Volta</info> version <comment>' . Volta::VERSION . '</comment>');
+        $this->line('<info>Volta</info> version <comment>'.Volta::VERSION.'</comment>');
     }
 }

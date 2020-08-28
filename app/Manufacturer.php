@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,14 +23,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Manufacturer
- *
- * @package App
+ * Class Manufacturer.
  */
 class Manufacturer extends Model
 {
     use SoftDeletes;
-    use Sluggable, SluggableScopeHelpers;
+    use Sluggable;
+    use SluggableScopeHelpers;
 
     /**
      * The database table used by the model.
@@ -53,22 +54,18 @@ class Manufacturer extends Model
 
     /**
      * Returns the sluggable configuration array for this model.
-     *
-     * @return array
      */
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 
     /**
-     * Get the route key for the model
-     *
-     * @return string
+     * Get the route key for the model.
      */
     public function getRouteKeyName(): string
     {
@@ -76,9 +73,7 @@ class Manufacturer extends Model
     }
 
     /**
-     * Get the products for the manufacturer
-     *
-     * @return HasMany
+     * Get the products for the manufacturer.
      */
     public function models(): HasMany
     {
@@ -86,9 +81,7 @@ class Manufacturer extends Model
     }
 
     /**
-     * Get the spools for the manufacturer
-     *
-     * @return HasMany
+     * Get the spools for the manufacturer.
      */
     public function spools(): HasMany
     {
@@ -99,8 +92,6 @@ class Manufacturer extends Model
      * Scope a query to only include manufacturers that are a filament supplier.
      *
      * @param Builder $query
-     *
-     * @return Builder
      */
     public function scopeIsFilamentSupplier($query): Builder
     {
@@ -111,8 +102,6 @@ class Manufacturer extends Model
      * Scope a query to only include manufacturers that are an equipment supplier.
      *
      * @param Builder $query
-     *
-     * @return Builder
      */
     public function scopeIsEquipmentSupplier($query): Builder
     {
@@ -123,7 +112,6 @@ class Manufacturer extends Model
      * Scope the query for the given query options.
      *
      * @param Builder $query
-     * @param ManufacturerQueryOptions $options
      *
      * @return Builder
      */

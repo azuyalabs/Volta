@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,8 +22,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 /**
  * The Manufacturer Repository with Eloquent as the data backend.
- *
- * @package App\Repositories
  */
 class ManufacturerRepository implements Contract
 {

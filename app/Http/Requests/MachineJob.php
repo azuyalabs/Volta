@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -40,7 +42,7 @@ class MachineJob extends FormRequest
             'duration' => 'integer|min:0',
             'status'   => 'sometimes|in:success,failed,in_progress',
             'type'     => 'sometimes|in:laser,3dprinter,router',
-            'details'  => 'sometimes|json'
+            'details'  => 'sometimes|json',
         ];
     }
 }

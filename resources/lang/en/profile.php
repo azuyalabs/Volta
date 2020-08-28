@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'section'    => 'Profile',
     'model_name' => 'Profile|Profiles',
@@ -17,5 +19,5 @@ return [
     'languageHelpBlock' => 'At the moment only English is supported. In the future other translations will be made available.',
     'currencyHelpBlock' => 'The default currency for your business in Volta',
     'countryHelpBlock'  => 'Your location on this rock. The country field is used to display related content such as public holidays.',
-    'cityHelpBlock'     => 'The city field is used for retrieving your local weather, which will be displayed on the Dashboard.'
+    'cityHelpBlock'     => 'The city field is used for retrieving your local weather, which will be displayed on the Dashboard.',
 ];

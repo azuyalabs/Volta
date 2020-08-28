@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,8 +23,6 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * Class representing actions to retrieve weather information using the OpenWeatherMap service.
- *
- * @package App\Repositories
  */
 class OpenWeatherMapRepository implements Contract
 {
@@ -44,7 +44,7 @@ class OpenWeatherMapRepository implements Contract
                 'state'       => $this->getState(),
                 'temperature' => [
                     'value' => $this->weather->temperature->getValue(),
-                    'uom'   => $this->weather->temperature->getUnit() === '&deg;C' ? 'celsius' : null,
+                    'uom'   => '&deg;C' === $this->weather->temperature->getUnit() ? 'celsius' : null,
                 ],
                 'humidity' => [
                     'value' => $this->weather->humidity->getValue(),
@@ -57,16 +57,17 @@ class OpenWeatherMapRepository implements Contract
                 'sun' => [
                     'rise' => $this->weather->sun->rise->format(DateTime::ATOM),
                     'set'  => $this->weather->sun->set->format(DateTime::ATOM),
-                ]
+                ],
             ];
         } catch (Exception $e) {
             Log::error($e->getMessage());
+
             return [];
         }
     }
 
     /**
-     * Map the applicable state for the current weather
+     * Map the applicable state for the current weather.
      *
      * @return string text indicating the current weather state
      */
@@ -82,7 +83,7 @@ class OpenWeatherMapRepository implements Contract
             500 => 'light_rain',
             501 => 'moderate_rain',
             701 => 'fog',
-            741 => 'fog'
+            741 => 'fog',
         ];
 
         $map_breezy = [
@@ -110,7 +111,6 @@ class OpenWeatherMapRepository implements Contract
             701 => 'fog',
             741 => 'fog',
         ];
-
 
         if ($this->weather->wind->speed->getValue() <= 5) {
             return $map[$this->weather->weather->id] ?? 'unknown';

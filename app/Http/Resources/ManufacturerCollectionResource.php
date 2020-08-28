@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,9 +22,7 @@ class ManufacturerCollectionResource extends ResourceCollection
     /**
      * Transform the resource collection into an array.
      *
-     * @param  Request $request
-     *
-     * @return array
+     * @param Request $request
      */
     public function toArray($request): array
     {
@@ -35,8 +35,6 @@ class ManufacturerCollectionResource extends ResourceCollection
      * Get additional data that should be returned with the resource array.
      *
      * @param Request $request
-     *
-     * @return array
      */
     public function with($request): array
     {

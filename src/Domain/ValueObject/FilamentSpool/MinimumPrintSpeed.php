@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Volta\Domain\ValueObject\FilamentSpool;
 
 use Volta\Domain\Exception\NegativeValueException;

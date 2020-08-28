@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,15 +22,13 @@ class FilamentSpoolResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  Request $request
-     *
-     * @return array
+     * @param Request $request
      */
     public function toArray($request): array
     {
         return [
             'type' => 'filamentspools',
-            'id'   => (string)$this->{$this->getRouteKeyName()},
+            'id'   => (string) $this->{$this->getRouteKeyName()},
 
             'attributes' => [
                 'name'           => $this->name,
@@ -44,12 +44,12 @@ class FilamentSpoolResource extends JsonResource
                     'length'   => $this->priceperlength,
                     'weight'   => $this->priceperweight,
                     'volume'   => $this->pricepervolume,
-                    'kilogram' => $this->priceperkilogram
+                    'kilogram' => $this->priceperkilogram,
                 ],
                 'length' => [
                     'capacity' => $this->length,
                     'usage'    => $this->usage,
-                ]
+                ],
             ],
             'links' => [
                 'self' => route('filamentspools.show', ['filamentspool' => $this->{$this->getRouteKeyName()}]),

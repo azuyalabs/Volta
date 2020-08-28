@@ -1,21 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 $projectPath = __DIR__;
 
 // Declare directories which contain PHP code
 $scanDirectories = [
-    $projectPath . '/app/',
-    $projectPath . '/resources/views/',
-    $projectPath . '/routes/',
-    $projectPath . '/bootstrap/',
+    $projectPath.'/app/',
+    $projectPath.'/resources/views/',
+    $projectPath.'/routes/',
+    $projectPath.'/bootstrap/',
 ];
 
 // Optionally declare standalone files
 $scanFiles = [];
 
 return [
-    'composerJsonPath' => $projectPath . '/composer.json',
-    'vendorPath'       => $projectPath . '/vendor/',
+    'composerJsonPath' => $projectPath.'/composer.json',
+    'vendorPath'       => $projectPath.'/vendor/',
     'scanDirectories'  => $scanDirectories,
-    'scanFiles'        => $scanFiles
+    'scanFiles'        => $scanFiles,
 ];

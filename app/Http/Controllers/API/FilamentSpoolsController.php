@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,15 +22,12 @@ use Illuminate\Http\Response;
 class FilamentSpoolsController extends Controller
 {
     /**
-     * @var FilamentSpoolRepository $spools the Filament Spools Repository
+     * @var FilamentSpoolRepository the Filament Spools Repository
      */
     private $spools;
 
     /**
      * API FilamentSpoolsController constructor.
-     *
-     * @param FilamentSpoolRepository $spools
-     *
      */
     public function __construct(FilamentSpoolRepository $spools)
     {
@@ -40,8 +39,6 @@ class FilamentSpoolsController extends Controller
      * Return the specified filament spool.
      *
      * @param string $id the id of the filament spool
-     *
-     * @return FilamentSpoolResource
      */
     public function show($id): FilamentSpoolResource
     {
@@ -52,8 +49,6 @@ class FilamentSpoolsController extends Controller
 
     /**
      * Return a listing of the authenticated users' filament spools.
-     *
-     * @return FilamentSpoolCollectionResource
      */
     public function index(): FilamentSpoolCollectionResource
     {
@@ -64,8 +59,6 @@ class FilamentSpoolsController extends Controller
      * Remove the specified filament spool from storage.
      *
      * @param string $id the id of the filament spool
-     *
-     * @return Response
      */
     public function destroy($id): Response
     {

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -23,8 +25,6 @@ use Spatie\ModelStatus\HasStatuses;
 
 /**
  * Class representing the model for a Machine (e.g. 3D Printer, Laser Cutter, etc.).
- *
- * @package App
  */
 class Machine extends Model
 {
@@ -34,16 +34,16 @@ class Machine extends Model
     use Sluggable;
 
     public $money_attributes = [
-        'acquisition_cost', 'residual_value', 'maintenance_cost'
+        'acquisition_cost', 'residual_value', 'maintenance_cost',
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $table = 'machines';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $fillable = [
         'user_id',
@@ -55,30 +55,28 @@ class Machine extends Model
         'lifespan',
         'operating_hours',
         'energy_consumption',
-        'reference_id'
+        'reference_id',
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $appends = [
-        'hourlyrate'
+        'hourlyrate',
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $dates = ['deleted_at'];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $casts = ['user_id' => 'int'];
 
     /**
      * Get the user that the machine belongs to.
-     *
-     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -87,8 +85,6 @@ class Machine extends Model
 
     /**
      * Get the product model that the machine belongs to.
-     *
-     * @return BelongsTo
      */
     public function model(): BelongsTo
     {
@@ -96,11 +92,9 @@ class Machine extends Model
     }
 
     /**
-     * Get my machines
+     * Get my machines.
      *
      * @param Builder $query
-     *
-     * @return Builder
      */
     public function scopeMine($query): Builder
     {
@@ -108,11 +102,9 @@ class Machine extends Model
     }
 
     /**
-     * Get all my machines that are paired (i.e. having an external reference ID)
+     * Get all my machines that are paired (i.e. having an external reference ID).
      *
      * @param Builder $query
-     *
-     * @return Builder
      */
     public function scopeMyPaired($query): Builder
     {
@@ -121,26 +113,20 @@ class Machine extends Model
 
     /**
      * Return the sluggable configuration array for this model.
-     *
-     * @return array
      */
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 
     /**
-     * @param Builder $query
-     * @param Model $model
      * @param string $attribute
-     * @param array $config
+     * @param array  $config
      * @param string $slug
-     *
-     * @return Builder
      */
     public function scopeWithUniqueSlugConstraints(Builder $query, Model $model, $attribute, $config, $slug): Builder
     {
@@ -149,8 +135,6 @@ class Machine extends Model
 
     /**
      * Calculates the hourly cost rate of this machine.
-     *
-     * @return Money
      */
     public function getHourlyRateAttribute(): Money
     {
@@ -164,8 +148,6 @@ class Machine extends Model
 
     /**
      * Calculates the total cost of this machine during its life.
-     *
-     * @return Money
      */
     public function getLifetimeCostAttribute(): Money
     {

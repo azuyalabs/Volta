@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -18,14 +20,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Project
- *
- * @package App
+ * Class Project.
  */
 class Project extends Model
 {
     use SoftDeletes;
-    use Sluggable, SluggableScopeHelpers;
+    use Sluggable;
+    use SluggableScopeHelpers;
 
     /**
      * The database table used by the model.
@@ -50,22 +51,18 @@ class Project extends Model
 
     /**
      * Returns the sluggable configuration array for this model.
-     *
-     * @return array
      */
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 
     /**
-     * Get the route key for the model
-     *
-     * @return string
+     * Get the route key for the model.
      */
     public function getRouteKeyName(): string
     {

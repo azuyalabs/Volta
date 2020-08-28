@@ -8,12 +8,10 @@ use Volta\Domain\Exception\FilamentSpool\MaximumValueMinimumFanSpeedException;
 use Volta\Domain\Exception\NegativeValueException;
 
 /**
- * Class representing the Minimum Fan Speed
+ * Class representing the Minimum Fan Speed.
  *
  * Although it is called 'speed', this attribute is usually expressed as a percentage.
  * (e.g. '50' denotes 50% of the fan speed's maximum capacity)
- *
- * @package Volta\Domain\ValueObject\FilamentSpool
  */
 class MinimumFanSpeed
 {

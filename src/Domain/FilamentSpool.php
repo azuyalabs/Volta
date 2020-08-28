@@ -281,8 +281,6 @@ class FilamentSpool
 
     /**
      * Get the weight equivalent (gram) price for this spool.
-     *
-     * @return Money
      */
     public function getPricePerWeight(): Money
     {
@@ -310,8 +308,6 @@ class FilamentSpool
      *
      * Some manufacturers supply filament spools in quantities other than 1000 gram. This method allows for equal
      * comparison between different spools of different weight quantities.
-     *
-     * @return Money
      */
     public function getPricePerKilogram(): Money
     {
@@ -560,8 +556,6 @@ class FilamentSpool
     /**
      * In case there are multiple calibrations, we assume the latest one is the
      * one to use.
-     *
-     * @return Length
      */
     public function getExtrusionMultiplier(): Length
     {

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,8 +23,6 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * Class for getting the latest release version of major 3D printer firmwares.
- *
- * @package App\Console\Components
  */
 class FetchFirmwareReleases extends Command
 {
@@ -37,7 +37,7 @@ class FetchFirmwareReleases extends Command
     protected $description = 'Fetch latest release version of major 3D printer firmwares.';
 
     /**
-     * Execute the console command
+     * Execute the console command.
      */
     public function handle(): void
     {
@@ -46,7 +46,8 @@ class FetchFirmwareReleases extends Command
         $releasesList[] = $client->fetchLatestRelease('MarlinFirmware', 'Marlin');
         $releasesList[] = $client->fetchLatestRelease('gnea', 'grbl', null, static function ($version) {
             preg_match_all('/^[v](\d{1,2})[.](.{1,3})[.]\w+$/', $version, $matches);
-            return $matches[1][0] . '.' . $matches[2][0];
+
+            return $matches[1][0].'.'.$matches[2][0];
         });
         $releasesList[] = $client->fetchLatestRelease('repetier', 'Repetier-Firmware', 'Repetier');
         $releasesList[] = $client->fetchLatestRelease('prusa3d', 'Prusa-Firmware', 'Prusa MK3', static function ($version) {

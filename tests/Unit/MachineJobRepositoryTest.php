@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -26,8 +28,6 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the Machine Job Repository class.
- *
- * @package Tests\Unit
  */
 class MachineJobRepositoryTest extends TestCase
 {
@@ -44,7 +44,7 @@ class MachineJobRepositoryTest extends TestCase
         $this->assertSame($job->name, $result->name);
         $this->assertSame($job->job_id, $result->job_id);
         $this->assertSame($job->status, $result->status);
-        $this->assertSame((string)$job->start, (string)$result->start);
+        $this->assertSame((string) $job->start, (string) $result->start);
         $this->assertSame($job->duration, $result->duration);
         $this->assertSame($job->type, $result->type);
         $this->assertSame($job->details, $result->details);
@@ -132,7 +132,7 @@ class MachineJobRepositoryTest extends TestCase
         $jobs_count = $repository->all($job->user_id, new MachineJobQueryOptions())->count(); // Get the number of records before creation
 
         $request['status']     = $this->faker->randomElement([MachineJobStatus::SUCCESS, MachineJobStatus::FAILED, MachineJobStatus::IN_PROGRESS]);
-        $request['job_id']     = $this->faker->ean13 . 'abc';
+        $request['job_id']     = $this->faker->ean13.'abc';
         $request['name']       = $this->faker->word;
         $request['started_at'] = $this->faker->dateTime();
         $request['duration']   = $this->faker->numberBetween(0, 50000);

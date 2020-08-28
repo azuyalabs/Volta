@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,14 +22,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Product
- *
- * @package App
+ * Class Product.
  */
 class Product extends Model
 {
     use SoftDeletes;
-    use Sluggable, SluggableScopeHelpers;
+    use Sluggable;
+    use SluggableScopeHelpers;
 
     /**
      * The database table used by the model.
@@ -52,22 +53,18 @@ class Product extends Model
 
     /**
      * Returns the sluggable configuration array for this model.
-     *
-     * @return array
      */
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 
     /**
-     * Get the route key for the model
-     *
-     * @return string
+     * Get the route key for the model.
      */
     public function getRouteKeyName(): string
     {
@@ -76,8 +73,6 @@ class Product extends Model
 
     /**
      * Get the manufacturer that the products belongs to.
-     *
-     * @return BelongsTo
      */
     public function manufacturer(): BelongsTo
     {
@@ -86,8 +81,6 @@ class Product extends Model
 
     /**
      * Get the machines for the product.
-     *
-     * @return HasMany
      */
     public function machines(): HasMany
     {

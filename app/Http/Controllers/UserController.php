@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -47,9 +49,10 @@ class UserController extends Controller
     }
 
     /**
-     * Show the user profile
+     * Show the user profile.
      *
      * @return View
+     *
      * @throws ModelNotFoundException
      */
     public function profile()
@@ -60,12 +63,10 @@ class UserController extends Controller
     }
 
     /**
-     * Update the user's profile
-     *
-     * @param Request $request
-     * @param User $user
+     * Update the user's profile.
      *
      * @return RedirectResponse
+     *
      * @throws ValidationException
      */
     public function update(Request $request, User $user)
@@ -73,7 +74,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|max:128',
             //'language' => 'required|max:2',
-            'currency' => 'required|max:3'
+            'currency' => 'required|max:3',
         ]);
         $requestData = $request->all();
 
@@ -95,9 +96,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the user preferences
-     *
-     * @param string $setting
+     * Show the user preferences.
      *
      * @return View
      */
@@ -111,20 +110,19 @@ class UserController extends Controller
         [$component, $part] = explode('.', $setting);
 
         return view(
-            'users.preferences.' . str_replace('.', '_', $setting),
+            'users.preferences.'.str_replace('.', '_', $setting),
             [
                 'component'   => $component,
                 'part'        => $part,
                 'index'       => $this->getPreferencesIndex(),
-                'preferences' => auth()->user()->profile->preferences[$component] ?? []
+                'preferences' => auth()->user()->profile->preferences[$component] ?? [],
             ]
         );
     }
 
     /**
-     * Validate the given setting string
+     * Validate the given setting string.
      *
-     * @param string $setting
      * @return bool
      */
     private function isValidSettingName(string $setting)
@@ -137,9 +135,7 @@ class UserController extends Controller
     }
 
     /**
-     * Get the index (navigation) for the Preferences page(s)
-     *
-     * @return array
+     * Get the index (navigation) for the Preferences page(s).
      */
     private function getPreferencesIndex(): array
     {
@@ -150,9 +146,9 @@ class UserController extends Controller
                 'parts'   => [
                     'main' => [
                         'url'  => '/preferences/volta.main',
-                        'name' => 'General'
-                    ]
-                ]
+                        'name' => 'General',
+                    ],
+                ],
             ],
             'dashboard' => [
                 'name'    => __('preferences.components.dashboard'),
@@ -160,24 +156,22 @@ class UserController extends Controller
                 'parts'   => [
                     'clock' => [
                         'url'  => '/preferences/dashboard.clock',
-                        'name' => __('preferences.clock.name')
+                        'name' => __('preferences.clock.name'),
                     ],
                     'weather' => [
                         'url'  => '/preferences/dashboard.weather',
-                        'name' => __('preferences.weather.name')
-                    ]
-                ]
-            ]
+                        'name' => __('preferences.weather.name'),
+                    ],
+                ],
+            ],
         ];
     }
 
     /**
      * Update the user's preferences.
      *
-     * @param Request $request
-     * @param string $setting
-     *
      * @return RedirectResponse
+     *
      * @throws ValidationException
      */
     public function updatePreferences(Request $request, string $setting)
@@ -189,7 +183,7 @@ class UserController extends Controller
 
         [$component, $part] = explode('.', $setting);
 
-        $className = '\App\Http\Requests\\' . ucfirst($component) . ucfirst($part) . 'Preferences';
+        $className = '\App\Http\Requests\\'.ucfirst($component).ucfirst($part).'Preferences';
 
         $validatedData = $this->validate($request, (new $className())->rules());
 

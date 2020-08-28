@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     // Model
     'model_name'  => 'Filament Spool|Filament Spools',
     'model_count' => '{1} :value spool|[2,*] :value spools',
@@ -30,7 +31,7 @@ return [
     'update_spool_subtitle' => 'Update the details of the splendid <strong>:manufacturer_name :spool_name</strong> filament.',
     'index_spool_subtitle'  => [
         'part1' => 'Your stockpile of 3D Printer Filament Spools. Currently you have ',
-        'part2' => '{1} <strong>:spool_count</strong> spools|[2,*] <strong>:spool_count</strong> spools with a value of '
+        'part2' => '{1} <strong>:spool_count</strong> spools|[2,*] <strong>:spool_count</strong> spools with a value of ',
     ],
 
     // Field Help Blocks
@@ -43,5 +44,5 @@ return [
     'densityHelpBlock'         => 'The filament density (in g/cm<sup>3</sup>) as given by the manufacturer',
     'colorHelpBlock'           => 'The color (name) as identified by the manufacturer',
     'colorvalueHelpBlock'      => 'The hexadecimal number of the filament color',
-    'usageHelpBlock'           => 'The amount of filament consumed (in meters) as of now'
+    'usageHelpBlock'           => 'The amount of filament consumed (in meters) as of now',
 ];

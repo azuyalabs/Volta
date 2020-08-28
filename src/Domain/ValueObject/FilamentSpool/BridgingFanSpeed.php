@@ -7,12 +7,10 @@ namespace Volta\Domain\ValueObject\FilamentSpool;
 use Volta\Domain\Exception\FilamentSpool\MaximumValueBridgingFanSpeedException;
 
 /**
- * Class representing the Bridging Fan Speed
+ * Class representing the Bridging Fan Speed.
  *
  * Although it is called 'speed', this attribute is usually expressed as a percentage.
  * (e.g. '50' denotes 50% of the fan speed's maximum capacity)
- *
- * @package Volta\Domain\ValueObject\FilamentSpool
  */
 class BridgingFanSpeed
 {

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -20,8 +22,6 @@ use Tests\TestCase;
  * Class containing cases for testing the 3D Printer Job Resource Collection class.
  *
  * //TODO: Incomplete tests!
- *
- * @package Tests\Unit\Resources
  */
 class ThreeDPrinterJobCollectionResourceTest extends TestCase
 {

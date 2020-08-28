@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -18,15 +20,11 @@ use Illuminate\Support\Collection;
 
 /**
  * Filament Spool Repository contract.
- *
- * @package App\Contracts\Repositories
  */
 interface FilamentSpoolRepository
 {
     /**
      * Get all of the authenticated user's filament spools.
-     *
-     * @return Collection
      */
     public function all(): Collection;
 
@@ -40,7 +38,7 @@ interface FilamentSpoolRepository
     public function find($id);
 
     /**
-     * Creates a new filament spool in storage
+     * Creates a new filament spool in storage.
      *
      * @param FilamentSpoolRequest $request the Form Request containing the new filament spool data
      *
@@ -49,28 +47,28 @@ interface FilamentSpoolRepository
     public function create(FilamentSpoolRequest $request): FilamentSpool;
 
     /**
-     * Removes a filament spool from storage with the given ID
+     * Removes a filament spool from storage with the given ID.
      *
      * @param string $id the filament spool identifier
      *
-     * @return boolean true if removal was successful, false otherwise
+     * @return bool true if removal was successful, false otherwise
      */
     public function delete($id): bool;
 
     /**
-     * Updates a filament spool from storage with the given ID
+     * Updates a filament spool from storage with the given ID.
      *
-     * @param string $id the filament spool identifier
+     * @param string               $id      the filament spool identifier
      * @param FilamentSpoolRequest $request the Form Request containing the updated filament spool data
      *
-     * @return boolean true if update was successful, false otherwise
+     * @return bool true if update was successful, false otherwise
      */
     public function update($id, FilamentSpoolRequest $request): bool;
 
     /**
      * Gets a summary (statistics) of the authenticated user's filament spools.
      *
-     * @return array list of performance indicators of the of the authenticated user's filament spools.
+     * @return array list of performance indicators of the of the authenticated user's filament spools
      */
     public function summary(): array;
 
@@ -79,7 +77,7 @@ interface FilamentSpoolRepository
      *
      * @param string $id the id of the filament spool
      *
-     * @return boolean true if duplication was successful, false otherwise
+     * @return bool true if duplication was successful, false otherwise
      */
     public function duplicate($id): bool;
 
@@ -88,7 +86,7 @@ interface FilamentSpoolRepository
      *
      * @param string $id the id of the filament spool
      *
-     * @return boolean true if the update was successful, false otherwise
+     * @return bool true if the update was successful, false otherwise
      */
     public function markAsEmpty($id): bool;
 }

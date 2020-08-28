@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -49,7 +50,7 @@ return [
         'apitoken' => [
             'driver'   => 'token',
             'provider' => 'users',
-        ]
+        ],
     ],
 
     /*
@@ -103,5 +104,4 @@ return [
             'expire'   => 60,
         ],
     ],
-
 ];

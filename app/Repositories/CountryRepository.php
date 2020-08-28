@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -17,7 +19,6 @@ use Punic\Territory;
 
 class CountryRepository implements Contract
 {
-
     /**
      * {@inheritdoc}
      */

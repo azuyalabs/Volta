@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -16,8 +18,6 @@ use App\User;
 
 /**
  * Class containing cases for testing the Monitor API Endpoint of the PrinterController.
- *
- * @package Tests\Feature\PrinterController
  */
 class MonitorEndpointTest extends PrinterMonitorController
 {
@@ -30,7 +30,7 @@ class MonitorEndpointTest extends PrinterMonitorController
 
         $response = $this->withHeaders([
             'Accept'     => self::ACCEPT_HEADER,
-            'User-Agent' => self::USER_AGENT
+            'User-Agent' => self::USER_AGENT,
         ])->actingAs($user, self::GUARD)->get(self::API_ENDPOINT);
 
         $response->assertStatus(405);
@@ -44,28 +44,29 @@ class MonitorEndpointTest extends PrinterMonitorController
 
         $response = $this->withHeaders([
             'Accept'     => self::ACCEPT_HEADER,
-            'User-Agent' => self::USER_AGENT
+            'User-Agent' => self::USER_AGENT,
         ])->actingAs($user, self::GUARD)->post(
             self::API_ENDPOINT,
             [
                 'id'    => $this->encryptPrinterID($printer, $user->api_token),
                 'name'  => 'Ender 3',
-                'state' => 'offline'
+                'state' => 'offline',
             ]
         );
 
         $response->assertStatus(201);
         $response->assertJson([
             'status'  => 'ok',
-            'message' => sprintf('Data for printer `%s` successfully received.', $printer)
+            'message' => sprintf('Data for printer `%s` successfully received.', $printer),
         ]);
     }
 
     /**
-     * Helper function to create a valid encrypted printer ID sample
+     * Helper function to create a valid encrypted printer ID sample.
      *
      * @param $data string the printer address (i.e. ID)
      * @param $key string the encryption key (the users' API token)
+     *
      * @return string string the encrypted printer address
      */
     private function encryptPrinterID($data, $key): string
@@ -77,7 +78,7 @@ class MonitorEndpointTest extends PrinterMonitorController
         $encrypted = openssl_encrypt($data, 'aes-256-cfb8', $key, 1, $iv);
 
         // The $iv is just as important as the key for decrypting, so save it with our encrypted data using a unique separator (::)
-        return base64_encode($encrypted . '::' . $iv);
+        return base64_encode($encrypted.'::'.$iv);
     }
 
     /** @test */
@@ -88,13 +89,13 @@ class MonitorEndpointTest extends PrinterMonitorController
 
         $response = $this->withHeaders([
             'Accept'     => self::ACCEPT_HEADER,
-            'User-Agent' => self::USER_AGENT
+            'User-Agent' => self::USER_AGENT,
         ])->actingAs($user, self::GUARD)->post(
             self::API_ENDPOINT,
             [
                 'id'    => $this->encryptPrinterID($printer, $this->faker->word),
                 'name'  => 'Prusa MK2.5',
-                'state' => 'printing'
+                'state' => 'printing',
             ]
         );
 
@@ -103,7 +104,7 @@ class MonitorEndpointTest extends PrinterMonitorController
             'errors' => [
                 'id' => ['The printer id is not valid. It must be a properly formatted and encoded string.'],
             ],
-            'message' => 'The given data was invalid.'
+            'message' => 'The given data was invalid.',
         ]);
     }
 
@@ -114,7 +115,7 @@ class MonitorEndpointTest extends PrinterMonitorController
 
         $response = $this->withHeaders([
             'Accept'     => self::ACCEPT_HEADER,
-            'User-Agent' => self::USER_AGENT
+            'User-Agent' => self::USER_AGENT,
         ])->actingAs($user, self::GUARD)->post(self::API_ENDPOINT);
 
         $response->assertStatus(422);
@@ -122,9 +123,9 @@ class MonitorEndpointTest extends PrinterMonitorController
             'errors' => [
                 'id'    => ['The id field is required.'],
                 'name'  => ['The name field is required.'],
-                'state' => ['The state field is required.']
+                'state' => ['The state field is required.'],
             ],
-            'message' => 'The given data was invalid.'
+            'message' => 'The given data was invalid.',
         ]);
     }
 }

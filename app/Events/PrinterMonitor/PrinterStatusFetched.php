@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -22,8 +24,6 @@ class PrinterStatusFetched implements ShouldBroadcast
     /**
      * Create a new event instance.
      *
-     * @param array $status
-     *
      * @return void
      */
     public function __construct(array $status)
@@ -38,6 +38,6 @@ class PrinterStatusFetched implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('printer.' . $this->status['id']);
+        return new Channel('printer.'.$this->status['id']);
     }
 }

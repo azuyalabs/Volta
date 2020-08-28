@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -19,45 +21,39 @@ use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Manufacturer Repository contract.
- *
- * @package App\Contracts\Repositories
  */
 interface ManufacturerRepository
 {
     /**
      * Get all of the manufacturers.
      *
-     * @param  ManufacturerQueryOptions $options query options
-     *
-     * @return Collection
+     * @param ManufacturerQueryOptions $options query options
      */
     public function all(ManufacturerQueryOptions $options): Collection;
 
     /**
-     * Removes a manufacturer from storage with the given ID
+     * Removes a manufacturer from storage with the given ID.
      *
      * @param string $id the manufacturer identifier
      *
-     * @return boolean true if removal was successful, false otherwise
+     * @return bool true if removal was successful, false otherwise
      */
     public function delete($id): bool;
 
     /**
-     * Adds a new manufacturer to the storage
-     *
-     * @param ManufacturerRequest $request
+     * Adds a new manufacturer to the storage.
      *
      * @return Manufacturer the newly created Machine Job object
      */
     public function create(ManufacturerRequest $request): Manufacturer;
 
     /**
-     * Updates a manufacturer from storage with the given ID
+     * Updates a manufacturer from storage with the given ID.
      *
-     * @param string $id the manufacturer identifier
+     * @param string              $id      the manufacturer identifier
      * @param ManufacturerRequest $request the Form Request containing the updated manufacturer data
      *
-     * @return boolean true if update was successful, false otherwise
+     * @return bool true if update was successful, false otherwise
      */
     public function update($id, ManufacturerRequest $request): bool;
 }

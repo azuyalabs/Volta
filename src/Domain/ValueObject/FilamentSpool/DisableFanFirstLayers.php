@@ -8,8 +8,6 @@ use Volta\Domain\Exception\NegativeValueException;
 
 /**
  * Class representing the number of first layers at which the fan should be disabled.
- *
- * @package Volta\Domain\ValueObject\FilamentSpool
  */
 class DisableFanFirstLayers
 {

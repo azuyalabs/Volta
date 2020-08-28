@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -13,16 +15,12 @@
 namespace App\Contracts\Repositories;
 
 /**
- * CountryRepository interface
- *
- * @package App\Contracts\Repositories
+ * CountryRepository interface.
  */
 interface CountryRepository
 {
     /**
      * Get all of the countries in the world.
-     *
-     * @return array
      */
     public function all(): array;
 }

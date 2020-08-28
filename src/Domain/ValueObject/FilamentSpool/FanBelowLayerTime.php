@@ -10,8 +10,6 @@ use Volta\Domain\Exception\ZeroValueException;
 /**
  * Class representing the number of seconds of layer printing time at  which (or below) the
  * fan needs to be enabled.
- *
- * @package Volta\Domain\ValueObject\FilamentSpool
  */
 class FanBelowLayerTime
 {

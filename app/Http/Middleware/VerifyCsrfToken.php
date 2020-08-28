@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,6 +23,6 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
-    protected $except = [//
+    protected $except = [
     ];
 }

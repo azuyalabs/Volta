@@ -96,7 +96,7 @@
     ],
     "spec": "phpspec run --stop-on-failure --ansi",
     "unit-test": "phpunit --stop-on-failure --colors=always",
-    "format": "vendor/bin/php-cs-fixer fix",
+    "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
     "analyse": "phpstan analyse app --level=5",
     "analyse-src": "phpstan analyse"
   },

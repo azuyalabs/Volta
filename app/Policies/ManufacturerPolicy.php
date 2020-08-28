@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -23,9 +25,6 @@ class ManufacturerPolicy
     /**
      * Determine whether the user can view a manufacturer.
      *
-     * @param User $user
-     * @param Manufacturer $manufacturer
-     *
      * @return mixed
      */
     public function view(User $user, Manufacturer $manufacturer)
@@ -35,8 +34,6 @@ class ManufacturerPolicy
 
     /**
      * Determine whether the user can create a manufacturer.
-     *
-     * @param User $user
      *
      * @return mixed
      */
@@ -48,9 +45,6 @@ class ManufacturerPolicy
     /**
      * Determine whether the user can update a manufacturer.
      *
-     * @param User $user
-     * @param Manufacturer $manufacturer
-     *
      * @return mixed
      */
     public function update(User $user, Manufacturer $manufacturer)
@@ -60,9 +54,6 @@ class ManufacturerPolicy
 
     /**
      * Determine whether the user can delete a manufacturer.
-     *
-     * @param User $user
-     * @param Manufacturer $manufacturer
      *
      * @return mixed
      */

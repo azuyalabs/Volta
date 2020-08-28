@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -22,8 +24,6 @@ use Predis\Client as PredisClient;
 
 /**
  * Class containing convenience methods for interacting with the Github API.
- *
- * @package App\Services
  */
 class GitHubApi
 {
@@ -52,16 +52,16 @@ class GitHubApi
     }
 
     /**
-     * Fetch the latest releases of a Github repository
+     * Fetch the latest releases of a Github repository.
      *
-     * @param string $userName the Github username
-     * @param string $repoName the Github repository name belonging to the user
-     * @param string|null $friendlyName an optional friendly name for the repository
-     * @param callable|null $callback an optional callback function to process the version number (not all repositories adhere to the semver standard).
+     * @param string        $userName     the Github username
+     * @param string        $repoName     the Github repository name belonging to the user
+     * @param string|null   $friendlyName an optional friendly name for the repository
+     * @param callable|null $callback     an optional callback function to process the version number (not all repositories adhere to the semver standard)
      *
      * @return array structure containing the latest release version number, the release date and the (friendly) repository name
-     * @throws Exception
      *
+     * @throws Exception
      */
     public function fetchLatestRelease(string $userName, string $repoName, string $friendlyName = null, callable $callback = null): array
     {
@@ -75,7 +75,6 @@ class GitHubApi
                 'release_date' => (new Carbon(trim($release['published_at'])))->toIso8601String(),
             ];
         } catch (RuntimeException $e) {
-
             // Alternatively, try to find the latest release based on the repository tags
             if ('Not Found' === $e->getMessage()) {
                 $tags = $this->client->repo()->tags($userName, $repoName);
@@ -83,6 +82,7 @@ class GitHubApi
                 // Get the tag with the highest numerical value (assuming most maintainers apply a semver pattern)
                 $lastTag = collect($tags)->sortBy(static function ($item) {
                     preg_match_all('/(\d{1,6})/m', $item['name'], $matches);
+
                     return implode('.', $matches[0]);
                 })->last();
 

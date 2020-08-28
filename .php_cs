@@ -8,13 +8,15 @@ $finder = Symfony\Component\Finder\Finder::create()
                                          ->ignoreVCS(true);
 
 return PhpCsFixer\Config::create()->setRiskyAllowed(true)->setRules([
-    '@PSR2'                      => true,
+        '@PSR2'                  => true,
+        '@Symfony'               => true,
         'array_syntax'           => ['syntax' => 'short'],
         'binary_operator_spaces' => [
             'default' => 'align',
         ],
-
         'ordered_imports'   => ['sortAlgorithm' => 'alpha'],
         'no_unused_imports' => true,
         'single_quote'      => true,
+        'date_time_immutable' => true,
+        'declare_strict_types' => true,
 ])->setLineEnding("\n")->setFinder($finder);

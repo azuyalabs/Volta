@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -16,18 +18,16 @@ use Illuminate\Contracts\Validation\Rule;
 
 /**
  * Rule class defining the rules for the printer ID.
- *
- * @package App\Rules
  */
 class ValidPrinterId implements Rule
 {
     /**
-     * @var string the decoded printer ID.
+     * @var string the decoded printer ID
      */
     public $printerId;
 
     /**
-     * @var string the API token of the user needed for decoding the printer ID.
+     * @var string the API token of the user needed for decoding the printer ID
      */
     private $apiToken;
 
@@ -45,8 +45,7 @@ class ValidPrinterId implements Rule
      * Determine if the validation rule passes.
      *
      * @param string $attribute
-     * @param mixed $value
-     * @return bool
+     * @param mixed  $value
      */
     public function passes($attribute, $value): bool
     {
@@ -59,7 +58,7 @@ class ValidPrinterId implements Rule
         $encodedPrinterId = explode('::', $_dValue);
 
         // Check if the Base64 decoded value is a valid 2 element array
-        if (!is_array($encodedPrinterId) || count($encodedPrinterId) === 1) {
+        if (!is_array($encodedPrinterId) || 1 === count($encodedPrinterId)) {
             return false;
         }
 
@@ -70,7 +69,7 @@ class ValidPrinterId implements Rule
             return false;
         }
 
-        if (preg_match('/^\S+@\S+:\d{1,5}$/', $printerIdDecoded) !== 1) {
+        if (1 !== preg_match('/^\S+@\S+:\d{1,5}$/', $printerIdDecoded)) {
             return false;
         }
 
@@ -81,8 +80,6 @@ class ValidPrinterId implements Rule
 
     /**
      * Get the validation error message.
-     *
-     * @return string
      */
     public function message(): string
     {

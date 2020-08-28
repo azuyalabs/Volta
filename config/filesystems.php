@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -42,7 +43,6 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root'   => storage_path('app'),
@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver'     => 'local',
             'root'       => storage_path('app/public'),
-            'url'        => env('APP_URL') . '/storage',
+            'url'        => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 
@@ -66,7 +66,7 @@ return [
 
         'gcode' => [
             'driver' => 'local',
-            'root'   => storage_path('app/gcode')
+            'root'   => storage_path('app/gcode'),
         ],
 
         // Storage holding user-defined filament spool profiles
@@ -80,7 +80,6 @@ return [
             'project-id'            => env('GITLAB_PROJECT_ID'), // Project id of your repo
             'branch'                => env('GITLAB_BRANCH', 'master'), // Branch that should be used
             'base-url'              => env('GITLAB_BASE_URL', 'https://gitlab.com'), // Base URL of Gitlab server you want to use
-        ]
+        ],
     ],
-
 ];

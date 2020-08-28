@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the Volta Project.
  *
@@ -21,8 +23,6 @@ use Tests\TestCase;
 
 /**
  * Class containing cases for testing the 3D Printer Job Resource class.
- *
- * @package Tests\Unit\Resources
  */
 class ThreeDPrinterJobResourceTest extends TestCase
 {
@@ -37,7 +37,7 @@ class ThreeDPrinterJobResourceTest extends TestCase
         $resource = (new ThreeDPrinterJobResource($job = factory(MachineJob::class)->create(['type' => MachineJobType::THREE_D_PRINTER])))->jsonSerialize();
 
         self::assertArraySubset(['type' => '3dprinterjobs', 'id' => $job->uuid_text], $resource);
-        self::assertArraySubset(['links' => ['self' => getenv('APP_URL') . '/api/threedprinterjobs/' . $job->uuid_text]], $resource);
+        self::assertArraySubset(['links' => ['self' => getenv('APP_URL').'/api/threedprinterjobs/'.$job->uuid_text]], $resource);
 
         self::assertArraySubset([
             'attributes' => [
@@ -48,7 +48,7 @@ class ThreeDPrinterJobResourceTest extends TestCase
                 'started_at' => $job->started_at,
                 'machine'    => $job->machine,
                 'details'    => $job->details,
-            ]
+            ],
         ], $resource);
 
         $this->assertInstanceOf(Machine::class, $job->machine);
