@@ -43,18 +43,19 @@
     "symfony/translation": "^5.0"
   },
   "require-dev": {
-    "roave/security-advisories": "dev-master",
     "dms/phpunit-arraysubset-asserts": "^0.1.0",
     "doctrine/dbal": "^2.9",
     "filp/whoops": "~2.4",
+    "friends-of-phpspec/phpspec-code-coverage": "^4.3",
     "friendsofphp/php-cs-fixer": "^2.15",
     "fzaninotto/faker": "~1.8",
     "mockery/mockery": "~1.2",
     "nunomaduro/collision": "^5.0",
     "nunomaduro/larastan": "^0.6",
     "phan/phan": "^3.2",
+    "phpspec/phpspec": "^6.2",
     "phpunit/phpunit": "^8.5",
-    "phpspec/phpspec": "^6.1"
+    "roave/security-advisories": "dev-master"
   },
   "autoload": {
     "classmap": [

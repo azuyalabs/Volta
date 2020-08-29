@@ -16,6 +16,7 @@ namespace spec\Volta\Domain;
 
 use PhpSpec\ObjectBehavior;
 use Volta\Domain\Calibration;
+use Volta\Domain\CalibrationParameters;
 use Volta\Domain\Exception\EmptyMeasurementsException;
 use Volta\Domain\ValueObject\CalibrationName;
 
@@ -27,6 +28,7 @@ class CalibrationSpec extends ObjectBehavior
             new CalibrationName('diameter'),
             new \DateTimeImmutable('2020-03-16'),
             [50.5, 45.3, 50, 51.6],
+            new CalibrationParameters(['flow' => 2.24])
         );
     }
 
@@ -79,5 +81,12 @@ class CalibrationSpec extends ObjectBehavior
     {
         $this->getAverage()->shouldBeNumeric();
         $this->getAverage()->shouldBe(49.35);
+    }
+
+    public function it_has_parameters(): void
+    {
+        $this->getParameters()->shouldBeAnInstanceOf(CalibrationParameters::class);
+        $this->getParameters()->all()->shouldHaveCount(1);
+        $this->getParameters()->get('flow')->shouldBe(2.24);
     }
 }

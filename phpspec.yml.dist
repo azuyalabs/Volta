@@ -2,3 +2,5 @@ suites:
   default:
     namespace: Volta
     psr4_prefix: Volta
+extensions:
+  FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension: ~
