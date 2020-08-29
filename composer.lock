@@ -1566,16 +1566,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.26.0",
+            "version": "v7.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f64299a11dedaaadf1cfff07b2b3220a9b791837"
+                "reference": "fad3e5f03b9ae89853c8a0925231d2b3ce07a9c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f64299a11dedaaadf1cfff07b2b3220a9b791837",
-                "reference": "f64299a11dedaaadf1cfff07b2b3220a9b791837",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/fad3e5f03b9ae89853c8a0925231d2b3ce07a9c3",
+                "reference": "fad3e5f03b9ae89853c8a0925231d2b3ce07a9c3",
                 "shasum": ""
             },
             "require": {
@@ -1720,7 +1720,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-08-25T13:44:44+00:00"
+            "time": "2020-08-27T14:22:46+00:00"
         },
         {
             "name": "laravel/passport",
@@ -9109,16 +9109,16 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v5.0.0",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "a8a1ef97ffa8c41bccff4318036e5e14a76bd87f"
+                "reference": "4a343299054e9368d0db4a982a780cc4ffa12707"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/a8a1ef97ffa8c41bccff4318036e5e14a76bd87f",
-                "reference": "a8a1ef97ffa8c41bccff4318036e5e14a76bd87f",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/4a343299054e9368d0db4a982a780cc4ffa12707",
+                "reference": "4a343299054e9368d0db4a982a780cc4ffa12707",
                 "shasum": ""
             },
             "require": {
@@ -9189,7 +9189,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-08-25T17:59:40+00:00"
+            "time": "2020-08-27T18:58:22+00:00"
         },
         {
             "name": "nunomaduro/larastan",
@@ -10146,7 +10146,6 @@
             "keywords": [
                 "tokenizer"
             ],
-            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
@@ -10248,12 +10247,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "89bed6788d61977969b89d912b5844e8beee09f0"
+                "reference": "dbda10aea96678b6742e8f0109c1c7ac003a0f69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/89bed6788d61977969b89d912b5844e8beee09f0",
-                "reference": "89bed6788d61977969b89d912b5844e8beee09f0",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/dbda10aea96678b6742e8f0109c1c7ac003a0f69",
+                "reference": "dbda10aea96678b6742e8f0109c1c7ac003a0f69",
                 "shasum": ""
             },
             "conflict": {
@@ -10269,6 +10268,7 @@
                 "bagisto/bagisto": "<0.1.5",
                 "barrelstrength/sprout-base-email": "<1.2.7",
                 "barrelstrength/sprout-forms": "<3.9",
+                "baserproject/basercms": ">=4,<=4.3.6",
                 "bolt/bolt": "<3.7.1",
                 "brightlocal/phpwhois": "<=4.2.5",
                 "buddypress/buddypress": "<5.1.2",
@@ -10536,7 +10536,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-19T19:01:52+00:00"
+            "time": "2020-08-28T21:02:31+00:00"
         },
         {
             "name": "sabre/event",
