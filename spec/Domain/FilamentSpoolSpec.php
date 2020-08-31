@@ -23,6 +23,9 @@ use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
 use Volta\Domain\Calibration;
 use Volta\Domain\CalibrationCollection;
+use Volta\Domain\CalibrationParameters;
+use Volta\Domain\Exception\FilamentSpool\MissingExtrusionMultiplierCalibrationParameter;
+use Volta\Domain\Exception\FilamentSpool\MissingExtrusionMultiplierCalibrationParameters;
 use Volta\Domain\Exception\ZeroDensityException;
 use Volta\Domain\Exception\ZeroWeightException;
 use Volta\Domain\FilamentSpool;
@@ -560,19 +563,34 @@ class FilamentSpoolSpec extends ObjectBehavior
     public function it_has_a_maximum_volumetric_speed(): void
     {
         $this->getMaximumVolumetricFlowRate()->shouldReturnAnInstanceOf(MaximumVolumetricFlowRate::class);
-        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(15, 1);
+        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(
+            15,
+            1
+        );
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_ABS));
-        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(11, 1);
+        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(
+            11,
+            1
+        );
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PLA));
-        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(15, 1);
+        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(
+            15,
+            1
+        );
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_PET));
-        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(8, 1);
+        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(
+            8,
+            1
+        );
 
         $this->setMaterialType(new MaterialType(MaterialType::MATERIALTYPE_WOODFILL));
-        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(15, 1);
+        $this->getMaximumVolumetricFlowRate()->getValue()->toUnit(MaximumVolumetricFlowRate::CUBIC_MILLIMETER_PER_SECOND)->shouldBeApproximately(
+            15,
+            1
+        );
     }
 
     public function it_tells_if_it_has_auto_cooling(): void
@@ -714,11 +732,12 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->addCalibration(new Calibration(
             new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
             new \DateTimeImmutable('2020-08-22'),
-            [0.47, 0.48, 0.48, 0.46, 0.44, 0.44, 0.45, 0.48, 0.47, 0.47, 0.44, 0.43]
+            [0.47, 0.48, 0.48, 0.46, 0.44, 0.44, 0.45, 0.48, 0.47, 0.47, 0.44, 0.43],
+            new CalibrationParameters([CalibrationParameters::PRIOR_MULTIPLIER => 1, CalibrationParameters::EXTRUSION_WIDTH => 0.45])
         ));
 
-        $this->getExtrusionMultiplier()->shouldBeAnInstanceOf(Length::class);
-        $this->getExtrusionMultiplier()->toUnit('millimeter')->shouldBe(1.02);
+        $this->getExtrusionMultiplier()->shouldBeFloat();
+        $this->getExtrusionMultiplier()->shouldBe(0.98);
     }
 
     public function it_has_an_extrusion_multiplier_when_multiple_calibrations(): void
@@ -726,21 +745,64 @@ class FilamentSpoolSpec extends ObjectBehavior
         $this->addCalibration(new Calibration(
             new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
             new \DateTimeImmutable('2020-08-22'),
-            [0.47, 0.48, 0.48, 0.46, 0.44, 0.44, 0.45, 0.48, 0.47, 0.47, 0.44, 0.43]
+            [0.47, 0.48, 0.48, 0.46, 0.44, 0.44, 0.45, 0.48, 0.47, 0.47, 0.44, 0.43],
+            new CalibrationParameters([CalibrationParameters::PRIOR_MULTIPLIER => 1, CalibrationParameters::EXTRUSION_WIDTH => 0.45])
         ));
 
+        $this->addCalibration(new Calibration(
+            new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
+            new \DateTimeImmutable('2020-08-23'),
+            [0.42, 0.43, 0.44, 0.43, 0.47],
+            new CalibrationParameters([CalibrationParameters::PRIOR_MULTIPLIER => 1, CalibrationParameters::EXTRUSION_WIDTH => 0.4])
+        ));
+
+        $this->getExtrusionMultiplier()->shouldBeFloat();
+        $this->getExtrusionMultiplier()->shouldBe(0.913);
+    }
+
+    public function it_has_an_extrusion_multiplier_when_no_calibrations(): void
+    {
+        $this->getExtrusionMultiplier()->shouldBe(1.0);
+    }
+
+    public function it_throws_exception_when_no_calibration_parameters(): void
+    {
         $this->addCalibration(new Calibration(
             new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
             new \DateTimeImmutable('2020-08-23'),
             [0.42, 0.43, 0.44, 0.43, 0.47]
         ));
 
-        $this->getExtrusionMultiplier()->shouldBeAnInstanceOf(Length::class);
-        $this->getExtrusionMultiplier()->toUnit('millimeter')->shouldBe(0.973);
+        $this->shouldThrow(MissingExtrusionMultiplierCalibrationParameters::class)
+            ->duringGetExtrusionMultiplier()
+        ;
     }
 
-    public function it_has_an_extrusion_multiplier_when_no_calibrations(): void
+    public function it_throws_exception_when_no_extrusion_width_param_set(): void
     {
-        $this->getExtrusionMultiplier()->toUnit('millimeter')->shouldBe(1.0);
+        $this->addCalibration(new Calibration(
+            new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
+            new \DateTimeImmutable('2020-08-23'),
+            [0.42, 0.43, 0.44, 0.43, 0.47],
+            new CalibrationParameters([CalibrationParameters::PRIOR_MULTIPLIER => 1])
+        ));
+
+        $this->shouldThrow(MissingExtrusionMultiplierCalibrationParameter::class)
+            ->duringGetExtrusionMultiplier()
+        ;
+    }
+
+    public function it_throws_exception_when_no_multiplier_param_set(): void
+    {
+        $this->addCalibration(new Calibration(
+            new CalibrationName(CalibrationCollection::EXTRUSION_MULTIPLIER),
+            new \DateTimeImmutable('2020-08-23'),
+            [0.42, 0.43, 0.44, 0.43, 0.47],
+            new CalibrationParameters([CalibrationParameters::EXTRUSION_WIDTH => 0.44])
+        ));
+
+        $this->shouldThrow(MissingExtrusionMultiplierCalibrationParameter::class)
+            ->duringGetExtrusionMultiplier()
+        ;
     }
 }

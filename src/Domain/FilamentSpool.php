@@ -19,6 +19,9 @@ use Money\Money;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
+use Volta\Domain\Exception\CalibrationParameterNotFoundException;
+use Volta\Domain\Exception\FilamentSpool\MissingExtrusionMultiplierCalibrationParameter;
+use Volta\Domain\Exception\FilamentSpool\MissingExtrusionMultiplierCalibrationParameters;
 use Volta\Domain\Exception\NoCalibrationsException;
 use Volta\Domain\Exception\ZeroDensityException;
 use Volta\Domain\Exception\ZeroDiameterException;
@@ -520,7 +523,7 @@ class FilamentSpool
         try {
             $value = round($this->calibrations->getAverage(CalibrationCollection::K_VALUE), 3);
         } catch (NoCalibrationsException $e) {
-            $value =  0.0;
+            $value = 0.0;
         }
 
         return $value;
@@ -552,17 +555,34 @@ class FilamentSpool
      * In case there are multiple calibrations, we assume the latest one is the
      * one to use.
      */
-    public function getExtrusionMultiplier(): Length
+    public function getExtrusionMultiplier(): float
     {
         try {
             $latestCalibration = $this->calibrations->getLatestCalibration(CalibrationCollection::EXTRUSION_MULTIPLIER);
 
-            $ratio = $latestCalibration->getAverage() / 0.45 * 1;
+            $parameters = $latestCalibration->getParameters();
+            if (null === $parameters) {
+                throw new MissingExtrusionMultiplierCalibrationParameters();
+            }
+
+            try {
+                $extrusionWidth = $parameters->get(CalibrationParameters::EXTRUSION_WIDTH);
+            } catch (CalibrationParameterNotFoundException $exception) {
+                throw new MissingExtrusionMultiplierCalibrationParameter(CalibrationParameters::EXTRUSION_WIDTH);
+            }
+
+            try {
+                $multiplier = $parameters->get(CalibrationParameters::PRIOR_MULTIPLIER);
+            } catch (CalibrationParameterNotFoundException $exception) {
+                throw new MissingExtrusionMultiplierCalibrationParameter(CalibrationParameters::PRIOR_MULTIPLIER);
+            }
+
+            $ratio = ($extrusionWidth / $latestCalibration->getAverage()) * $multiplier;
         } catch (NoCalibrationsException $e) {
             $ratio = 1;
         }
 
-        return new Length(round($ratio, 3), 'millimeter');
+        return round($ratio, 3);
     }
 
     private function isZero(float $value): bool

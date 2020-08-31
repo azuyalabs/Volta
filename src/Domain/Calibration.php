@@ -21,21 +21,19 @@ class Calibration
     private CalibrationName $name;
     private \DateTimeImmutable $timestamp;
     private array $measurements;
-    private CalibrationParameters $parameters;
+    private ?CalibrationParameters $parameters;
 
     public function __construct(CalibrationName $name, \DateTimeImmutable $timestamp, array $measurements, CalibrationParameters $parameters = null)
     {
         $this->name         = $name;
         $this->timestamp    = $timestamp;
         $this->measurements = $measurements;
-        if (null !== $parameters) {
-            $this->parameters   = $parameters;
-        }
+        $this->parameters   = $parameters;
 
         // TODO Validate if measurements is empty.
     }
 
-    public function getParameters(): CalibrationParameters
+    public function getParameters(): ?CalibrationParameters
     {
         return $this->parameters;
     }

@@ -78,7 +78,7 @@ class CalibrationParametersSpec
         $this->get('parameter')->shouldBe('value');
     }
 
-    public function it_throws_exception(): void
+    public function it_throws_exception_for_unknown_parameter(): void
     {
         $this->shouldThrow(CalibrationParameterNotFoundException::class)
             ->duringGet('something')

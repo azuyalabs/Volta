@@ -8,6 +8,9 @@ use Volta\Domain\Exception\CalibrationParameterNotFoundException;
 
 class CalibrationParameters
 {
+    public const EXTRUSION_WIDTH  = 'extrusion_width';
+    public const PRIOR_MULTIPLIER = 'prior_multiplier';
+
     protected array $parameters = [];
 
     public function __construct(array $parameters = [])
@@ -63,7 +66,7 @@ class CalibrationParameters
      */
     public function get(string $name)
     {
-        if (!\array_key_exists($name, $this->parameters) && !$name) {
+        if (!\array_key_exists($name, $this->parameters)) {
             throw new CalibrationParameterNotFoundException($name);
         }
 
