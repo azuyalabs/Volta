@@ -115,12 +115,12 @@ class SlicerTemplateTransformerSpec extends ObjectBehavior
                 'keep_warm_temperature'         => 137.0,
                 'maximum_volumetric_speed'      => 8.0,
                 'auto_cooling'                  => 1,
-                'note'                          => 'Calibrated settings for ABC Plastics PET Plus Red 1.75mm.\n\n`First Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Bed Temperature` last calibrated on 2020-05-01\n`Diameter` last calibrated on 2020-05-01\n`K Value` last calibrated on 2020-06-12',
+                'note'                          => 'Calibrated settings for ABC Plastics PET Plus Red 1.75mm.\n\n`First Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Print Temperature` last calibrated on 2020-05-01\n`Next Layer Bed Temperature` last calibrated on 2020-05-01\n`Diameter` last calibrated on 2020-05-01\n`K Value` last calibrated on 2020-06-12\n`Extrusion Multiplier` last calibrated on 2020-08-02',
                 'disable_fan_first_layers'      => 3,
                 'k_value'                       => 0.953,
                 'fan_always_on'                 => 1,
                 'fan_below_layer_time'          => 20,
-                'extrusion_multiplier'          => 0.982,
+                'extrusion_multiplier'          => 0.964,
             ]
         );
     }

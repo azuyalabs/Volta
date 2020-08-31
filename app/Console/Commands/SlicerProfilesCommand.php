@@ -32,6 +32,7 @@ use Spatie\Fractalistic\Fractal;
 use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateTransformer;
 use Volta\Domain\Calibration;
 use Volta\Domain\CalibrationCollection;
+use Volta\Domain\CalibrationParameters;
 use Volta\Domain\FilamentSpool;
 use Volta\Domain\Manufacturer;
 use Volta\Domain\Temperatures;
@@ -181,7 +182,7 @@ class SlicerProfilesCommand extends Command
                             new CalibrationName($name),
                             new \DateTimeImmutable($cal['date']),
                             $cal['measurements'] ?? [],
-                            $cal['parameters'] ?? null,
+                            new CalibrationParameters($cal['parameters'] ?? [])
                         );
                         $spool->addCalibration($c);
                     }
