@@ -34,11 +34,11 @@ class CalibrationCollection
             throw new NoCalibrationsException();
         }
 
-        $result = 0;
-        $c      = $this->calibrations[$name];
+        $result    = 0;
+        $cals      = $this->calibrations[$name];
 
-        if (0 < count($c)) {
-            $sum  = array_reduce($c, static function ($carry, $item) {
+        if (0 < count($cals)) {
+            $sum  = array_reduce($cals, static function ($carry, $item) {
                 $count  = (is_array($carry)) ? $carry[0] : 0;
                 $values = (is_array($carry)) ? $carry[1] : 0;
 
@@ -60,9 +60,9 @@ class CalibrationCollection
         }
 
         return array_reduce($this->calibrations[$name], static function ($carry, $item) {
-            $m = max($item->getMeasurements());
+            $msr = max($item->getMeasurements());
 
-            return (null !== $carry && $carry > $m) ? $carry : $m;
+            return (null !== $carry && $carry > $msr) ? $carry : $msr;
         });
     }
 
@@ -73,9 +73,9 @@ class CalibrationCollection
         }
 
         return array_reduce($this->calibrations[$name], static function ($carry, $item) {
-            $m = min($item->getMeasurements());
+            $msr = min($item->getMeasurements());
 
-            return (null !== $carry && $carry < $m) ? $carry : $m;
+            return (null !== $carry && $carry < $msr) ? $carry : $msr;
         });
     }
 
@@ -86,9 +86,9 @@ class CalibrationCollection
         }
 
         return array_reduce($this->calibrations[$name], static function ($carry, $item) {
-            $d = $item->getTimestamp();
+            $time = $item->getTimestamp();
 
-            return (null !== $carry && $carry > $d) ? $carry : $d;
+            return (null !== $carry && $carry > $time) ? $carry : $time;
         });
     }
 
