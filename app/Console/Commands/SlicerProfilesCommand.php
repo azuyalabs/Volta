@@ -116,7 +116,10 @@ class SlicerProfilesCommand extends Command
             $f = $this->getFilamentSpoolData($filamentFile);
 
             if (!isset($f['product'], $f['id']) || null === $f) {
-                $this->warn(sprintf('! `%s` is invalid (Perhaps empty or an older version?)', $filamentFile['basename']));
+                $this->warn(sprintf(
+                    '! `%s` is invalid (Perhaps empty or an older version?)',
+                    $filamentFile['basename']
+                ));
 
                 continue;
             }
@@ -177,7 +180,8 @@ class SlicerProfilesCommand extends Command
                         $c = new Calibration(
                             new CalibrationName($name),
                             new \DateTimeImmutable($cal['date']),
-                            $cal['measurements'] ?? []
+                            $cal['measurements'] ?? [],
+                            $cal['parameters'] ?? null,
                         );
                         $spool->addCalibration($c);
                     }
