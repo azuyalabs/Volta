@@ -81,5 +81,9 @@ return [
             'branch'                => env('GITLAB_BRANCH', 'master'), // Branch that should be used
             'base-url'              => env('GITLAB_BASE_URL', 'https://gitlab.com'), // Base URL of Gitlab server you want to use
         ],
+        'fila' => [
+            'driver' => 'local',
+            'root' => '/home/sacha/code/3dprint/slicers/'
+        ]
     ],
 ];

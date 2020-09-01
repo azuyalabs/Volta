@@ -87,6 +87,8 @@ class SlicerProfilesCommand extends Command
 
     protected Filesystem $filamentsDirectory;
 
+    protected FileSystem $fila;
+
     /**
      * SlicerProfilesCommand constructor.
      */
@@ -94,6 +96,7 @@ class SlicerProfilesCommand extends Command
     {
         $this->plates             = new Engine(storage_path('app/'.self::TEMPLATES_DIR), 'ini');
         $this->filamentsDirectory = Storage::disk(self::FILAMENTS_DISK);
+        $this->fila = Storage::disk('fila');
 
         parent::__construct();
     }
@@ -208,7 +211,8 @@ class SlicerProfilesCommand extends Command
                 ->toArray()
             ;
 
-            print_r($f);
+
+           // print_r($f);
 
 //            continue;
 //            // Set defaults
@@ -250,6 +254,20 @@ class SlicerProfilesCommand extends Command
 
             // Export profiles for each supported slicer
             foreach ($this->slicers as $slicer_id => $slicer_name) {
+                $profileFilename = $spool->getDisplayName()->getValue().'.ini';
+
+                if ('cura' === $slicer_id) {
+                    $profileFilename = str_replace(' ', '_', $spool->getDisplayName()->getValue()).'.xml.fdm_material';
+                }
+
+                $contents = $this->plates->render($slicer_id, [
+                    'generated_on' => (new \DateTimeImmutable())->format(DATE_ATOM),
+                    'profile'      => $f,
+                ]);
+
+                $this->fila->put($slicer_id.DIRECTORY_SEPARATOR.'filament'.DIRECTORY_SEPARATOR.$profileFilename, $contents);
+
+                /*
                 $outputDirectory = storage_path('app/'.self::PROFILES_DIR.DIRECTORY_SEPARATOR.$slicer_id);
 
                 // Create slicer profile directory if not exists
@@ -281,6 +299,7 @@ class SlicerProfilesCommand extends Command
                         'profile'      => $f,
                     ])
                 );
+                */
             }
             $this->line('');
         }
