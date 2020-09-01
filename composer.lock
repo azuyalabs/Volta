@@ -9275,16 +9275,16 @@
         },
         {
             "name": "nunomaduro/larastan",
-            "version": "v0.6.2",
+            "version": "v0.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/larastan.git",
-                "reference": "fd0ab4e585db15618ab6e78b368be456aa8c86ad"
+                "reference": "377101974d46679d9dce54f468db054ec5362da8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/fd0ab4e585db15618ab6e78b368be456aa8c86ad",
-                "reference": "fd0ab4e585db15618ab6e78b368be456aa8c86ad",
+                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/377101974d46679d9dce54f468db054ec5362da8",
+                "reference": "377101974d46679d9dce54f468db054ec5362da8",
                 "shasum": ""
             },
             "require": {
@@ -9364,7 +9364,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-07-30T19:33:12+00:00"
+            "time": "2020-08-31T15:48:45+00:00"
         },
         {
             "name": "phan/phan",
