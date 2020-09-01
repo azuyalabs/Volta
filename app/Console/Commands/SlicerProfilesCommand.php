@@ -27,7 +27,6 @@ use OzdemirBurak\Iris\Color\Hex;
 use PhpUnitsOfMeasure\PhysicalQuantity\Length;
 use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use PhpUnitsOfMeasure\PhysicalQuantity\Temperature;
-use RuntimeException;
 use Spatie\Fractalistic\Fractal;
 use Volta\Application\DataTransformer\FilamentSpool\SlicerTemplateTransformer;
 use Volta\Domain\Calibration;
@@ -53,6 +52,11 @@ class SlicerProfilesCommand extends Command
      * Name of the disk where the filament spool definitions are stored.
      */
     private const FILAMENTS_DISK = 'filaments';
+
+    /**
+     * Name of the disk where the (generated) slicer filament spool definitions are stored.
+     */
+    private const SLICER_FILAMENTS_DISK = 'slicer_filaments';
 
     /**
      * Name of the directory where the filament spool definitions are stored.
@@ -97,7 +101,7 @@ class SlicerProfilesCommand extends Command
     {
         $this->plates             = new Engine(storage_path('app/'.self::TEMPLATES_DIR), 'ini');
         $this->filamentsDirectory = Storage::disk(self::FILAMENTS_DISK);
-        $this->fila = Storage::disk('fila');
+        $this->fila               = Storage::disk(self::SLICER_FILAMENTS_DISK);
 
         parent::__construct();
     }
@@ -212,13 +216,6 @@ class SlicerProfilesCommand extends Command
                 ->toArray()
             ;
 
-
-           // print_r($f);
-
-//            continue;
-//            // Set defaults
-//            $f['extrusion_multiplier']          = 1;
-//
 //            $f['price_per_cm3'] = ($f['price'] * $f['density']) / $f['weight'];
 //
 //            // Store Cura Material Settings
@@ -229,29 +226,6 @@ class SlicerProfilesCommand extends Command
 //            $f['msds_url']         = $f['info']['msds_url']                  ?? '';
 //            $f['tds_url']          = $f['info']['tds_url']                   ?? '';
 //
-//            # Retrieve Extrusion Multiplier Calibration data
-//            if (isset($f['extrusion_calibrations'])) {
-//                $em = collect($f['extrusion_calibrations']);
-//
-//                $newMultiplier = $em->map(static function ($item) {
-//                    return ($item['extrusion_width'] / collect($item['measurements'])->average()) * $item['multiplier'];
-//                })->average();
-//
-//                $avg_extrusion_width = $em->pluck('extrusion_width')->flatten()->average();
-//
-//                $average = $em->pluck('measurements')->flatten()->average();
-//                $margin  = $average - $avg_extrusion_width;
-//
-//                if (isset($newMultiplier)) {
-//                    $this->info(sprintf('Extrusion Width      : %.3fmm [%.3fmm (%.2f%%)]', $average, $margin, ($margin / $avg_extrusion_width * 100)));
-//                    $this->info(sprintf('Extrusion Multiplier : %.3f', $newMultiplier));
-//
-//                    $f['extrusion_multiplier'] = sprintf('%.3f', $newMultiplier);
-//                    $f['filament_notes'] .= sprintf('Extrusion Multiplier last calibrated on %s\\n', $em->pluck('date')->max());
-//                }
-//            } else {
-//                $this->warn('>> Extrusion Multiplier Calibration not performed yet.');
-//            }
 
             // Export profiles for each supported slicer
             foreach ($this->slicers as $slicer_id => $slicer_name) {
@@ -266,40 +240,19 @@ class SlicerProfilesCommand extends Command
                     'profile'      => $f,
                 ]);
 
-                $this->fila->put($slicer_id.DIRECTORY_SEPARATOR.'filament'.DIRECTORY_SEPARATOR.$profileFilename, $contents);
+                $this->fila->put(
+                    $slicer_id.DIRECTORY_SEPARATOR.'filament'.DIRECTORY_SEPARATOR.$profileFilename,
+                    $contents
+                );
 
                 /*
-                $outputDirectory = storage_path('app/'.self::PROFILES_DIR.DIRECTORY_SEPARATOR.$slicer_id);
-
-                // Create slicer profile directory if not exists
-                if (!file_exists($outputDirectory) && !mkdir(
-                    $outputDirectory,
-                    0777,
-                    true
-                ) && !is_dir($outputDirectory)) {
-                    throw new RuntimeException(sprintf('Directory "%s" could not be created', $outputDirectory));
-                }
-
-                $profileFilename = $spool->getDisplayName()->getValue().'.ini';
-
                 if ('cura' === $slicer_id) {
-                    $profileFilename = str_replace(' ', '_', $spool->getDisplayName()->getValue()).'.xml.fdm_material';
-
                     // Output Cura Material Settings (replace this in your cura.cfg file)
                     file_put_contents(
                         $outputDirectory.DIRECTORY_SEPARATOR.'cura_material_settings.txt',
                         'material_settings = '.json_encode($cura_material_settings, JSON_THROW_ON_ERROR, 512)
                     );
                 }
-
-                // Save output
-                file_put_contents(
-                    $outputDirectory.DIRECTORY_SEPARATOR.$profileFilename,
-                    $this->plates->render($slicer_id, [
-                        'generated_on' => (new \DateTimeImmutable())->format(DATE_ATOM),
-                        'profile'      => $f,
-                    ])
-                );
                 */
             }
             $this->line('');
