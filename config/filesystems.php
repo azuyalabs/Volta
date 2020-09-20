@@ -45,28 +45,28 @@ return [
     'disks' => [
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root'   => storage_path('app'),
         ],
 
         'public' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL') . '/storage',
+            'driver'     => 'local',
+            'root'       => storage_path('app/public'),
+            'url'        => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
+            'key'    => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
+            'url'    => env('AWS_URL'),
         ],
 
         'gcode' => [
             'driver' => 'local',
-            'root' => storage_path('app/gcode'),
+            'root'   => storage_path('app/gcode'),
         ],
 
         // Storage holding user-defined filament spool profiles
@@ -75,15 +75,15 @@ return [
         //    'root'   => storage_path('app/filaments')
         //]
         'filaments' => [
-            'driver' => 'gitlab',
+            'driver'                => 'gitlab',
             'personal-access-token' => env('GITLAB_ACCESS_TOKEN', ''), // Personal access token
-            'project-id' => env('GITLAB_PROJECT_ID'), // Project id of your repo
-            'branch' => env('GITLAB_BRANCH', 'master'), // Branch that should be used
-            'base-url' => env('GITLAB_BASE_URL', 'https://gitlab.com'), // Base URL of Gitlab server you want to use
+            'project-id'            => env('GITLAB_PROJECT_ID'), // Project id of your repo
+            'branch'                => env('GITLAB_BRANCH', 'master'), // Branch that should be used
+            'base-url'              => env('GITLAB_BASE_URL', 'https://gitlab.com'), // Base URL of Gitlab server you want to use
         ],
         'slicer_filaments' => [
             'driver' => 'local',
-            'root' => env('FILAMENT_PROFILES_PATH', '')
+            'root'   => env('FILAMENT_PROFILES_PATH', ''),
         ],
     ],
 ];
