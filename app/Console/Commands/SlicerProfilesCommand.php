@@ -133,7 +133,7 @@ class SlicerProfilesCommand extends Command
             }
 
             $spool = new FilamentSpool(
-                new FilamentSpoolId(),
+                (isset($f['id'])) ? FilamentSpoolId::fromString($f['id']) : new FilamentSpoolId(),
                 new Manufacturer(
                     new ManufacturerId(),
                     new ManufacturerName($f['product']['manufacturer']),
@@ -176,7 +176,8 @@ class SlicerProfilesCommand extends Command
             if (isset($f['product']['temperatures']['heated_bed'])) {
                 $spool->setBedTemperatures(
                     new Temperatures(
-                        new Temperature(191, 'celsius'),new Temperature(230, 'celsius'),
+                        new Temperature(191, 'celsius'),
+                        new Temperature(230, 'celsius'),
                         new Temperature($f['product']['temperatures']['heated_bed']['min'], 'celsius'),
                         new Temperature($f['product']['temperatures']['heated_bed']['max'], 'celsius')
                     )
