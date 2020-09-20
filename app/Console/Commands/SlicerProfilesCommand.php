@@ -173,11 +173,12 @@ class SlicerProfilesCommand extends Command
                 );
             }
 
-            if (isset($f['product']['temperatures']['bed'])) {
-                $spool->setPrintTemperatures(
+            if (isset($f['product']['temperatures']['heated_bed'])) {
+                $spool->setBedTemperatures(
                     new Temperatures(
-                        new Temperature($f['product']['temperatures']['bed']['min'], 'celsius'),
-                        new Temperature($f['product']['temperatures']['bed']['max'], 'celsius')
+                        new Temperature(191, 'celsius'),new Temperature(230, 'celsius'),
+                        new Temperature($f['product']['temperatures']['heated_bed']['min'], 'celsius'),
+                        new Temperature($f['product']['temperatures']['heated_bed']['max'], 'celsius')
                     )
                 );
             }
