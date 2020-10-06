@@ -80,6 +80,7 @@ class SlicerProfilesCommand extends Command
         'prusaslicer' => 'Prusa Slicer',
         'kisslicer'   => 'KISSlicer',
         'superslicer' => 'SuperSlicer',
+        'ideamaker'   => 'ideaMaker',
     ];
     /**
      * Common settings for 'Fan Below Layer Time' (by filament type).
@@ -235,6 +236,10 @@ class SlicerProfilesCommand extends Command
 
                 if ('cura' === $slicer_id) {
                     $profileFilename = str_replace(' ', '_', $spool->getDisplayName()->getValue()).'.xml.fdm_material';
+                }
+
+                if ('ideamaker' === $slicer_id) {
+                    $profileFilename = str_replace(' ', '_', $spool->getDisplayName()->getValue()).'.filament';
                 }
 
                 $contents = $this->plates->render($slicer_id, [
