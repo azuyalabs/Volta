@@ -85,7 +85,8 @@ class SlicerProfilesCommand extends Command
     /**
      * Common settings for 'Fan Below Layer Time' (by filament type).
      */
-    protected $signature = 'volta:profiles';
+    protected $signature = 'volta:profiles 
+                            {filename? : The name of the spool file (optional)}';
 
     protected $description = 'Generate slicer profiles';
 
@@ -115,6 +116,14 @@ class SlicerProfilesCommand extends Command
     public function handle(): void
     {
         $filamentFiles = $this->getFilamentFiles();
+
+        $filename = $this->argument('filename');
+
+        if (null !== $filename) {
+            $filamentFiles = array_filter($filamentFiles, static function ($item) use ($filename) {
+                return $filename === $item['filename'];
+            });
+        }
 
         $cura_material_settings = [];
 
